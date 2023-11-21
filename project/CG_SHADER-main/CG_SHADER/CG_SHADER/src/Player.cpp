@@ -90,12 +90,21 @@ void Player::KeyUpdate()
 void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 {
 
+
 	if (other->GetOwner()->GetObjectType() == ObjectType::WALL)
 	{
 	/*	"여기서 충돌처리 해주면 됨 벽이랑 초록 불들어왓을때를 의미하는거임"*/
-		cout << "hello" << endl;
+		
+		CameraManager::GetInstance()->m_cameraPos = CameraManager::GetInstance()->m_cameraLastPos;
+		
+		_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+		_center.y = 0;
+		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+
+		CameraManager::GetInstance()->m_cameraSpeed = 0.0f;
 
 
+	/////////////////////////////////////////////////////////////
 	}
 
 
@@ -117,7 +126,6 @@ void Player::OnComponentEndOverlap(Collider* collider, Collider* other)
 	_debug_color.z = 0;
 
 
-
-
+	CameraManager::GetInstance()->m_cameraSpeed = 40.0f;
 
 }
