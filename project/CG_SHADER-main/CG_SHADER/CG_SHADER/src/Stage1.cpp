@@ -60,6 +60,12 @@ void Stage1::Init()
 
 void Stage1::Update()
 {
+	
+	for (auto& ele : v_wall)
+	{
+		ele->Update();
+	}
+	GET_SINGLE(CollisionManager)->Update();
 
 	CameraManager::GetInstance()->KeyUpdate();
 	CameraManager::GetInstance()->MouseUpdate(MouseManager::GetInstance()->GetMousePos().x, MouseManager::GetInstance()->GetMousePos().y);
@@ -67,11 +73,11 @@ void Stage1::Update()
 
 	player->Update();
 
+
 	for (auto& ele : v_wall)
 	{
 		ele->Update();
 	}
-
 	GET_SINGLE(CollisionManager)->Update();
 
 	// 업데이트 순서 변경됨

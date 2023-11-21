@@ -24,7 +24,7 @@ public:
 
 public:
 
-	float m_cameraSpeed = 40.0f;
+	float m_cameraSpeed = 50.0f;
 
 	float m_cameraPitch{ 0.0f };
 	float m_cameraYaw{ 0.0f };

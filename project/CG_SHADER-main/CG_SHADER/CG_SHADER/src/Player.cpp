@@ -94,19 +94,159 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 	if (other->GetOwner()->GetObjectType() == ObjectType::WALL)
 	{
 	/*	"여기서 충돌처리 해주면 됨 벽이랑 초록 불들어왓을때를 의미하는거임"*/
-		
-		CameraManager::GetInstance()->m_cameraPos = CameraManager::GetInstance()->m_cameraLastPos;
-		
-		_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-		_center.y = 0;
-		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+		//	glm::vec3 inverseMove = CameraManager::GetInstance()->m_cameraLastPos - CameraManager::GetInstance()->m_cameraPos;
+		//	
+		//	
+		//	
+		//	CameraManager::GetInstance()->m_cameraPos += inverseMove;
+		//	
+		//	_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+		//	_center.y = 0;
+		//	_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+		//	
+		//	CameraManager::GetInstance()->m_cameraSpeed = 0.0f;
+
+		int viewport[4];
+		glGetIntegerv(GL_VIEWPORT, viewport);
+
+		int width = viewport[2];
+		int height = viewport[3];
+
+		float speedScaleWidth = static_cast<float>(height) / static_cast<float>(width);
+		float speedScaleHeight = static_cast<float>(width) / static_cast<float>(height);
+		float dt = TimeManager::GetInstance()->GetDeltaTime();
+
+		if (KeyManager::GetInstance()->Getbutton(KeyType::W))
+		{
+			// -- front
+
+			CameraManager::GetInstance()->m_cameraPos -= (speedScaleHeight * CameraManager::GetInstance()->m_cameraSpeed) * glm::normalize(CameraManager::GetInstance()->m_cameraFront) * dt;
+
+			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+			_center.y = 0;
+			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+
+			if (KeyManager::GetInstance()->Getbutton(KeyType::A))
+			{
+				auto cameraRight = glm::normalize(glm::cross(CameraManager::GetInstance()->m_cameraUp, -(CameraManager::GetInstance()->m_cameraFront)));
+
+				CameraManager::GetInstance()->m_cameraPos += (speedScaleWidth * CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+
+				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+				_center.y = 0;
+				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+			}
+			if (KeyManager::GetInstance()->Getbutton(KeyType::D))
+			{
+				auto cameraRight = glm::normalize(glm::cross(CameraManager::GetInstance()->m_cameraUp, -(CameraManager::GetInstance()->m_cameraFront)));
+
+				CameraManager::GetInstance()->m_cameraPos -= (speedScaleWidth * CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+
+				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+				_center.y = 0;
+				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+			}
+		}
+		if (KeyManager::GetInstance()->Getbutton(KeyType::S))
+		{
+			// ++ front
+
+			CameraManager::GetInstance()->m_cameraPos += (speedScaleHeight * CameraManager::GetInstance()->m_cameraSpeed) * glm::normalize(CameraManager::GetInstance()->m_cameraFront) * dt;
+
+			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+			_center.y = 0;
+			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+
+			if (KeyManager::GetInstance()->Getbutton(KeyType::A))
+			{
+				auto cameraRight = glm::normalize(glm::cross(CameraManager::GetInstance()->m_cameraUp, -(CameraManager::GetInstance()->m_cameraFront)));
+
+				CameraManager::GetInstance()->m_cameraPos += (speedScaleWidth * CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+
+				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+				_center.y = 0;
+				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+			}
+			if (KeyManager::GetInstance()->Getbutton(KeyType::D))
+			{
+				auto cameraRight = glm::normalize(glm::cross(CameraManager::GetInstance()->m_cameraUp, -(CameraManager::GetInstance()->m_cameraFront)));
+
+				CameraManager::GetInstance()->m_cameraPos -= (speedScaleWidth * CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+
+				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+				_center.y = 0;
+				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+			}
+		}
+
+		if (KeyManager::GetInstance()->Getbutton(KeyType::A))
+		{
+			// ++ right
+			
+			auto cameraRight = glm::normalize(glm::cross(CameraManager::GetInstance()->m_cameraUp, -(CameraManager::GetInstance()->m_cameraFront)));
+
+			CameraManager::GetInstance()->m_cameraPos += (speedScaleWidth * CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+
+			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+			_center.y = 0;
+			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+
+			if (KeyManager::GetInstance()->Getbutton(KeyType::W))
+			{
+				CameraManager::GetInstance()->m_cameraPos -= (speedScaleHeight * CameraManager::GetInstance()->m_cameraSpeed) * glm::normalize(CameraManager::GetInstance()->m_cameraFront) * dt;
+
+				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+				_center.y = 0;
+				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+			}
+			if (KeyManager::GetInstance()->Getbutton(KeyType::S))
+			{
+				CameraManager::GetInstance()->m_cameraPos += (speedScaleHeight * CameraManager::GetInstance()->m_cameraSpeed) * glm::normalize(CameraManager::GetInstance()->m_cameraFront) * dt;
+
+				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+				_center.y = 0;
+				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+			}
+		}
+		if (KeyManager::GetInstance()->Getbutton(KeyType::D))
+		{
+			// -- right
+			
+			auto cameraRight = glm::normalize(glm::cross(CameraManager::GetInstance()->m_cameraUp, -(CameraManager::GetInstance()->m_cameraFront)));
+
+			CameraManager::GetInstance()->m_cameraPos -= (speedScaleWidth * CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+
+			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+			_center.y = 0;
+			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+
+			if (KeyManager::GetInstance()->Getbutton(KeyType::W))
+			{
+				CameraManager::GetInstance()->m_cameraPos -= (speedScaleHeight * CameraManager::GetInstance()->m_cameraSpeed) * glm::normalize(CameraManager::GetInstance()->m_cameraFront) * dt;
+
+				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+				_center.y = 0;
+				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+			}
+			if (KeyManager::GetInstance()->Getbutton(KeyType::S))
+			{
+				CameraManager::GetInstance()->m_cameraPos += (speedScaleHeight * CameraManager::GetInstance()->m_cameraSpeed) * glm::normalize(CameraManager::GetInstance()->m_cameraFront) * dt;
+
+				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+				_center.y = 0;
+				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+			}
+		}
+
 
 		CameraManager::GetInstance()->m_cameraSpeed = 0.0f;
 
 
+
+
 	/////////////////////////////////////////////////////////////
 	}
-
+	
 
 	_debug_color.x = 0;
 	_debug_color.y = 1;
