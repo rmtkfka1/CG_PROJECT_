@@ -90,8 +90,14 @@ void Player::KeyUpdate()
 void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 {
 
+	if (other->GetOwner()->GetObjectType() == ObjectType::WALL)
+	{
+	/*	"여기서 충돌처리 해주면 됨 벽이랑 초록 불들어왓을때를 의미하는거임"*/
+		cout << "hello" << endl;
 
-	_collusion = true;
+
+	}
+
 
 	_debug_color.x = 0;
 	_debug_color.y = 1;
@@ -104,11 +110,13 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 
 void Player::OnComponentEndOverlap(Collider* collider, Collider* other)
 {
-	_collusion = false;
+	
 
 	_debug_color.x = 1;
 	_debug_color.y = 0;
 	_debug_color.z = 0;
+
+
 
 
 

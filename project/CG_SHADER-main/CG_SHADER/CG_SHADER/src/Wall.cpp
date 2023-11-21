@@ -2,7 +2,7 @@
 #include "Wall.h"
 #include "Model.h"
 
-Wall::Wall(Model& model) :Object(ObjectType::PLAYER)
+Wall::Wall(Model& model) :Object(ObjectType::WALL)
 {
 	_center = model.GetCenter();
 	_size = model.GetSize();
