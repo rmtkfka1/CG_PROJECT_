@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="99.defines">
+      <UniqueIdentifier>{5bcbb399-0001-4edc-9449-e7e56e1110a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="100.memo">
+      <UniqueIdentifier>{46d95fe6-38be-45a7-9705-4dd88cf51db1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.res">
+      <UniqueIdentifier>{1a2b234b-e3b4-49fc-843d-85e4fb6d890b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.res\shader">
+      <UniqueIdentifier>{eee5382c-1aa5-445e-8767-1dc758473f44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.OPENGL">
+      <UniqueIdentifier>{9a73e75c-3ba7-4ca6-b17b-db9c059c41ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.OPENGL\01.Core">
+      <UniqueIdentifier>{5e95f049-99d5-443b-ab83-de5aee0cfc31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.OPENGL\02.VAO">
+      <UniqueIdentifier>{1c012270-b8e9-40b9-b19f-e021ad964450}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.OPENGL\03.VBO">
+      <UniqueIdentifier>{5ceadad5-3e26-469b-929f-e445f7c2e5f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.OPENGL\04.IBO">
+      <UniqueIdentifier>{4404a1ad-76fe-4eae-b57d-45124801e6b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.OPENGL\05.Shader">
+      <UniqueIdentifier>{af4b0a1e-e670-4d5f-b500-a474c476771a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Object">
+      <UniqueIdentifier>{2bf560c8-d426-4a7c-8bbe-47d741c06895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03,Manager">
+      <UniqueIdentifier>{85a7d254-0cbc-4d21-ae3e-a8673cebff75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Object\00.Object">
+      <UniqueIdentifier>{3c8f9fe8-8dad-4e39-bbef-a0e51e9b21f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Matrix">
+      <UniqueIdentifier>{84f712b1-4e15-4ee6-abf7-1df1d8269d35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.OPENGL\06.Texture">
+      <UniqueIdentifier>{3315251a-0657-4053-b76c-d35e6748e9e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.OPENGL\07.Assimp">
+      <UniqueIdentifier>{29ed043c-de66-4ad0-be5c-4e4093b48f62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.res\models">
+      <UniqueIdentifier>{ebde5f3d-7d57-4ad7-a97e-c71420274709}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.res\textures">
+      <UniqueIdentifier>{54357efe-d561-4482-b315-a775c8309a4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.OPENGL\08.Light">
+      <UniqueIdentifier>{4705ef9a-09eb-491a-9e64-1d67e0408fa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Component">
+      <UniqueIdentifier>{601b5cda-8140-4860-a889-5006e15d4eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Component\Collider">
+      <UniqueIdentifier>{cf34f9bf-bf7c-433b-9139-0bc807df1fcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Object\01.Player">
+      <UniqueIdentifier>{a7901eb3-6f8a-4285-bba0-d67c1a315606}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Object\02.Wall">
+      <UniqueIdentifier>{9aed8dfb-0d6a-469b-bbf7-01760b8f86e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Scene">
+      <UniqueIdentifier>{edd6bed1-dcc5-4eb4-bdfe-0de4c2a05e49}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Core.cpp">
+      <Filter>01.OPENGL\01.Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pch.cpp">
+      <Filter>99.defines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VAO.cpp">
+      <Filter>01.OPENGL\02.VAO</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utility.cpp">
+      <Filter>99.defines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VBO.cpp">
+      <Filter>01.OPENGL\03.VBO</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IBO.cpp">
+      <Filter>01.OPENGL\04.IBO</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader.cpp">
+      <Filter>01.OPENGL\05.Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\KeyManager.cpp">
+      <Filter>03,Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MouseManager.cpp">
+      <Filter>03,Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ObjectManager.cpp">
+      <Filter>03,Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TimeManager.cpp">
+      <Filter>03,Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\matrix.cpp">
+      <Filter>04.Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture.cpp">
+      <Filter>01.OPENGL\06.Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model.cpp">
+      <Filter>01.OPENGL\07.Assimp</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light.cpp">
+      <Filter>01.OPENGL\08.Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Component.cpp">
+      <Filter>06.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collider.cpp">
+      <Filter>06.Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BoxCollider.cpp">
+      <Filter>06.Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CollisionManager.cpp">
+      <Filter>03,Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\소스.cpp" />
+    <ClCompile Include="src\Object.cpp">
+      <Filter>02.Object\00.Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>02.Object\01.Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Wall.cpp">
+      <Filter>02.Object\02.Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CameraManager.cpp">
+      <Filter>03,Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SceneManager.cpp">
+      <Filter>05.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene.cpp">
+      <Filter>05.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Stage1.cpp">
+      <Filter>05.Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Core.h">
+      <Filter>01.OPENGL\01.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pch.h">
+      <Filter>99.defines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VAO.h">
+      <Filter>01.OPENGL\02.VAO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utility.h">
+      <Filter>99.defines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VBO.h">
+      <Filter>01.OPENGL\03.VBO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IBO.h">
+      <Filter>01.OPENGL\04.IBO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader.h">
+      <Filter>01.OPENGL\05.Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Types.h">
+      <Filter>99.defines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\KeyManager.h">
+      <Filter>03,Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enum.h">
+      <Filter>99.defines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MouseManager.h">
+      <Filter>03,Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VertexBufferLayout.h">
+      <Filter>01.OPENGL\02.VAO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ObjectManager.h">
+      <Filter>03,Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TimeManager.h">
+      <Filter>03,Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\matrix.h">
+      <Filter>04.Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texture.h">
+      <Filter>01.OPENGL\06.Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model.h">
+      <Filter>01.OPENGL\07.Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Light.h">
+      <Filter>01.OPENGL\08.Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Component.h">
+      <Filter>06.Component</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collider.h">
+      <Filter>06.Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BoxCollider.h">
+      <Filter>06.Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CollisionManager.h">
+      <Filter>03,Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object.h">
+      <Filter>02.Object\00.Object</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player.h">
+      <Filter>02.Object\01.Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wall.h">
+      <Filter>02.Object\02.Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CameraManager.h">
+      <Filter>03,Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SceneManager.h">
+      <Filter>05.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene.h">
+      <Filter>05.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Stage1.h">
+      <Filter>05.Scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="자주사용하는코드.txt">
+      <Filter>100.memo</Filter>
+    </Text>
+    <Text Include="텍스트.txt">
+      <Filter>100.memo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shader\mvp.vs">
+      <Filter>00.res\shader</Filter>
+    </None>
+    <None Include="res\shader\mvp.fs">
+      <Filter>00.res\shader</Filter>
+    </None>
+    <None Include="res\shader\mvp_new.vs">
+      <Filter>00.res\shader</Filter>
+    </None>
+    <None Include="res\shader\mvp_new.fs">
+      <Filter>00.res\shader</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\textures\JBNU.png">
+      <Filter>00.res\textures</Filter>
+    </Image>
+    <Image Include="res\textures\1.jpg">
+      <Filter>00.res\textures</Filter>
+    </Image>
+    <Image Include="res\models\K-093.png">
+      <Filter>00.res\textures</Filter>
+    </Image>
+    <Image Include="res\textures\zz.jpg">
+      <Filter>00.res\textures</Filter>
+    </Image>
+    <Image Include="res\textures\해리.jpeg">
+      <Filter>00.res\textures</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="res\models\teapot.obj">
+      <Filter>00.res\models</Filter>
+    </Object>
+  </ItemGroup>
+</Project>
