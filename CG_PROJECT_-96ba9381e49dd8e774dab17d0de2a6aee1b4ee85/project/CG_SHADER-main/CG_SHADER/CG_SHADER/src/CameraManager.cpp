@@ -3,10 +3,7 @@
 
 void CameraManager::KeyUpdate()
 {
-	if (!m_cameraControl)
-	{
-		return;
-	}
+	
 
 	float dt = TimeManager::GetInstance()->GetDeltaTime();
 
@@ -16,7 +13,7 @@ void CameraManager::KeyUpdate()
 	{
 		m_cameraPos += cameraSpeed * m_cameraFront *dt;
 
-		m_cameraPos.y = 20.0f;
+		m_cameraPos.y = 5.0f;
 
 	
 	}
@@ -24,7 +21,7 @@ void CameraManager::KeyUpdate()
 	{
 		m_cameraPos -= cameraSpeed * m_cameraFront * dt;
 
-		m_cameraPos.y = 20.0f;
+		m_cameraPos.y = 5.0f;
 	}
 
 
@@ -34,13 +31,13 @@ void CameraManager::KeyUpdate()
 	{
 		m_cameraPos += cameraSpeed * cameraRight *dt;
 
-		m_cameraPos.y = 20.0f;
+		m_cameraPos.y = 5.0f;
 	}
 	if (KeyManager::GetInstance()->Getbutton(KeyType::A))
 	{
 		m_cameraPos -= cameraSpeed * cameraRight * dt;
 
-		m_cameraPos.y = 20.0f;
+		m_cameraPos.y = 5.0f;
 	}
 
 	auto cameraUp = glm::normalize(glm::cross(-m_cameraFront, cameraRight));
@@ -59,12 +56,6 @@ void CameraManager::KeyUpdate()
 
 void CameraManager::MouseUpdate(float x, float y)
 {
-	if (!m_cameraControl)
-	{
-		return;
-	}
-
-
 
 	float dt = TimeManager::GetInstance()->GetDeltaTime();
 
