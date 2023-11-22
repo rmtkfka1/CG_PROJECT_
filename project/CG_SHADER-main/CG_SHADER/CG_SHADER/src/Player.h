@@ -20,6 +20,7 @@ public:
 	void KeyUpdate();
 
 	void OnComponentBeginOverlap(Collider* collider, Collider* other) override;
+	void OnComponentWhileOverlap(Collider* collider, Collider* other) override;
 	void OnComponentEndOverlap(Collider* collider, Collider* other) override;
 
 public:

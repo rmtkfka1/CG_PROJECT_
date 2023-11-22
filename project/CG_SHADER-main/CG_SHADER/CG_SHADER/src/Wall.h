@@ -16,6 +16,7 @@ public:
 	void Render(Shader& shader, Model& model,glm::mat4 matrix) override;
 
 	void OnComponentBeginOverlap(Collider* collider, Collider* other) override;
+	void OnComponentWhileOverlap(Collider* collider, Collider* other) override;
 	void OnComponentEndOverlap(Collider* collider, Collider* other) override;
 
 public:

@@ -29,6 +29,13 @@ void CollisionManager::Update()
 					dest->GetOwner()->OnComponentBeginOverlap(dest, src);
 					src->_collisionMap.insert(dest);
 					dest->_collisionMap.insert(src);
+					//cout << "begin collision" << endl;
+				}
+				else
+				{
+					src->GetOwner()->OnComponentWhileOverlap(src, dest);
+					dest->GetOwner()->OnComponentWhileOverlap(dest, src);
+					//cout << "while collision" << endl;
 				}
 			}
 			else
@@ -39,11 +46,16 @@ void CollisionManager::Update()
 					dest->GetOwner()->OnComponentEndOverlap(dest, src);
 					src->_collisionMap.erase(dest);
 					dest->_collisionMap.erase(src);
+					//cout << "end collision" << endl;
+				}
+				else
+				{
+					//cout << "no collision" << endl;
 				}
 			}
+			break;
 		}
 	}
-
 }
 
 void CollisionManager::AddCollider(Collider* collider)

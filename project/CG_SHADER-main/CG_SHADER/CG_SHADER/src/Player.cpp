@@ -31,9 +31,6 @@ void Player::Update()
 
 	Super::Update();
 
-
-
-
 }
 
 void Player::Render(Shader& shader,Model& model,glm::mat4 matrix)
@@ -50,7 +47,8 @@ void Player::Render(Shader& shader,Model& model,glm::mat4 matrix)
 	shader.SetUniformMat4f("u_model", matrix::GetInstance()->GetTranslation(this->GetCenter_x(), this->GetCenter_y(), this->GetCenter_z()));
 	model.RenderModel(shader);
 
-
+	//	cout << "curPos Rendered: " << _center.x << ", " << _center.z << endl;
+	//	cout << "camPos Rendered: " << GET_SINGLE(CameraManager)->m_cameraPos.x << ", " << GET_SINGLE(CameraManager)->m_cameraPos.z << endl;
 }
 
 void Player::KeyUpdate()
@@ -106,42 +104,32 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 		//	
 		//	CameraManager::GetInstance()->m_cameraSpeed = 0.0f;
 
-		int viewport[4];
-		glGetIntegerv(GL_VIEWPORT, viewport);
 
-		int width = viewport[2];
-		int height = viewport[3];
-
-		float speedScaleWidth = static_cast<float>(height) / static_cast<float>(width);
-		float speedScaleHeight = static_cast<float>(width) / static_cast<float>(height);
+		auto cameraRight = glm::normalize(glm::cross(CameraManager::GetInstance()->m_cameraUp, -(CameraManager::GetInstance()->m_cameraFront)));
+		auto cameraFrontDir = glm::normalize(glm::cross(CameraManager::GetInstance()->m_cameraUp, cameraRight));
 		float dt = TimeManager::GetInstance()->GetDeltaTime();
-
+		
 		if (KeyManager::GetInstance()->Getbutton(KeyType::W))
 		{
 			// -- front
-
-			CameraManager::GetInstance()->m_cameraPos -= (speedScaleHeight * CameraManager::GetInstance()->m_cameraSpeed) * glm::normalize(CameraManager::GetInstance()->m_cameraFront) * dt;
-
+		
+			CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * cameraFrontDir * dt;
 			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 			_center.y = 0;
 			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
-
+		
 			if (KeyManager::GetInstance()->Getbutton(KeyType::A))
 			{
-				auto cameraRight = glm::normalize(glm::cross(CameraManager::GetInstance()->m_cameraUp, -(CameraManager::GetInstance()->m_cameraFront)));
-
-				CameraManager::GetInstance()->m_cameraPos += (speedScaleWidth * CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
-
+				CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+		
 				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 				_center.y = 0;
 				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 			}
 			if (KeyManager::GetInstance()->Getbutton(KeyType::D))
 			{
-				auto cameraRight = glm::normalize(glm::cross(CameraManager::GetInstance()->m_cameraUp, -(CameraManager::GetInstance()->m_cameraFront)));
-
-				CameraManager::GetInstance()->m_cameraPos -= (speedScaleWidth * CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
-
+				CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+		
 				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 				_center.y = 0;
 				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
@@ -150,59 +138,53 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 		if (KeyManager::GetInstance()->Getbutton(KeyType::S))
 		{
 			// ++ front
-
-			CameraManager::GetInstance()->m_cameraPos += (speedScaleHeight * CameraManager::GetInstance()->m_cameraSpeed) * glm::normalize(CameraManager::GetInstance()->m_cameraFront) * dt;
-
+		
+			CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * cameraFrontDir * dt;
+		
 			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 			_center.y = 0;
 			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
-
+		
 			if (KeyManager::GetInstance()->Getbutton(KeyType::A))
 			{
-				auto cameraRight = glm::normalize(glm::cross(CameraManager::GetInstance()->m_cameraUp, -(CameraManager::GetInstance()->m_cameraFront)));
-
-				CameraManager::GetInstance()->m_cameraPos += (speedScaleWidth * CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
-
+				CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+		
 				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 				_center.y = 0;
 				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 			}
 			if (KeyManager::GetInstance()->Getbutton(KeyType::D))
 			{
-				auto cameraRight = glm::normalize(glm::cross(CameraManager::GetInstance()->m_cameraUp, -(CameraManager::GetInstance()->m_cameraFront)));
-
-				CameraManager::GetInstance()->m_cameraPos -= (speedScaleWidth * CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
-
+				CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+		
 				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 				_center.y = 0;
 				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 			}
 		}
-
+		
 		if (KeyManager::GetInstance()->Getbutton(KeyType::A))
 		{
 			// ++ right
-			
-			auto cameraRight = glm::normalize(glm::cross(CameraManager::GetInstance()->m_cameraUp, -(CameraManager::GetInstance()->m_cameraFront)));
 
-			CameraManager::GetInstance()->m_cameraPos += (speedScaleWidth * CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
-
+			CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+		
 			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 			_center.y = 0;
 			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
-
+		
 			if (KeyManager::GetInstance()->Getbutton(KeyType::W))
 			{
-				CameraManager::GetInstance()->m_cameraPos -= (speedScaleHeight * CameraManager::GetInstance()->m_cameraSpeed) * glm::normalize(CameraManager::GetInstance()->m_cameraFront) * dt;
-
+				CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * cameraFrontDir * dt;
+		
 				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 				_center.y = 0;
 				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 			}
 			if (KeyManager::GetInstance()->Getbutton(KeyType::S))
 			{
-				CameraManager::GetInstance()->m_cameraPos += (speedScaleHeight * CameraManager::GetInstance()->m_cameraSpeed) * glm::normalize(CameraManager::GetInstance()->m_cameraFront) * dt;
-
+				CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * cameraFrontDir * dt;
+		
 				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 				_center.y = 0;
 				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
@@ -211,39 +193,32 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 		if (KeyManager::GetInstance()->Getbutton(KeyType::D))
 		{
 			// -- right
-			
-			auto cameraRight = glm::normalize(glm::cross(CameraManager::GetInstance()->m_cameraUp, -(CameraManager::GetInstance()->m_cameraFront)));
-
-			CameraManager::GetInstance()->m_cameraPos -= (speedScaleWidth * CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
-
+			CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+		
 			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 			_center.y = 0;
 			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
-
+		
 			if (KeyManager::GetInstance()->Getbutton(KeyType::W))
 			{
-				CameraManager::GetInstance()->m_cameraPos -= (speedScaleHeight * CameraManager::GetInstance()->m_cameraSpeed) * glm::normalize(CameraManager::GetInstance()->m_cameraFront) * dt;
-
+				CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * cameraFrontDir * dt;
+		
 				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 				_center.y = 0;
 				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 			}
 			if (KeyManager::GetInstance()->Getbutton(KeyType::S))
 			{
-				CameraManager::GetInstance()->m_cameraPos += (speedScaleHeight * CameraManager::GetInstance()->m_cameraSpeed) * glm::normalize(CameraManager::GetInstance()->m_cameraFront) * dt;
-
+				CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * cameraFrontDir * dt;
+		
 				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 				_center.y = 0;
 				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 			}
 		}
-
-
+		
 		CameraManager::GetInstance()->m_cameraSpeed = 0.0f;
-
-
-
-
+	
 	/////////////////////////////////////////////////////////////
 	}
 	
@@ -254,6 +229,15 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 
 
 
+
+}
+
+void Player::OnComponentWhileOverlap(Collider* collider, Collider* other)
+{
+	
+	_debug_color.x = 0;
+	_debug_color.y = 0;
+	_debug_color.z = 1;
 
 }
 

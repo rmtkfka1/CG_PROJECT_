@@ -8,48 +8,39 @@ void CameraManager::KeyUpdate()
 		return;
 	}
 
-	int viewport[4];
-	glGetIntegerv(GL_VIEWPORT, viewport);
-
-	int width = viewport[2];
-	int height = viewport[3];
-
-	float speedScaleWidth = static_cast<float>(height) / static_cast<float>(width);
-	float speedScaleHeight = static_cast<float>(width) / static_cast<float>(height);
-
 
 	float dt = TimeManager::GetInstance()->GetDeltaTime();
+
+	auto cameraRight = glm::normalize(glm::cross(m_cameraUp, -m_cameraFront));
+	auto cameraFrontDir = glm::normalize(glm::cross(m_cameraUp, cameraRight));
 
 	if(KeyManager::GetInstance()->Getbutton(KeyType::W))
 	{
 		// 카메라 위치를 이동시키기 전에 이전 카메라의 위치를 저장
 		m_cameraLastPos = m_cameraPos;
-		m_cameraPos += (speedScaleHeight * m_cameraSpeed) * glm::normalize(m_cameraFront) * dt;
+		m_cameraPos += m_cameraSpeed * cameraFrontDir * dt;
 
 		m_cameraPos.y = 50.0f;
 	}
 	if (KeyManager::GetInstance()->Getbutton(KeyType::S))
 	{
 		m_cameraLastPos = m_cameraPos;
-		m_cameraPos -= (speedScaleHeight * m_cameraSpeed) * glm::normalize(m_cameraFront) * dt;
+		m_cameraPos -= m_cameraSpeed * cameraFrontDir * dt;
 
 		m_cameraPos.y = 50.0f;
 	}
 
-
-	auto cameraRight = glm::normalize(glm::cross(m_cameraUp, -m_cameraFront));
-
 	if (KeyManager::GetInstance()->Getbutton(KeyType::D))
 	{
 		m_cameraLastPos = m_cameraPos;
-		m_cameraPos += (speedScaleWidth * m_cameraSpeed) * cameraRight * dt;
+		m_cameraPos += m_cameraSpeed * cameraRight * dt;
 
 		m_cameraPos.y = 50.0f;
 	}
 	if (KeyManager::GetInstance()->Getbutton(KeyType::A))
 	{
 		m_cameraLastPos = m_cameraPos;
-		m_cameraPos -= (speedScaleWidth * m_cameraSpeed) * cameraRight * dt;
+		m_cameraPos -= m_cameraSpeed * cameraRight * dt;
 
 		m_cameraPos.y = 50.0f;
 	}
@@ -59,12 +50,10 @@ void CameraManager::KeyUpdate()
 
 	if (KeyManager::GetInstance()->Getbutton(KeyType::Q))
 	{
-		m_cameraLastPos = m_cameraPos;
 		m_cameraPos += m_cameraSpeed * cameraUp * dt;
 	}
 	if (KeyManager::GetInstance()->Getbutton(KeyType::E))
 	{
-		m_cameraLastPos = m_cameraPos;
 		m_cameraPos -= m_cameraSpeed * cameraUp * dt;
 	}
 

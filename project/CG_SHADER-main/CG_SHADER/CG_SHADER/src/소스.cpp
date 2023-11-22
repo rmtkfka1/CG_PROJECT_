@@ -12,7 +12,6 @@ void draw()
 
 	SceneManager::GetInstance()->Render();
 	glutSwapBuffers();
-
 };
 
 int main(int argc, char** argv)
