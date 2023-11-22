@@ -12,6 +12,7 @@ void draw()
 
 	SceneManager::GetInstance()->Render();
 	glutSwapBuffers();
+
 };
 
 int main(int argc, char** argv)
@@ -31,6 +32,7 @@ int main(int argc, char** argv)
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
+	glutSetCursor(GLUT_CURSOR_NONE); // 마우스 커서 숨기기
 
 
 	SceneManager::GetInstance()->ChangeScene(SceneType::Stage1);

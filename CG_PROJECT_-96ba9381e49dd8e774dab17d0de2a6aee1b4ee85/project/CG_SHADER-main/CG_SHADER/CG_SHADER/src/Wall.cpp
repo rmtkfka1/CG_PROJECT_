@@ -42,6 +42,7 @@ void Wall::Render(Shader& shader, Model& model, glm::mat4 matrix)
 	shader.SetUniformMat4f("u_model", matrix);
 	model.RenderModel(shader);
 
+
 }
 
 void Wall::OnComponentBeginOverlap(Collider* collider, Collider* other)
@@ -53,21 +54,6 @@ void Wall::OnComponentBeginOverlap(Collider* collider, Collider* other)
 	_debug_color.x = 0;
 	_debug_color.y = 1;
 	_debug_color.z = 0;
-
-
-
-
-}
-
-void Wall::OnComponentWhileOverlap(Collider* collider, Collider* other)
-{
-
-
-	_collusion = true;
-
-	_debug_color.x = 0;
-	_debug_color.y = 0;
-	_debug_color.z = 1;
 
 
 

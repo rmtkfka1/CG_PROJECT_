@@ -60,11 +60,6 @@ void Stage1::Init()
 
 void Stage1::Update()
 {
-	
-
-	CameraManager::GetInstance()->KeyUpdate();
-	CameraManager::GetInstance()->MouseUpdate(MouseManager::GetInstance()->GetMousePos().x, MouseManager::GetInstance()->GetMousePos().y);
-	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
 
 	player->Update();
 
@@ -72,15 +67,21 @@ void Stage1::Update()
 	{
 		ele->Update();
 	}
+
 	GET_SINGLE(CollisionManager)->Update();
+
+	CameraManager::GetInstance()->KeyUpdate();
+	CameraManager::GetInstance()->MouseUpdate(MouseManager::GetInstance()->GetMousePos().x, MouseManager::GetInstance()->GetMousePos().y);
 	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
 
-	// 업데이트 순서 변경됨
+
 
 }
 
 void Stage1::Render()
 {
+
+	
 	player->Render(*shader, *player_model, matrix::GetInstance()->GetTranslation(player->GetCenter_x(), player->GetCenter_y(), player->GetCenter_z()));
 	
 	for (auto& ele : v_wall)

@@ -125,10 +125,6 @@ void Object::OnComponentBeginOverlap(Collider* collider, Collider* other)
 
 }
 
-void Object::OnComponentWhileOverlap(Collider* collider, Collider* other)
-{
-}
-
 void Object::OnComponentEndOverlap(Collider* collider, Collider* other)
 {
 }

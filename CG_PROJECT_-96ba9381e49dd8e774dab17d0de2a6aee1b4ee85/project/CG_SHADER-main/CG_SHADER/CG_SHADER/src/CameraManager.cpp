@@ -8,41 +8,39 @@ void CameraManager::KeyUpdate()
 		return;
 	}
 
-
 	float dt = TimeManager::GetInstance()->GetDeltaTime();
 
-	auto cameraRight = glm::normalize(glm::cross(m_cameraUp, -m_cameraFront));
-	auto cameraFrontDir = glm::normalize(glm::cross(m_cameraUp, cameraRight));
+	float cameraSpeed = 40.0f;
 
 	if(KeyManager::GetInstance()->Getbutton(KeyType::W))
 	{
-		// 카메라 위치를 이동시키기 전에 이전 카메라의 위치를 저장
-		m_cameraLastPos = m_cameraPos;
-		m_cameraPos += m_cameraSpeed * cameraFrontDir * dt;
+		m_cameraPos += cameraSpeed * m_cameraFront *dt;
 
-		m_cameraPos.y = 50.0f;
+		m_cameraPos.y = 20.0f;
+
+	
 	}
 	if (KeyManager::GetInstance()->Getbutton(KeyType::S))
 	{
-		m_cameraLastPos = m_cameraPos;
-		m_cameraPos -= m_cameraSpeed * cameraFrontDir * dt;
+		m_cameraPos -= cameraSpeed * m_cameraFront * dt;
 
-		m_cameraPos.y = 50.0f;
+		m_cameraPos.y = 20.0f;
 	}
+
+
+	auto cameraRight = glm::normalize(glm::cross(m_cameraUp, -m_cameraFront));
 
 	if (KeyManager::GetInstance()->Getbutton(KeyType::D))
 	{
-		m_cameraLastPos = m_cameraPos;
-		m_cameraPos += m_cameraSpeed * cameraRight * dt;
+		m_cameraPos += cameraSpeed * cameraRight *dt;
 
-		m_cameraPos.y = 50.0f;
+		m_cameraPos.y = 20.0f;
 	}
 	if (KeyManager::GetInstance()->Getbutton(KeyType::A))
 	{
-		m_cameraLastPos = m_cameraPos;
-		m_cameraPos -= m_cameraSpeed * cameraRight * dt;
+		m_cameraPos -= cameraSpeed * cameraRight * dt;
 
-		m_cameraPos.y = 50.0f;
+		m_cameraPos.y = 20.0f;
 	}
 
 	auto cameraUp = glm::normalize(glm::cross(-m_cameraFront, cameraRight));
@@ -50,11 +48,11 @@ void CameraManager::KeyUpdate()
 
 	if (KeyManager::GetInstance()->Getbutton(KeyType::Q))
 	{
-		m_cameraPos += m_cameraSpeed * cameraUp * dt;
+		m_cameraPos += cameraSpeed * cameraUp * dt;
 	}
 	if (KeyManager::GetInstance()->Getbutton(KeyType::E))
 	{
-		m_cameraPos -= m_cameraSpeed * cameraUp * dt;
+		m_cameraPos -= cameraSpeed * cameraUp * dt;
 	}
 
 }
@@ -75,6 +73,30 @@ void CameraManager::MouseUpdate(float x, float y)
 	auto deltaPos = pos - m_prevMousePos;
 
 	const float cameraSpeed = 10.0f;
+
+	///윈도우 크기를 가져와서 무한회전 가능하게 시킴//
+
+	float windowWidth = glutGet(GLUT_WINDOW_WIDTH);
+	float windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
+
+	if (x > windowWidth - 300)
+	{
+		glutWarpPointer(windowWidth / 2, windowHeight / 2);
+		m_prevMousePos = glm::vec2(windowWidth / 2, windowHeight / 2);
+		deltaPos = glm::vec2(0, 0);
+		return;
+	}
+
+	if (x < 300)
+	{
+		glutWarpPointer(windowWidth / 2, windowHeight / 2);
+		m_prevMousePos = glm::vec2(windowWidth / 2, windowHeight / 2);
+		deltaPos = glm::vec2(0, 0);
+		return;
+	}
+
+	/////////////////////////////////////////////////////
+
 
 	m_cameraYaw -= deltaPos.x * cameraSpeed * dt;
 	m_cameraPitch -= deltaPos.y * cameraSpeed * dt;
