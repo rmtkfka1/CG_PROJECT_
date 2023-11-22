@@ -61,6 +61,10 @@ void Stage1::Init()
 void Stage1::Update()
 {
 
+	CameraManager::GetInstance()->KeyUpdate();
+	CameraManager::GetInstance()->MouseUpdate(MouseManager::GetInstance()->GetMousePos().x, MouseManager::GetInstance()->GetMousePos().y);
+	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
+
 	player->Update();
 
 	for (auto& ele : v_wall)
@@ -70,9 +74,7 @@ void Stage1::Update()
 
 	GET_SINGLE(CollisionManager)->Update();
 
-	CameraManager::GetInstance()->KeyUpdate();
-	CameraManager::GetInstance()->MouseUpdate(MouseManager::GetInstance()->GetMousePos().x, MouseManager::GetInstance()->GetMousePos().y);
-	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
+	
 
 
 

@@ -47,7 +47,7 @@ void Player::Render(Shader& shader,Model& model,glm::mat4 matrix)
 
 
 	shader.SetUniform3f("control_color", 0, 0, 0);
-	shader.SetUniformMat4f("u_model", matrix::GetInstance()->GetTranslation(this->GetCenter_x(), this->GetCenter_y(), this->GetCenter_z()));
+	shader.SetUniformMat4f("u_model", matrix);
 	model.RenderModel(shader);
 
 

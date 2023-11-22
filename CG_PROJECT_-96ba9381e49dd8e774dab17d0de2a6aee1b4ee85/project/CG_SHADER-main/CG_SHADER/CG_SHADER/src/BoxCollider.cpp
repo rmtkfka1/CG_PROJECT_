@@ -30,7 +30,7 @@ void BoxCollider::Render(Shader& shader)
 	
     if (_showDebug)
     {
-        glLineWidth(5.0f);
+        glLineWidth(30.0f);
 
         glBegin(GL_LINES); // 라인 그리기 시작
 

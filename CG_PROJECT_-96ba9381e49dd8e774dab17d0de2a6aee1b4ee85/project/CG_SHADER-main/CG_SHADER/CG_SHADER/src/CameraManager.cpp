@@ -86,6 +86,23 @@ void CameraManager::MouseUpdate(float x, float y)
 		return;
 	}
 
+	if (y < 100)
+	{
+		glutWarpPointer(windowWidth / 2, windowHeight / 2);
+		m_prevMousePos = glm::vec2(windowWidth / 2, windowHeight / 2);
+		deltaPos = glm::vec2(0, 0);
+		return;
+	}
+
+	if (y > windowHeight-100)
+	{
+		glutWarpPointer(windowWidth / 2, windowHeight / 2);
+		m_prevMousePos = glm::vec2(windowWidth / 2, windowHeight / 2);
+		deltaPos = glm::vec2(0, 0);
+		return;
+	}
+
+
 	/////////////////////////////////////////////////////
 
 

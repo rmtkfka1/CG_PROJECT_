@@ -6,8 +6,8 @@
 
 void MouseManager::Init()
 {
-	glutMouseFunc(MouseCallBack);
-	glutMotionFunc(MousemoveCallBack);
+	
+
 	glutPassiveMotionFunc(MousemoveCallBack2);
 	
 }
