@@ -63,7 +63,6 @@ void Stage1::Update()
 
 	CameraManager::GetInstance()->KeyUpdate();
 	CameraManager::GetInstance()->MouseUpdate(MouseManager::GetInstance()->GetMousePos().x, MouseManager::GetInstance()->GetMousePos().y);
-	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
 
 	player->Update();
 
@@ -73,6 +72,7 @@ void Stage1::Update()
 	}
 
 	GET_SINGLE(CollisionManager)->Update();
+	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
 
 	
 

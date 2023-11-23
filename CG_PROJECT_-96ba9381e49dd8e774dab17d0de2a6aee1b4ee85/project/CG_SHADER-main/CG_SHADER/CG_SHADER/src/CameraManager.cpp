@@ -7,35 +7,31 @@ void CameraManager::KeyUpdate()
 
 	float dt = TimeManager::GetInstance()->GetDeltaTime();
 
-	float cameraSpeed = 40.0f;
 
 	if(KeyManager::GetInstance()->Getbutton(KeyType::W))
 	{
-		m_cameraPos += cameraSpeed * m_cameraFront *dt;
+		m_cameraPos += m_cameraSpeed * m_cameraFront *dt;
 
 		m_cameraPos.y = 5.0f;
-
-	
 	}
 	if (KeyManager::GetInstance()->Getbutton(KeyType::S))
 	{
-		m_cameraPos -= cameraSpeed * m_cameraFront * dt;
+		m_cameraPos -= m_cameraSpeed * m_cameraFront * dt;
 
 		m_cameraPos.y = 5.0f;
 	}
-
 
 	auto cameraRight = glm::normalize(glm::cross(m_cameraUp, -m_cameraFront));
 
 	if (KeyManager::GetInstance()->Getbutton(KeyType::D))
 	{
-		m_cameraPos += cameraSpeed * cameraRight *dt;
+		m_cameraPos += m_cameraSpeed * cameraRight *dt;
 
 		m_cameraPos.y = 5.0f;
 	}
 	if (KeyManager::GetInstance()->Getbutton(KeyType::A))
 	{
-		m_cameraPos -= cameraSpeed * cameraRight * dt;
+		m_cameraPos -= m_cameraSpeed * cameraRight * dt;
 
 		m_cameraPos.y = 5.0f;
 	}
@@ -45,11 +41,11 @@ void CameraManager::KeyUpdate()
 
 	if (KeyManager::GetInstance()->Getbutton(KeyType::Q))
 	{
-		m_cameraPos += cameraSpeed * cameraUp * dt;
+		m_cameraPos += m_cameraSpeed * cameraUp * dt;
 	}
 	if (KeyManager::GetInstance()->Getbutton(KeyType::E))
 	{
-		m_cameraPos -= cameraSpeed * cameraUp * dt;
+		m_cameraPos -= m_cameraSpeed * cameraUp * dt;
 	}
 
 }

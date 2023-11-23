@@ -92,10 +92,128 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 
 	if (other->GetOwner()->GetObjectType() == ObjectType::WALL)
 	{
-	/*	"여기서 충돌처리 해주면 됨 벽이랑 초록 불들어왓을때를 의미하는거임"*/
-		cout << "hello" << endl;
+		// 부딛힌 방향의 역방향 재이동 수행, 대각선은 아직 수정이 필요함
+		auto cameraRight = glm::normalize(glm::cross(CameraManager::GetInstance()->m_cameraUp, -(CameraManager::GetInstance()->m_cameraFront)));
+		float dt = TimeManager::GetInstance()->GetDeltaTime();
 
+		if (KeyManager::GetInstance()->Getbutton(KeyType::W))
+		{
+			// -- front
 
+			CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * CameraManager::GetInstance()->m_cameraFront * dt;
+			CameraManager::GetInstance()->m_cameraPos.y = 5.0f;
+
+			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+			_center.y = 0;
+			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+
+			if (KeyManager::GetInstance()->Getbutton(KeyType::A))
+			{
+				CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+
+				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+				_center.y = 0;
+				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+			}
+			if (KeyManager::GetInstance()->Getbutton(KeyType::D))
+			{
+				CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+
+				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+				_center.y = 0;
+				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+			}
+		}
+		if (KeyManager::GetInstance()->Getbutton(KeyType::S))
+		{
+			// ++ front
+
+			CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * CameraManager::GetInstance()->m_cameraFront * dt;
+			CameraManager::GetInstance()->m_cameraPos.y = 5.0f;
+
+			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+			_center.y = 0;
+			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+
+			if (KeyManager::GetInstance()->Getbutton(KeyType::A))
+			{
+				CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+
+				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+				_center.y = 0;
+				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+			}
+			if (KeyManager::GetInstance()->Getbutton(KeyType::D))
+			{
+				CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+
+				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+				_center.y = 0;
+				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+			}
+		}
+
+		if (KeyManager::GetInstance()->Getbutton(KeyType::A))
+		{
+			// ++ right
+
+			CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+
+			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+			_center.y = 0;
+			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+
+			if (KeyManager::GetInstance()->Getbutton(KeyType::W))
+			{
+				CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * CameraManager::GetInstance()->m_cameraFront * dt;
+				CameraManager::GetInstance()->m_cameraPos.y = 5.0f;
+
+				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+				_center.y = 0;
+				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+			}
+			if (KeyManager::GetInstance()->Getbutton(KeyType::S))
+			{
+				CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * CameraManager::GetInstance()->m_cameraFront * dt;
+				CameraManager::GetInstance()->m_cameraPos.y = 5.0f;
+
+				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+				_center.y = 0;
+				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+			}
+		}
+		if (KeyManager::GetInstance()->Getbutton(KeyType::D))
+		{
+			// -- right
+			CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+
+			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+			_center.y = 0;
+			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+
+			if (KeyManager::GetInstance()->Getbutton(KeyType::W))
+			{
+				CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * CameraManager::GetInstance()->m_cameraFront * dt;
+				CameraManager::GetInstance()->m_cameraPos.y = 5.0f;
+
+				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+				_center.y = 0;
+				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+			}
+			if (KeyManager::GetInstance()->Getbutton(KeyType::S))
+			{
+				CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * CameraManager::GetInstance()->m_cameraFront * dt;
+				CameraManager::GetInstance()->m_cameraPos.y = 5.0f;
+
+				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+				_center.y = 0;
+				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+			}
+		}
+
+		CameraManager::GetInstance()->m_cameraSpeed = 0.0f;
+
+		/////////////////////////////////////////////////////////////
 	}
 
 
@@ -116,7 +234,8 @@ void Player::OnComponentEndOverlap(Collider* collider, Collider* other)
 	_debug_color.y = 0;
 	_debug_color.z = 0;
 
-
+	// 속도 원상복귀
+	CameraManager::GetInstance()->m_cameraSpeed = 40.0f;
 
 
 
