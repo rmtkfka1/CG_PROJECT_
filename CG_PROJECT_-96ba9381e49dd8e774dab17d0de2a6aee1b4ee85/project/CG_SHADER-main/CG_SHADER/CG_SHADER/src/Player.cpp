@@ -107,22 +107,6 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 			_center.y = 0;
 			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
-			if (KeyManager::GetInstance()->Getbutton(KeyType::A))
-			{
-				CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
-
-				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-				_center.y = 0;
-				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
-			}
-			if (KeyManager::GetInstance()->Getbutton(KeyType::D))
-			{
-				CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
-
-				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-				_center.y = 0;
-				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
-			}
 		}
 		if (KeyManager::GetInstance()->Getbutton(KeyType::S))
 		{
@@ -135,22 +119,6 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 			_center.y = 0;
 			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
-			if (KeyManager::GetInstance()->Getbutton(KeyType::A))
-			{
-				CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
-
-				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-				_center.y = 0;
-				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
-			}
-			if (KeyManager::GetInstance()->Getbutton(KeyType::D))
-			{
-				CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
-
-				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-				_center.y = 0;
-				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
-			}
 		}
 
 		if (KeyManager::GetInstance()->Getbutton(KeyType::A))
@@ -163,24 +131,6 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 			_center.y = 0;
 			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
-			if (KeyManager::GetInstance()->Getbutton(KeyType::W))
-			{
-				CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * CameraManager::GetInstance()->m_cameraFront * dt;
-				CameraManager::GetInstance()->m_cameraPos.y = 5.0f;
-
-				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-				_center.y = 0;
-				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
-			}
-			if (KeyManager::GetInstance()->Getbutton(KeyType::S))
-			{
-				CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * CameraManager::GetInstance()->m_cameraFront * dt;
-				CameraManager::GetInstance()->m_cameraPos.y = 5.0f;
-
-				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-				_center.y = 0;
-				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
-			}
 		}
 		if (KeyManager::GetInstance()->Getbutton(KeyType::D))
 		{
@@ -191,24 +141,6 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 			_center.y = 0;
 			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
-			if (KeyManager::GetInstance()->Getbutton(KeyType::W))
-			{
-				CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * CameraManager::GetInstance()->m_cameraFront * dt;
-				CameraManager::GetInstance()->m_cameraPos.y = 5.0f;
-
-				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-				_center.y = 0;
-				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
-			}
-			if (KeyManager::GetInstance()->Getbutton(KeyType::S))
-			{
-				CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * CameraManager::GetInstance()->m_cameraFront * dt;
-				CameraManager::GetInstance()->m_cameraPos.y = 5.0f;
-
-				_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-				_center.y = 0;
-				_center.z = CameraManager::GetInstance()->m_cameraPos.z;
-			}
 		}
 
 		CameraManager::GetInstance()->m_cameraSpeed = 0.0f;
