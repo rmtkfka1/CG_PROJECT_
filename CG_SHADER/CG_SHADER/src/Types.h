@@ -128,7 +128,8 @@ enum class ObjectType
 {
 	NONE,
 	PLAYER,
-	WALL
+	WALL,
+	PlANE
 };
 
 enum class SceneType

@@ -1,6 +1,8 @@
 #pragma once
 
 
+class Player;
+
 class CameraManager
 {
 
@@ -13,7 +15,7 @@ public:
 	}
 
 
-	void KeyUpdate();
+	void PosUpdate(Player *player);
 	void MouseUpdate(float x, float y);
 
 	glm::mat4 GetMatrix();

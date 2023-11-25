@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Bottom.cpp" />
     <ClCompile Include="src\Light2.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\SceneManager.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="src\Stage1.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Bottom.h" />
     <ClInclude Include="src\Light2.h" />
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\SceneManager.h" />

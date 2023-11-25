@@ -1,15 +1,17 @@
 #pragma once
 
+#include "Object.h"
 class Model;
 #include "Object.h"
-class Wall :public Object
+class Bottom :public Object
 {
 
 	using Super = Object;
 
 public:
-	Wall(Model& model);
-	~Wall();
+
+	Bottom(Model& model);
+	~Bottom();
 
 	void Init() override;
 	void Update() override;
@@ -20,6 +22,6 @@ public:
 
 public:
 
-	
+
 
 };

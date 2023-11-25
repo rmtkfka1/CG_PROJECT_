@@ -38,7 +38,7 @@ void Object::Update()
 	}
 }
 
-void Object::Render(Shader& shader, Model& model,glm::mat4 matrix)
+void Object::Render(Shader& shader, Model& model)
 {
 
 	for (Component* component : v_component)

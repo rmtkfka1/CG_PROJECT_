@@ -16,14 +16,15 @@ public:
 
 	void Init() override;
 	void Update() override;
-	void Render(Shader& shader, Model& model, glm::mat4 matrix) override;
+	void UpdatePos(); //카메라 위치에맞게 자기매트릭스 설정
+	void Render(Shader& shader, Model& model) override;
 	void KeyUpdate();
 
 	void OnComponentBeginOverlap(Collider* collider, Collider* other) override;
 	void OnComponentEndOverlap(Collider* collider, Collider* other) override;
 
-public:
+private:
+	float _speed=20.0f;
 	
-	bool _collusion = false;
 
 };

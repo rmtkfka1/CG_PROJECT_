@@ -73,6 +73,9 @@
     <Filter Include="05.Scene">
       <UniqueIdentifier>{edd6bed1-dcc5-4eb4-bdfe-0de4c2a05e49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Object\03.Bottom">
+      <UniqueIdentifier>{f6f87df6-1f02-4c04-a7b7-73d597b0315f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -156,6 +159,9 @@
     </ClCompile>
     <ClCompile Include="src\Light2.cpp">
       <Filter>01.OPENGL\08.Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bottom.cpp">
+      <Filter>02.Object\03.Bottom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +254,9 @@
     </ClInclude>
     <ClInclude Include="src\Light2.h">
       <Filter>01.OPENGL\08.Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bottom.h">
+      <Filter>02.Object\03.Bottom</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

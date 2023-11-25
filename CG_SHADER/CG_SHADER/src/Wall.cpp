@@ -28,18 +28,18 @@ void Wall::Update()
 
 }
 
-void Wall::Render(Shader& shader, Model& model, glm::mat4 matrix)
+void Wall::Render(Shader& shader, Model& model)
 {
 
 
 	shader.SetUniform3f("control_color", _debug_color.x, _debug_color.y, _debug_color.z);
 	auto simple = glm::mat4(1.0f);
 	shader.SetUniformMat4f("u_model", simple);
-	Super::Render(shader, model, matrix);
+	Super::Render(shader, model);
 
 
 	shader.SetUniform3f("control_color", 0, 0, 0);
-	shader.SetUniformMat4f("u_model", matrix);
+	shader.SetUniformMat4f("u_model", _matrix);
 	model.RenderModel(shader);
 
 
@@ -49,7 +49,6 @@ void Wall::OnComponentBeginOverlap(Collider* collider, Collider* other)
 {
 
 
-	_collusion = true;
 
 	_debug_color.x = 0;
 	_debug_color.y = 1;
@@ -62,7 +61,7 @@ void Wall::OnComponentBeginOverlap(Collider* collider, Collider* other)
 
 void Wall::OnComponentEndOverlap(Collider* collider, Collider* other)
 {
-	_collusion = false;
+
 
 	_debug_color.x = 1;
 	_debug_color.y = 0;
