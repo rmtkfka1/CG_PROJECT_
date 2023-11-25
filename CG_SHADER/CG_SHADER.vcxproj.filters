@@ -271,10 +271,10 @@
     <None Include="res\shader\mvp_new.fs">
       <Filter>00.res\shader</Filter>
     </None>
-    <None Include="res\shader\mvp_spotlight.vs">
+    <None Include="res\shader\mvp_pointlight.vs">
       <Filter>00.res\shader</Filter>
     </None>
-    <None Include="res\shader\mvp_spotlight.fs">
+    <None Include="res\shader\mvp_pointlight.fs">
       <Filter>00.res\shader</Filter>
     </None>
     <None Include="..\..\..\..\opengl_course-main\projects\09_lighting\lighting_example\shader\lighting.fs">
@@ -284,6 +284,12 @@
       <Filter>00.res\shader</Filter>
     </None>
     <None Include="res\shader\simple.vs">
+      <Filter>00.res\shader</Filter>
+    </None>
+    <None Include="res\shader\mvp_spotlight.vs">
+      <Filter>00.res\shader</Filter>
+    </None>
+    <None Include="res\shader\mvp_spotlight.fs">
       <Filter>00.res\shader</Filter>
     </None>
   </ItemGroup>

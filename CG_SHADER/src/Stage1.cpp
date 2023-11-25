@@ -27,7 +27,7 @@ void Stage1::Init()
 
 	///////////////////////////////////////////////////모델 불러오기 
 	player_model = new Model("res/models/player.obj");
-	wall_model = new Model("res/models/wall.obj");
+	wall_model = new Model("res/models/test_box.obj");
 	///////////////////////////////////////////////////////////////////////////////////////////
 
 	///오브젝트 생성////////////////////////////////////////////////////////////////////////////
@@ -62,6 +62,7 @@ void Stage1::Init()
 	shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
 	///////////////////////////////////////////////////////////////////////////////////
 
+	v_wall[0]->PrintInfo();
 }
 
 void Stage1::Update()
@@ -72,14 +73,34 @@ void Stage1::Update()
 
 	player->Update();
 
+
+	light->_light.position = CameraManager::GetInstance()->m_cameraPos;
+	light->_light.direction = CameraManager::GetInstance()->m_cameraFront;
+	light->UseLight(*shader);
+
+	shader->SetUniform3f("u_viewpos", CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
+	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
 	for (auto& ele : v_wall)
 	{
 		ele->Update();
 	}
 
 	GET_SINGLE(CollisionManager)->Update();
-	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
+	
 
+	if (KeyManager::GetInstance()->Getbutton(KeyType::SpaceBar))
+	{
+		light->_light.cutoff[1] += 1.0f;
+		cout << "cutoff1" << endl;
+		cout << light->_light.cutoff[1] << endl;
+	}
+
+	if (KeyManager::GetInstance()->Getbutton(KeyType::R))
+	{
+		light->_light.cutoff[0] -= 1.0f;
+		cout << "cutoff0" << endl;
+		cout << light->_light.cutoff[0] << endl;
+	}
 	
 
 

@@ -8,6 +8,8 @@ out vec4 fragcolor;
 
 struct Light {
     vec3 position; // 광원의 위치
+    vec3 direction;
+    vec2 cutoff;
     vec3 attenuation;
     vec3 ambient;  
     vec3 diffuse;
@@ -32,24 +34,38 @@ void main() {
 
     vec3 ambient = textcolor * u_light.ambient;
 
-    
+
     float dist =length(u_light.position - v_position);
     vec3 distpoly = vec3(1.0,dist,dist*dist);
     float attenuation = 1.0/dot(distpoly,u_light.attenuation);
     vec3 lightdir = (u_light.position - v_position)/dist;
-    vec3 pixelnorm = normalize(v_normal);
+   
+ 
+    float theta = dot(lightdir,normalize(-u_light.direction));
+    vec3 result = ambient;
 
-    // 디퓨즈항 계산 //
-    float diff = max(dot(pixelnorm, lightdir), 0.0);
-    vec3 diffuse = diff * textcolor * u_light.diffuse;
+    float intensity = clamp((theta-u_light.cutoff[1]) / (u_light.cutoff[0]- u_light.cutoff[1]),0.0,1.0);
 
-    // 스펙큘러항 계산 //
-    vec3 viewdir = normalize(u_viewpos - v_position);
-    vec3 reflectdir = reflect(-lightdir, pixelnorm);
-    float spec = pow(max(dot(viewdir, reflectdir), 0.0), u_material.shininess);
-    vec3 specular = spec * u_material.specular * u_light.specular;
 
-    vec3 result = (ambient + diffuse + specular)*attenuation + control_color;
+    if(intensity>0.0)
+    {
+         vec3 pixelnorm = normalize(v_normal);
+         
+        float diff = max(dot(pixelnorm, lightdir), 0.0);
+        vec3 diffuse = diff * textcolor * u_light.diffuse;
 
-    fragcolor = vec4(result, 1.0);
+        vec3 specColor = texture2D(u_texture,v_texcoord).xyz;
+        vec3 viewdir = normalize(u_viewpos - v_position);
+        vec3 reflectdir = reflect(-lightdir, pixelnorm);
+        float spec = pow(max(dot(viewdir, reflectdir), 0.0), u_material.shininess);
+        vec3 specular = spec * specColor * u_light.specular;
+
+        result += (diffuse +specular) * intensity;   
+    }
+
+
+    result *= attenuation;
+    fragcolor = vec4(result,1.0) + vec4(control_color,1);
+
+
 }

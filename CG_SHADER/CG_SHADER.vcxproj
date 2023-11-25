@@ -210,6 +210,8 @@
     <None Include="..\..\..\..\opengl_course-main\projects\09_lighting\lighting_example\shader\lighting.fs" />
     <None Include="res\shader\mvp_spotlight.fs" />
     <None Include="res\shader\mvp_spotlight.vs" />
+    <None Include="res\shader\mvp_pointlight.fs" />
+    <None Include="res\shader\mvp_pointlight.vs" />
     <None Include="res\shader\mvp_new.fs" />
     <None Include="res\shader\mvp_new.vs" />
     <None Include="res\shader\mvp.fs" />

@@ -4,6 +4,8 @@
 struct Light
 {
 	glm::vec3 position; //광원의 위치
+	glm::vec3 direction; //광원의 위치
+	glm::vec2 cutoff;
 	glm::vec3 ambient;
 	float distance;
 	glm::vec3 diffuse;
@@ -40,7 +42,7 @@ public:
 	void SetMaterialSpecular(glm::vec3 ms);
 	void SetShininess(float shininess);
 
-private:
+public:
 
 	Light _light;
 	Material _material;
