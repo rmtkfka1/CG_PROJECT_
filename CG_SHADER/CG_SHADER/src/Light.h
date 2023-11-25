@@ -19,7 +19,6 @@ public:
 
 private:
 
-
 	glm::vec3 _lightColor;
 	glm::vec3 _lvector; // max((n*l),0)*sd*md ¿¡¼­ÀÇ l
 

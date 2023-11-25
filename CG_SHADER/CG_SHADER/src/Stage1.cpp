@@ -4,6 +4,7 @@
 #include "Wall.h"
 #include "BoxCollider.h"
 #include "CollisionManager.h"
+#include "Light2.h"
 
 
 Stage1::Stage1()
@@ -21,14 +22,15 @@ Stage1::~Stage1()
 void Stage1::Init()
 {
 
-	shader = new Shader("res/shader/mvp.vs", "res/shader/mvp.fs");
+	shader = new Shader("res/shader/mvp_spotlight.vs", "res/shader/mvp_spotlight.fs");
 	shader->Bind();
 
-	///////////////////////////////////////////////////모델 불러오기 밑에 생성전에 먼저해줘야됨
+	///////////////////////////////////////////////////모델 불러오기 
 	player_model = new Model("res/models/player.obj");
 	wall_model = new Model("res/models/wall.obj");
 	///////////////////////////////////////////////////////////////////////////////////////////
 
+	///오브젝트 생성////////////////////////////////////////////////////////////////////////////
 	{
 		player = new Player(*player_model);
 		BoxCollider* ptr = new BoxCollider;
@@ -44,17 +46,21 @@ void Stage1::Init()
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 		v_wall.push_back(wall);
 	}
-
-
-
-	texture = new Texture("res/textures/box.jpg");
+	///////////////////////////////////////////////////////////////////////////////////
+	
+	/////////텍스처 만들기/////////////////////////////////////////////////////////////
+	texture = new Texture("res/textures/1.jpg");
 	texture->Bind(0);
-	shader->SetUniform1i("u_texture", 0);
 
+	////////////////////////조명작업///////////////////////////////////////////////////
+	light = new Light2();
+	light->UseLight(*shader);
+
+	light->SetLightPos(glm::vec3(0, 10.0f, 0.0f));
 
 
 	shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
-
+	///////////////////////////////////////////////////////////////////////////////////
 
 }
 
@@ -86,8 +92,11 @@ void Stage1::Render()
 	
 	player->Render(*shader, *player_model, matrix::GetInstance()->GetTranslation(player->GetCenter_x(), player->GetCenter_y(), player->GetCenter_z()));
 	
+
+	shader->SetUniform1i("u_texture", 0);
 	for (auto& ele : v_wall)
 	{
+		
 		ele->Render(*shader, *wall_model,matrix::GetInstance()->GetSimple());
 	}
 

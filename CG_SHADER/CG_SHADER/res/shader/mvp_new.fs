@@ -35,7 +35,7 @@ void main()
 
 
 
-	vec3 lightDir = normalize(-u_light.direction);
+	vec3 lightDir = normalize(u_light.direction);
 	//µðÇ»Áî
 
 	float diffuseFactor = max(dot(normalize(v_Normal), lightDir), 0.0);
@@ -49,6 +49,5 @@ void main()
 	vec3 lightSpecular = pow(max(dot(rVec, fragToEye), 0.0), u_light.shinIness) * u_light.lightColor * u_light.specularIntensity;
 
 	color = texture(u_texture, v_TexCoord)* vec4(lightAmbient+lightDiffuse +lightSpecular ,1.0) + vec4(control_color,1);
-
 
 };

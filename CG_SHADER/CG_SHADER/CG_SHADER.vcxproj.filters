@@ -154,6 +154,9 @@
     <ClCompile Include="src\Stage1.cpp">
       <Filter>05.Scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\Light2.cpp">
+      <Filter>01.OPENGL\08.Light</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core.h">
@@ -243,6 +246,9 @@
     <ClInclude Include="src\Stage1.h">
       <Filter>05.Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\Light2.h">
+      <Filter>01.OPENGL\08.Light</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="자주사용하는코드.txt">
@@ -263,6 +269,15 @@
       <Filter>00.res\shader</Filter>
     </None>
     <None Include="res\shader\mvp_new.fs">
+      <Filter>00.res\shader</Filter>
+    </None>
+    <None Include="res\shader\mvp_spotlight.vs">
+      <Filter>00.res\shader</Filter>
+    </None>
+    <None Include="res\shader\mvp_spotlight.fs">
+      <Filter>00.res\shader</Filter>
+    </None>
+    <None Include="..\..\..\..\opengl_course-main\projects\09_lighting\lighting_example\shader\lighting.fs">
       <Filter>00.res\shader</Filter>
     </None>
   </ItemGroup>

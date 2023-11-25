@@ -8,6 +8,7 @@ class Model;
 class Texture;
 class Shader;
 class Wall;
+class Light2;
 
 
 class Stage1 : public Scene
@@ -35,5 +36,8 @@ public:
 
 	//벽만들기
 	vector<Wall*> v_wall;
+
+	//조명 객체 만들기
+	Light2* light;
 };
 
