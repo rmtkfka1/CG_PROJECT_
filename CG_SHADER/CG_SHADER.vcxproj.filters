@@ -73,6 +73,9 @@
     <Filter Include="05.Scene">
       <UniqueIdentifier>{edd6bed1-dcc5-4eb4-bdfe-0de4c2a05e49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Object\03.Test">
+      <UniqueIdentifier>{10293054-8eca-40c2-9b61-80ce23339788}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -157,7 +160,9 @@
     <ClCompile Include="src\Light2.cpp">
       <Filter>01.OPENGL\08.Light</Filter>
     </ClCompile>
-    <ClCompile Include="src\testing.cpp" />
+    <ClCompile Include="src\Test.cpp">
+      <Filter>02.Object\03.Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core.h">
@@ -250,7 +255,9 @@
     <ClInclude Include="src\Light2.h">
       <Filter>01.OPENGL\08.Light</Filter>
     </ClInclude>
-    <ClInclude Include="src\testing.h" />
+    <ClInclude Include="src\Test.h">
+      <Filter>02.Object\03.Test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="자주사용하는코드.txt">
@@ -292,6 +299,12 @@
       <Filter>00.res\shader</Filter>
     </None>
     <None Include="res\shader\mvp_spotlight.fs">
+      <Filter>00.res\shader</Filter>
+    </None>
+    <None Include="res\shader\real_simple.vs">
+      <Filter>00.res\shader</Filter>
+    </None>
+    <None Include="res\shader\real_simple.fs">
       <Filter>00.res\shader</Filter>
     </None>
   </ItemGroup>

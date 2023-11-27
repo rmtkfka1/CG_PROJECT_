@@ -39,6 +39,7 @@ public:
 	//юс╫ц©К
 	glm::vec3 GetCenter() { return _center; }
 	glm::vec3 GetSize() { return _size; }
+	glm::vec3 SetSize(glm::vec3& size) { _size = size; }
 
 	void SetCenter(glm::vec3 temp) { _center = temp; }
 	void SetCenter_x(float x) { _center.x = x; }
@@ -52,6 +53,8 @@ public:
 	float GetFirstCenter_x() { return _first_center.x; }
 	float GetFirstCenter_y() { return _first_center.y; }
 	float GetFirstCenter_z() { return _first_center.z; }
+
+
 
 	
 

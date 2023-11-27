@@ -1,14 +1,15 @@
 #include "pch.h"
 #include "ObjectManager.h"
+#include "Model.h"
 
-void ObjectManager::AddShader(Shader* shader)
+
+void ObjectManager::AddModel(Model* model)
 {
-
-	if (shader == nullptr)
+	if (model == nullptr)
 	{
 		return;
 	}
 
-	v_shader.push_back(shader);
+	v_model.push_back(model);
 
 }

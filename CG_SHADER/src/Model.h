@@ -16,7 +16,7 @@ public:
 	void PrintInfo(); // 중심점 , 사이즈 출력 하는 함수
 	glm::vec3 GetCenter() {return _center;} 
 	glm::vec3 GetSize() { return _size; }
-
+	glm::vec3 SetSize(glm::vec3 size) { _size = size; }
 
 private:
 	void LoadNode(aiNode* node, const aiScene* scene);

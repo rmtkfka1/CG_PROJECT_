@@ -1,7 +1,7 @@
 #pragma once
 
-class p14_world;
-class Shader;
+class Model;
+
 class ObjectManager
 {
 
@@ -12,14 +12,14 @@ public:
 		return &OM;
 	}
 
-	void AddShader(Shader *shader);
+	void AddModel(Model *model);
 
 
-	vector<Shader*>& Get_Shader() { return v_shader; } //외부 CPP,헤더파일에서 벡터가져오기//
+	vector<Model*>& Get_Model() { return v_model; } //외부 CPP,헤더파일에서 벡터가져오기//
 
 
 
 private:
-	vector<Shader*> v_shader;
+	vector<Model*> v_model;
 };
 

@@ -5,7 +5,7 @@
 #include "BoxCollider.h"
 #include "CollisionManager.h"
 #include "Light2.h"
-
+#include "Test.h"
 
 Stage1::Stage1()
 {
@@ -22,13 +22,15 @@ Stage1::~Stage1()
 void Stage1::Init()
 {
 
-	shader = new Shader("res/shader/mvp_spotlight.vs", "res/shader/mvp_spotlight.fs");
+	shader = new Shader("res/shader/simple.vs", "res/shader/simple.fs");
+	text_shader =new Shader("res/shader/real_simple.vs", "res/shader/real_simple.fs");
 	shader->Bind();
 	
 	///////////////////////////////////////////////////모델 불러오기 
+	test_model = new Model("res/models/box.obj");
 	player_model = new Model("res/models/player.obj");
-	wall_model = new Model("res/models/suicide_people.obj");
-	bathroom_people = new Model("res/models/bathroom.obj");
+	wall_model = new Model("res/models/test_box.obj");
+	ptr = new Model("res/models/test.obj");
 	///////////////////////////////////////////////////////////////////////////////////////////
 
 	///오브젝트 생성////////////////////////////////////////////////////////////////////////////
@@ -47,12 +49,22 @@ void Stage1::Init()
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 		v_wall.push_back(wall);
 	}
+
+
+	{
+		test = new Test(*test_model);
+		BoxCollider* ptr = new BoxCollider;
+		test->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+
 	///////////////////////////////////////////////////////////////////////////////////
 	
 	/////////텍스처 만들기/////////////////////////////////////////////////////////////
 	texture = new Texture("res/textures/1.jpg");
 	texture2 = new Texture("res/textures/putin.jpeg");
-	texture3 = new Texture("res/textures/toilet.png");
+	texture3 = new Texture("res/textures/text_first.png");
 
 	texture->Bind(0);
 	texture2->Bind(1);
@@ -68,7 +80,7 @@ void Stage1::Init()
 	shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
 	///////////////////////////////////////////////////////////////////////////////////
 
-	v_wall[0]->PrintInfo();
+	test_model->PrintInfo();
 }
 
 void Stage1::Update()
@@ -78,6 +90,7 @@ void Stage1::Update()
 	CameraManager::GetInstance()->MouseUpdate(MouseManager::GetInstance()->GetMousePos().x, MouseManager::GetInstance()->GetMousePos().y);
 
 	player->Update();
+	test->Update();
 
 
 	light->_light.position = CameraManager::GetInstance()->m_cameraPos;
@@ -116,10 +129,14 @@ void Stage1::Update()
 void Stage1::Render()
 {
 
+	glEnable(GL_DEPTH_TEST);
+	glViewport(0, 0, 3000, 3000);
+
 	shader->SetUniform1i("u_texture", 0);
-	
-	
 	player->Render(*shader, *player_model, matrix::GetInstance()->GetTranslation(player->GetCenter_x(), player->GetCenter_y(), player->GetCenter_z()));
+
+
+
 	
 	shader->SetUniform1i("u_texture", 1);
 	for (auto& ele : v_wall)
@@ -128,7 +145,22 @@ void Stage1::Render()
 		ele->Render(*shader, *wall_model,matrix::GetInstance()->GetSimple());
 	}
 
-	shader->SetUniform1i("u_texture", 2);
-	bathroom_people->RenderModel(*shader);
+	test->Render(*shader, *test_model,glm::mat4(1.0f));
+
+
+	if (test->_collusion)
+	{
+		shader->SetUniform1i("u_texture", 2);
+		glDisable(GL_DEPTH_TEST);
+		glViewport(0, 0, 3000, 800);
+		shader->SetUniformMat4f("u_view", matrix::GetInstance()->
+			GetCamera(glm::vec3(ptr->GetCenter().x, ptr->GetCenter().y, ptr->GetCenter().z + 10), glm::vec3(ptr->GetCenter().x, ptr->GetCenter().y, ptr->GetCenter().z), glm::vec3(0, 1, 0)));
+		ptr->RenderModel(*shader);
+	}
+
+
+
+
+
 
 }
