@@ -111,7 +111,7 @@ void Stage1::Init()
 
 	////////////////////////조명작업///////////////////////////////////////////////////
 	light = new Light2();
-	light->UseLight(*shader);
+	light->UseSpotLight(*shader);
 	shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
 	///////////////////////////////////////////////////////////////////////////////////
 
@@ -142,7 +142,7 @@ void Stage1::Update()
 
 	light->_light.position = CameraManager::GetInstance()->m_cameraPos;
 	light->_light.direction = CameraManager::GetInstance()->m_cameraFront;
-	light->UseLight(*shader);
+	light->UseSpotLight(*shader);
 
 
 }

@@ -12,7 +12,7 @@ Light2::Light2()
 
 
 	_light.ambient = glm::vec3(0.01f, 0.01f, 0.01f);
-	_light.diffuse = glm::vec3(0.1f, 0.1f, 0.1f);
+	_light.diffuse = glm::vec3(0.5f, 0.5f, 0.5f);
 	_light.specular = glm::vec3(0.1f, 0.1f, 0.1f);
 
 
@@ -29,7 +29,7 @@ Light2::~Light2()
 
 }
 
-void Light2::UseLight(Shader& shader)
+void Light2::UseSpotLight(Shader& shader)
 {
 
 

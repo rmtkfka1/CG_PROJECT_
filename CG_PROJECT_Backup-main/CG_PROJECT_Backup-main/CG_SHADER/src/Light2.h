@@ -27,7 +27,7 @@ public:
 
 	Light2();
 	~Light2();
-	void UseLight(Shader& shader);
+	void UseSpotLight(Shader& shader);
 
 
 
