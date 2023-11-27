@@ -21,15 +21,7 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 
-
-
-	void Object_Render();
-	void Texture_Render();
-
 public:
-
-	int screenWidth = glutGet(GLUT_SCREEN_WIDTH); // 모니터의 가로 해상도 가져오기
-	int screenHeight = glutGet(GLUT_SCREEN_HEIGHT); // 모니터의 세로 해상도 가져오기
 
 
 	//쉐이더
@@ -45,13 +37,9 @@ public:
 	Model* back_wall_model;
 	Model* left_wall_model;
 	Model* right_wall_model;
-	Model* flash;
-
 	// 다 별도 벽모델이
 	//텍스쳐
 	Texture* texture;
-	Texture* flash_texture;
-
 
 	//벽만들기
 	vector<Wall*> v_wall;

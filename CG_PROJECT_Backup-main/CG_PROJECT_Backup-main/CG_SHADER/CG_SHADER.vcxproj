@@ -219,6 +219,18 @@
     <None Include="res\shader\simple.fs" />
     <None Include="res\shader\simple.vs" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\models\K-093.png" />
+    <Image Include="res\textures\JBNU.png" />
+    <Image Include="res\textures\1.jpg" />
+    <Image Include="res\textures\zz.jpg" />
+    <Image Include="res\textures\해리.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="res\models\teapot.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
