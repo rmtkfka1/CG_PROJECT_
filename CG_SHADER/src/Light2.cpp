@@ -8,11 +8,11 @@ Light2::Light2()
 	_light.direction = glm::vec3(1.0f, 1.0f, 1.0f);
 
 	_light.cutoff = glm::vec2(-10.0f, 741.0f);
-	_light.distance = 500.0f;
+	_light.distance =100.0f;
 
 
 	_light.ambient = glm::vec3(0.03f, 0.03f, 0.03f);
-	_light.diffuse = glm::vec3(0.1f, 0.1f, 0.1f);
+	_light.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
 	_light.specular = glm::vec3(1.0f, 1.0f, 1.0f);
 
 

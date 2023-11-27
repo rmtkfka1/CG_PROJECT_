@@ -24,10 +24,11 @@ void Stage1::Init()
 
 	shader = new Shader("res/shader/mvp_spotlight.vs", "res/shader/mvp_spotlight.fs");
 	shader->Bind();
-
+	
 	///////////////////////////////////////////////////모델 불러오기 
 	player_model = new Model("res/models/player.obj");
-	wall_model = new Model("res/models/test_box.obj");
+	wall_model = new Model("res/models/suicide_people.obj");
+	bathroom_people = new Model("res/models/bathroom.obj");
 	///////////////////////////////////////////////////////////////////////////////////////////
 
 	///오브젝트 생성////////////////////////////////////////////////////////////////////////////
@@ -50,7 +51,12 @@ void Stage1::Init()
 	
 	/////////텍스처 만들기/////////////////////////////////////////////////////////////
 	texture = new Texture("res/textures/1.jpg");
+	texture2 = new Texture("res/textures/putin.jpeg");
+	texture3 = new Texture("res/textures/toilet.png");
+
 	texture->Bind(0);
+	texture2->Bind(1);
+	texture3->Bind(2);
 
 	////////////////////////조명작업///////////////////////////////////////////////////
 	light = new Light2();
@@ -110,15 +116,19 @@ void Stage1::Update()
 void Stage1::Render()
 {
 
+	shader->SetUniform1i("u_texture", 0);
+	
 	
 	player->Render(*shader, *player_model, matrix::GetInstance()->GetTranslation(player->GetCenter_x(), player->GetCenter_y(), player->GetCenter_z()));
 	
-
-	shader->SetUniform1i("u_texture", 0);
+	shader->SetUniform1i("u_texture", 1);
 	for (auto& ele : v_wall)
 	{
 		
 		ele->Render(*shader, *wall_model,matrix::GetInstance()->GetSimple());
 	}
+
+	shader->SetUniform1i("u_texture", 2);
+	bathroom_people->RenderModel(*shader);
 
 }

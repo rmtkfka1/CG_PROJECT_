@@ -157,6 +157,7 @@
     <ClCompile Include="src\Light2.cpp">
       <Filter>01.OPENGL\08.Light</Filter>
     </ClCompile>
+    <ClCompile Include="src\testing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core.h">
@@ -249,6 +250,7 @@
     <ClInclude Include="src\Light2.h">
       <Filter>01.OPENGL\08.Light</Filter>
     </ClInclude>
+    <ClInclude Include="src\testing.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="자주사용하는코드.txt">
@@ -309,6 +311,7 @@
     <Image Include="res\textures\해리.jpeg">
       <Filter>00.res\textures</Filter>
     </Image>
+    <Image Include="..\..\..\목매단사람\putin-hanged-and-rope\textures\putin.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="res\models\teapot.obj">

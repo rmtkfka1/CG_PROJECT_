@@ -27,6 +27,8 @@ uniform vec3 u_viewpos;
 uniform vec3 control_color;
 uniform sampler2D u_texture;
 
+
+
 void main() {
     vec3 textcolor = texture(u_texture, v_texcoord).xyz;
 

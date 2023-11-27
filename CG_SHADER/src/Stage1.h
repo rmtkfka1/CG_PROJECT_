@@ -31,8 +31,13 @@ public:
 	//모델
 	Model* player_model;
 	Model* wall_model;
+	Model* bathroom_people;
 	//텍스쳐
+
+
 	Texture* texture;
+	Texture* texture2;
+	Texture* texture3;
 
 	//벽만들기
 	vector<Wall*> v_wall;

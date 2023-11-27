@@ -169,6 +169,7 @@
     <ClCompile Include="src\소스.cpp" />
     <ClCompile Include="src\Wall.cpp" />
     <ClCompile Include="src\Stage1.cpp" />
+    <ClCompile Include="src\testing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Light2.h" />
@@ -201,6 +202,7 @@
     <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\Wall.h" />
     <ClInclude Include="src\Stage1.h" />
+    <ClInclude Include="src\testing.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="자주사용하는코드.txt" />
@@ -220,6 +222,7 @@
     <None Include="res\shader\simple.vs" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\목매단사람\putin-hanged-and-rope\textures\putin.jpeg" />
     <Image Include="res\models\K-093.png" />
     <Image Include="res\textures\JBNU.png" />
     <Image Include="res\textures\1.jpg" />
