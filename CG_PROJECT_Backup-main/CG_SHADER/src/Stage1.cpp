@@ -6,6 +6,7 @@
 #include "BoxCollider.h"
 #include "CollisionManager.h"
 #include "Light2.h"
+#include "Light.h"
 
 
 Stage1::Stage1()
@@ -22,9 +23,12 @@ Stage1::~Stage1()
 
 void Stage1::Init()
 {
-	//shader = new Shader("res/shader/simple.vs", "res/shader/simple.fs");
-	spot_shader = new Shader("res/shader/mvp_spotlight.vs", "res/shader/mvp_spotlight.fs");
-	spot_shader->Bind();
+
+	shader = new Shader("res/shader/mvp_spotlight.vs", "res/shader/mvp_spotlight.fs");
+	shader->Bind();
+
+	shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
+
 
 	///////////////////////////////////////////////////모델 불러오기 
 	player_model = new Model("res/models/stage1/player.obj");
@@ -51,7 +55,7 @@ void Stage1::Init()
 
 
 	/////////텍스처 만들기/////////////////////////////////////////////////////////////
-	texture = new Texture("res/textures/block.jpg");
+	texture = new Texture("res/textures/1.jpg");
 	flash_texture = new Texture("res/textures/flash.png");
 	billboard_texture = new Texture("res/textures/billboard_test.png");
 	light_texture = new Texture("res/textures/light.jpg");
@@ -64,8 +68,10 @@ void Stage1::Init()
 
 	////////////////////////조명작업///////////////////////////////////////////////////
 	light = new Light2();
-	light->UseSpotLight(*spot_shader);
-	spot_shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
+	light->UseSpotLight(*shader);
+
+
+
 	///////////////////////////////////////////////////////////////////////////////////
 
 
@@ -91,12 +97,12 @@ void Stage1::Update()
 	GET_SINGLE(CollisionManager)->Update();
 
 
-	spot_shader->SetUniform3f("u_viewpos", CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
-	spot_shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
+	shader->SetUniform3f("u_viewpos", CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
+	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
 
 	light->Spot_light.position = CameraManager::GetInstance()->m_cameraPos;
 	light->Spot_light.direction = CameraManager::GetInstance()->m_cameraFront;
-	light->UseSpotLight(*spot_shader);
+	light->UseSpotLight(*shader);
 
 	// 플래시 회전 행렬 계산
 	glm::vec3 cameraFront = GET_SINGLE(CameraManager)->m_cameraFront;
@@ -127,44 +133,48 @@ void Stage1::Object_Render()
 
 	glViewport(0, 0, screenWidth, screenHeight);
 
-	spot_shader->SetUniform1i("u_texture", 0);
+	shader->SetUniform1i("u_texture", 0);
 
-	player->Render(*spot_shader, *player_model, matrix::GetInstance()->GetTranslation(player->GetCenter_x(), player->GetCenter_y(), player->GetCenter_z()));
+	player->Render(*shader, *player_model, matrix::GetInstance()->GetTranslation(player->GetCenter_x(), player->GetCenter_y(), player->GetCenter_z()));
 
-	light->UseSpotLight(*spot_shader);
+	//light->UseSpotLight(*spot_shader);
 
 	for (int i = 0; i < room1.size(); i++)
 	{
-		room1[i].first->Render(*spot_shader, *room1[i].second, matrix::GetInstance()->GetSimple());
+		room1[i].first->Render(*shader, *room1[i].second, matrix::GetInstance()->GetSimple());
 	}
 
 	for (int i = 0; i < corridor1.size(); i++)
 	{
-		corridor1[i].first->Render(*spot_shader, *corridor1[i].second, matrix::GetInstance()->GetSimple());
+		corridor1[i].first->Render(*shader, *corridor1[i].second, matrix::GetInstance()->GetSimple());
 	}
 
 	for (int i = 0; i < room2.size(); i++)
 	{
-		room2[i].first->Render(*spot_shader, *room2[i].second, matrix::GetInstance()->GetSimple());
+		room2[i].first->Render(*shader, *room2[i].second, matrix::GetInstance()->GetSimple());
 	}
 
 	for (int i = 0; i < corridor2.size(); i++)
 	{
-		corridor2[i].first->Render(*spot_shader, *corridor2[i].second, matrix::GetInstance()->GetSimple());
+		corridor2[i].first->Render(*shader, *corridor2[i].second, matrix::GetInstance()->GetSimple());
 	}
 
 	for (int i = 0; i < room3.size(); i++)
 	{
-		room3[i].first->Render(*spot_shader, *room3[i].second, matrix::GetInstance()->GetSimple());
+		room3[i].first->Render(*shader, *room3[i].second, matrix::GetInstance()->GetSimple());
 	}
 
-	spot_shader->SetUniform1i("u_texture", 1);
+	shader->SetUniform1i("u_texture", 1);
 
 	//player->Render(*shader, *flash, matrix::GetInstance()->GetTranslation(player->GetCenter_x(), player->GetCenter_y() + 4.5f, player->GetCenter_z() - 1.0f));
-	player->Render(*spot_shader, *flash, flash_matrix);
+	player->Render(*shader, *flash, flash_matrix);
 
-	spot_shader->SetUniform1i("u_texture", 2);
-	billboard->Render(*spot_shader, *b_plane, GET_SINGLE(matrix)->GetSimple());
+	shader->SetUniform1i("u_texture", 2);
+	billboard->Render(*shader, *b_plane, GET_SINGLE(matrix)->GetSimple());
+
+	shader->SetUniform1i("u_texture", 0);
+	shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+
 
 }
 

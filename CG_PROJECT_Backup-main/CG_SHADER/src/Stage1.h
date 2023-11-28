@@ -10,6 +10,7 @@ class Texture;
 class Shader;
 class Wall;
 class Light2;
+class Light_test;
 class Object;
 
 class Stage1 : public Scene
@@ -42,8 +43,7 @@ private:
 
 
 	//쉐이더
-	Shader* spot_shader;
-	Shader* point_shader;
+	Shader* shader;
 	//플레이어 객체
 	Player* player;
 	//빌보드(테스트)
@@ -53,6 +53,15 @@ private:
 	Model* player_model;
 	Model* flash;
 	Model* b_plane;
+
+
+
+	///////////테스트용 
+	Model* test1;
+
+
+
+
 
 	// pair로 Object와 Model을 묶어버림
 	vector<pair<Object*, Model*>> room1;
@@ -80,7 +89,9 @@ private:
 	//vector<Model*> room_model;
 
 	//조명 객체 만들기
+	Light_test* light_test;
 	Light2* light;
+
 
 	// 손전등 회전행렬
 	glm::mat4 flash_matrix;

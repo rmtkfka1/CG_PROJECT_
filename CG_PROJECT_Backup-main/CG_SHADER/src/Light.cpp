@@ -1,59 +1,58 @@
 #include "pch.h"
 #include "Light.h"
 
-Light::Light()
+Light_test::Light_test()
 {
 	_lightColor = glm::vec3(1.0f, 1.0f, 1.0f) ;
-	_ambientIntensity = 1.0f;
+	_ambientIntensity = 0.0f;
 
-	_lvector = glm::vec3(0, 0, 0);
-	_diffuseIntensity = 1.0f;
+	_lvector = glm::vec3(1.0f, 1.0f, 1.0);
+	_diffuseIntensity =10.0f;
 
-
-	_specularIntensity = 1.0f;
+	_specularIntensity = 0.1f;
 	_shinIness =1.0f;
 
 }
 
-Light::~Light()
+Light_test::~Light_test()
 {
 
 }
 
 
-void Light::SetLvector(glm::vec3 lvector)
+void Light_test::SetLvector(glm::vec3 lvector)
 {
 	_lvector = glm::normalize(lvector);
 }
 
 
-void Light::SetAmbientIntensity(float ambientIntensity)
+void Light_test::SetAmbientIntensity(float ambientIntensity)
 {
 	_ambientIntensity = ambientIntensity;
 }
 
-void Light::SetDiffuseIntensity(float diffuseIntensity)
+void Light_test::SetDiffuseIntensity(float diffuseIntensity)
 {
 	_diffuseIntensity = diffuseIntensity;
 }
 
 
-void Light::SetSpecularIntensity(float specularIntensity)
+void Light_test::SetSpecularIntensity(float specularIntensity)
 {
 	_specularIntensity = specularIntensity;
 }
 
-void Light::SetShinIness(float shinelness)
+void Light_test::SetShinIness(float shinelness)
 {
 	_shinIness = shinelness;
 }
 
-void Light::SetLightColor(glm::vec3 lightcolor)
+void Light_test::SetLightColor(glm::vec3 lightcolor)
 {
 	_lightColor = lightcolor;
 }
 
-void Light::UseLight(Shader& shader)
+void Light_test::UseLight(Shader& shader)
 {
 
 

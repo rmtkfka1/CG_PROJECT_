@@ -3,21 +3,31 @@
 
 Light2::Light2()
 {
+
+	//스폿 라이트 작업//
 	
 	Spot_light.position = glm::vec3(-9.8f, 5.9f, -3.3f);
-	Spot_light.direction = glm::vec3(1.0f, 1.0f, 1.0f);
+	Spot_light.direction = glm::vec3(0, 0, 0);
 
-	Spot_light.cutoff = glm::vec2(-10.0f, 350.0f);
-	Spot_light.distance = 300.0f;
+	Spot_light.cutoff = glm::vec2(-10.0f, 30.0f);
+	Spot_light.distance = 10000.0f;
 
 
 	Spot_light.ambient = glm::vec3(0.01f, 0.01f, 0.01f);
 	Spot_light.diffuse = glm::vec3(0.5f, 0.5f, 0.5f);
 	Spot_light.specular = glm::vec3(0.1f, 0.1f, 0.1f);
 
-	Spot_material.shininess = 20.0f;
-	Spot_material.specular = glm::vec3(1.0f, 1.0f, 1.0f);
+	material.shininess = 20.0f;
+	material.specular = glm::vec3(0.1f, 0.1f, 0.1f);
 
+
+	//포인트 라이트 작업
+
+	point_light.position = glm::vec3(0, 20.0f, 0);
+	point_light.distance = 1.0f;
+	point_light.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+	point_light.ambient = glm::vec3(0, 0, 0);
+	point_light.specular = glm::vec3(0, 0, 0);
 
 
 
@@ -42,9 +52,23 @@ void Light2::UseSpotLight(Shader& shader)
 
 	shader.SetUniform3f("spot_light.diffuse", Spot_light.diffuse.r , Spot_light.diffuse.g ,Spot_light.diffuse.b );
 	shader.SetUniform3f("spot_light.specular", Spot_light.specular.r, Spot_light.specular.g, Spot_light.specular.b);
-	////shader.SetUniform3f("u_material.specular", _material.specular.r, _material.specular.g, _material.specular.b);
 
-	shader.SetUniform1f("spot_material.shininess", Spot_material.shininess);
+
+
+
+
+
+	//테스트해보자
+	shader.SetUniform3f("point_light.attenuation", GetAttenuationCoeff(point_light.distance).x, GetAttenuationCoeff(point_light.distance).y, GetAttenuationCoeff(point_light.distance).z);
+	shader.SetUniform3f("point_light.position", point_light.position.x, point_light.position.y, point_light.position.z);
+	shader.SetUniform3f("point_light.ambient", point_light.ambient.r, point_light.ambient.g, point_light.ambient.b);
+	shader.SetUniform3f("point_light.diffuse", point_light.diffuse.r, point_light.diffuse.g, point_light.diffuse.b);
+	shader.SetUniform3f("point_light.specular", point_light.specular.r, point_light.specular.g, point_light.specular.b);
+
+
+	shader.SetUniform1f("material.shininess", material.shininess);
+
+
 
 }
 
@@ -56,7 +80,7 @@ void Light2::UsePointLight(Shader& shader)
 	shader.SetUniform3f("u_light.ambient", Spot_light.ambient.r, Spot_light.ambient.g, Spot_light.ambient.b);
 	shader.SetUniform3f("u_light.diffuse", Spot_light.diffuse.r, Spot_light.diffuse.g, Spot_light.diffuse.b);
 	shader.SetUniform3f("u_light.specular", Spot_light.specular.r, Spot_light.specular.g, Spot_light.specular.b);
-	shader.SetUniform1f("u_material.shininess", Spot_material.shininess);
+	shader.SetUniform1f("material.shininess", material.shininess);
 }
 
 void Light2::SetLightPos(glm::vec3 pos)
@@ -82,13 +106,13 @@ void Light2::SetLightSpecular(glm::vec3 ss)
 
 void Light2::SetMaterialSpecular(glm::vec3 ms)
 {
-	Spot_material.specular = ms;
+	material.specular = ms;
 }
 
 void Light2::SetShininess(float shininess)
 {
 
-	Spot_material.shininess = shininess;
+	material.shininess = shininess;
 
 
 }

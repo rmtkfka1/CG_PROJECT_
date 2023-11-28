@@ -1,7 +1,7 @@
 #pragma once
 
 
-struct Light
+struct SpotLight
 {
 	glm::vec3 position; //±¤¿øÀÇ À§Ä¡
 	glm::vec3 direction; //±¤¿øÀÇ À§Ä¡
@@ -11,6 +11,16 @@ struct Light
 	glm::vec3 diffuse;
 	glm::vec3 specular;
 };
+
+struct PointLight
+{
+	glm::vec3 position; 
+	float distance;
+	glm::vec3 ambient;
+	glm::vec3 diffuse;
+	glm::vec3 specular;
+};
+
 
 struct Material
 {
@@ -46,8 +56,17 @@ public:
 
 public:
 
-	Light Spot_light;
-	Material Spot_material;
+	SpotLight Spot_light;
+	PointLight point_light;
+
+
+
+
+	Material material;
+
+
+
+
 
 
 

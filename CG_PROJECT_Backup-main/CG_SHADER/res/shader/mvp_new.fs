@@ -26,7 +26,7 @@ in vec3 v_worldPosition;
 uniform sampler2D u_texture;
 uniform light u_light;
 uniform vec3 control_color;
-uniform vec3 u_eyePosition; //specular 계산을 위한 카메라 위치
+uniform vec3 u_viewpos; //specular 계산을 위한 카메라 위치
 
 void main()
 {
@@ -35,7 +35,7 @@ void main()
 
 
 
-	vec3 lightDir = normalize(u_light.direction);
+	vec3 lightDir = normalize(u_light.direction );
 	//디퓨즈
 
 	float diffuseFactor = max(dot(normalize(v_Normal), lightDir), 0.0);
@@ -44,7 +44,7 @@ void main()
 
 
 	//스펙큘러
-	vec3 fragToEye = normalize(u_eyePosition - v_worldPosition);
+	vec3 fragToEye = normalize(u_viewpos - v_worldPosition);
 	vec3 rVec = 2.0 * v_Normal * dot(v_Normal, lightDir) - lightDir; //r vector 계산
 	vec3 lightSpecular = pow(max(dot(rVec, fragToEye), 0.0), u_light.shinIness) * u_light.lightColor * u_light.specularIntensity;
 

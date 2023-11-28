@@ -2,11 +2,11 @@
 
 
 
-class Light
+class Light_test
 {
 public:
-	Light();
-	~Light();
+	Light_test();
+	~Light_test();
 
 	void SetLvector(glm::vec3 lvector);
 	void SetAmbientIntensity(float ambientIntensity);
