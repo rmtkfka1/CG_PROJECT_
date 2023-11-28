@@ -33,18 +33,18 @@ void Light2::UseSpotLight(Shader& shader)
 
 
 	shader.Bind();
-	shader.SetUniform3f("u_light.attenuation", GetAttenuationCoeff(Spot_light.distance).x, GetAttenuationCoeff(Spot_light.distance).y, GetAttenuationCoeff(Spot_light.distance).z);
-	shader.SetUniform3f("u_light.position", Spot_light.position.x, Spot_light.position.y ,Spot_light.position.z);
-	shader.SetUniform3f("u_light.ambient", Spot_light.ambient.r, Spot_light.ambient.g, Spot_light.ambient.b);
+	shader.SetUniform3f("spot_light.attenuation", GetAttenuationCoeff(Spot_light.distance).x, GetAttenuationCoeff(Spot_light.distance).y, GetAttenuationCoeff(Spot_light.distance).z);
+	shader.SetUniform3f("spot_light.position", Spot_light.position.x, Spot_light.position.y ,Spot_light.position.z);
+	shader.SetUniform3f("spot_light.ambient", Spot_light.ambient.r, Spot_light.ambient.g, Spot_light.ambient.b);
 
-	shader.SetUniform3f("u_light.direction", Spot_light.direction.x, Spot_light.direction.y, Spot_light.direction.z);
-	shader.SetUniform2fv("u_light.cutoff", glm::vec2(glm::cos(glm::radians(Spot_light.cutoff[0])), glm::cos(glm::radians(Spot_light.cutoff[1] + Spot_light.cutoff[0]))));
+	shader.SetUniform3f("spot_light.direction", Spot_light.direction.x, Spot_light.direction.y, Spot_light.direction.z);
+	shader.SetUniform2fv("spot_light.cutoff", glm::vec2(glm::cos(glm::radians(Spot_light.cutoff[0])), glm::cos(glm::radians(Spot_light.cutoff[1] + Spot_light.cutoff[0]))));
 
-	shader.SetUniform3f("u_light.diffuse", Spot_light.diffuse.r , Spot_light.diffuse.g ,Spot_light.diffuse.b );
-	shader.SetUniform3f("u_light.specular", Spot_light.specular.r, Spot_light.specular.g, Spot_light.specular.b);
+	shader.SetUniform3f("spot_light.diffuse", Spot_light.diffuse.r , Spot_light.diffuse.g ,Spot_light.diffuse.b );
+	shader.SetUniform3f("spot_light.specular", Spot_light.specular.r, Spot_light.specular.g, Spot_light.specular.b);
 	////shader.SetUniform3f("u_material.specular", _material.specular.r, _material.specular.g, _material.specular.b);
-	shader.SetUniform1f("u_material.shininess", Spot_material.shininess);
 
+	shader.SetUniform1f("spot_material.shininess", Spot_material.shininess);
 
 }
 
