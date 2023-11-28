@@ -55,7 +55,7 @@ void Stage1::Init()
 
 
 	/////////텍스처 만들기/////////////////////////////////////////////////////////////
-	texture = new Texture("res/textures/1.jpg");
+	texture = new Texture("res/textures/block.jpg");
 	flash_texture = new Texture("res/textures/flash.png");
 	billboard_texture = new Texture("res/textures/billboard_test.png");
 	light_texture = new Texture("res/textures/light.jpg");
