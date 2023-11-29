@@ -10,7 +10,7 @@ Light2::Light2()
 	Spot_light.direction = glm::vec3(0, 0, 0);
 
 	Spot_light.cutoff = glm::vec2(-10.0f, 30.0f);
-	Spot_light.distance = 1.0;
+	Spot_light.distance = 400.0f;
 
 
 	Spot_light.ambient = glm::vec3(0.01f, 0.01f, 0.01f);
@@ -24,8 +24,8 @@ Light2::Light2()
 	//포인트 라이트 작업
 
 	point_light.position = glm::vec3(0, 22.0f, 0);
-	point_light.distance = 10000.0f;
-	point_light.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+	point_light.distance = 100.0f;
+	point_light.diffuse = glm::vec3(1.0f, 0, 0);
 	point_light.ambient = glm::vec3(0, 0, 0);
 	point_light.specular = glm::vec3(0, 0, 0);
 

@@ -35,7 +35,6 @@ void Stage1::Init()
 	player_model = new Model("res/models/stage1/player.obj");
 	flash_model = new Model("res/models/stage1/flash.obj");
 	b_plane = new Model("res/models/billboard_plane/billboard_plane.obj");
-	table = new Model("res/models/test.obj");
 	flash_fake = new Model("res/models/flash.obj");
 
 	///오브젝트 생성////////////////////////////////////////////////////////////////////////////
@@ -170,17 +169,17 @@ void Stage1::Object_Render()
 	flash->Render(*shader, *flash_model, glm::mat4(1.0f));
 
 	shader->SetUniform1i("u_texture", 2);
-	//billboard->Render(*shader, *b_plane, GET_SINGLE(matrix)->GetSimple());
+	billboard->Render(*shader, *b_plane, GET_SINGLE(matrix)->GetSimple());
 
 
 	shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
 
 
-	{
-		//테이블 그리기
-		shader->SetUniform1i("u_texture", table_texture->GetSlot());
-		table->RenderModel(*shader);
-	}
+	//{
+	//	//테이블 그리기
+	//	shader->SetUniform1i("u_texture", table_texture->GetSlot());
+	//	table->RenderModel(*shader);
+	//}
 
 
 	{
@@ -460,6 +459,7 @@ void Stage1::MakeCorridor()
 	Model* corridor_floor_model = new Model("res/models/corridor1/corridor_floor.obj");
 	Model* corridor_left_wall_model = new Model("res/models/corridor1/corridor_left.obj");
 	Model* corridor_right_wall_model = new Model("res/models/corridor1/corridor_right.obj");
+	Model* table_model = new Model("res/models/test.obj");
 
 	Wall* floor = new Wall(*corridor_floor_model);
 	BoxCollider* ptr = new BoxCollider;
@@ -482,6 +482,15 @@ void Stage1::MakeCorridor()
 	GET_SINGLE(CollisionManager)->AddCollider(ptr3);
 	v_wall.push_back(right_wall);
 	corridor1.push_back(pair<Object*, Model*>(right_wall, corridor_right_wall_model));
+
+	Wall* table = new Wall(*table_model);
+	BoxCollider* ptr4 = new BoxCollider;
+	table->AddComponent(ptr4);
+	GET_SINGLE(CollisionManager)->AddCollider(ptr4);
+	v_wall.push_back(table);
+	corridor1.push_back(pair<Object*, Model*>(right_wall, table_model));
+
+
 }
 
 void Stage1::MakeRoom1()
@@ -554,4 +563,6 @@ void Stage1::MakeRoom1()
 	GET_SINGLE(CollisionManager)->AddCollider(ptr8);
 	v_wall.push_back(celing);
 	room1.push_back(pair<Object*, Model*>(right_wall, ceiling_model));
+
+
 }

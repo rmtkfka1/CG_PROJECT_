@@ -13,6 +13,8 @@ class Light2;
 class Light_test;
 class Object;
 class Flash;
+
+
 class Stage1 : public Scene
 {
 public:
@@ -55,10 +57,6 @@ private:
 	Model* flash_model;
 	Model* flash_fake;
 	Model* b_plane;
-	Model* table;
-
-
-
 
 
 
