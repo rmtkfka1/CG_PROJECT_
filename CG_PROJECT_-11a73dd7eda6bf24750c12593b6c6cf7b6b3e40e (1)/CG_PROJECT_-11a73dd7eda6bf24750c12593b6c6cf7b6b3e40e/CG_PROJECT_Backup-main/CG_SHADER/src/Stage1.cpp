@@ -43,8 +43,8 @@ void Stage1::Init()
 		//고스트 생성
 
 		Model* ghost_body = new Model("res/models/ghost/ghost_body.obj");
-		Model* ghost_left_arm = new Model("res/models/ghost/ghost_left_arm.obj");
-		Model* ghost_right_arm = new Model("res/models/ghost/ghost_right_arm.obj");
+		Model* ghost_left_arm = new Model("res/models/ghost/ghost_left_arm_test.obj");
+		Model* ghost_right_arm = new Model("res/models/ghost/ghost_right_arm_test.obj");
 
 		ghost = new Ghost(*ghost_body, *ghost_left_arm, *ghost_right_arm);
 		ghost->Init();
@@ -103,7 +103,7 @@ void Stage1::Init()
 	light_texture = new Texture("res/textures/light.jpg");
 	table_texture = new Texture("res/textures/table.png");
 	flash_fake_texture = new Texture("res/textures/flash_fake.jpg");
-	ghost_texture = new Texture("res/textures/ghost.png");
+	ghost_texture = new Texture("res/textures/SM_text.png");
 
 
 	texture->Bind(0);
