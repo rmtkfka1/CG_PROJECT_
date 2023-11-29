@@ -13,7 +13,7 @@ public:
 
 	void Init() override;
 	void Update() override;
-	void Render(Shader& shader, Model& model, glm::mat4 matrix) override;
+	void Render(Shader& shader) override;
 
 	// 사이즈 조절
 	void SetSize(float x, float y);

@@ -10,6 +10,7 @@ Player::Player(Model& model):Object(ObjectType::PLAYER)
 	_center = model.GetCenter();
 	_size = model.GetSize();
 	_first_center = _center;
+	_model =&model;
 
 }
 
@@ -31,12 +32,12 @@ void Player::Update()
 
 	Super::Update();
 
-
+	MatrixUpdate();
 
 
 }
 
-void Player::Render(Shader& shader,Model& model,glm::mat4 matrix)
+void Player::Render(Shader& shader)
 {
 
 
@@ -47,8 +48,15 @@ void Player::Render(Shader& shader,Model& model,glm::mat4 matrix)
 
 
 	shader.SetUniform3f("control_color", 0, 0, 0);
-	shader.SetUniformMat4f("u_model", matrix);
-	model.RenderModel(shader);
+	shader.SetUniformMat4f("u_model", _matrix);
+	_model->RenderModel(shader);
+
+}
+
+void Player::MatrixUpdate()
+{
+	_matrix = matrix::GetInstance()->GetTranslation(CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
+
 
 }
 
@@ -57,7 +65,7 @@ void Player::KeyUpdate()
 	if(KeyManager::GetInstance()->Getbutton(KeyType::W))
 	{
 		_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-		_center.y = 0;
+		_center.y = 5.0f;
 		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
 	}
@@ -65,7 +73,7 @@ void Player::KeyUpdate()
 	if (KeyManager::GetInstance()->Getbutton(KeyType::S))
 	{
 		_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-		_center.y = 0;
+		_center.y = 5.0f;
 		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
 	}
@@ -73,14 +81,14 @@ void Player::KeyUpdate()
 	if (KeyManager::GetInstance()->Getbutton(KeyType::A))
 	{
 		_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-		_center.y = 0;
+		_center.y = 5.0f;
 		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 	}
 
 	if (KeyManager::GetInstance()->Getbutton(KeyType::D))
 	{
 		_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-		_center.y = 0;
+		_center.y = 5.0f;
 		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
 	}
@@ -103,7 +111,7 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 			CameraManager::GetInstance()->m_cameraPos.y = 5.0f;
 
 			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-			_center.y = 0;
+			_center.y = 5.0f;
 			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
 		}
@@ -115,7 +123,7 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 			CameraManager::GetInstance()->m_cameraPos.y = 5.0f;
 
 			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-			_center.y = 0;
+			_center.y = 5.0f;
 			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
 		}
@@ -127,7 +135,7 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 			CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
 
 			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-			_center.y = 0;
+			_center.y = 5.0f;
 			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
 		}
@@ -137,7 +145,7 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 			CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
 
 			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
-			_center.y = 0;
+			_center.y = 5.0f;
 			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
 		}

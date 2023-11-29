@@ -7,6 +7,7 @@ Wall::Wall(Model& model) :Object(ObjectType::WALL)
 	_center = model.GetCenter();
 	_size = model.GetSize();
 	_first_center = _center;
+	_model = &model;
 
 }
 
@@ -29,7 +30,7 @@ void Wall::Update()
 
 }
 
-void Wall::Render(Shader& shader, Model& model, glm::mat4 matrix)
+void Wall::Render(Shader& shader)
 {
 
 
@@ -40,8 +41,8 @@ void Wall::Render(Shader& shader, Model& model, glm::mat4 matrix)
 
 
 	shader.SetUniform3f("control_color", 0, 0, 0);
-	shader.SetUniformMat4f("u_model", matrix);
-	model.RenderModel(shader);
+	shader.SetUniformMat4f("u_model", _matrix);
+	_model->RenderModel(shader);
 
 
 }

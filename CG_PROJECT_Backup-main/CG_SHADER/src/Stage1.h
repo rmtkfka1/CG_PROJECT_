@@ -15,6 +15,7 @@ class Object;
 class Flash;
 
 
+
 class Stage1 : public Scene
 {
 public:
@@ -26,7 +27,7 @@ public:
 	virtual void Render() override;
 
 
-
+	
 	void Object_Render();
 	void Texture_Render();
 
@@ -59,22 +60,21 @@ private:
 	Model* b_plane;
 
 
-
+	// pair로 Object와 Model을 묶어버림
+	vector<Object*> room1;
 
 	// pair로 Object와 Model을 묶어버림
-	vector<pair<Object*, Model*>> room1;
+	vector<Object*> corridor1;
 
 	// pair로 Object와 Model을 묶어버림
-	vector<pair<Object*, Model*>> corridor1;
+	vector<Object*> room2;
 
 	// pair로 Object와 Model을 묶어버림
-	vector<pair<Object*, Model*>> room2;
+	vector<Object*> corridor2;
 
 	// pair로 Object와 Model을 묶어버림
-	vector<pair<Object*, Model*>> corridor2;
+	vector<Object*> room3;
 
-	// pair로 Object와 Model을 묶어버림
-	vector<pair<Object*, Model*>> room3;
 
 	//텍스쳐
 	Texture* texture;
@@ -82,9 +82,6 @@ private:
 	Texture* light_texture;
 	Texture* table_texture;
 	Texture* flash_fake_texture;
-	//벽만들기
-	vector<Wall*> v_wall;
-	//vector<Model*> room_model;
 
 	//조명 객체 만들기
 	Light_test* light_test;

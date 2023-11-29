@@ -5,6 +5,7 @@ class Texture;
 class Model;
 class Shader;
 class Collider;
+class Model;
 
 class Object
 {
@@ -16,7 +17,7 @@ public:
 
 	virtual void Init();
 	virtual void Update();
-	virtual void Render(Shader& shader, Model& model, glm::mat4 matrix);
+	virtual void Render(Shader& shader);
 
 
 
@@ -65,7 +66,7 @@ protected:
 	glm::vec3 _size{};
 	ObjectType _type=ObjectType::NONE;
 	glm::mat4 _matrix = glm::mat4(1.0f);
-
+	Model* _model = nullptr;
 public:
 	glm::vec3 _debug_color = { 1,0,0 };
 };

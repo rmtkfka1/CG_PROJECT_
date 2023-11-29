@@ -7,6 +7,7 @@ Flash::Flash(Model& model):Object(ObjectType::FLASH)
 	_center = model.GetCenter();
 	_size = model.GetSize();
 	_first_center = _center;
+	_model = &model;
 }
 
 Flash::~Flash()
@@ -38,12 +39,12 @@ void Flash::MatrixUpdate(Player* player)
 }
 
 
-void Flash::Render(Shader& shader, Model& model, glm::mat4 matrix)
+void Flash::Render(Shader& shader)
 {
 	if (lighton)
 	{
 		shader.SetUniform3f("control_color", 0, 0, 0);
 		shader.SetUniformMat4f("u_model", _matrix);
-		model.RenderModel(shader);
+		_model->RenderModel(shader);
 	}
 }

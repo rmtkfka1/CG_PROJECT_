@@ -6,6 +6,7 @@ Billboard::Billboard(Model& model) :Object(ObjectType::BILLBOARD)
 	_center = model.GetCenter();
 	_size = model.GetSize();
 	_first_center = _center;
+	_model = &model;
 }
 
 Billboard::~Billboard()
@@ -35,7 +36,7 @@ void Billboard::Update()
 	m_matrix = m_matrix * GET_SINGLE(matrix)->GetScale(m_size_x, m_size_y, 1.0f) * GET_SINGLE(matrix)->GetTranslation(0.0f, 0.5f, 0.0f);
 }
 
-void Billboard::Render(Shader& shader, Model& model, glm::mat4 matrix)
+void Billboard::Render(Shader& shader)
 {
 	//shader.SetUniform3f("control_color", _debug_color.x, _debug_color.y, _debug_color.z);
 	//auto simple = glm::mat4(1.0f);
@@ -45,7 +46,7 @@ void Billboard::Render(Shader& shader, Model& model, glm::mat4 matrix)
 
 	shader.SetUniform3f("control_color", 0, 0, 0);
 	shader.SetUniformMat4f("u_model", m_matrix);
-	model.RenderModel(shader);
+	_model->RenderModel(shader);
 
 
 }

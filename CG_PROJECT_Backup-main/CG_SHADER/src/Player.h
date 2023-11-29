@@ -16,7 +16,9 @@ public:
 
 	void Init() override;
 	void Update() override;
-	void Render(Shader& shader, Model& model, glm::mat4 matrix) override;
+	void Render(Shader& shader) override;
+
+	void MatrixUpdate();
 	void KeyUpdate();
 
 	void OnComponentBeginOverlap(Collider* collider, Collider* other) override;

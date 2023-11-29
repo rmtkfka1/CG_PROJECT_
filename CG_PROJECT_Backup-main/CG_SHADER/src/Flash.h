@@ -17,7 +17,7 @@ public:
 	void Init() override;
 	void Update() override;
 	void MatrixUpdate(Player *player);
-	void Render(Shader& shader, Model& model, glm::mat4 matrix) override;
+	void Render(Shader& shader) override;
 	void SetLighton() { lighton != lighton; }
 
 private:
