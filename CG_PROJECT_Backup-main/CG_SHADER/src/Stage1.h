@@ -12,7 +12,7 @@ class Wall;
 class Light2;
 class Light_test;
 class Object;
-
+class Flash;
 class Stage1 : public Scene
 {
 public:
@@ -46,12 +46,14 @@ private:
 	Shader* shader;
 	//플레이어 객체
 	Player* player;
+	Flash* flash;
 	//빌보드(테스트)
 	Billboard* billboard;
 
 	//모델
 	Model* player_model;
-	Model* flash;
+	Model* flash_model;
+	Model* flash_fake;
 	Model* b_plane;
 	Model* table;
 
@@ -78,10 +80,10 @@ private:
 
 	//텍스쳐
 	Texture* texture;
-	Texture* flash_texture;
 	Texture* billboard_texture;
 	Texture* light_texture;
 	Texture* table_texture;
+	Texture* flash_fake_texture;
 	//벽만들기
 	vector<Wall*> v_wall;
 	//vector<Model*> room_model;
@@ -91,8 +93,7 @@ private:
 	Light2* light;
 
 
-	// 손전등 회전행렬
-	glm::mat4 flash_matrix;
+
 
 };
 

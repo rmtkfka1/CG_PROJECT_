@@ -7,6 +7,7 @@
 #include "CollisionManager.h"
 #include "Light2.h"
 #include "Light.h"
+#include "Flash.h"
 
 
 Stage1::Stage1()
@@ -32,16 +33,21 @@ void Stage1::Init()
 
 	///////////////////////////////////////////////////모델 불러오기 
 	player_model = new Model("res/models/stage1/player.obj");
-	flash = new Model("res/models/stage1/flash.obj");
+	flash_model = new Model("res/models/stage1/flash.obj");
 	b_plane = new Model("res/models/billboard_plane/billboard_plane.obj");
 	table = new Model("res/models/test.obj");
+	flash_fake = new Model("res/models/flash.obj");
 
 	///오브젝트 생성////////////////////////////////////////////////////////////////////////////
 	{
-		player = new Player(*flash);
+		player = new Player(*flash_model);
 		BoxCollider* ptr = new BoxCollider;
 		player->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		flash = new Flash(*flash_model);
 	}
 
 	{
@@ -57,14 +63,13 @@ void Stage1::Init()
 
 	/////////텍스처 만들기/////////////////////////////////////////////////////////////
 	texture = new Texture("res/textures/block.jpg");
-	flash_texture = new Texture("res/textures/flash.jpg");
 	billboard_texture = new Texture("res/textures/billboard_test.png");
 	light_texture = new Texture("res/textures/light.jpg");
 	table_texture = new Texture("res/textures/table.png");
-
+	flash_fake_texture = new Texture("res/textures/flash_fake.jpg");
 
 	texture->Bind(0);
-	flash_texture->Bind(1);
+	flash_fake_texture->Bind(1);
 	billboard_texture->Bind(2);
 	light_texture->Bind(3);
 	table_texture->Bind(4);
@@ -89,7 +94,7 @@ void Stage1::Update()
 	CameraManager::GetInstance()->MouseUpdate(MouseManager::GetInstance()->GetMousePos().x, MouseManager::GetInstance()->GetMousePos().y);
 
 	player->Update();
-
+	flash->MatrixUpdate(player);
 
 	for (auto& ele : v_wall)
 	{
@@ -106,16 +111,6 @@ void Stage1::Update()
 	light->Spot_light.position = CameraManager::GetInstance()->m_cameraPos;
 	light->Spot_light.direction = CameraManager::GetInstance()->m_cameraFront;
 	light->UseSpotLight(*shader);
-
-	// 플래시 회전 행렬 계산
-	glm::vec3 cameraFront = GET_SINGLE(CameraManager)->m_cameraFront;
-	glm::vec4 flachloc = { player->GetCenter_x() + cameraFront.x, player->GetCenter_y() + cameraFront.y + 4.5f, player->GetCenter_z() + cameraFront.z, 1.0f };
-	glm::mat4 transMat = matrix::GetInstance()->GetTranslation(flachloc.x, flachloc.y, flachloc.z);
-
-	glm::mat4 yawMat = matrix::GetInstance()->GetRotate(GET_SINGLE(CameraManager)->m_cameraYaw, 0, 1, 0);
-	glm::mat4 pitchMat = matrix::GetInstance()->GetRotate(GET_SINGLE(CameraManager)->m_cameraPitch, 1, 0, 0);
-
-	flash_matrix = transMat * yawMat * pitchMat;
 
 	billboard->Update();
 
@@ -170,10 +165,9 @@ void Stage1::Object_Render()
 		room3[i].first->Render(*shader, *room3[i].second, matrix::GetInstance()->GetSimple());
 	}
 
-	shader->SetUniform1i("u_texture", 1);
+	shader->SetUniform1i("u_texture", flash_fake_texture->GetSlot());
 
-	//player->Render(*shader, *flash, matrix::GetInstance()->GetTranslation(player->GetCenter_x(), player->GetCenter_y() + 4.5f, player->GetCenter_z() - 1.0f));
-	player->Render(*shader, *flash, flash_matrix);
+	flash->Render(*shader, *flash_model, glm::mat4(1.0f));
 
 	shader->SetUniform1i("u_texture", 2);
 	//billboard->Render(*shader, *b_plane, GET_SINGLE(matrix)->GetSimple());
@@ -182,10 +176,17 @@ void Stage1::Object_Render()
 	shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
 
 
-	shader->SetUniform1i("u_texture", table_texture->GetSlot());
-	table->RenderModel(*shader);
+	{
+		//테이블 그리기
+		shader->SetUniform1i("u_texture", table_texture->GetSlot());
+		table->RenderModel(*shader);
+	}
 
 
+	{
+		shader->SetUniform1i("u_texture", flash_fake_texture->GetSlot());
+		flash_fake->RenderModel(*shader);
+	}
 }
 
 void Stage1::Texture_Render()

@@ -76,6 +76,9 @@
     <Filter Include="02.Object\03.Billboard">
       <UniqueIdentifier>{344890c7-9682-4f8b-b963-1c344a85cef3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Object\04.Flash">
+      <UniqueIdentifier>{8377ef3f-44fe-4995-ae94-2896a11fb528}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -162,6 +165,9 @@
     </ClCompile>
     <ClCompile Include="src\Billboard.cpp">
       <Filter>02.Object\03.Billboard</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Flash.cpp">
+      <Filter>02.Object\04.Flash</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -257,6 +263,9 @@
     </ClInclude>
     <ClInclude Include="src\Billboard.h">
       <Filter>02.Object\03.Billboard</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Flash.h">
+      <Filter>02.Object\04.Flash</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

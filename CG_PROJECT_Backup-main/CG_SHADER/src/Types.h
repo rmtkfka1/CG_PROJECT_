@@ -129,7 +129,8 @@ enum class ObjectType
 	NONE,
 	PLAYER,
 	WALL,
-	BILLBOARD
+	BILLBOARD,
+	FLASH
 };
 
 enum class SceneType

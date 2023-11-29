@@ -64,6 +64,7 @@ protected:
 	glm::vec3 _center{};
 	glm::vec3 _size{};
 	ObjectType _type=ObjectType::NONE;
+	glm::mat4 _matrix = glm::mat4(1.0f);
 
 public:
 	glm::vec3 _debug_color = { 1,0,0 };
