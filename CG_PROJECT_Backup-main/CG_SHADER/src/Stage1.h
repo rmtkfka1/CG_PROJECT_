@@ -53,11 +53,9 @@ private:
 	Model* player_model;
 	Model* flash;
 	Model* b_plane;
+	Model* table;
 
 
-
-	///////////테스트용 
-	Model* test1;
 
 
 
@@ -83,7 +81,7 @@ private:
 	Texture* flash_texture;
 	Texture* billboard_texture;
 	Texture* light_texture;
-
+	Texture* table_texture;
 	//벽만들기
 	vector<Wall*> v_wall;
 	//vector<Model*> room_model;

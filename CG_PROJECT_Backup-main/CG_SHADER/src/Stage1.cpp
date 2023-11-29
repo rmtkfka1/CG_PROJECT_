@@ -34,6 +34,7 @@ void Stage1::Init()
 	player_model = new Model("res/models/stage1/player.obj");
 	flash = new Model("res/models/stage1/flash.obj");
 	b_plane = new Model("res/models/billboard_plane/billboard_plane.obj");
+	table = new Model("res/models/test.obj");
 
 	///오브젝트 생성////////////////////////////////////////////////////////////////////////////
 	{
@@ -59,12 +60,14 @@ void Stage1::Init()
 	flash_texture = new Texture("res/textures/flash.jpg");
 	billboard_texture = new Texture("res/textures/billboard_test.png");
 	light_texture = new Texture("res/textures/light.jpg");
+	table_texture = new Texture("res/textures/table.png");
 
 
 	texture->Bind(0);
 	flash_texture->Bind(1);
 	billboard_texture->Bind(2);
 	light_texture->Bind(3);
+	table_texture->Bind(4);
 
 	////////////////////////조명작업///////////////////////////////////////////////////
 	light = new Light2();
@@ -115,6 +118,7 @@ void Stage1::Update()
 	flash_matrix = transMat * yawMat * pitchMat;
 
 	billboard->Update();
+
 }
 
 void Stage1::Render()
@@ -124,6 +128,8 @@ void Stage1::Render()
 	
 
 	Texture_Render();
+
+	cout << CameraManager::GetInstance()->m_cameraPos.x << " " << -CameraManager::GetInstance()->m_cameraPos.z << " " << CameraManager::GetInstance()->m_cameraPos.y << endl;
 
 }
 
@@ -170,10 +176,14 @@ void Stage1::Object_Render()
 	player->Render(*shader, *flash, flash_matrix);
 
 	shader->SetUniform1i("u_texture", 2);
-	billboard->Render(*shader, *b_plane, GET_SINGLE(matrix)->GetSimple());
+	//billboard->Render(*shader, *b_plane, GET_SINGLE(matrix)->GetSimple());
 
-	shader->SetUniform1i("u_texture", 0);
+
 	shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+
+
+	shader->SetUniform1i("u_texture", table_texture->GetSlot());
+	table->RenderModel(*shader);
 
 
 }
