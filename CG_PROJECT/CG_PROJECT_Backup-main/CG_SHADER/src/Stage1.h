@@ -15,6 +15,7 @@ class Object;
 class Flash;
 class FakeFlash;
 class Ghost;
+class LeftDoor;
 
 class Stage1 : public Scene
 {
@@ -32,9 +33,15 @@ public:
 	void Texture_Render();
 
 private:
+
 	void MakeRoom();
+
+	void MakeRoom6();
+	void MakeRoom5();
+	void MakeRoom4();
 	void MakeRoom3();
-	void MakeCorridor2();
+
+
 	void MakeRoom2();
 	void MakeCorridor();
 	void MakeRoom1();
@@ -57,23 +64,26 @@ private:
 	Billboard* billboard;
 	Wall* table;
 	Ghost* ghost;
+
+	LeftDoor* Corridor_left_door;
+
 	////////////////////
 
-	
-	// pair로 Object와 Model을 묶어버림
 	vector<Object*> room1;
 
-	// pair로 Object와 Model을 묶어버림
 	vector<Wall*> corridor1;
 
-	// pair로 Object와 Model을 묶어버림
 	vector<Wall*> room2;
 
-	// pair로 Object와 Model을 묶어버림
-	vector<Wall*> corridor2;
-
-	// pair로 Object와 Model을 묶어버림
 	vector<Wall*> room3;
+	
+	vector<Wall*> room4;
+	
+	vector<Wall*> room5;
+	
+	vector<Wall*> room6;
+
+
 
 
 	//텍스쳐

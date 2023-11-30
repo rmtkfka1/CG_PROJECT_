@@ -133,7 +133,8 @@ enum class ObjectType
 	FLASH,
 	FAKE_FLASH,
 	GHOST,
-	DOOR
+	LEFTDOOR,
+	RIGHTDOOR
 };
 
 enum class SceneType

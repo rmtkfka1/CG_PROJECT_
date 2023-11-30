@@ -136,7 +136,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Door.cpp" />
+    <ClCompile Include="src\LeftDoor.cpp" />
+    <ClCompile Include="src\RightDoor.cpp" />
     <ClCompile Include="src\Ghost.cpp" />
     <ClCompile Include="src\FakeFlash.cpp" />
     <ClCompile Include="src\Flash.cpp" />
@@ -173,10 +174,16 @@
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Wall.cpp" />
     <ClCompile Include="src\Stage1.cpp" />
-    <ClCompile Include="src\소스.cpp" />
+    <ClCompile Include="src\소스.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\연습장.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Door.h" />
+    <ClInclude Include="src\LeftDoor.h" />
+    <ClInclude Include="src\RightDoor.h" />
     <ClInclude Include="src\Ghost.h" />
     <ClInclude Include="src\FakeFlash.h" />
     <ClInclude Include="src\Flash.h" />

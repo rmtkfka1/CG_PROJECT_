@@ -83,7 +83,7 @@
       <UniqueIdentifier>{5aa2671d-6af3-4a7a-9229-e12fa3bca706}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Object\06.Door">
-      <UniqueIdentifier>{315da035-5287-41bf-aedd-76d00d831501}</UniqueIdentifier>
+      <UniqueIdentifier>{27de4c53-43a5-4fc5-8a7e-98fae510251f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -181,9 +181,13 @@
     <ClCompile Include="src\Ghost.cpp">
       <Filter>02.Object\05.Ghost</Filter>
     </ClCompile>
-    <ClCompile Include="src\Door.cpp">
+    <ClCompile Include="src\LeftDoor.cpp">
       <Filter>02.Object\06.Door</Filter>
     </ClCompile>
+    <ClCompile Include="src\RightDoor.cpp">
+      <Filter>02.Object\06.Door</Filter>
+    </ClCompile>
+    <ClCompile Include="src\연습장.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core.h">
@@ -203,6 +207,9 @@
     </ClInclude>
     <ClInclude Include="src\IBO.h">
       <Filter>01.OPENGL\04.IBO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader.h">
+      <Filter>01.OPENGL\05.Shader</Filter>
     </ClInclude>
     <ClInclude Include="src\Types.h">
       <Filter>99.defines</Filter>
@@ -285,11 +292,11 @@
     <ClInclude Include="src\Ghost.h">
       <Filter>02.Object\05.Ghost</Filter>
     </ClInclude>
-    <ClInclude Include="src\Door.h">
+    <ClInclude Include="src\LeftDoor.h">
       <Filter>02.Object\06.Door</Filter>
     </ClInclude>
-    <ClInclude Include="src\Shader.h">
-      <Filter>01.OPENGL\06.Texture</Filter>
+    <ClInclude Include="src\RightDoor.h">
+      <Filter>02.Object\06.Door</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
