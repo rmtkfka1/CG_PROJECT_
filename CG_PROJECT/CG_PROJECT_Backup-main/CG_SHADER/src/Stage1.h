@@ -16,6 +16,7 @@ class Flash;
 class FakeFlash;
 class Ghost;
 class LeftDoor;
+class RightDoor;
 
 class Stage1 : public Scene
 {
@@ -66,7 +67,7 @@ private:
 	Ghost* ghost;
 
 	LeftDoor* Corridor_left_door;
-
+	RightDoor* Corridor_right_door;
 	////////////////////
 
 	vector<Object*> room1;

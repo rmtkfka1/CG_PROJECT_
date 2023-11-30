@@ -5,7 +5,7 @@
 LeftDoor::LeftDoor(Model& model):Object(ObjectType::LEFTDOOR)
 {
 	_center.x = model.GetCenter().x;
-	_center.y = model.GetCenter().y;
+	_center.y = model.GetCenter().y+0.1f;
 	_center.z = model.GetCenter().z;
 	_size.x =  model.GetSize().x;
 	_size.y = model.GetSize().y;
@@ -29,24 +29,9 @@ void LeftDoor::Init()
 void LeftDoor::Update()
 {
 	Super::Update();
+
+
 	
-
-
-}
-
-void LeftDoor::Render(Shader& shader)
-{
-	Super::Render(shader);
-
-	shader.SetUniform3f("control_color", 0, 0, 0);
-	shader.SetUniformMat4f("u_model", _matrix);
-	_model->RenderModel(shader);
-}
-
-void LeftDoor::MatrixUpdate(Player* p)
-{
-
-
 	if (_test == false)
 	{
 		if (_collusion)
@@ -86,6 +71,8 @@ void LeftDoor::MatrixUpdate(Player* p)
 				auto result = trans2 * rotate * trans1;
 				_matrix = result;
 			}
+
+		
 
 		}
 	}
@@ -130,13 +117,23 @@ void LeftDoor::MatrixUpdate(Player* p)
 				_matrix = result;
 			}
 
+			
+
 		}
 	}
 
-
-
-
 }
+
+void LeftDoor::Render(Shader& shader)
+{
+	Super::Render(shader);
+
+
+	shader.SetUniform3f("control_color", 0, 0, 0);
+	shader.SetUniformMat4f("u_model", _matrix);
+	_model->RenderModel(shader);
+}
+
 
 void LeftDoor::OnComponentBeginOverlap(Collider* collider, Collider* other)
 {
@@ -145,6 +142,8 @@ void LeftDoor::OnComponentBeginOverlap(Collider* collider, Collider* other)
 
 		_collusion = true;
 		start_time = std::chrono::steady_clock::now(); // 현재 시간으로 시작 시간 저장
+
+
 
 		if (_center.z < other->GetOwner()->GetCenter_z())
 		{
@@ -162,5 +161,6 @@ void LeftDoor::OnComponentBeginOverlap(Collider* collider, Collider* other)
 
 void LeftDoor::OnComponentEndOverlap(Collider* collider, Collider* other)
 {
+	
 	
 }

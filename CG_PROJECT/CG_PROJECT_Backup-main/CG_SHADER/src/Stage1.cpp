@@ -11,7 +11,7 @@
 #include "FakeFlash.h"
 #include "Ghost.h"
 #include "LeftDoor.h"
-
+#include "RightDoor.h"
 
 
 Stage1::Stage1()
@@ -97,10 +97,18 @@ void Stage1::Init()
 	}
 
 	{
-		Model* temp = new Model("res/models/corridor1/door_left.obj");
-		Corridor_left_door = new LeftDoor(*temp);
+		Model* door_left = new Model("res/models/corridor1/door_left.obj");
+		Corridor_left_door = new LeftDoor(*door_left);
 		BoxCollider* ptr = new BoxCollider;
 		Corridor_left_door->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		Model* door_right = new Model("res/models/corridor1/door_right.obj");
+		Corridor_right_door = new RightDoor(*door_right);
+		BoxCollider* ptr = new BoxCollider;
+		Corridor_right_door->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 	}
 
@@ -149,7 +157,8 @@ void Stage1::Update()
 
 	flash->MatrixUpdate(player);
 	Corridor_left_door->Update();
-	Corridor_left_door->MatrixUpdate(player);
+	Corridor_right_door->Update();
+
 
 	fake_flash->Update();
 	fake_flash->UpdateFlash(light, flash);
@@ -304,7 +313,10 @@ void Stage1::Object_Render()
 	{
 		shader->SetUniform1i("u_texture", flash_fake_texture->GetSlot());
 		Corridor_left_door->Render(*shader);
+		Corridor_right_door->Render(*shader);
 	}
+
+
 
 }
 
