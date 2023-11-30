@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Object.h"
-
 class Model;
 
 class Player :public Object
@@ -10,7 +9,7 @@ class Player :public Object
 	using Super = Object;
 
 public:
-	Player(Model &model);
+	Player(Model& model);
 	~Player();
 
 
@@ -25,7 +24,7 @@ public:
 	void OnComponentEndOverlap(Collider* collider, Collider* other) override;
 
 public:
-	
+
 	bool _collusion = false;
 
 };

@@ -50,7 +50,7 @@ void Stage1::Init()
 
 		ghost = new Ghost(*ghost_body, *ghost_left_arm, *ghost_right_arm);
 		ghost->Init();
-		ghost->SetPosition(-25.0f, -25.0f);
+		ghost->SetPosition(0.0f, 0.0f);
 	
 
 	}
@@ -121,7 +121,7 @@ void Stage1::Init()
 	billboard_texture = new Texture("res/textures/billboard_test.png");
 	light_texture = new Texture("res/textures/light.jpg");
 	table_texture = new Texture("res/textures/table.png");
-	flash_fake_texture = new Texture("res/textures/flash_fake.jpg");
+	flash_fake_texture = new Texture("res/textures/door.jpg");
 	ghost_texture = new Texture("res/textures/SM_text.png");
 
 	texture->Bind(0);
@@ -153,9 +153,12 @@ void Stage1::Update()
 	CameraManager::GetInstance()->KeyUpdate();
 	CameraManager::GetInstance()->MouseUpdate(MouseManager::GetInstance()->GetMousePos().x, MouseManager::GetInstance()->GetMousePos().y);
 
+
 	player->Update();
 
+
 	flash->MatrixUpdate(player);
+
 	Corridor_left_door->Update();
 	Corridor_right_door->Update();
 
@@ -209,7 +212,10 @@ void Stage1::Update()
 	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
 
 	light->Spot_light.position = CameraManager::GetInstance()->m_cameraPos;
-	light->Spot_light.direction = CameraManager::GetInstance()->m_cameraFront;
+
+	light->Spot_light.direction.x = CameraManager::GetInstance()->m_cameraFront.x;
+	light->Spot_light.direction.y = CameraManager::GetInstance()->m_cameraFront.y;
+	light->Spot_light.direction.z = CameraManager::GetInstance()->m_cameraFront.z;
 	light->UseSpotLight(*shader);
 
 	ghost->UpdatePlayerLocation(player->GetCenter());

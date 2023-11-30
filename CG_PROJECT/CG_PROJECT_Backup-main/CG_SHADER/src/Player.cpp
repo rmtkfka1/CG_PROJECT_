@@ -4,13 +4,14 @@
 #include "Object.h"
 #include "Collider.h"
 #include "Model.h"
+#include "Light2.h"
 
-Player::Player(Model& model):Object(ObjectType::PLAYER)
+Player::Player(Model& model) :Object(ObjectType::PLAYER)
 {
 	_center = model.GetCenter();
 	_size = model.GetSize();
 	_first_center = _center;
-	_model =&model;
+	_model = &model;
 
 }
 
@@ -57,7 +58,7 @@ void Player::MatrixUpdate()
 
 void Player::KeyUpdate()
 {
-	if(KeyManager::GetInstance()->Getbutton(KeyType::W))
+	if (KeyManager::GetInstance()->Getbutton(KeyType::W))
 	{
 		_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
@@ -153,7 +154,7 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 
 void Player::OnComponentEndOverlap(Collider* collider, Collider* other)
 {
-	
+
 
 	_debug_color.x = 1;
 	_debug_color.y = 0;

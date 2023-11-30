@@ -5,13 +5,13 @@
 
 class Model;
 
-class Ghost:public Object
+class Ghost :public Object
 {
 
 	using Super = Object;
 
 public:
-	Ghost(Model& model_body,Model& model_left_arm, Model& model_right_arm);
+	Ghost(Model& model_body, Model& model_left_arm, Model& model_right_arm);
 	~Ghost();
 
 
@@ -27,7 +27,7 @@ public:
 
 
 	void UpdatePlayerLocation(glm::vec3 pos);
-	
+
 
 public:
 
@@ -36,12 +36,12 @@ public:
 	Model* _left_arm;
 	Model* _right_arm;
 
-	glm::vec3 left_arm_center = glm::vec3(-1.51369f+0.38f, 12.708f, -0.480505f);
-	glm::vec3 right_arm_center = glm::vec3(1.22144f-0.358f, 12.7469f, -0.554352f);
+	glm::vec3 left_arm_center = glm::vec3(-1.51369f + 0.38f, 12.708f, -0.480505f);
+	glm::vec3 right_arm_center = glm::vec3(1.22144f - 0.358f, 12.7469f, -0.554352f);
 
 	/// 바디는 오브젝트에 정의되있음
-	glm::mat4 _left_arm_matrix=glm::mat4(1.0f);
-	glm::mat4 _right_arm_matrix= glm::mat4(1.0f);
+	glm::mat4 _left_arm_matrix = glm::mat4(1.0f);
+	glm::mat4 _right_arm_matrix = glm::mat4(1.0f);
 
 	float degree = 0;
 
@@ -52,9 +52,12 @@ public:
 	glm::vec3 _dir = glm::vec3(0.0f, 0.0f, 0.0f);	// 이동방향, 정규화됨
 	glm::mat4 _trans_matrix = glm::mat4(1.0f);		// 이동행렬
 	glm::mat4 _rotate_matrix = glm::mat4(1.0f);		// 이동방향을 바라보도록 하는 회전행렬
-	glm::vec3 _patrol_locations[4];					// 순찰경로
+	vector<glm::vec3> _patrol_locations;
+	//glm::vec3 _patrol_locations[91];					// 순찰경로
 	int _patrol_location_no = 0;
-	float _speed = 10.0f;
+	float _speed = 40.0f;
+
+	float _anim_switch = true;
 
 	////////////////////////////////////
 	// 
@@ -122,4 +125,3 @@ public:
 
 
 };
-
