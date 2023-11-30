@@ -9,7 +9,7 @@ Light2::Light2()
 	Spot_light.position = glm::vec3(-9.8f, 5.9f, -3.3f);
 	Spot_light.direction = glm::vec3(0, 0, 0);
 
-	Spot_light.cutoff = glm::vec2(-10.0f, 30.0f); //-10 /30
+	Spot_light.cutoff = glm::vec2(-14.0f, 31.0f); //-10 /30
 	Spot_light.distance = 0.1f;
 
 
