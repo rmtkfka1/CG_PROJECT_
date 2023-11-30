@@ -70,8 +70,8 @@ vec3 Calculate_spot_light()
 // 포인트 라이트 구현하기 위한 변수들
 struct Point_Light 
 {
-    vec3 position[3]; 
-    vec3 attenuation[3];
+    vec3 position[7]; 
+    vec3 attenuation;
     vec3 ambient;  
     vec3 diffuse;
     vec3 specular;
@@ -86,7 +86,7 @@ vec3 Calculate_point_light(int i)
 
     float dist = length(point_light.position[i] - v_position);
     vec3 distpoly = vec3(1.0, dist, dist * dist);
-    float attenuation = 1.0 / dot(distpoly, point_light.attenuation[i]);
+    float attenuation = 1.0 / dot(distpoly, point_light.attenuation);
     vec3 lightdir = (point_light.position[i] - v_position) / dist;
     vec3 pixelnorm = normalize(v_normal);
 
@@ -110,7 +110,7 @@ void main()
     vec3 spot_result = Calculate_spot_light();
 
     vec3 point_result = vec3(0.0);
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 7; ++i)
     {
         point_result += Calculate_point_light(i);
     }

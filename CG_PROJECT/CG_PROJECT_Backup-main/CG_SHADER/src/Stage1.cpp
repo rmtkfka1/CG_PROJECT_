@@ -140,7 +140,6 @@ void Stage1::Init()
 	ObjectInit();
 
 
-	
 
 
 }
@@ -149,6 +148,7 @@ void Stage1::Init()
 void Stage1::Update()
 {
 
+	cout << CameraManager::GetInstance()->m_cameraPos.x << " ," << CameraManager::GetInstance()->m_cameraPos.y << "  , " << CameraManager::GetInstance()->m_cameraPos.z << endl;
 
 	CameraManager::GetInstance()->KeyUpdate();
 	CameraManager::GetInstance()->MouseUpdate(MouseManager::GetInstance()->GetMousePos().x, MouseManager::GetInstance()->GetMousePos().y);

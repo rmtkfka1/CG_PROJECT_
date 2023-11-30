@@ -37,14 +37,12 @@ void FakeFlash::UpdateFlash(Light2* light, Flash* flash)
 	{
 		flash->SetLighton();
 
-		light->Spot_light.distance = 1000.0f;
+		light->Spot_light.distance = 500.0f;
 		light->Spot_light.cutoff[0] = -10.0f;
 		light->Spot_light.cutoff[1] = 30.0f;
 
 		light->point_light.diffuse = glm::vec3(1.0f, 0, 0);
-		light->point_light.distance[0] = 0.1f;
-		light->point_light.distance[1] = 50.0f;
-		light->point_light.distance[2] = 200.0f;
+
 	}
 	
 }

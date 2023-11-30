@@ -25,12 +25,16 @@ Light2::Light2()
 
 	point_light.position[0] = glm::vec3(0, 22.0f,0);
 	point_light.position[1] = glm::vec3(0, 22.0f, -250.0f);
-	point_light.position[2] = glm::vec3(0, 22.0f, -40.0f);
+	point_light.position[2] = glm::vec3(-0.3, 79.0f, -505.0f); //1번조명
+	point_light.position[3] = glm::vec3(-418.0f, 79.0f, -303.0f); //2번조명
+	point_light.position[4] = glm::vec3(448.0f, 79.0f, -303.0f); //3번조명
+	point_light.position[5] = glm::vec3(-450.0f, 79.0f, -729.0f); //3번조명
+	point_light.position[6] = glm::vec3(443.0f, 79.0f, -733.0f); //3번조명
 
 
-	point_light.distance[0] = 200.0f;
-	point_light.distance[1] = 200.0f;
-	point_light.distance[2] = 200.0f;
+	point_light.distance = 300.0f;
+
+
 	point_light.diffuse = glm::vec3(1.0f,1.0f, 1.0f);
 	point_light.ambient = glm::vec3(0, 0, 0);
 	point_light.specular = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -62,12 +66,15 @@ void Light2::UseSpotLight(Shader& shader)
 
 
 	//테스트해보자
-	shader.SetUniform3f("point_light.attenuation[0]", GetAttenuationCoeff(point_light.distance[0]).x, GetAttenuationCoeff(point_light.distance[0]).y, GetAttenuationCoeff(point_light.distance[0]).z);
-	shader.SetUniform3f("point_light.attenuation[1]", GetAttenuationCoeff(point_light.distance[1]).x, GetAttenuationCoeff(point_light.distance[1]).y, GetAttenuationCoeff(point_light.distance[1]).z);
-	shader.SetUniform3f("point_light.attenuation[2]", GetAttenuationCoeff(point_light.distance[2]).x, GetAttenuationCoeff(point_light.distance[2]).y, GetAttenuationCoeff(point_light.distance[2]).z);
+	shader.SetUniform3f("point_light.attenuation", GetAttenuationCoeff(point_light.distance).x, GetAttenuationCoeff(point_light.distance).y, GetAttenuationCoeff(point_light.distance).z);
 	shader.SetUniform3f("point_light.position[0]", point_light.position[0].x, point_light.position[0].y, point_light.position[0].z);
 	shader.SetUniform3f("point_light.position[1]", point_light.position[1].x, point_light.position[1].y, point_light.position[1].z);
 	shader.SetUniform3f("point_light.position[2]", point_light.position[2].x, point_light.position[2].y, point_light.position[2].z);
+	shader.SetUniform3f("point_light.position[3]", point_light.position[3].x, point_light.position[3].y, point_light.position[3].z);
+	shader.SetUniform3f("point_light.position[4]", point_light.position[4].x, point_light.position[4].y, point_light.position[4].z);
+	shader.SetUniform3f("point_light.position[5]", point_light.position[5].x, point_light.position[5].y, point_light.position[5].z);
+	shader.SetUniform3f("point_light.position[6]", point_light.position[6].x, point_light.position[6].y, point_light.position[6].z);
+
 	shader.SetUniform3f("point_light.ambient", point_light.ambient.r, point_light.ambient.g, point_light.ambient.b);
 	shader.SetUniform3f("point_light.diffuse", point_light.diffuse.r, point_light.diffuse.g, point_light.diffuse.b);
 	shader.SetUniform3f("point_light.specular", point_light.specular.r, point_light.specular.g, point_light.specular.b);
