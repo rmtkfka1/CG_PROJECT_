@@ -68,6 +68,7 @@ private:
 
 	LeftDoor* Corridor_left_door;
 	RightDoor* Corridor_right_door;
+	Model* test;
 	////////////////////
 
 	vector<Object*> room1;

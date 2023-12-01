@@ -34,16 +34,9 @@ void Stage1::Init()
 
 
 
-
 	///////////////////////////////////////////////////모델 불러오기 
-
-
-
-
-
 	{
 		//고스트 생성
-
 		Model* ghost_body = new Model("res/models/ghost/ghost_body.obj");
 		Model* ghost_left_arm = new Model("res/models/ghost/ghost_left_arm_test.obj");
 		Model* ghost_right_arm = new Model("res/models/ghost/ghost_right_arm_test.obj");
@@ -110,6 +103,12 @@ void Stage1::Init()
 		BoxCollider* ptr = new BoxCollider;
 		Corridor_right_door->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	//////test////////
+	{
+		test = new Model("res/models/deadbody.obj");
+
 	}
 
 	
@@ -322,6 +321,8 @@ void Stage1::Object_Render()
 		Corridor_right_door->Render(*shader);
 	}
 
+
+	test->RenderModel(*shader);
 
 
 }
@@ -593,7 +594,7 @@ void Stage1::MakeRoom2()
 	room2.push_back(right_wall);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-	// 천장
+	//천장
 	Wall* celing = new Wall(*room2_ceiling_model);
 	BoxCollider* ptr10 = new BoxCollider;
 	right_wall->AddComponent(ptr10);

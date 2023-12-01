@@ -7,7 +7,7 @@
 FakeFlash::FakeFlash(Model& model):Object(ObjectType::FAKE_FLASH)
 {
 	_center = model.GetCenter();
-	_size.x = model.GetSize().x+10;
+	_size.x = model.GetSize().x+20;
 	_size.z = model.GetSize().z+10;
 	_first_center = _center;
 	_model = &model;

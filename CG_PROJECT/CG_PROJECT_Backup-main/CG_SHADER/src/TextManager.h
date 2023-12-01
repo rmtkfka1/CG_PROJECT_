@@ -4,8 +4,6 @@
 class TextManager
 {
 
-
-
 public:
 
 	static TextManager* GetInstance()
@@ -14,23 +12,12 @@ public:
 		return &mg;
 	}
 
-
 	void Init();
-
 	void Render(float x, float y,const char* text);
 
-
-
-
-
 private:
-
 	GLuint _base;
 	HDC _hdc;
-
-
-
-
 
 };
 

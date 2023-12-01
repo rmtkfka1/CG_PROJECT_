@@ -22,8 +22,9 @@ Light2::Light2()
 
 
 	//포인트 라이트 작업
-
-	point_light.position[0] = glm::vec3(0, 22.0f,0);
+	//200 -215 250
+	point_light.position[7] = glm::vec3(0, 22.0f, 200.0f); //첫번쨰방조명
+	point_light.position[0] = glm::vec3(0, 22.0f, 140.0f);
 	point_light.position[1] = glm::vec3(0, 22.0f, -250.0f);
 	point_light.position[2] = glm::vec3(-0.3, 79.0f, -505.0f); //1번조명
 	point_light.position[3] = glm::vec3(-418.0f, 79.0f, -303.0f); //2번조명
@@ -74,6 +75,7 @@ void Light2::UseSpotLight(Shader& shader)
 	shader.SetUniform3f("point_light.position[4]", point_light.position[4].x, point_light.position[4].y, point_light.position[4].z);
 	shader.SetUniform3f("point_light.position[5]", point_light.position[5].x, point_light.position[5].y, point_light.position[5].z);
 	shader.SetUniform3f("point_light.position[6]", point_light.position[6].x, point_light.position[6].y, point_light.position[6].z);
+	shader.SetUniform3f("point_light.position[7]", point_light.position[7].x, point_light.position[7].y, point_light.position[7].z);
 
 	shader.SetUniform3f("point_light.ambient", point_light.ambient.r, point_light.ambient.g, point_light.ambient.b);
 	shader.SetUniform3f("point_light.diffuse", point_light.diffuse.r, point_light.diffuse.g, point_light.diffuse.b);
