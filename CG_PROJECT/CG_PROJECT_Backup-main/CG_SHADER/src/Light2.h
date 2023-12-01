@@ -29,7 +29,7 @@ struct Material
 	float shininess;
 };
 
-
+class Ghost;
 
 class Light2
 {
@@ -38,8 +38,8 @@ public:
 
 	Light2();
 	~Light2();
-	void UseSpotLight(Shader& shader);
-	void UsePointLight(Shader& shader);
+	void UseSpotLight(Shader& shader, Ghost& ghost);
+
 
 
 

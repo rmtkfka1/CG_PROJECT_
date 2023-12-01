@@ -233,6 +233,8 @@ void Ghost::MatrixUpdate()
 
 }
 
+
+
 void Ghost::SetPosition(float x, float z)
 {
 	_pos = glm::vec3(x, _center.y, z);

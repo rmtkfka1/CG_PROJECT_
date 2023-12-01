@@ -46,7 +46,7 @@ void Stage1::Init()
 
 		ghost = new Ghost(*ghost_body, *ghost_left_arm, *ghost_right_arm);
 		ghost->Init();
-		ghost->SetPosition(0.0f, 0.0f);
+		ghost->SetPosition(0.0f, 0.0F);
 	
 
 	}
@@ -163,7 +163,7 @@ void Stage1::Init()
 
 	////////////////////////조명작업///////////////////////////////////////////////////
 	light = new Light2();
-	light->UseSpotLight(*shader);
+
 
 
 	///////////////////////////////////////////////////////////////////////////////////
@@ -193,7 +193,7 @@ void Stage1::Update()
 	Corridor_right_door->Update();
 
 
-	
+
 	table->Update();
 
 
@@ -214,7 +214,7 @@ void Stage1::Update()
 	{
 		room2[i]->Update();
 	}
-	
+
 	for (int i = 0; i < room3.size(); i++)
 	{
 		room3[i]->Update();
@@ -229,17 +229,17 @@ void Stage1::Update()
 	{
 		room5[i]->Update();
 	}
-	
+
 	for (int i = 0; i < room6.size(); i++)
 	{
 		room6[i]->Update();
 	}
-	
+
 	flash->MatrixUpdate(player);
 
 	light->Spot_light.position = CameraManager::GetInstance()->m_cameraPos;
 	light->Spot_light.direction = CameraManager::GetInstance()->m_cameraFront;
-	light->UseSpotLight(*shader);
+	light->UseSpotLight(*shader,*ghost);
 
 
 
@@ -250,12 +250,13 @@ void Stage1::Update()
 	mask->MatrixUpdate(mask_event);
 	mask->Update();
 	deadbody->Update();
-	
+
 
 	shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
 	shader->SetUniform3f("u_viewpos", CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
 	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
 
+	cout << CameraManager::GetInstance()->m_cameraPos.x << "  " << CameraManager::GetInstance()->m_cameraPos.y << "  " << CameraManager::GetInstance()->m_cameraPos.z << endl;
 
 }
 
@@ -284,7 +285,7 @@ void Stage1::Object_Render()
 	player->Render(*shader);
 
 
-	light->UseSpotLight(*shader);
+	light->UseSpotLight(*shader,*ghost);
 
 	for (int i = 0; i < room1.size(); i++)
 	{

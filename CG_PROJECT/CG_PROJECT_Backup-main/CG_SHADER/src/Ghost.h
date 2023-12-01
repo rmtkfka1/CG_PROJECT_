@@ -4,6 +4,7 @@
 
 
 class Model;
+class Light2;
 
 class Ghost :public Object
 {
