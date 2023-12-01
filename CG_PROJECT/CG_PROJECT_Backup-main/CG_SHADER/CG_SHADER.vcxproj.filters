@@ -188,6 +188,7 @@
       <Filter>02.Object\06.Door</Filter>
     </ClCompile>
     <ClCompile Include="src\연습장.cpp" />
+    <ClCompile Include="src\TextManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core.h">
@@ -298,6 +299,7 @@
     <ClInclude Include="src\RightDoor.h">
       <Filter>02.Object\06.Door</Filter>
     </ClInclude>
+    <ClInclude Include="src\TextManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="자주사용하는코드.txt">

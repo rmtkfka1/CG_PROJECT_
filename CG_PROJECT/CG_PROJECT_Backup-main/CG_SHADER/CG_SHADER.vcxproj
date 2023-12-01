@@ -180,6 +180,7 @@
     <ClCompile Include="src\연습장.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\TextManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\LeftDoor.h" />
@@ -218,6 +219,7 @@
     <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\Wall.h" />
     <ClInclude Include="src\Stage1.h" />
+    <ClInclude Include="src\TextManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="자주사용하는코드.txt" />

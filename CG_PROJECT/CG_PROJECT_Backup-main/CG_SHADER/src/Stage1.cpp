@@ -12,7 +12,7 @@
 #include "Ghost.h"
 #include "LeftDoor.h"
 #include "RightDoor.h"
-
+#include "TextManager.h"
 
 Stage1::Stage1()
 {
@@ -32,7 +32,7 @@ void Stage1::Init()
 	shader = new Shader("res/shader/mvp_spotlight.vs", "res/shader/mvp_spotlight.fs");
 	shader->Bind();
 
-	shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
+
 
 
 	///////////////////////////////////////////////////모델 불러오기 
@@ -206,8 +206,7 @@ void Stage1::Update()
 	}
 
 
-	shader->SetUniform3f("u_viewpos", CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
-	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
+
 
 	flash->MatrixUpdate(player);
 
@@ -228,9 +227,15 @@ void Stage1::Update()
 
 void Stage1::Render()
 {
+	shader->Bind();
+
+	shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
+	shader->SetUniform3f("u_viewpos", CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
+	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
 
 	Object_Render();
 	
+	shader->Unbind();
 
 	Texture_Render();
 
@@ -244,6 +249,8 @@ void Stage1::Object_Render()
 
 
 	glViewport(0, 0, screenWidth, screenHeight);
+
+
 
 
 	{
@@ -330,6 +337,8 @@ void Stage1::Texture_Render()
 {
 
 	glViewport(0, 0, screenWidth, 300);
+	TextManager::GetInstance()->Render("Press  F");
+	
 
 
 }
