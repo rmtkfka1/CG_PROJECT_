@@ -156,15 +156,13 @@ void Stage1::Update()
 
 	player->Update();
 
-
-	flash->MatrixUpdate(player);
+	fake_flash->Update();
+	fake_flash->UpdateFlash(light, flash);
 
 	Corridor_left_door->Update();
 	Corridor_right_door->Update();
 
 
-	fake_flash->Update();
-	fake_flash->UpdateFlash(light, flash);
 	
 	table->Update();
 
@@ -210,6 +208,8 @@ void Stage1::Update()
 
 	shader->SetUniform3f("u_viewpos", CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
 	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
+
+	flash->MatrixUpdate(player);
 
 	light->Spot_light.position = CameraManager::GetInstance()->m_cameraPos;
 

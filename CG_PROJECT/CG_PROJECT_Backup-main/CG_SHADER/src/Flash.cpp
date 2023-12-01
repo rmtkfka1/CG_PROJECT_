@@ -33,6 +33,8 @@ void Flash::MatrixUpdate(Player* player)
 	glm::vec4 flachloc = { player->GetCenter_x() + cameraFront.x , player->GetCenter_y() + cameraFront.y +4.6f, player->GetCenter_z() + cameraFront.z, 1.0f };
 	glm::mat4 transMat = matrix::GetInstance()->GetTranslation(flachloc.x, flachloc.y, flachloc.z);
 
+
+
 	glm::mat4 yawMat = matrix::GetInstance()->GetRotate(GET_SINGLE(CameraManager)->m_cameraYaw, 0, 1, 0);
 	glm::mat4 pitchMat = matrix::GetInstance()->GetRotate(GET_SINGLE(CameraManager)->m_cameraPitch, 1, 0, 0);
 
