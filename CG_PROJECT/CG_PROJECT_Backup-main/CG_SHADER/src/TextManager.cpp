@@ -30,9 +30,9 @@ void TextManager::Init()
 
 }
 
-void TextManager::Render(const char* text)
+void TextManager::Render(float x, float y, const char* text)
 {
-	glRasterPos2f(0.0f, 0.0f);       //<2>
+	glRasterPos2f(x, y);       //<2>
 	glPushAttrib(GL_LIST_BIT); //<1>
 	glListBase(_base - 32); //<2>
 	glCallLists(strlen(text), GL_UNSIGNED_BYTE, text); //<3>

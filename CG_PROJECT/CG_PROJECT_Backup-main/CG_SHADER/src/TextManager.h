@@ -17,7 +17,7 @@ public:
 
 	void Init();
 
-	void Render(const char* text);
+	void Render(float x, float y,const char* text);
 
 
 

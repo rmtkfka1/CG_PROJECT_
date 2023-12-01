@@ -153,8 +153,8 @@ void Stage1::Update()
 	CameraManager::GetInstance()->KeyUpdate();
 	CameraManager::GetInstance()->MouseUpdate(MouseManager::GetInstance()->GetMousePos().x, MouseManager::GetInstance()->GetMousePos().y);
 
-
 	player->Update();
+
 
 	fake_flash->Update();
 	fake_flash->UpdateFlash(light, flash);
@@ -204,39 +204,32 @@ void Stage1::Update()
 	{
 		room6[i]->Update();
 	}
-
-
-
-
+	
 	flash->MatrixUpdate(player);
 
 	light->Spot_light.position = CameraManager::GetInstance()->m_cameraPos;
-
-	light->Spot_light.direction.x = CameraManager::GetInstance()->m_cameraFront.x;
-	light->Spot_light.direction.y = CameraManager::GetInstance()->m_cameraFront.y;
-	light->Spot_light.direction.z = CameraManager::GetInstance()->m_cameraFront.z;
+	light->Spot_light.direction = CameraManager::GetInstance()->m_cameraFront;
 	light->UseSpotLight(*shader);
+
+
 
 	ghost->UpdatePlayerLocation(player->GetCenter());
 	ghost->Update();
 	billboard->Update();
 
-
+	shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
+	shader->SetUniform3f("u_viewpos", CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
+	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
 
 }
 
 void Stage1::Render()
 {
 	shader->Bind();
-
-	shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
-	shader->SetUniform3f("u_viewpos", CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
-	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
-
 	Object_Render();
-	
-	shader->Unbind();
 
+
+	shader->Unbind();
 	Texture_Render();
 
 
@@ -336,9 +329,10 @@ void Stage1::Object_Render()
 void Stage1::Texture_Render()
 {
 
-	glViewport(0, 0, screenWidth, 300);
-	TextManager::GetInstance()->Render("Press  F");
-	
+	if (fake_flash->GetCollsionState() == true)
+	{
+		TextManager::GetInstance()->Render(0.0f, 0.0f, "Press F to Equid");
+	}
 
 
 }

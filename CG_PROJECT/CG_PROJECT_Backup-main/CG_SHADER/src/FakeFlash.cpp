@@ -34,16 +34,23 @@ void FakeFlash::Update()
 
 void FakeFlash::UpdateFlash(Light2* light, Flash* flash)
 {
-	if (!draw)
+	if (collision) //충돌중일때 
+	{
+		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::F))
+		{
+
+			draw = false;
+		}	
+
+	}
+
+	if (draw == false)
 	{
 		flash->SetLighton();
 
 		light->Spot_light.distance = 1000.0f;
 
 		light->point_light.diffuse = glm::vec3(1.0f, 0, 0);
-
-	
-
 	}
 	
 }
@@ -68,12 +75,15 @@ void FakeFlash::OnComponentBeginOverlap(Collider* collider, Collider* other)
 
 	if (other->GetOwner()->GetObjectType() == ObjectType::PLAYER)
 	{
-		draw = false;
+		collision = true;
 	}
 }
 
 void FakeFlash::OnComponentEndOverlap(Collider* collider, Collider* other)
 {
-
+	if (other->GetOwner()->GetObjectType() == ObjectType::PLAYER)
+	{
+		collision = false;
+	}
 
 }
