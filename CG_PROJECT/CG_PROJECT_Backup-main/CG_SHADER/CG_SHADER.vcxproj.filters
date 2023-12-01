@@ -85,6 +85,12 @@
     <Filter Include="02.Object\06.Door">
       <UniqueIdentifier>{27de4c53-43a5-4fc5-8a7e-98fae510251f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Object\07.Deadbody">
+      <UniqueIdentifier>{8a66333f-d0a1-4aad-a337-71602b4a15ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Object\08.Mask">
+      <UniqueIdentifier>{732d032b-cc04-4b4d-a587-c2eb4de97703}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -190,6 +196,15 @@
     <ClCompile Include="src\연습장.cpp" />
     <ClCompile Include="src\TextManager.cpp">
       <Filter>03,Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DeadBody.cpp">
+      <Filter>02.Object\07.Deadbody</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MaskEvent.cpp">
+      <Filter>02.Object\08.Mask</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mask.cpp">
+      <Filter>02.Object\08.Mask</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -303,6 +318,15 @@
     </ClInclude>
     <ClInclude Include="src\TextManager.h">
       <Filter>03,Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DeadBody.h">
+      <Filter>02.Object\07.Deadbody</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MaskEvent.h">
+      <Filter>02.Object\08.Mask</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mask.h">
+      <Filter>02.Object\08.Mask</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

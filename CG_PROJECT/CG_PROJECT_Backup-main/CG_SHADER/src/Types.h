@@ -134,7 +134,10 @@ enum class ObjectType
 	FAKE_FLASH,
 	GHOST,
 	LEFTDOOR,
-	RIGHTDOOR
+	RIGHTDOOR,
+	DEADBODY,
+	MASK,
+	MASKEVENT
 };
 
 enum class SceneType

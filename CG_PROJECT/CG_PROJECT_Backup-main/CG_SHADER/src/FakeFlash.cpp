@@ -63,7 +63,6 @@ void FakeFlash::Render(Shader& shader)
 		
 		Super::Render(shader); 
 
-		
 		shader.SetUniform3f("control_color", 0, 0, 0);
 		shader.SetUniformMat4f("u_model", _matrix);
 		_model->RenderModel(shader);

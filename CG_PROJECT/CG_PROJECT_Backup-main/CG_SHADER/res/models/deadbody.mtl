@@ -1,5 +1,5 @@
 # 3ds Max Wavefront OBJ Exporter v0.99 - (c)2007 guruware
-# File Created: 01.12.2023 18:03:03
+# File Created: 01.12.2023 21:36:26
 
 newmtl putinHead
 	Kd 0.8000 0.8000 0.8000
@@ -11,7 +11,7 @@ newmtl putinHead
 	Pm 0.0000
 	Pc 0.0000
 	Pcr 0.0000
-	Ni 1.5200
+	Ni 1.5000
 	Ke 0.0000 0.0000 0.0000
 	illum 2
 	map_Kd C:\Users\pakhe\Desktop\putin-hanged-and-rope\source\putinHanged_andRope.fbm\putin.jpg
@@ -26,7 +26,7 @@ newmtl Blue
 	Pm 0.0000
 	Pc 0.0000
 	Pcr 0.0000
-	Ni 1.5200
+	Ni 1.5000
 	Ke 0.0000 0.0000 0.0000
 	illum 2
 	map_Kd C:\Users\pakhe\Desktop\putin-hanged-and-rope\source\putinHanged_andRope.fbm\Blue_baseColor.jpeg
@@ -42,7 +42,7 @@ newmtl Blue_baseColor_Mat
 	Pm 0.0000
 	Pc 0.0000
 	Pcr 0.0000
-	Ni 1.5200
+	Ni 1.5000
 	Ke 0.0000 0.0000 0.0000
 	illum 2
 	map_Kd C:\Users\pakhe\Desktop\putin-hanged-and-rope\source\putinHanged_andRope.fbm\Blue_baseColor.jpeg
@@ -57,20 +57,23 @@ newmtl Blue_baseColor_special_military_operation_Mat
 	Pm 0.0000
 	Pc 0.0000
 	Pcr 0.0000
-	Ni 1.5200
+	Ni 1.5000
 	Ke 0.0000 0.0000 0.0000
 	illum 2
-	map_Kd C:\Users\pakhe\Desktop\putin-hanged-and-rope\source\putinHanged_andRope.fbm\Blue_baseColor special military operation.png
 
 newmtl wire_204204204
-	Ns 32
-	d 1
-	Tr 0
-	Tf 1 1 1
-	illum 2
-	Ka 0.8000 0.8000 0.8000
 	Kd 0.8000 0.8000 0.8000
 	Ks 0.3500 0.3500 0.3500
+	Tr 0.0000
+	d 1.0000
+	Tf 1.0000 1.0000 1.0000
+	Pr 0.6800
+	Pm 0.0000
+	Pc 0.0000
+	Pcr 0.0000
+	Ni 1.5000
+	Ke 0.0000 0.0000 0.0000
+	illum 2
 
 newmtl Yellow
 	Kd 0.8000 0.8000 0.8000
@@ -82,7 +85,7 @@ newmtl Yellow
 	Pm 0.0000
 	Pc 0.0000
 	Pcr 0.0000
-	Ni 1.5200
+	Ni 1.5000
 	Ke 0.0000 0.0000 0.0000
 	illum 2
 	map_Kd C:\Users\pakhe\Desktop\putin-hanged-and-rope\source\putinHanged_andRope.fbm\Yellow_baseColor.jpeg
@@ -98,7 +101,7 @@ newmtl Green
 	Pm 0.0000
 	Pc 0.0000
 	Pcr 0.0000
-	Ni 1.5200
+	Ni 1.5000
 	Ke 0.0000 0.0000 0.0000
 	illum 2
 	map_Kd C:\Users\pakhe\Desktop\putin-hanged-and-rope\source\putinHanged_andRope.fbm\Green_baseColor.jpeg

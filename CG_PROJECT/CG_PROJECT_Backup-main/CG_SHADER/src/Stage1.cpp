@@ -13,6 +13,9 @@
 #include "LeftDoor.h"
 #include "RightDoor.h"
 #include "TextManager.h"
+#include "DeadBody.h"
+#include "MaskEvent.h"
+#include "Mask.h"
 
 Stage1::Stage1()
 {
@@ -105,11 +108,35 @@ void Stage1::Init()
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 	}
 
-	//////test////////
+	//시체
 	{
-		test = new Model("res/models/deadbody.obj");
-
+		Model *dead_body = new Model("res/models/deadbody.obj");
+		deadbody = new DeadBody(*dead_body);
+		BoxCollider* ptr = new BoxCollider;
+		deadbody->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 	}
+
+
+	//마스크
+	{
+		
+		Model* mask_model = new Model("res/models/mask.obj");
+		mask = new Mask(*mask_model);
+		BoxCollider* ptr = new BoxCollider;
+		mask->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	//마스크이벤트발생
+	{
+		Model* mask__event = new Model("res/models/deadbody_event.obj");
+		mask_event = new MaskEvent(*mask__event);
+		BoxCollider* ptr = new BoxCollider;
+		mask_event->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
 
 	
 	MakeRoom();
@@ -122,6 +149,8 @@ void Stage1::Init()
 	table_texture = new Texture("res/textures/table.png");
 	flash_fake_texture = new Texture("res/textures/door.jpg");
 	ghost_texture = new Texture("res/textures/SM_text.png");
+	deadbody_texture = new Texture("res/textures/deadbody.jpg");
+	mask_texture = new Texture("res/textures/mask.jpg");
 
 	texture->Bind(0);
 	flash_fake_texture->Bind(1);
@@ -129,6 +158,8 @@ void Stage1::Init()
 	light_texture->Bind(3);
 	table_texture->Bind(4);
 	ghost_texture->Bind(5);
+	deadbody_texture->Bind(6);
+	mask_texture->Bind(7);
 
 	////////////////////////조명작업///////////////////////////////////////////////////
 	light = new Light2();
@@ -215,10 +246,16 @@ void Stage1::Update()
 	ghost->UpdatePlayerLocation(player->GetCenter());
 	ghost->Update();
 	billboard->Update();
+	mask_event->Update();
+	mask->MatrixUpdate(mask_event);
+	mask->Update();
+	deadbody->Update();
+	
 
 	shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
 	shader->SetUniform3f("u_viewpos", CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
 	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
+
 
 }
 
@@ -243,12 +280,8 @@ void Stage1::Object_Render()
 	glViewport(0, 0, screenWidth, screenHeight);
 
 
-
-
-	{
-		shader->SetUniform1i("u_texture", 0);
-		player->Render(*shader);
-	}
+	shader->SetUniform1i("u_texture", 0);
+	player->Render(*shader);
 
 
 	light->UseSpotLight(*shader);
@@ -267,22 +300,22 @@ void Stage1::Object_Render()
 	{
 		room2[i]->Render(*shader);
 	}
-	
+
 	for (int i = 0; i < room3.size(); i++)
 	{
 		room3[i]->Render(*shader);
 	}
-	
+
 	for (int i = 0; i < room4.size(); i++)
 	{
 		room4[i]->Render(*shader);
 	}
-	
+
 	for (int i = 0; i < room5.size(); i++)
 	{
 		room5[i]->Render(*shader);
 	}
-	
+
 	for (int i = 0; i < room6.size(); i++)
 	{
 		room6[i]->Render(*shader);
@@ -321,8 +354,18 @@ void Stage1::Object_Render()
 		Corridor_right_door->Render(*shader);
 	}
 
+	{
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		shader->SetUniform1i("u_texture", deadbody_texture->GetSlot());
+		deadbody->SpecialRender(*shader, fake_flash);
+	}
 
-	test->RenderModel(*shader);
+
+	{
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		shader->SetUniform1i("u_texture", mask_texture->GetSlot());
+		mask->Render(*shader);
+	}
 
 
 }

@@ -29,6 +29,7 @@ uniform Spot_Light spot_light;
 // 공용 변수
 uniform Material material;
 uniform sampler2D u_texture;
+
 uniform vec3 control_color;
 uniform vec3 u_viewpos;
 

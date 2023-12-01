@@ -28,51 +28,51 @@ void BoxCollider::Update()
 void BoxCollider::Render(Shader& shader)
 {
 	
-      //if (_showDebug)
-      //{
-      //    glLineWidth(30.0f);  
-      //
-      //    glBegin(GL_LINES); // 라인 그리기 시작
-      //
-      //    glVertex3f(_center.x - _size.x / 2, _center.y + _size.y / 2, _center.z - _size.z / 2);
-      //    glVertex3f(_center.x + _size.x / 2, _center.y + _size.y / 2, _center.z - _size.z / 2);
-      //
-      //    glVertex3f(_center.x - _size.x / 2, _center.y + _size.y / 2, _center.z + _size.z / 2);
-      //    glVertex3f(_center.x + _size.x / 2, _center.y + _size.y / 2, _center.z + _size.z / 2);
-      //
-      //    glVertex3f(_center.x - _size.x / 2, _center.y + _size.y / 2, _center.z - _size.z / 2);
-      //    glVertex3f(_center.x - _size.x / 2, _center.y + _size.y / 2, _center.z + _size.z / 2);
-      //
-      //    glVertex3f(_center.x + _size.x / 2, _center.y + _size.y / 2, _center.z - _size.z / 2);
-      //    glVertex3f(_center.x + _size.x / 2, _center.y + _size.y / 2, _center.z + _size.z / 2);
-      //
-      //    glVertex3f(_center.x - _size.x / 2, _center.y - _size.y / 2, _center.z - _size.z / 2);
-      //    glVertex3f(_center.x - _size.x / 2, _center.y + _size.y / 2, _center.z - _size.z / 2);
-      //
-      //    glVertex3f(_center.x - _size.x / 2, _center.y - _size.y / 2, _center.z + _size.z / 2);
-      //    glVertex3f(_center.x - _size.x / 2, _center.y + _size.y / 2, _center.z + _size.z / 2);
-      //
-      //    glVertex3f(_center.x + _size.x / 2, _center.y - _size.y / 2, _center.z + _size.z / 2);
-      //    glVertex3f(_center.x + _size.x / 2, _center.y + _size.y / 2, _center.z + _size.z / 2);
-      //
-      //    glVertex3f(_center.x + _size.x / 2, _center.y - _size.y / 2, _center.z - _size.z / 2);
-      //    glVertex3f(_center.x + _size.x / 2, _center.y + _size.y / 2, _center.z - _size.z / 2);
-      //
-      //    glVertex3f(_center.x - _size.x / 2, _center.y - _size.y / 2, _center.z - _size.z / 2);
-      //    glVertex3f(_center.x + _size.x / 2, _center.y - _size.y / 2, _center.z - _size.z / 2);
-      //
-      //    glVertex3f(_center.x - _size.x / 2, _center.y - _size.y / 2, _center.z + _size.z / 2);
-      //    glVertex3f(_center.x + _size.x / 2, _center.y - _size.y / 2, _center.z + _size.z / 2);
-      //
-      //    glVertex3f(_center.x - _size.x / 2, _center.y - _size.y / 2, _center.z - _size.z / 2);
-      //    glVertex3f(_center.x - _size.x / 2, _center.y - _size.y / 2, _center.z + _size.z / 2);
-      //
-      //    glVertex3f(_center.x + _size.x / 2, _center.y - _size.y / 2, _center.z - _size.z / 2);
-      //    glVertex3f(_center.x + _size.x / 2, _center.y - _size.y / 2, _center.z + _size.z / 2);
-      //
-      //    glEnd(); // 라인 그리기 종료
-      //
-      //}
+      if (_showDebug)
+      {
+          glLineWidth(30.0f);  
+      
+          glBegin(GL_LINES); // 라인 그리기 시작
+      
+          glVertex3f(_center.x - _size.x / 2, _center.y + _size.y / 2, _center.z - _size.z / 2);
+          glVertex3f(_center.x + _size.x / 2, _center.y + _size.y / 2, _center.z - _size.z / 2);
+      
+          glVertex3f(_center.x - _size.x / 2, _center.y + _size.y / 2, _center.z + _size.z / 2);
+          glVertex3f(_center.x + _size.x / 2, _center.y + _size.y / 2, _center.z + _size.z / 2);
+      
+          glVertex3f(_center.x - _size.x / 2, _center.y + _size.y / 2, _center.z - _size.z / 2);
+          glVertex3f(_center.x - _size.x / 2, _center.y + _size.y / 2, _center.z + _size.z / 2);
+      
+          glVertex3f(_center.x + _size.x / 2, _center.y + _size.y / 2, _center.z - _size.z / 2);
+          glVertex3f(_center.x + _size.x / 2, _center.y + _size.y / 2, _center.z + _size.z / 2);
+      
+          glVertex3f(_center.x - _size.x / 2, _center.y - _size.y / 2, _center.z - _size.z / 2);
+          glVertex3f(_center.x - _size.x / 2, _center.y + _size.y / 2, _center.z - _size.z / 2);
+      
+          glVertex3f(_center.x - _size.x / 2, _center.y - _size.y / 2, _center.z + _size.z / 2);
+          glVertex3f(_center.x - _size.x / 2, _center.y + _size.y / 2, _center.z + _size.z / 2);
+      
+          glVertex3f(_center.x + _size.x / 2, _center.y - _size.y / 2, _center.z + _size.z / 2);
+          glVertex3f(_center.x + _size.x / 2, _center.y + _size.y / 2, _center.z + _size.z / 2);
+      
+          glVertex3f(_center.x + _size.x / 2, _center.y - _size.y / 2, _center.z - _size.z / 2);
+          glVertex3f(_center.x + _size.x / 2, _center.y + _size.y / 2, _center.z - _size.z / 2);
+      
+          glVertex3f(_center.x - _size.x / 2, _center.y - _size.y / 2, _center.z - _size.z / 2);
+          glVertex3f(_center.x + _size.x / 2, _center.y - _size.y / 2, _center.z - _size.z / 2);
+      
+          glVertex3f(_center.x - _size.x / 2, _center.y - _size.y / 2, _center.z + _size.z / 2);
+          glVertex3f(_center.x + _size.x / 2, _center.y - _size.y / 2, _center.z + _size.z / 2);
+      
+          glVertex3f(_center.x - _size.x / 2, _center.y - _size.y / 2, _center.z - _size.z / 2);
+          glVertex3f(_center.x - _size.x / 2, _center.y - _size.y / 2, _center.z + _size.z / 2);
+      
+          glVertex3f(_center.x + _size.x / 2, _center.y - _size.y / 2, _center.z - _size.z / 2);
+          glVertex3f(_center.x + _size.x / 2, _center.y - _size.y / 2, _center.z + _size.z / 2);
+      
+          glEnd(); // 라인 그리기 종료
+      
+      }
 
 }
 

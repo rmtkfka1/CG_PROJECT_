@@ -17,7 +17,9 @@ class FakeFlash;
 class Ghost;
 class LeftDoor;
 class RightDoor;
-
+class DeadBody;
+class MaskEvent;
+class Mask;
 class Stage1 : public Scene
 {
 public:
@@ -65,10 +67,12 @@ private:
 	Billboard* billboard;
 	Wall* table;
 	Ghost* ghost;
-
 	LeftDoor* Corridor_left_door;
 	RightDoor* Corridor_right_door;
-	Model* test;
+	DeadBody* deadbody;
+	MaskEvent* mask_event;
+	Mask* mask;
+	Model* temp;
 	////////////////////
 
 	vector<Object*> room1;
@@ -96,7 +100,8 @@ private:
 	Texture* flash_fake_texture;
 	Texture* ghost_texture;
 	Texture* door_texture;
-
+	Texture* deadbody_texture;
+	Texture* mask_texture;
 	//조명 객체 만들기
 	Light2* light;
 

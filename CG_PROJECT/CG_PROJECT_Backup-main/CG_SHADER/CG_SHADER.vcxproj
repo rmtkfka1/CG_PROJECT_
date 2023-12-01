@@ -136,6 +136,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Mask.cpp" />
+    <ClCompile Include="src\MaskEvent.cpp" />
+    <ClCompile Include="src\DeadBody.cpp" />
     <ClCompile Include="src\LeftDoor.cpp" />
     <ClCompile Include="src\RightDoor.cpp" />
     <ClCompile Include="src\Ghost.cpp" />
@@ -183,6 +186,9 @@
     <ClCompile Include="src\TextManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Mask.h" />
+    <ClInclude Include="src\MaskEvent.h" />
+    <ClInclude Include="src\DeadBody.h" />
     <ClInclude Include="src\LeftDoor.h" />
     <ClInclude Include="src\RightDoor.h" />
     <ClInclude Include="src\Ghost.h" />

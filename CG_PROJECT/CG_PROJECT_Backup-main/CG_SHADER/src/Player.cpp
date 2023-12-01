@@ -43,15 +43,15 @@ void Player::Render(Shader& shader)
 
 	Super::Render(shader);
 
-	shader.SetUniform3f("control_color", 0, 0, 0);
+	/*shader.SetUniform3f("control_color", 0, 0, 0);
 	shader.SetUniformMat4f("u_model", _matrix);
-	_model->RenderModel(shader);
+	_model->RenderModel(shader);*/
 
 }
 
 void Player::MatrixUpdate()
 {
-	_matrix = matrix::GetInstance()->GetTranslation(CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
+	_matrix = matrix::GetInstance()->GetTranslation(_center.x, 0,_center.z-187.80f);
 
 
 }
