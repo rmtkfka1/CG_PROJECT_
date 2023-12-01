@@ -484,7 +484,9 @@ void Stage1::MakeRoom4()
 {
 	Model* model_front = new Model("res/models/room2/front.obj");
 	Model* model_back = new Model("res/models/room2/back.obj");
-	Model* model_left = new Model("res/models/room2/left.obj");
+	Model* model_left1 = new Model("res/models/room2/left1.obj");
+	Model* model_left2 = new Model("res/models/room2/left2.obj");
+	Model* model_left3 = new Model("res/models/room2/left3.obj");
 	Model* model_right = new Model("res/models/room2/right.obj");
 
 	{
@@ -504,7 +506,23 @@ void Stage1::MakeRoom4()
 	}
 
 	{
-		Wall* left = new Wall(*model_left);
+		Wall* left = new Wall(*model_left1);
+		BoxCollider* ptr = new BoxCollider;
+		left->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+		room4.push_back(left);
+	}
+	
+	{
+		Wall* left = new Wall(*model_left2);
+		BoxCollider* ptr = new BoxCollider;
+		left->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+		room4.push_back(left);
+	}
+	
+	{
+		Wall* left = new Wall(*model_left3);
 		BoxCollider* ptr = new BoxCollider;
 		left->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
@@ -522,13 +540,33 @@ void Stage1::MakeRoom4()
 
 void Stage1::MakeRoom3()
 {
-	Model* model_front = new Model("res/models/room1/front.obj");
-	Model* model_back = new Model("res/models/room1/back.obj");
+	Model* model_front1 = new Model("res/models/room1/front1.obj");
+	Model* model_front2 = new Model("res/models/room1/front2.obj");
+	Model* model_front3 = new Model("res/models/room1/front3.obj");
+	Model* model_back1 = new Model("res/models/room1/back1.obj");
+	Model* model_back2 = new Model("res/models/room1/back2.obj");
+	Model* model_back3 = new Model("res/models/room1/back3.obj");
 	Model* model_left = new Model("res/models/room1/left.obj");
 	Model* model_right = new Model("res/models/room1/right.obj");
 
 	{
-		Wall* front = new Wall(*model_front);
+		Wall* front = new Wall(*model_front1);
+		BoxCollider* ptr = new BoxCollider;
+		front->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+		room3.push_back(front);
+	}
+
+	{
+		Wall* front = new Wall(*model_front2);
+		BoxCollider* ptr = new BoxCollider;
+		front->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+		room3.push_back(front);
+	}
+
+	{
+		Wall* front = new Wall(*model_front3);
 		BoxCollider* ptr = new BoxCollider;
 		front->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
@@ -536,7 +574,23 @@ void Stage1::MakeRoom3()
 	}
 	
 	{
-		Wall* back = new Wall(*model_back);
+		Wall* back = new Wall(*model_back1);
+		BoxCollider* ptr = new BoxCollider;
+		back->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+		room3.push_back(back);
+	}
+	
+	{
+		Wall* back = new Wall(*model_back2);
+		BoxCollider* ptr = new BoxCollider;
+		back->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+		room3.push_back(back);
+	}
+	
+	{
+		Wall* back = new Wall(*model_back3);
 		BoxCollider* ptr = new BoxCollider;
 		back->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
@@ -564,39 +618,39 @@ void Stage1::MakeRoom3()
 void Stage1::MakeRoom2()
 {
 
-	Model* room2_floor_model = new Model("res/models/stage2/floor.obj");
-	Model* room2_ceiling_model = new Model("res/models/stage2/ceiling.obj");
-	Model* room2_front_wall_upper_model = new Model("res/models/stage2/front1.obj");
-	Model* room2_front_wall_left_model = new Model("res/models/stage2/front2.obj");
-	Model* room2_front_wall_right_model = new Model("res/models/stage2/front3.obj");
-	Model* room2_back_wall_upper_model = new Model("res/models/stage2/back1.obj");
-	Model* room2_back_wall_left_model = new Model("res/models/stage2/back2.obj");
-	Model* room2_back_wall_right_model = new Model("res/models/stage2/back3.obj");
-	Model* room2_left_wall_model = new Model("res/models/stage2/left.obj");
-	Model* room2_right_wall_model = new Model("res/models/stage2/right.obj");
+	Model* m_floor = new Model("res/models/stage2/floor.obj");
+	Model* m_ceiling = new Model("res/models/stage2/ceiling.obj");
+	Model* m_front_wall1 = new Model("res/models/stage2/front1.obj");
+	Model* m_front_wall2 = new Model("res/models/stage2/front2.obj");
+	Model* m_front_wall3 = new Model("res/models/stage2/front3.obj");
+	Model* m_back_wall1 = new Model("res/models/stage2/back1.obj");
+	Model* m_back_wall2 = new Model("res/models/stage2/back2.obj");
+	Model* m_back_wall3 = new Model("res/models/stage2/back3.obj");
+	Model* m_left_wall = new Model("res/models/stage2/left.obj");
+	Model* m_right_wall = new Model("res/models/stage2/right.obj");
 
 
 	// ¹Ù´Ú
-	Wall* floor = new Wall(*room2_floor_model);
+	Wall* floor = new Wall(*m_floor);
 	BoxCollider* ptr = new BoxCollider;
 	floor->AddComponent(ptr);
 	//	GET_SINGLE(CollisionManager)->AddCollider(ptr);
 	room2.push_back(floor);
 
-	Wall* front_wall_upper = new Wall(*room2_front_wall_upper_model);
+	Wall* front_wall_upper = new Wall(*m_front_wall1);
 	BoxCollider* ptr2 = new BoxCollider;
 	front_wall_upper->AddComponent(ptr2);
 	GET_SINGLE(CollisionManager)->AddCollider(ptr2);
 	room2.push_back(front_wall_upper);
 
-	Wall* front_wall_left = new Wall(*room2_front_wall_left_model);
+	Wall* front_wall_left = new Wall(*m_front_wall2);
 	BoxCollider* ptr3 = new BoxCollider;
 	front_wall_left->AddComponent(ptr3);
 	GET_SINGLE(CollisionManager)->AddCollider(ptr3);
 	room2.push_back(front_wall_left);
 
 
-	Wall* front_wall_right = new Wall(*room2_front_wall_right_model);
+	Wall* front_wall_right = new Wall(*m_front_wall3);
 	BoxCollider* ptr4 = new BoxCollider;
 	front_wall_right->AddComponent(ptr4);
 	GET_SINGLE(CollisionManager)->AddCollider(ptr4);
@@ -604,19 +658,19 @@ void Stage1::MakeRoom2()
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	Wall* back_wall_upper = new Wall(*room2_back_wall_upper_model);
+	Wall* back_wall_upper = new Wall(*m_back_wall1);
 	BoxCollider* ptr5 = new BoxCollider;
 	back_wall_upper->AddComponent(ptr5);
 	GET_SINGLE(CollisionManager)->AddCollider(ptr5);
 	room2.push_back(back_wall_upper);
 
-	Wall* back_wall_left = new Wall(*room2_back_wall_left_model);
+	Wall* back_wall_left = new Wall(*m_back_wall2);
 	BoxCollider* ptr6 = new BoxCollider;
 	back_wall_left->AddComponent(ptr6);
 	GET_SINGLE(CollisionManager)->AddCollider(ptr6);
 	room2.push_back(back_wall_left);
 
-	Wall* back_wall_right = new Wall(*room2_back_wall_right_model);
+	Wall* back_wall_right = new Wall(*m_back_wall3);
 	BoxCollider* ptr7 = new BoxCollider;
 	back_wall_right->AddComponent(ptr7);
 	GET_SINGLE(CollisionManager)->AddCollider(ptr7);
@@ -624,21 +678,22 @@ void Stage1::MakeRoom2()
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	Wall* left_wall = new Wall(*room2_left_wall_model);
+	Wall* left_wall = new Wall(*m_left_wall);
 	BoxCollider* ptr8 = new BoxCollider;
 	left_wall->AddComponent(ptr8);
 	GET_SINGLE(CollisionManager)->AddCollider(ptr8);
 	room2.push_back(left_wall);
 
-	Wall* right_wall = new Wall(*room2_right_wall_model);
+	Wall* right_wall = new Wall(*m_right_wall);
 	BoxCollider* ptr9 = new BoxCollider;
 	right_wall->AddComponent(ptr9);
 	GET_SINGLE(CollisionManager)->AddCollider(ptr9);
 	room2.push_back(right_wall);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
+	// 
 	//ÃµÀå
-	Wall* celing = new Wall(*room2_ceiling_model);
+	Wall* celing = new Wall(*m_ceiling);
 	BoxCollider* ptr10 = new BoxCollider;
 	right_wall->AddComponent(ptr10);
 	GET_SINGLE(CollisionManager)->AddCollider(ptr10);
@@ -748,6 +803,7 @@ void Stage1::MakeRoom1()
 	room1.push_back(celing);
 
 }
+
 
 void Stage1::ObjectInit()
 {
