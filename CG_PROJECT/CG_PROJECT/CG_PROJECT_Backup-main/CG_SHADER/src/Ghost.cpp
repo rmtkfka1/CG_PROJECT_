@@ -30,121 +30,167 @@ void Ghost::Init()
 
 	//	1
 	{
-		_patrol_locations.push_back(glm::vec3(0.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(-75.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(-150.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(-225.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(-300.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(-375.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(-450.0f, 0.0f, -525.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-40.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-77.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-152.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-190.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-227.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-265.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-302.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-340.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-377.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-470.0f));
 
-		_patrol_locations.push_back(glm::vec3(-450.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(-450.0f, 0.0f, -575.0f));
-		_patrol_locations.push_back(glm::vec3(-450.0f, 0.0f, -625.0f));
-		_patrol_locations.push_back(glm::vec3(-450.0f, 0.0f, -675.0f));
-		_patrol_locations.push_back(glm::vec3(-450.0f, 0.0f, -725.0f));
+		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-485.0f));
+		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-522.5f));
+		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-597.5f));
+		_patrol_locations.push_back(glm::vec3(-415.5f,	0.0f,	-635.0f));
+		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-660.0f));
 
-		_patrol_locations.push_back(glm::vec3(-450.0f, 0.0f, -725.0f));
-		_patrol_locations.push_back(glm::vec3(-375.0f, 0.0f, -725.0f));
-		_patrol_locations.push_back(glm::vec3(-300.0f, 0.0f, -725.0f));
-		_patrol_locations.push_back(glm::vec3(-225.0f, 0.0f, -725.0f));
-		_patrol_locations.push_back(glm::vec3(-150.0f, 0.0f, -725.0f));
+		_patrol_locations.push_back(glm::vec3(-377.5f,	0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(-340.0f,	0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(-302.5f,	0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(-227.5f,	0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(-190.0f,	0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(-152.5f,	0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-660.0f));
 
-		_patrol_locations.push_back(glm::vec3(-150.0f, 0.0f, -725.0f));
-		_patrol_locations.push_back(glm::vec3(-150.0f, 0.0f, -675.0f));
-		_patrol_locations.push_back(glm::vec3(-150.0f, 0.0f, -625.0f));
-		_patrol_locations.push_back(glm::vec3(-150.0f, 0.0f, -575.0f));
-		_patrol_locations.push_back(glm::vec3(-150.0f, 0.0f, -525.0f));
+		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-635.0f));
+		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-597.5f));
+		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-560.0f));
+		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-522.5f));
+		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-470.0f));
 
-		_patrol_locations.push_back(glm::vec3(-75.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(-0.0f, 0.0f, -525.0f));
+		_patrol_locations.push_back(glm::vec3(-77.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-40.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-470.0f));
+
+
 	}
 
 	//	2
 	{
-		_patrol_locations.push_back(glm::vec3(0.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(0.0f, 0.0f, -450.0f));
-		_patrol_locations.push_back(glm::vec3(0.0f, 0.0f, -400.0f));
-		_patrol_locations.push_back(glm::vec3(0.0f, 0.0f, -350.0f));
-		_patrol_locations.push_back(glm::vec3(0.0f, 0.0f, -300.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-455.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-417.5f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-380.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-342.5f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-305.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-290.0f));
 
-		_patrol_locations.push_back(glm::vec3(+75.0f, 0.0f, -300.0f));
-		_patrol_locations.push_back(glm::vec3(+150.0f, 0.0f, -300.0f));
-		_patrol_locations.push_back(glm::vec3(+225.0f, 0.0f, -300.0f));
-		_patrol_locations.push_back(glm::vec3(+300.0f, 0.0f, -300.0f));
-		_patrol_locations.push_back(glm::vec3(+375.0f, 0.0f, -300.0f));
-		_patrol_locations.push_back(glm::vec3(+450.0f, 0.0f, -300.0f));
+		_patrol_locations.push_back(glm::vec3(+35.0f,	0.0f,	-290.0f));
+		_patrol_locations.push_back(glm::vec3(+82.5f,	0.0f,	-290.0f));
+		_patrol_locations.push_back(glm::vec3(+130.0f,	0.0f,	-290.0f));
+		_patrol_locations.push_back(glm::vec3(+177.5f,	0.0f,	-290.0f));
+		_patrol_locations.push_back(glm::vec3(+225.0f,	0.0f,	-290.0f));
+		_patrol_locations.push_back(glm::vec3(+272.5f,	0.0f,	-290.0f));
+		_patrol_locations.push_back(glm::vec3(+320.0f,	0.0f,	-290.0f));
+		_patrol_locations.push_back(glm::vec3(+367.5f,	0.0f,	-290.0f));
+		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-290.0f));
 
-		_patrol_locations.push_back(glm::vec3(+450.0f, 0.0f, -350.0f));
-		_patrol_locations.push_back(glm::vec3(+450.0f, 0.0f, -400.0f));
-		_patrol_locations.push_back(glm::vec3(+450.0f, 0.0f, -450.0f));
-		_patrol_locations.push_back(glm::vec3(+450.0f, 0.0f, -525.0f));
+		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-305.0f));
+		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-342.5f));
+		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-380.0f));
+		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-417.5f));
+		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-455.0f));
+		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-470.0f));
 
-		_patrol_locations.push_back(glm::vec3(+375.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(+300.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(+225.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(+75.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(+0.0f, 0.0f, -525.0f));
+		_patrol_locations.push_back(glm::vec3(+367.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(+320.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(+272.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(+225.0,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(+177.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(+130.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(+82.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(+35.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f, 	0.0f,	-470.0f));
 	}
 
 	// 3
 	{
-		_patrol_locations.push_back(glm::vec3(0.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(-75.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(-150.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(-225.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(-300.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(-375.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(-450.0f, 0.0f, -525.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-40.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-77.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-152.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-190.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-227.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-265.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-302.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-340.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-377.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-470.0f));
 
-		_patrol_locations.push_back(glm::vec3(-450.0f, 0.0f, -450.0f));
-		_patrol_locations.push_back(glm::vec3(-450.0f, 0.0f, -400.0f));
-		_patrol_locations.push_back(glm::vec3(-450.0f, 0.0f, -350.0f));
-		_patrol_locations.push_back(glm::vec3(-450.0f, 0.0f, -300.0f));
+		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-455.0f));
+		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-417.5f));
+		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-380.0f));
+		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-342.5f));
+		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-305.0f));
+		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-290.0f));
 
-		_patrol_locations.push_back(glm::vec3(-375.0f, 0.0f, -300.0f));
-		_patrol_locations.push_back(glm::vec3(-300.0f, 0.0f, -300.0f));
-		_patrol_locations.push_back(glm::vec3(-225.0f, 0.0f, -300.0f));
-		_patrol_locations.push_back(glm::vec3(-150.0f, 0.0f, -300.0f));
-		_patrol_locations.push_back(glm::vec3(-75.0f, 0.0f, -300.0f));
-		_patrol_locations.push_back(glm::vec3(0.0f, 0.0f, -300.0f));
+		_patrol_locations.push_back(glm::vec3(-367.5f,	0.0f,	-300.0f));
+		_patrol_locations.push_back(glm::vec3(-320.0f,	0.0f,	-300.0f));
+		_patrol_locations.push_back(glm::vec3(-272.5f,	0.0f,	-300.0f));
+		_patrol_locations.push_back(glm::vec3(-225.0f,	0.0f,	-300.0f));
+		_patrol_locations.push_back(glm::vec3(-177.5f,	0.0f,	-300.0f));
+		_patrol_locations.push_back(glm::vec3(-130.0f,	0.0f,	-300.0f));
+		_patrol_locations.push_back(glm::vec3(-82.5f,	0.0f,	-300.0f));
+		_patrol_locations.push_back(glm::vec3(-35.0f,	0.0f,	-300.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-300.0f));
 
-		_patrol_locations.push_back(glm::vec3(0.0f, 0.0f, -350.0f));
-		_patrol_locations.push_back(glm::vec3(0.0f, 0.0f, -400.0f));
-		_patrol_locations.push_back(glm::vec3(0.0f, 0.0f, -450.0f));
-		_patrol_locations.push_back(glm::vec3(0.0f, 0.0f, -525.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-305.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-342.5f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-380.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-417.5f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-455.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-470.0f));
 	}
 
 	// 4
 	{
-		_patrol_locations.push_back(glm::vec3(0.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(-75.0f, 0.0f, -525.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-40.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-77.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-470.0f));
 
-		_patrol_locations.push_back(glm::vec3(-150.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(-150.0f, 0.0f, -575.0f));
-		_patrol_locations.push_back(glm::vec3(-150.0f, 0.0f, -625.0f));
-		_patrol_locations.push_back(glm::vec3(-150.0f, 0.0f, -675.0f));
-		_patrol_locations.push_back(glm::vec3(-150.0f, 0.0f, -725.0f));
+		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-485.0f));
+		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-522.5f));
+		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-560.0f));
+		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-597.5f));
+		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-635.0f));
+		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-660.0f));
 
-		_patrol_locations.push_back(glm::vec3(-75.0f, 0.0f, -725.0f));
-		_patrol_locations.push_back(glm::vec3(0.0f, 0.0f, -725.0f));
-		_patrol_locations.push_back(glm::vec3(+75.0f, 0.0f, -725.0f));
-		_patrol_locations.push_back(glm::vec3(+150.0f, 0.0f, -725.0f));
-		_patrol_locations.push_back(glm::vec3(+225.0f, 0.0f, -725.0f));
-		_patrol_locations.push_back(glm::vec3(+375.0f, 0.0f, -725.0f));
-		_patrol_locations.push_back(glm::vec3(+450.0f, 0.0f, -725.0f));
+		_patrol_locations.push_back(glm::vec3(-77.5f,	0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(-40.0f, 	0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(+35.0f,	0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(+82.5f,	0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(+130.0f,	0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(+177.5f,	0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(+225.0f,	0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(+272.5f,	0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(+320.0f,	0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(+367.5f,	0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-660.0f));
 
-		_patrol_locations.push_back(glm::vec3(+450.0f, 0.0f, -675.0f));
-		_patrol_locations.push_back(glm::vec3(+450.0f, 0.0f, -625.0f));
-		_patrol_locations.push_back(glm::vec3(+450.0f, 0.0f, -575.0f));
-		_patrol_locations.push_back(glm::vec3(+450.0f, 0.0f, -525.0f));
+		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-635.0f));
+		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-597.5f));
+		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-560.0f));
+		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-522.5f));
+		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-485.0f));
+		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-470.0f));
 
-		_patrol_locations.push_back(glm::vec3(+375.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(+300.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(+225.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(+150.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(+75.0f, 0.0f, -525.0f));
-		_patrol_locations.push_back(glm::vec3(0.0f, 0.0f, -525.0f));
+		_patrol_locations.push_back(glm::vec3(+367.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(+320.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(+272.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(+225.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(+177.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(+130.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(+82.5f, 	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(+35.0f, 	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,   	0.0f,	-470.0f));
 	}
 
 	MakeBehaviorTree();
