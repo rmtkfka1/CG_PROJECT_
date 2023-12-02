@@ -83,15 +83,7 @@ void Stage1::Init()
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 
 	}
-	{
-
-		Model* table_model = new Model("res/models/lockedtable.obj");
-		Lockedtable = new Wall(*table_model);
-		BoxCollider* ptr = new BoxCollider;
-		Lockedtable->AddComponent(ptr);
-		GET_SINGLE(CollisionManager)->AddCollider(ptr);
-
-	}
+	
 
 	//탁자위에 놓인 플래쉬
 	{
@@ -171,10 +163,73 @@ void Stage1::Init()
 	}
 
 
+
+
 	//방1 퀴즈 생성
+	MakeRoom1_QUIZ();
+	MakeRoom2_QUIZ();
+/////////////	
+	MakeRoom();
+	/////////텍스처 만들기/////////////////////////////////////////////////////////////
+	MakeTexture();
+	////////////////////////조명작업///////////////////////////////////////////////////
+	light = new Light2();
+	///////////////////////////////////////////////////////////////////////////////////
+	ObjectInit();
+
+
+
+
+
+}
+
+void Stage1::MakeRoom2_QUIZ()
+{
+	//방2 퀴즈 생성
+	{
+		Model* box = new Model("res/models/lockedbox.obj");
+		Lockedbox2 = new Wall(*box);
+		Lockedbox2->SetTransPose(455, 0, 20);
+		BoxCollider* ptr = new BoxCollider;
+		Lockedbox2->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		Model* table_model = new Model("res/models/lockedtable.obj");
+		Lockedtable2 = new Wall(*table_model);
+		Lockedtable2->SetTransPose(455, 0, 20);
+		BoxCollider* ptr = new BoxCollider;
+		Lockedtable2->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		Model* locked_key = new Model("res/models/lockedkey.obj");
+		int num[4] = { 1,1,1,1 };// 너가 정답을 설정해줘야됨
+		Lockedkey2 = new Locked(*locked_key, num);
+		Lockedkey2->SetTransPose(455, 0, 20);
+		BoxCollider* ptr = new BoxCollider;
+		Lockedkey2->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		Model* answerbox = new Model("res/models/room1_event/answer_box.obj");
+		answerbox2 = new Wall(*answerbox);
+		answerbox2->SetTransPose(455, 0, 20);
+		BoxCollider* ptr = new BoxCollider;
+		answerbox2->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+
+	}
+}
+
+void Stage1::MakeRoom1_QUIZ()
+{
 	{
 		//퀴즈박스1
-		Model* box = new Model("res/models/room2_event/box.obj");
+		Model* box = new Model("res/models/room1_event/box.obj");
 		quizbox = new Wall(*box);
 		BoxCollider* ptr = new BoxCollider;
 		quizbox->AddComponent(ptr);
@@ -190,8 +245,20 @@ void Stage1::Init()
 	}
 
 	{
+
+		Model* table_model = new Model("res/models/lockedtable.obj");
+		Lockedtable = new Wall(*table_model);
+		BoxCollider* ptr = new BoxCollider;
+		Lockedtable->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+
+	}
+
+	{
 		Model* locked_key = new Model("res/models/lockedkey.obj");
-		Lockedkey = new Locked(*locked_key);
+
+		int num[4] = { 1,3,4,1 };
+		Lockedkey = new Locked(*locked_key, num);
 		BoxCollider* ptr = new BoxCollider;
 		Lockedkey->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
@@ -199,7 +266,7 @@ void Stage1::Init()
 
 	}
 	{
-		Model* temp = new Model("res/models/room2_event/fake_box.obj");
+		Model* temp = new Model("res/models/room1_event/fake_box.obj");
 		quizbox_event = new Event(*temp);
 		BoxCollider* ptr = new BoxCollider;
 		quizbox_event->AddComponent(ptr);
@@ -210,16 +277,13 @@ void Stage1::Init()
 
 		//정답 
 		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
-		answerbox = new Model("res/models/room2_event/answer_box.obj");
-		
+		answerbox = new Model("res/models/room1_event/answer_box.obj");
 
 	}
+}
 
-/////////////	
-	MakeRoom();
-
-
-	/////////텍스처 만들기/////////////////////////////////////////////////////////////
+void Stage1::MakeTexture()
+{
 	texture = new Texture("res/textures/block.jpg");
 	billboard_texture = new Texture("res/textures/billboard_test.png");
 	light_texture = new Texture("res/textures/light.jpg");
@@ -246,18 +310,6 @@ void Stage1::Init()
 	quizbox_texture->Bind(9);
 	lockedbox_texture->Bind(10);
 	answer1_texture->Bind(11);
-	////////////////////////조명작업///////////////////////////////////////////////////
-	light = new Light2();
-
-
-
-	///////////////////////////////////////////////////////////////////////////////////
-	ObjectInit();
-
-
-
-
-
 }
 
 
@@ -283,6 +335,12 @@ void Stage1::Update()
 	table->Update();
 	Lockedtable->Update();
 	Lockedkey->Update();
+
+
+	Lockedbox2->Update();
+	Lockedtable2->Update();
+	Lockedkey2->Update();
+	answerbox2->Update();
 
 
 
@@ -422,6 +480,7 @@ void Stage1::Object_Render()
 		shader->SetUniform1i("u_texture", table_texture->GetSlot());
 		table->Render(*shader);
 		Lockedtable->Render(*shader);
+		Lockedtable2->Render(*shader);
 	}
 
 	{
@@ -470,6 +529,8 @@ void Stage1::Object_Render()
 		shader->SetUniform1i("u_texture", lockedbox_texture->GetSlot());
 		Lockedbox->Render(*shader);
 		Lockedkey->Render(*shader);
+		Lockedbox2->Render(*shader);
+		Lockedkey2->Render(*shader);
 
 	}
 
@@ -479,6 +540,10 @@ void Stage1::Object_Render()
 		answerbox->RenderModel(*shader);
 	}
 
+	{
+		shader->SetUniform1i("u_texture", answer1_texture->GetSlot());
+		answerbox2->Render(*shader);
+	}
 
 
 
@@ -517,12 +582,27 @@ void Stage1::Texture_Render()
 		TextManager::GetInstance()->Render(-0.1f, 0.1f,"Press 1,2,3,4");
 
 
-		string strValue = std::to_string(Lockedkey->num2[0]);
-		strValue += std::to_string(Lockedkey->num2[1]);
-		strValue += std::to_string(Lockedkey->num2[2]);
-		strValue += std::to_string(Lockedkey->num2[3]);
+		string strValue = std::to_string(Lockedkey->_first_set[0]);
+		strValue += std::to_string(Lockedkey->_first_set[1]);
+		strValue += std::to_string(Lockedkey->_first_set[2]);
+		strValue += std::to_string(Lockedkey->_first_set[3]);
 
 		TextManager::GetInstance()->Render(0.0f,0.0f, strValue.c_str());
+	}
+
+
+	if (Lockedkey2->_collusion == true)
+	{
+
+		TextManager::GetInstance()->Render(-0.1f, 0.1f, "Press 1,2,3,4");
+
+
+		string strValue = std::to_string(Lockedkey2->_first_set[0]);
+		strValue += std::to_string(Lockedkey2->_first_set[1]);
+		strValue += std::to_string(Lockedkey2->_first_set[2]);
+		strValue += std::to_string(Lockedkey2->_first_set[3]);
+
+		TextManager::GetInstance()->Render(0.0f, 0.0f, strValue.c_str());
 	}
 
 

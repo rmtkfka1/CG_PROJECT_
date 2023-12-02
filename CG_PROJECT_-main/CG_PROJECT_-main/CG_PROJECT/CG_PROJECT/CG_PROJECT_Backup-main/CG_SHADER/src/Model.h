@@ -29,6 +29,7 @@ private:
 	std::vector<Texture*> m_TextureList;
 	std::vector<unsigned int> m_MeshToTex;
 
+
 	glm::vec3 _size;
 	glm::vec3 _center;
 	string _fileName;

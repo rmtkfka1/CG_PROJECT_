@@ -101,7 +101,12 @@ glm::mat4 Object::GetScale(float dx,float dy ,float dz)
 void Object::SetTransPose(float dx, float dy, float dz)
 {
 
-	_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(dx, dy, dz)); // 원점으로 이동시킴
+	_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(dx, dy, dz)); 
+
+	_dx = dx;
+	_dy = dy;
+	_dz = dz;
+
 
 	_center.x = _first_center.x + dx;
 	_center.y = _first_center.y + dy;

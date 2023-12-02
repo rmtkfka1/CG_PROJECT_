@@ -70,5 +70,7 @@ protected:
 public:
 	glm::mat4 _matrix = glm::mat4(1.0f);
 	glm::vec3 _debug_color = { 1,0,0 };
+
+	float _dx{}, _dy{}, _dz{};
 };
 

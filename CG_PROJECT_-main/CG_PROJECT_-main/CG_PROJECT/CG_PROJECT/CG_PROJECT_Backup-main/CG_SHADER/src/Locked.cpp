@@ -1,20 +1,26 @@
 #include "pch.h"
 #include "Locked.h"
 
-Locked::Locked(Model& model):Object(ObjectType::LOCKED)
+
+
+
+Locked::Locked(Model& model, int answer[4]) :Object(ObjectType::LOCKED)
 {
 	_center.x = model.GetCenter().x;
 	_center.y = model.GetCenter().y;
 	_center.z = model.GetCenter().z;
 
-	_size.x = model.GetSize().x+  20;
+
+	_size.x = model.GetSize().x + 20;
 	_size.y = model.GetSize().y;
 	_size.z = model.GetSize().z;
 
 	_first_center = _center;
 	_model = &model;
 
-
+	for (int i = 0; i < 4; ++i) {
+		_answer[i] = answer[i];
+	}
 
 }
 
@@ -42,34 +48,34 @@ void Locked::Update()
 		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::ONE))
 		{
 
-			num2[0] = (num2[0] + 1) % 10;
+			_first_set[0] = (_first_set[0] + 1) % 10;
 
 		}
 
 		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::TWO))
 		{
 
-			num2[1] = (num2[1] + 1) % 10;
+			_first_set[1] = (_first_set[1] + 1) % 10;
 
 		}
 
 		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::THREE))
 		{
 
-			num2[2] = (num2[2] + 1) % 10;
+			_first_set[2] = (_first_set[2] + 1) % 10;
 
 		}
 
 		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::FOUR))
 		{
 
-			num2[3] = (num2[3] + 1) % 10;
+			_first_set[3] = (_first_set[3] + 1) % 10;
 
 		}
 
-		if (num2[0] == 1 && num2[1] == 3 && num2[2] == 4 && num2[3] == 1)
+		if (_first_set[0] == _answer[0] && _first_set[1] == _answer[1] && _first_set[2] == _answer[2]  && _first_set[3] == _answer[3])
 		{
-			locked2 = false;
+			_locked = false;
 		}
 
 
@@ -77,18 +83,21 @@ void Locked::Update()
 
 
 
-	if (_collusion && locked2 == false)
+	if (_locked == false)
 	{
 
 		if (_degree < 180.0f)
 		{
 			_degree += _speed * TimeManager::GetInstance()->GetDeltaTime();
+
+			auto trans0 = matrix::GetInstance()->GetTranslation(_dx,_dy,_dz);
+
 			auto trans1 = matrix::GetInstance()->GetTranslation(-(_center.x), - _center.y,-  (_center.z -_size.z/2));
 			auto rotate = matrix::GetInstance()->GetRotate(_degree, 0, 1, 0);
 			auto trans2 = matrix::GetInstance()->GetTranslation(_center.x, _center.y, (_center.z- _size.z/2));
 
-			auto result = trans2 * rotate * trans1;
-			_matrix = result;
+			auto result = trans2 * rotate * trans1* trans0;
+			_matrix = result ;
 		}
 
 
@@ -112,7 +121,10 @@ void Locked::OnComponentBeginOverlap(Collider* collider, Collider* other)
 {
 	if (other->GetOwner()->GetObjectType() == ObjectType::PLAYER)
 	{
+
 		_collusion = true;
+
+	
 	}
 
 }
@@ -122,6 +134,9 @@ void Locked::OnComponentEndOverlap(Collider* collider, Collider* other)
 
 	if (other->GetOwner()->GetObjectType() == ObjectType::PLAYER)
 	{
+
 		_collusion = false;
+
+	
 	}
 }

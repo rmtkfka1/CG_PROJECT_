@@ -30,6 +30,9 @@ public:
 	virtual ~Stage1();
 
 	virtual void Init() override;
+	void MakeRoom2_QUIZ();
+	void MakeRoom1_QUIZ();
+	void MakeTexture();
 	virtual void Update() override;
 	virtual void Render() override;
 
@@ -86,6 +89,16 @@ private:
 	Event* quizbox_event;
 	Model* answerbox;
 	////////////////////
+
+	//방2퀴즈 배치
+	Wall*   quizbox2;
+	Wall*   Lockedbox2;
+	Wall*   Lockedtable2;
+	Locked* Lockedkey2;
+	Wall*  answerbox2;
+
+	////////////////
+
 
 	vector<Object*> room1;
 
