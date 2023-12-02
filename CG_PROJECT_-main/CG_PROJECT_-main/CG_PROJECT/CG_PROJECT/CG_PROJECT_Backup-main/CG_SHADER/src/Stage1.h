@@ -20,6 +20,8 @@ class RightDoor;
 class DeadBody;
 class MaskEvent;
 class Mask;
+class ExitDoor;
+
 class Stage1 : public Scene
 {
 public:
@@ -72,7 +74,8 @@ private:
 	DeadBody* deadbody;
 	MaskEvent* mask_event;
 	Mask* mask;
-	Model* temp;
+	ExitDoor* exitdoor;
+	Model* exitdoor2;
 	////////////////////
 
 	vector<Object*> room1;
@@ -102,6 +105,7 @@ private:
 	Texture* door_texture;
 	Texture* deadbody_texture;
 	Texture* mask_texture;
+	Texture* exitdoor_texture;
 	//조명 객체 만들기
 	Light2* light;
 

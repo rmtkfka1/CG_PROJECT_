@@ -5,6 +5,7 @@
 #include "Collider.h"
 #include "Model.h"
 #include "Light2.h"
+#include "ExitDoor.h"
 
 Player::Player(Model& model) :Object(ObjectType::PLAYER)
 {
@@ -141,6 +142,69 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 
 		/////////////////////////////////////////////////////////////
 	}
+
+	if (other->GetOwner()->GetObjectType() == ObjectType::EXITDOOR && dynamic_cast<ExitDoor*>(other->GetOwner())->locked ==true)
+	{
+		_collusion = true;
+
+		// 부딛힌 방향의 역방향 재이동 수행, 대각선은 아직 수정이 필요함
+		auto cameraRight = glm::normalize(glm::cross(CameraManager::GetInstance()->m_cameraUp, -(CameraManager::GetInstance()->m_cameraFront)));
+		float dt = TimeManager::GetInstance()->GetDeltaTime();
+
+		if (KeyManager::GetInstance()->Getbutton(KeyType::W))
+		{
+			// -- front
+
+			CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * CameraManager::GetInstance()->m_cameraFront * dt;
+
+			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+
+		}
+		if (KeyManager::GetInstance()->Getbutton(KeyType::S))
+		{
+			// ++ front
+
+			CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * CameraManager::GetInstance()->m_cameraFront * dt;
+
+			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+
+		}
+
+		if (KeyManager::GetInstance()->Getbutton(KeyType::A))
+		{
+			// ++ right
+
+			CameraManager::GetInstance()->m_cameraPos += (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+
+
+			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+
+		}
+		if (KeyManager::GetInstance()->Getbutton(KeyType::D))
+		{
+			// -- right
+			CameraManager::GetInstance()->m_cameraPos -= (CameraManager::GetInstance()->m_cameraSpeed) * cameraRight * dt;
+
+			_center.x = CameraManager::GetInstance()->m_cameraPos.x;
+			_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+
+		}
+
+		CameraManager::GetInstance()->m_cameraSpeed = 0.0f;
+	}
+
+
+
+
+
+
+
+
+
+
 
 
 	_debug_color.x = 0;

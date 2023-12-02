@@ -34,6 +34,12 @@ void FakeFlash::Update()
 
 void FakeFlash::UpdateFlash(Light2* light, Flash* flash)
 {
+	if (KeyManager::GetInstance()->GetbuttonDown(KeyType::R))
+	{
+		spotoff = !spotoff;
+	}
+
+
 	if (collision) //충돌중일때 
 	{
 		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::F))
@@ -47,10 +53,16 @@ void FakeFlash::UpdateFlash(Light2* light, Flash* flash)
 	if (draw == false)
 	{
 		flash->SetLighton();
-
-		light->Spot_light.distance = 1000.0f;
-
 		light->point_light.diffuse = glm::vec3(1.0f, 0, 0);
+		if (spotoff == false)
+		{
+			light->Spot_light.distance = 1000.0f;			
+		}
+
+		else 
+		{
+			light->Spot_light.distance = 0.1f;
+		}
 	}
 	
 }

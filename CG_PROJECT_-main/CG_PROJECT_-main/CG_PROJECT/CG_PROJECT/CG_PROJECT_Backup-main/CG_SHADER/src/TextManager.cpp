@@ -8,7 +8,7 @@ void TextManager::Init()
 
 	HFONT font; // <1>
 	_base = glGenLists(96); // <2>
-	font = CreateFont(-24, // <3-1>
+	font = CreateFont(-42, // <3-1>
 		0,
 		0,
 		0,

@@ -206,6 +206,9 @@
     <ClCompile Include="src\Mask.cpp">
       <Filter>02.Object\08.Mask</Filter>
     </ClCompile>
+    <ClCompile Include="src\ExitDoor.cpp">
+      <Filter>02.Object\06.Door</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core.h">
@@ -327,6 +330,9 @@
     </ClInclude>
     <ClInclude Include="src\Mask.h">
       <Filter>02.Object\08.Mask</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ExitDoor.h">
+      <Filter>02.Object\06.Door</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

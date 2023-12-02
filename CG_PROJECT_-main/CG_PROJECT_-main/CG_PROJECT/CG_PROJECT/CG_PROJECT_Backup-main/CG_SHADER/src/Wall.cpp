@@ -46,6 +46,7 @@ void Wall::Render(Shader& shader)
 
 void Wall::OnComponentBeginOverlap(Collider* collider, Collider* other)
 {
+
 	_collusion = true;
 
 	_debug_color.x = 0;

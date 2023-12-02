@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ExitDoor.cpp" />
     <ClCompile Include="src\Mask.cpp" />
     <ClCompile Include="src\MaskEvent.cpp" />
     <ClCompile Include="src\DeadBody.cpp" />
@@ -186,6 +187,7 @@
     <ClCompile Include="src\TextManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ExitDoor.h" />
     <ClInclude Include="src\Mask.h" />
     <ClInclude Include="src\MaskEvent.h" />
     <ClInclude Include="src\DeadBody.h" />

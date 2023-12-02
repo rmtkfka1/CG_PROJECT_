@@ -27,5 +27,6 @@ public:
 public :
 	bool draw=true;
 	bool collision = false;
+	bool spotoff = false;
 
 };

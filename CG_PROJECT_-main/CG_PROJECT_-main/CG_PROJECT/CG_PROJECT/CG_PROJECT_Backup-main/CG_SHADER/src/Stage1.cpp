@@ -16,6 +16,7 @@
 #include "DeadBody.h"
 #include "MaskEvent.h"
 #include "Mask.h"
+#include "ExitDoor.h"
 
 Stage1::Stage1()
 {
@@ -38,6 +39,20 @@ void Stage1::Init()
 
 
 	///////////////////////////////////////////////////모델 불러오기 
+
+	{
+
+		Model* model = new Model("res/models/exitdoor.obj");
+		exitdoor = new ExitDoor(*model);
+		BoxCollider* ptr = new BoxCollider;
+		exitdoor->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+
+		exitdoor2 = new Model("res/models/exitdoor2.obj");
+
+	}
+
+
 	{
 		//고스트 생성
 		Model* ghost_body = new Model("res/models/ghost/ghost_body.obj");
@@ -153,6 +168,7 @@ void Stage1::Init()
 	ghost_texture = new Texture("res/textures/SM_text.png");
 	deadbody_texture = new Texture("res/textures/deadbody.jpg");
 	mask_texture = new Texture("res/textures/mask.jpg");
+	exitdoor_texture = new Texture("res/textures/exitdoor.png");
 
 	texture->Bind(0);
 	flash_fake_texture->Bind(1);
@@ -162,6 +178,7 @@ void Stage1::Init()
 	ghost_texture->Bind(5);
 	deadbody_texture->Bind(6);
 	mask_texture->Bind(7);
+	exitdoor_texture->Bind(8);
 
 	////////////////////////조명작업///////////////////////////////////////////////////
 	light = new Light2();
@@ -181,13 +198,13 @@ void Stage1::Init()
 void Stage1::Update()
 {
 
-	cout << CameraManager::GetInstance()->m_cameraPos.x << " ," << CameraManager::GetInstance()->m_cameraPos.y << "  , " << CameraManager::GetInstance()->m_cameraPos.z << endl;
+	
 
 	CameraManager::GetInstance()->KeyUpdate();
 	CameraManager::GetInstance()->MouseUpdate(MouseManager::GetInstance()->GetMousePos().x, MouseManager::GetInstance()->GetMousePos().y);
 
 	player->Update();
-
+	GET_SINGLE(CollisionManager)->Update();
 
 	fake_flash->Update();
 	fake_flash->UpdateFlash(light, flash);
@@ -201,7 +218,6 @@ void Stage1::Update()
 
 
 
-	GET_SINGLE(CollisionManager)->Update();
 
 	for (int i = 0; i < room1.size(); i++)
 	{
@@ -238,6 +254,8 @@ void Stage1::Update()
 		room6[i]->Update();
 	}
 
+	exitdoor->Update();
+
 	flash->MatrixUpdate(player);
 
 	light->Spot_light.position = CameraManager::GetInstance()->m_cameraPos;
@@ -253,11 +271,8 @@ void Stage1::Update()
 	mask->MatrixUpdate(mask_event);
 	mask->Update();
 	deadbody->Update();
+	
 
-
-	shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
-	shader->SetUniform3f("u_viewpos", CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
-	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
 
 	
 }
@@ -279,8 +294,6 @@ void Stage1::Render()
 void Stage1::Object_Render()
 {
 
-
-	glViewport(0, 0, screenWidth, screenHeight);
 
 
 	shader->SetUniform1i("u_texture", 0);
@@ -364,21 +377,41 @@ void Stage1::Object_Render()
 	}
 
 
-	//	{
-	//		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
-	//		shader->SetUniform1i("u_texture", mask_texture->GetSlot());
-	//		mask->Render(*shader);
-	//	}
+	{
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		shader->SetUniform1i("u_texture", mask_texture->GetSlot());
+		mask->Render(*shader);
+	}
 
+	{
+		shader->SetUniform1i("u_texture", exitdoor_texture->GetSlot());
+		exitdoor->Render(*shader);
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		exitdoor2->RenderModel(*shader);
+	}
+
+
+
+	shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
+	shader->SetUniform3f("u_viewpos", CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
+	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
 
 }
+
 
 void Stage1::Texture_Render()
 {
 
 	if (fake_flash->GetCollsionState() == true)
 	{
-		TextManager::GetInstance()->Render(0.0f, 0.0f, "Press F to Equid");
+		TextManager::GetInstance()->Render(-0.2f, -0.5f, "Press F to Equid");
+		TextManager::GetInstance()->Render(-0.2f, -0.6f, "Press R to Turnon / Turnoff");
+	}
+
+	if (exitdoor->LockedAndCollusion() == true)
+	{
+		TextManager::GetInstance()->Render(-0.2f, -0.5f, "THIS DOOR IS LOCKED");
+		TextManager::GetInstance()->Render(-0.2f, -0.6f, "TO OPEN THE DOOR NEDD A KEY");
 	}
 
 
