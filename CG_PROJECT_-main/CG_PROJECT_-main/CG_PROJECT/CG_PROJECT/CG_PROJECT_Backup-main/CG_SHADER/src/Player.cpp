@@ -207,9 +207,6 @@ void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 
 
 
-	_debug_color.x = 0;
-	_debug_color.y = 1;
-	_debug_color.z = 0;
 
 
 
@@ -220,9 +217,7 @@ void Player::OnComponentEndOverlap(Collider* collider, Collider* other)
 {
 
 
-	_debug_color.x = 1;
-	_debug_color.y = 0;
-	_debug_color.z = 0;
+
 
 	// 속도 원상복귀
 	CameraManager::GetInstance()->m_cameraSpeed = 200.0f;

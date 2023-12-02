@@ -1,7 +1,7 @@
 #pragma once
 #include "Object.h"
 class Model;
-class MaskEvent;
+class Event;
 class Mask :public Object
 {
 
@@ -16,7 +16,7 @@ public:
 	void Update() override;
 	void Render(Shader& shader) override;
 
-	void MatrixUpdate(MaskEvent* ptr);
+	void MatrixUpdate(Event* ptr);
 
 	void OnComponentBeginOverlap(Collider* collider, Collider* other) override;
 	void OnComponentEndOverlap(Collider* collider, Collider* other) override;

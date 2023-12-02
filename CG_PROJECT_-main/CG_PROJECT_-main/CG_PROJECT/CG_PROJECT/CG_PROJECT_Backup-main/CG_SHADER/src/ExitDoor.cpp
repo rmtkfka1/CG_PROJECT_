@@ -9,7 +9,7 @@ ExitDoor::ExitDoor(Model& model):Object(ObjectType::EXITDOOR)
 	_center.z = model.GetCenter().z;
 	_size.x = model.GetSize().x;
 	_size.y = model.GetSize().y;
-	_size.z = model.GetSize().z+10;
+	_size.z = model.GetSize().z;
 	_first_center = _center;
 	_model = &model;
 

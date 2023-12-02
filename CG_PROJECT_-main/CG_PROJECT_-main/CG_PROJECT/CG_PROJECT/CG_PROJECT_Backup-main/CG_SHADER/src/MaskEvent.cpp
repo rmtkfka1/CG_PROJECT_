@@ -2,7 +2,7 @@
 #include "MaskEvent.h"
 #include "BoxCollider.h"
 #include "DeadBody.h"
-MaskEvent::MaskEvent(Model& model) :Object(ObjectType::MASKEVENT)
+Event::Event(Model& model) :Object(ObjectType::MASKEVENT)
 {
 	_center = model.GetCenter();
 	_size = model.GetSize();
@@ -11,18 +11,18 @@ MaskEvent::MaskEvent(Model& model) :Object(ObjectType::MASKEVENT)
 
 }
 
-MaskEvent::~MaskEvent()
+Event::~Event()
 {
 
 
 }
 
-void MaskEvent::Init()
+void Event::Init()
 {
 	Super::Init();
 }
 
-void MaskEvent::Update()
+void Event::Update()
 {
 	Super::Update();
 
@@ -30,9 +30,7 @@ void MaskEvent::Update()
 
 
 
-
-
-void MaskEvent::Render(Shader& shader)
+void Event::Render(Shader& shader)
 {
 
 	Super::Render(shader);
@@ -44,15 +42,21 @@ void MaskEvent::Render(Shader& shader)
 
 }
 
-void MaskEvent::OnComponentBeginOverlap(Collider* collider, Collider* other)
+void Event::OnComponentBeginOverlap(Collider* collider, Collider* other)
 {
 	if (other->GetOwner()->GetObjectType() == ObjectType::PLAYER)
 	{
-		_collison = true;
+		mask_collison = true;
+		room2_box_collison = true;
 	}
 }
 
-void MaskEvent::OnComponentEndOverlap(Collider* collider, Collider* other)
+void Event::OnComponentEndOverlap(Collider* collider, Collider* other)
 {
+
+	if (other->GetOwner()->GetObjectType() == ObjectType::PLAYER)
+	{
+		room2_box_collison = false;
+	}
 }
 

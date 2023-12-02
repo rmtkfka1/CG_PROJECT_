@@ -51,6 +51,6 @@ using namespace std;
 #include "Texture.h"
 #include "Model.h"
 #include "CameraManager.h"
-
+#include "BoxCollider.h"
 
 

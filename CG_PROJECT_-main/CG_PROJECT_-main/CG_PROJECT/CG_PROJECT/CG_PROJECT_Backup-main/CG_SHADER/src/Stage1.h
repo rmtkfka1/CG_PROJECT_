@@ -18,9 +18,10 @@ class Ghost;
 class LeftDoor;
 class RightDoor;
 class DeadBody;
-class MaskEvent;
+class Event;
 class Mask;
 class ExitDoor;
+class Locked;
 
 class Stage1 : public Scene
 {
@@ -72,26 +73,33 @@ private:
 	LeftDoor* Corridor_left_door;
 	RightDoor* Corridor_right_door;
 	DeadBody* deadbody;
-	MaskEvent* mask_event;
+	Event* mask_event;
 	Mask* mask;
 	ExitDoor* exitdoor;
 	Model* exitdoor2;
+
+	//방1퀴즈 배치
+	Wall* quizbox;
+	Wall* Lockedbox;
+	Wall* Lockedtable;
+	Locked* Lockedkey;
+	Event* quizbox_event;
+	Model* answerbox;
 	////////////////////
 
 	vector<Object*> room1;
 
-	vector<Wall*> corridor1;
+	vector<Object*> corridor1;
 
-	vector<Wall*> room2;
+	vector<Object*> room2;
 
-	vector<Wall*> room3;
+	vector<Object*> room3;
 	
-	vector<Wall*> room4;
+	vector<Object*> room4;
 	
-	vector<Wall*> room5;
+	vector<Object*> room5;
 	
-	vector<Wall*> room6;
-
+	vector<Object*> room6;
 
 
 
@@ -106,11 +114,14 @@ private:
 	Texture* deadbody_texture;
 	Texture* mask_texture;
 	Texture* exitdoor_texture;
+	Texture* quizbox_texture;
+	Texture* lockedbox_texture;
+	Texture* answer1_texture;
 	//조명 객체 만들기
 	Light2* light;
 
 
 
-
+	float xx;
 };
 

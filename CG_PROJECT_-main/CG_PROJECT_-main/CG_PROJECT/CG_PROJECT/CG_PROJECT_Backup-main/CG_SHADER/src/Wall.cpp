@@ -49,16 +49,11 @@ void Wall::OnComponentBeginOverlap(Collider* collider, Collider* other)
 
 	_collusion = true;
 
-	_debug_color.x = 0;
-	_debug_color.y = 1;
-	_debug_color.z = 0;
 }
 
 void Wall::OnComponentEndOverlap(Collider* collider, Collider* other)
 {
 	_collusion = false;
 
-	_debug_color.x = 1;
-	_debug_color.y = 0;
-	_debug_color.z = 0;
+
 }

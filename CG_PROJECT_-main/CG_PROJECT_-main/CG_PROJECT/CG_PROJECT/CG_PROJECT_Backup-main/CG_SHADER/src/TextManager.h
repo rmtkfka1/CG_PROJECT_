@@ -18,6 +18,7 @@ public:
 private:
 	GLuint _base;
 	HDC _hdc;
+	int _size=90;
 
 };
 

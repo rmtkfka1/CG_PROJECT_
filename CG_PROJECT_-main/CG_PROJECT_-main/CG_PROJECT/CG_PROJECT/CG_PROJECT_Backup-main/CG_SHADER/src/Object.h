@@ -21,9 +21,9 @@ public:
 
 
 
-	glm::mat4 GetRotate(float radian, float x, float y, float z);
+	void SetRotate(float radian, float x, float y, float z);
 	glm::mat4 GetScale(float dx,float dy, float dz); // 크기조절 자동화(mat4 뱉어줌 행렬식 조합해서 사용할떄 사용)
-	glm::mat4 GetTransPose(float dx, float dy, float dz); // 크기조절 자동화(mat4 뱉어줌 행렬식 조합해서 사용할떄 사용)
+	void SetTransPose(float dx, float dy, float dz); // 크기조절 자동화(mat4 뱉어줌 행렬식 조합해서 사용할떄 사용)
 
 
 	void PrintInfo();
@@ -65,9 +65,10 @@ protected:
 	glm::vec3 _center{};
 	glm::vec3 _size{};
 	ObjectType _type=ObjectType::NONE;
-	glm::mat4 _matrix = glm::mat4(1.0f);
+
 	Model* _model = nullptr;
 public:
+	glm::mat4 _matrix = glm::mat4(1.0f);
 	glm::vec3 _debug_color = { 1,0,0 };
 };
 

@@ -138,7 +138,8 @@ enum class ObjectType
 	DEADBODY,
 	MASK,
 	MASKEVENT,
-	EXITDOOR
+	EXITDOOR,
+	LOCKED
 };
 
 enum class SceneType

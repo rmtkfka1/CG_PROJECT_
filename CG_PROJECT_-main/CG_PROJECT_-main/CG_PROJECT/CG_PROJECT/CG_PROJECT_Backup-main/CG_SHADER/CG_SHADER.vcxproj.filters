@@ -64,9 +64,6 @@
     <Filter Include="06.Component\Collider">
       <UniqueIdentifier>{cf34f9bf-bf7c-433b-9139-0bc807df1fcb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Object\01.Player">
-      <UniqueIdentifier>{a7901eb3-6f8a-4285-bba0-d67c1a315606}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Object\02.Wall">
       <UniqueIdentifier>{9aed8dfb-0d6a-469b-bbf7-01760b8f86e8}</UniqueIdentifier>
     </Filter>
@@ -90,6 +87,12 @@
     </Filter>
     <Filter Include="02.Object\08.Mask">
       <UniqueIdentifier>{732d032b-cc04-4b4d-a587-c2eb4de97703}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Object\09.Locked">
+      <UniqueIdentifier>{349e4abd-82c6-48ed-8a88-ba5d74b292e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Object\01.Player">
+      <UniqueIdentifier>{a7901eb3-6f8a-4285-bba0-d67c1a315606}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="src\ExitDoor.cpp">
       <Filter>02.Object\06.Door</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Locked.cpp">
+      <Filter>02.Object\09.Locked</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -333,6 +339,9 @@
     </ClInclude>
     <ClInclude Include="src\ExitDoor.h">
       <Filter>02.Object\06.Door</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Locked.h">
+      <Filter>02.Object\09.Locked</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

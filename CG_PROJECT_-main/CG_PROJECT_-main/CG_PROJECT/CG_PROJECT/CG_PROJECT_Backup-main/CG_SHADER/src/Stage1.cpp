@@ -17,6 +17,7 @@
 #include "MaskEvent.h"
 #include "Mask.h"
 #include "ExitDoor.h"
+#include "Locked.h"
 
 Stage1::Stage1()
 {
@@ -38,7 +39,12 @@ void Stage1::Init()
 
 
 
+
 	///////////////////////////////////////////////////모델 불러오기 
+
+
+
+
 
 	{
 
@@ -61,7 +67,7 @@ void Stage1::Init()
 
 		ghost = new Ghost(*ghost_body, *ghost_left_arm, *ghost_right_arm);
 		ghost->Init();
-		ghost->SetPosition(0.0f, 0.0F);
+		ghost->SetPosition(0.0f, -800.0f);
 
 		ghost_body->PrintInfo();
 	
@@ -75,6 +81,16 @@ void Stage1::Init()
 		BoxCollider* ptr = new BoxCollider;
 		table->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+
+	}
+	{
+
+		Model* table_model = new Model("res/models/lockedtable.obj");
+		Lockedtable = new Wall(*table_model);
+		BoxCollider* ptr = new BoxCollider;
+		Lockedtable->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+
 	}
 
 	//탁자위에 놓인 플래쉬
@@ -148,14 +164,58 @@ void Stage1::Init()
 	//마스크이벤트발생
 	{
 		Model* mask__event = new Model("res/models/deadbody_event.obj");
-		mask_event = new MaskEvent(*mask__event);
+		mask_event = new Event(*mask__event);
 		BoxCollider* ptr = new BoxCollider;
 		mask_event->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 	}
 
 
-	
+	//방1 퀴즈 생성
+	{
+		//퀴즈박스1
+		Model* box = new Model("res/models/room2_event/box.obj");
+		quizbox = new Wall(*box);
+		BoxCollider* ptr = new BoxCollider;
+		quizbox->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		Model* lockedbox = new Model("res/models/lockedbox.obj");
+		Lockedbox = new Wall(*lockedbox);
+		BoxCollider* ptr = new BoxCollider;
+		Lockedbox->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		Model* locked_key = new Model("res/models/lockedkey.obj");
+		Lockedkey = new Locked(*locked_key);
+		BoxCollider* ptr = new BoxCollider;
+		Lockedkey->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+
+
+	}
+	{
+		Model* temp = new Model("res/models/room2_event/fake_box.obj");
+		quizbox_event = new Event(*temp);
+		BoxCollider* ptr = new BoxCollider;
+		quizbox_event->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+
+	}
+	{
+
+		//정답 
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		answerbox = new Model("res/models/room2_event/answer_box.obj");
+		
+
+	}
+
+/////////////	
 	MakeRoom();
 
 
@@ -169,6 +229,10 @@ void Stage1::Init()
 	deadbody_texture = new Texture("res/textures/deadbody.jpg");
 	mask_texture = new Texture("res/textures/mask.jpg");
 	exitdoor_texture = new Texture("res/textures/exitdoor.png");
+	quizbox_texture = new Texture("res/textures/1.jpg");
+	lockedbox_texture = new Texture("res/textures/lockedbox.jpeg");
+	answer1_texture = new Texture("res/textures/answer1.png");
+
 
 	texture->Bind(0);
 	flash_fake_texture->Bind(1);
@@ -179,7 +243,9 @@ void Stage1::Init()
 	deadbody_texture->Bind(6);
 	mask_texture->Bind(7);
 	exitdoor_texture->Bind(8);
-
+	quizbox_texture->Bind(9);
+	lockedbox_texture->Bind(10);
+	answer1_texture->Bind(11);
 	////////////////////////조명작업///////////////////////////////////////////////////
 	light = new Light2();
 
@@ -198,6 +264,7 @@ void Stage1::Init()
 void Stage1::Update()
 {
 
+
 	
 
 	CameraManager::GetInstance()->KeyUpdate();
@@ -208,19 +275,20 @@ void Stage1::Update()
 
 	fake_flash->Update();
 	fake_flash->UpdateFlash(light, flash);
+	quizbox_event->Update();
 
 	Corridor_left_door->Update();
 	Corridor_right_door->Update();
 
-
-
 	table->Update();
-
+	Lockedtable->Update();
+	Lockedkey->Update();
 
 
 
 	for (int i = 0; i < room1.size(); i++)
 	{
+
 		room1[i]->Update();
 	}
 
@@ -255,13 +323,13 @@ void Stage1::Update()
 	}
 
 	exitdoor->Update();
+	quizbox->Update();
 
 	flash->MatrixUpdate(player);
 
 	light->Spot_light.position = CameraManager::GetInstance()->m_cameraPos;
 	light->Spot_light.direction = CameraManager::GetInstance()->m_cameraFront;
 	light->UseSpotLight(*shader,*ghost);
-
 
 
 	ghost->UpdatePlayerLocation(player->GetCenter());
@@ -273,12 +341,15 @@ void Stage1::Update()
 	deadbody->Update();
 	
 
-
+	cout << CameraManager::GetInstance()->m_cameraPos.x << "  " << CameraManager::GetInstance()->m_cameraPos.y << "  " << CameraManager::GetInstance()->m_cameraPos.z << endl;
 	
 }
 
 void Stage1::Render()
 {
+
+
+
 	shader->Bind();
 	Object_Render();
 
@@ -294,13 +365,12 @@ void Stage1::Render()
 void Stage1::Object_Render()
 {
 
+	light->UseSpotLight(*shader, *ghost);
 
 
 	shader->SetUniform1i("u_texture", 0);
 	player->Render(*shader);
 
-
-	light->UseSpotLight(*shader,*ghost);
 
 	for (int i = 0; i < room1.size(); i++)
 	{
@@ -338,7 +408,6 @@ void Stage1::Object_Render()
 	}
 
 
-
 	{
 		shader->SetUniform1i("u_texture", flash_fake_texture->GetSlot());
 		fake_flash->Render(*shader);
@@ -352,6 +421,7 @@ void Stage1::Object_Render()
 	{
 		shader->SetUniform1i("u_texture", table_texture->GetSlot());
 		table->Render(*shader);
+		Lockedtable->Render(*shader);
 	}
 
 	{
@@ -390,6 +460,26 @@ void Stage1::Object_Render()
 		exitdoor2->RenderModel(*shader);
 	}
 
+	{
+		shader->SetUniform1i("u_texture", quizbox_texture->GetSlot());
+		quizbox->Render(*shader);
+	}
+
+	{
+
+		shader->SetUniform1i("u_texture", lockedbox_texture->GetSlot());
+		Lockedbox->Render(*shader);
+		Lockedkey->Render(*shader);
+
+	}
+
+	{
+		shader->SetUniform1i("u_texture", answer1_texture->GetSlot());
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		answerbox->RenderModel(*shader);
+	}
+
+
 
 
 	shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
@@ -410,8 +500,29 @@ void Stage1::Texture_Render()
 
 	if (exitdoor->LockedAndCollusion() == true)
 	{
-		TextManager::GetInstance()->Render(-0.2f, -0.5f, "THIS DOOR IS LOCKED");
-		TextManager::GetInstance()->Render(-0.2f, -0.6f, "TO OPEN THE DOOR NEDD A KEY");
+		TextManager::GetInstance()->Render(-0.4f, 0.0f, "THIS DOOR IS LOCKED");
+		TextManager::GetInstance()->Render(-0.4f, -0.1f, "TO OPEN THE DOOR NEDD A PASSWORD");
+	}
+
+	if (quizbox_event->room2_box_collison == true)
+	{
+		TextManager::GetInstance()->Render(0.0f, 0.0f, " RGBA !?");
+	}
+
+
+	if (Lockedkey->_collusion == true)
+	{
+
+
+		TextManager::GetInstance()->Render(-0.1f, 0.1f,"Press 1,2,3,4");
+
+
+		string strValue = std::to_string(Lockedkey->num2[0]);
+		strValue += std::to_string(Lockedkey->num2[1]);
+		strValue += std::to_string(Lockedkey->num2[2]);
+		strValue += std::to_string(Lockedkey->num2[3]);
+
+		TextManager::GetInstance()->Render(0.0f,0.0f, strValue.c_str());
 	}
 
 
@@ -877,7 +988,7 @@ void Stage1::MakeRoom1()
 	Model* back_wall_model = new Model("res/models/stage1/back.obj");
 	Model* left_wall_model = new Model("res/models/stage1/left.obj");
 	Model* right_wall_model = new Model("res/models/stage1/right.obj");
-	Model* door_model = new Model("res/models/simpledoor.obj");
+
 
 	Wall* floor = new Wall(*floor_model);
 	BoxCollider* ptr = new BoxCollider;

@@ -34,7 +34,7 @@ void Mask::Render(Shader& shader)
 	_model->RenderModel(shader);
 }
 
-void Mask::MatrixUpdate(MaskEvent* ptr)
+void Mask::MatrixUpdate(Event* ptr)
 {
 
 	if (delta > 600)

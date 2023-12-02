@@ -60,7 +60,7 @@ void Object::Render(Shader& shader)
 }
 
 
-glm::mat4 Object::GetRotate(float radian, float x, float y, float z)
+void Object::SetRotate(float radian, float x, float y, float z)
 {
 	
 	
@@ -72,8 +72,15 @@ glm::mat4 Object::GetRotate(float radian, float x, float y, float z)
 
 	auto result = trans2 * rotate * trans1;
 
-	return result;
 
+	glm::vec4 temp = glm::vec4(_size, 1.0f);
+	glm::vec4 rotatedSize = result * temp;
+
+	_size = glm::vec3(rotatedSize);
+
+	_matrix = result;
+
+	
 }
 
 glm::mat4 Object::GetScale(float dx,float dy ,float dz)
@@ -91,12 +98,14 @@ glm::mat4 Object::GetScale(float dx,float dy ,float dz)
 
 }
 
-glm::mat4 Object::GetTransPose(float dx, float dy, float dz)
+void Object::SetTransPose(float dx, float dy, float dz)
 {
 
-	auto trans = glm::translate(glm::mat4(1.0f), glm::vec3(dx, dy, dz)); // 원점으로 이동시킴
+	_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(dx, dy, dz)); // 원점으로 이동시킴
 
-	return trans;
+	_center.x = _first_center.x + dx;
+	_center.y = _first_center.y + dy;
+	_center.z = _first_center.z + dz;
 
 }
 
@@ -130,11 +139,18 @@ void Object::RemoveComponent(Component* component)
 void Object::OnComponentBeginOverlap(Collider* collider, Collider* other)
 {
 
+	_debug_color.x = 1;
+	_debug_color.y = 0;
+	_debug_color.z = 0;
 
 }
 
 void Object::OnComponentEndOverlap(Collider* collider, Collider* other)
 {
+	_debug_color.x = 0;
+	_debug_color.y = 0;
+	_debug_color.z = 1;
+
 }
 
 
