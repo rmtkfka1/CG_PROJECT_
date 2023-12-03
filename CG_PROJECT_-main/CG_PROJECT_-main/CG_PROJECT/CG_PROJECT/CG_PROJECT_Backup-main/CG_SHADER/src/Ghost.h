@@ -54,6 +54,15 @@ public:
 	glm::mat4 _trans_matrix = glm::mat4(1.0f);		// 이동행렬
 	glm::mat4 _rotate_matrix = glm::mat4(1.0f);		// 이동방향을 바라보도록 하는 회전행렬
 	vector<glm::vec3> _patrol_locations;
+	vector<glm::vec3> _room1_patrol_lower2upper;
+	vector<glm::vec3> _room1_patrol_upper2lower;
+	vector<glm::vec3> _room2_patrol_left2right;
+	vector<glm::vec3> _room2_patrol_right2left;
+	vector<glm::vec3> _room3_patrol_left2right;
+	vector<glm::vec3> _room3_patrol_right2left;
+	vector<glm::vec3> _room4_patrol_upper2lower;
+	vector<glm::vec3> _room4_patrol_lower2upper;
+
 	//glm::vec3 _patrol_locations[91];					// 순찰경로
 	int _patrol_location_no = 0;
 	float _speed = 40.0f;

@@ -193,6 +193,134 @@ void Ghost::Init()
 		_patrol_locations.push_back(glm::vec3(0.0f,   	0.0f,	-470.0f));
 	}
 
+	// 1¹ø¹æ ¾Æ·§¹® -> À­¹® ¼øÂû°æ·Î
+	{
+		_room1_patrol_lower2upper.push_back(glm::vec3(-367.5f, 0.0f, -305.0f));
+		_room1_patrol_lower2upper.push_back(glm::vec3(-350.0f, 0.0f, -330.0f));
+		_room1_patrol_lower2upper.push_back(glm::vec3(-300.0f, 0.0f, -330.0f));
+		_room1_patrol_lower2upper.push_back(glm::vec3(-250.0f, 0.0f, -330.0f));
+		_room1_patrol_lower2upper.push_back(glm::vec3(-200.0f, 0.0f, -330.0f));
+		_room1_patrol_lower2upper.push_back(glm::vec3(-150.0f, 0.0f, -330.0f));
+		_room1_patrol_lower2upper.push_back(glm::vec3(-100.0f, 0.0f, -330.0f));
+		_room1_patrol_lower2upper.push_back(glm::vec3(-100.0f, 0.0f, -380.0f));
+		_room1_patrol_lower2upper.push_back(glm::vec3(-100.0f, 0.0f, -430.0f));
+		_room1_patrol_lower2upper.push_back(glm::vec3(-150.0f, 0.0f, -430.0f));
+		_room1_patrol_lower2upper.push_back(glm::vec3(-150.0f, 0.0f, -455.0f));
+	}
+
+	// 1¹ø¹æ À­¹® -> ¾Æ·§¹® ¼øÂû°æ·Î
+	{
+		_room1_patrol_upper2lower.push_back(glm::vec3(-150.0f, 0.0f, -455.0f));
+		_room1_patrol_upper2lower.push_back(glm::vec3(-150.0f, 0.0f, -430.0f));
+		_room1_patrol_upper2lower.push_back(glm::vec3(-200.0f, 0.0f, -430.0f));
+		_room1_patrol_upper2lower.push_back(glm::vec3(-250.0f, 0.0f, -430.0f));
+		_room1_patrol_upper2lower.push_back(glm::vec3(-300.0f, 0.0f, -430.0f));
+		_room1_patrol_upper2lower.push_back(glm::vec3(-350.0f, 0.0f, -430.0f));
+		_room1_patrol_upper2lower.push_back(glm::vec3(-350.0f, 0.0f, -380.0f));
+		_room1_patrol_upper2lower.push_back(glm::vec3(-350.0f, 0.0f, -330.0f));
+		_room1_patrol_upper2lower.push_back(glm::vec3(-367.5f, 0.0f, -305.0f));
+	}
+
+	// 2¹ø¹æ ¿ÞÂÊ¹® -> ¿À¸¥ÂÊ¹® ¼øÂû°æ·Î
+	{
+		_room2_patrol_left2right.push_back(glm::vec3(+50.0f, 0.0f, -380.0f));
+		_room2_patrol_left2right.push_back(glm::vec3(+100.0f, 0.0f, -380.0f));
+		_room2_patrol_left2right.push_back(glm::vec3(+100.0f, 0.0f, -330.0f));
+		_room2_patrol_left2right.push_back(glm::vec3(+150.0f, 0.0f, -330.0f));
+		_room2_patrol_left2right.push_back(glm::vec3(+200.0f, 0.0f, -330.0f));
+		_room2_patrol_left2right.push_back(glm::vec3(+250.0f, 0.0f, -330.0f));
+		_room2_patrol_left2right.push_back(glm::vec3(+300.0f, 0.0f, -330.0f));
+		_room2_patrol_left2right.push_back(glm::vec3(+350.0f, 0.0f, -330.0f));
+		_room2_patrol_left2right.push_back(glm::vec3(+350.0f, 0.0f, -380.0f));
+		_room2_patrol_left2right.push_back(glm::vec3(+400.0f, 0.0f, -380.0f));
+	}
+
+	// 2¹ø¹æ ¿À¸¥ÂÊ¹® -> ¿ÞÂÊ¹® ¼øÂû°æ·Î
+	{
+		_room2_patrol_right2left.push_back(glm::vec3(+400.0f, 0.0f, -380.0f));
+		_room2_patrol_right2left.push_back(glm::vec3(+350.0f, 0.0f, -380.0f));
+		_room2_patrol_right2left.push_back(glm::vec3(+350.0f, 0.0f, -430.0f));
+		_room2_patrol_right2left.push_back(glm::vec3(+300.0f, 0.0f, -430.0f));
+		_room2_patrol_right2left.push_back(glm::vec3(+250.0f, 0.0f, -430.0f));
+		_room2_patrol_right2left.push_back(glm::vec3(+200.0f, 0.0f, -430.0f));
+		_room2_patrol_right2left.push_back(glm::vec3(+150.0f, 0.0f, -430.0f));
+		_room2_patrol_right2left.push_back(glm::vec3(+100.0f, 0.0f, -430.0f));
+		_room2_patrol_right2left.push_back(glm::vec3(+100.0f, 0.0f, -380.0f));
+		_room2_patrol_right2left.push_back(glm::vec3(+50.0f, 0.0f, -380.0f));
+	}
+
+	// 3¹ø¹æ ¿ÞÂÊ¹® -> ¿À¸¥ÂÊ¹® ¼øÂû°æ·Î
+	{
+		_room3_patrol_left2right.push_back(glm::vec3(-400.0f, 0.0f, -560.0f));
+		_room3_patrol_left2right.push_back(glm::vec3(-370.0f, 0.0f, -560.0f));
+		_room3_patrol_left2right.push_back(glm::vec3(-370.0f, 0.0f, -530.0f));
+		_room3_patrol_left2right.push_back(glm::vec3(-370.0f, 0.0f, -500.0f));
+		_room3_patrol_left2right.push_back(glm::vec3(-340.0f, 0.0f, -500.0f));
+		_room3_patrol_left2right.push_back(glm::vec3(-310.0f, 0.0f, -500.0f));
+		_room3_patrol_left2right.push_back(glm::vec3(-280.0f, 0.0f, -500.0f));
+		_room3_patrol_left2right.push_back(glm::vec3(-250.0f, 0.0f, -500.0f));
+		_room3_patrol_left2right.push_back(glm::vec3(-220.0f, 0.0f, -500.0f));
+		_room3_patrol_left2right.push_back(glm::vec3(-190.0f, 0.0f, -500.0f));
+		_room3_patrol_left2right.push_back(glm::vec3(-160.0f, 0.0f, -500.0f));
+		_room3_patrol_left2right.push_back(glm::vec3(-160.0f, 0.0f, -530.0f));
+		_room3_patrol_left2right.push_back(glm::vec3(-160.0f, 0.0f, -560.0f));
+		_room3_patrol_left2right.push_back(glm::vec3(-130.0f, 0.0f, -560.0f));
+	}
+
+	// 3¹ø¹æ ¿À¸¥ÂÊ¹® -> ¿ÞÂÊ¹® ¼øÂû°æ·Î
+	{
+		_room3_patrol_right2left.push_back(glm::vec3(-130.0f, 0.0f, -560.0f));
+		_room3_patrol_right2left.push_back(glm::vec3(-160.0f, 0.0f, -560.0f));
+		_room3_patrol_right2left.push_back(glm::vec3(-160.0f, 0.0f, -590.0f));
+		_room3_patrol_right2left.push_back(glm::vec3(-160.0f, 0.0f, -620.0f));
+		_room3_patrol_right2left.push_back(glm::vec3(-190.0f, 0.0f, -620.0f));
+		_room3_patrol_right2left.push_back(glm::vec3(-220.0f, 0.0f, -620.0f));
+		_room3_patrol_right2left.push_back(glm::vec3(-250.0f, 0.0f, -620.0f));
+		_room3_patrol_right2left.push_back(glm::vec3(-280.0f, 0.0f, -620.0f));
+		_room3_patrol_right2left.push_back(glm::vec3(-310.0f, 0.0f, -620.0f));
+		_room3_patrol_right2left.push_back(glm::vec3(-340.0f, 0.0f, -620.0f));
+		_room3_patrol_right2left.push_back(glm::vec3(-370.0f, 0.0f, -620.0f));
+		_room3_patrol_right2left.push_back(glm::vec3(-370.0f, 0.0f, -590.0f));
+		_room3_patrol_right2left.push_back(glm::vec3(-370.0f, 0.0f, -560.0f));
+		_room3_patrol_right2left.push_back(glm::vec3(-400.0f, 0.0f, -560.0f));
+	}
+
+	// 4¹ø¹æ ¾Æ·§¹® -> À­¹® ¼øÂû°æ·Î
+	{
+		_room4_patrol_upper2lower.push_back(glm::vec3(+320.0f, 0.0f, -485.0f));
+		_room4_patrol_upper2lower.push_back(glm::vec3(+250.0f, 0.0f, -510.0f));
+		_room4_patrol_upper2lower.push_back(glm::vec3(+200.0f, 0.0f, -510.0f));
+		_room4_patrol_upper2lower.push_back(glm::vec3(+150.0f, 0.0f, -510.0f));
+		_room4_patrol_upper2lower.push_back(glm::vec3(+100.0f, 0.0f, -510.0f));
+		_room4_patrol_upper2lower.push_back(glm::vec3(+50.0f, 0.0f, -510.0f));
+		_room4_patrol_upper2lower.push_back(glm::vec3(0.0f, 0.0f, -510.0f));
+		_room4_patrol_upper2lower.push_back(glm::vec3(-50.0f, 0.0f, -510.0f));
+		_room4_patrol_upper2lower.push_back(glm::vec3(-50.0f, 0.0f, -560.0f));
+		_room4_patrol_upper2lower.push_back(glm::vec3(-50.0f, 0.0f, -610.0f));
+		_room4_patrol_upper2lower.push_back(glm::vec3(0.0f, 0.0f, -610.0f));
+		_room4_patrol_upper2lower.push_back(glm::vec3(0.0f, 0.0f, -635.0f));
+	}
+	
+	// 4¹ø¹æ À­¹® -> ¾Æ·§¹® ¼øÂû°æ·Î
+	{
+		_room4_patrol_lower2upper.push_back(glm::vec3(-0.0f,	0.0f, -635.0f));
+		_room4_patrol_lower2upper.push_back(glm::vec3(-0.0f,	0.0f, -610.0f));
+		_room4_patrol_lower2upper.push_back(glm::vec3(+50.0f,	0.0f, -610.0f));
+		_room4_patrol_lower2upper.push_back(glm::vec3(+100.0f,	0.0f, -610.0f));
+		_room4_patrol_lower2upper.push_back(glm::vec3(+150.0f,	0.0f, -610.0f));
+		_room4_patrol_lower2upper.push_back(glm::vec3(+200.0f,	0.0f, -610.0f));
+		_room4_patrol_lower2upper.push_back(glm::vec3(+250.0f,	0.0f, -610.0f));
+		_room4_patrol_lower2upper.push_back(glm::vec3(+300.0f,	0.0f, -610.0f));
+		_room4_patrol_lower2upper.push_back(glm::vec3(+350.0f,	0.0f, -610.0f));
+		_room4_patrol_lower2upper.push_back(glm::vec3(+350.0f,	0.0f, -560.0f));
+		_room4_patrol_lower2upper.push_back(glm::vec3(+350.0f,	0.0f, -510.0f));
+		_room4_patrol_lower2upper.push_back(glm::vec3(+300.0f,	0.0f, -510.0f));
+		_room4_patrol_lower2upper.push_back(glm::vec3(+320.0f,	0.0f,-485.0f));
+	}
+
+
+
+
 	MakeBehaviorTree();
 }
 
