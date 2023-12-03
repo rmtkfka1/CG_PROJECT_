@@ -23,6 +23,11 @@ void BoxCollider::Update()
     _center = _owner->GetCenter();
     _size = _owner->GetSize();
 
+    if (KeyManager::GetInstance()->GetbuttonDown(KeyType::O))
+    {
+        _showDebug = !_showDebug;
+    }
+
 }
 
 void BoxCollider::Render(Shader& shader)

@@ -97,6 +97,7 @@ private:
 	Locked* Lockedkey2;
 	Wall*  answerbox2;
 
+
 	////////////////
 
 

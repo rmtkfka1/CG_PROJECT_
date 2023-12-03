@@ -33,6 +33,7 @@ void TextManager::Init()
 void TextManager::Render(float x, float y, const char* text)
 {
 
+	glColor3f(1.0f, 1.0f, 1.0f); // Èò»ö
 	glRasterPos2f(x, y);       //<2>
 	glPushAttrib(GL_LIST_BIT); //<1>
 	glListBase(_base - 32); //<2>

@@ -108,7 +108,7 @@ void Locked::Update()
 
 void Locked::Render(Shader& shader)
 {
-	cout << CameraManager::GetInstance()->m_cameraPos.x<<"  " << CameraManager::GetInstance()->m_cameraPos.y <<"  " << CameraManager::GetInstance()->m_cameraPos.z << endl;
+	
 	Super::Render(shader);
 	
 	shader.SetUniform3f("control_color", 0, 0, 0);

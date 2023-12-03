@@ -12,14 +12,14 @@ void CameraManager::KeyUpdate()
 	{
 		m_cameraPos += m_cameraSpeed * m_cameraFront *dt;
 
-
+		m_cameraPos.y = 15.0f;
 
 	}
 	if (KeyManager::GetInstance()->Getbutton(KeyType::S))
 	{
 		m_cameraPos -= m_cameraSpeed * m_cameraFront * dt;
 
-	
+		m_cameraPos.y = 15.0f;
 	}
 
 	auto cameraRight = glm::normalize(glm::cross(m_cameraUp, -m_cameraFront));
@@ -28,14 +28,14 @@ void CameraManager::KeyUpdate()
 	{
 		m_cameraPos += m_cameraSpeed * cameraRight *dt;
 
-
+		m_cameraPos.y = 15.0f;
 
 	}
 	if (KeyManager::GetInstance()->Getbutton(KeyType::A))
 	{
 		m_cameraPos -= m_cameraSpeed * cameraRight * dt;
 
-	
+		m_cameraPos.y = 15.0f;
 
 	}
 

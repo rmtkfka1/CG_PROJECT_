@@ -355,7 +355,7 @@ BehaviorStatus Ghost::MoveTo()
 
 BehaviorStatus Ghost::IsPlayerNearBy()
 {
-	if (DistanceLessThan(_pos.x, _pos.z, _player_pos.x, _player_pos.z, 0.0f))
+	if (DistanceLessThan(_pos.x, _pos.z, _player_pos.x, _player_pos.z, 100.0f))
 	{
 		//cout << "Player Nearby!!" << endl;
 		return BT_SUCCESS;

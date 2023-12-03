@@ -37,6 +37,10 @@ void Player::Update()
 	MatrixUpdate();
 
 
+
+
+
+
 }
 
 void Player::Render(Shader& shader)
@@ -47,6 +51,8 @@ void Player::Render(Shader& shader)
 	/*shader.SetUniform3f("control_color", 0, 0, 0);
 	shader.SetUniformMat4f("u_model", _matrix);
 	_model->RenderModel(shader);*/
+
+
 
 }
 
@@ -85,6 +91,58 @@ void Player::KeyUpdate()
 		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
 	}
+
+	if (KeyManager::GetInstance()->Getbutton(KeyType::SHIFT))
+	{
+
+		if (speed_gage < -1.0f)
+		{
+			CameraManager::GetInstance()->m_cameraSpeed = 40.0f;
+			return;
+		}
+
+		
+		CameraManager::GetInstance()->m_cameraSpeed = 80.0f;
+		_run = true;
+		cout << speed_gage << endl;
+		speed_gage += -0.05f * TimeManager::GetInstance()->GetDeltaTime();
+
+	}
+
+	if (KeyManager::GetInstance()->GetbuttonUp(KeyType::SHIFT))
+	{
+
+		CameraManager::GetInstance()->m_cameraSpeed = 40.0f;
+		_run = false;
+
+		if (speed_gage < -0.67f)
+		{
+			speed_gage += 0.05f * TimeManager::GetInstance()->GetDeltaTime();
+		}
+
+	
+		
+	}
+}
+
+void Player::DrawGage()
+{
+	glBegin(GL_QUADS);
+	glColor3f(0.3f, 0.3f, 0); // 흰색
+	glVertex2f(-1.0f, -1.0f);  //좌하단
+	glVertex2f(speed_gage, -1.0f);  //조절
+	glVertex2f(speed_gage, -0.8f); //조절
+	glVertex2f(-1.0f, -0.8f);  //좌상단
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);
+	glLineWidth(0.1f);
+	glColor3f(1.0f, 1.0f, 1.0f); // 라인의 색상
+	glVertex2f(-1.0f, -1.0f);    // 좌하단
+	glVertex2f(speed_gage, -1.0f); // 조절
+	glVertex2f(speed_gage, -0.8f); // 조절
+	glVertex2f(-1.0f, -0.8f);    // 좌상단
+	glEnd();
 }
 
 void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
@@ -217,11 +275,19 @@ void Player::OnComponentEndOverlap(Collider* collider, Collider* other)
 {
 
 
-
-
 	// 속도 원상복귀
-	CameraManager::GetInstance()->m_cameraSpeed = 200.0f;
+	
 
+	if (_run)
+	{
+		CameraManager::GetInstance()->m_cameraSpeed = 80.0f;
+		
+	}
 
+	else
+	{
+		CameraManager::GetInstance()->m_cameraSpeed = 40.0f;
 
+	}
+	
 }

@@ -33,7 +33,7 @@ enum class KeyType
 	RightMouse = VK_RBUTTON,
 	SpaceBar = VK_SPACE,
 	ESC = VK_ESCAPE,
-
+	SHIFT = VK_SHIFT,
 	A = 'A',
 	B = 'B',
 	C = 'C',

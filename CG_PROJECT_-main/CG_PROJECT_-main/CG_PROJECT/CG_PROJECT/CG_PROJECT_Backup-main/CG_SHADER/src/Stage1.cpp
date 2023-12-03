@@ -44,8 +44,6 @@ void Stage1::Init()
 
 
 
-
-
 	{
 
 		Model* model = new Model("res/models/exitdoor.obj");
@@ -399,7 +397,7 @@ void Stage1::Update()
 	deadbody->Update();
 	
 
-	cout << CameraManager::GetInstance()->m_cameraPos.x << "  " << CameraManager::GetInstance()->m_cameraPos.y << "  " << CameraManager::GetInstance()->m_cameraPos.z << endl;
+	//cout << CameraManager::GetInstance()->m_cameraPos.x << "  " << CameraManager::GetInstance()->m_cameraPos.y << "  " << CameraManager::GetInstance()->m_cameraPos.z << endl;
 	
 }
 
@@ -414,6 +412,11 @@ void Stage1::Render()
 
 	shader->Unbind();
 	Texture_Render();
+	player->DrawGage();
+
+
+
+
 
 
 	
@@ -488,10 +491,10 @@ void Stage1::Object_Render()
 		ghost->Render(*shader);
 	}
 
-	{
-		shader->SetUniform1i("u_texture", flash_fake_texture->GetSlot());
-		flash->Render(*shader);
-	}
+	//{
+	//	shader->SetUniform1i("u_texture", flash_fake_texture->GetSlot());
+	//	flash->Render(*shader);
+	//}
 
 	{
 		shader->SetUniform1i("u_texture", flash_fake_texture->GetSlot());
@@ -551,11 +554,16 @@ void Stage1::Object_Render()
 	shader->SetUniform3f("u_viewpos", CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
 	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
 
+
 }
 
 
 void Stage1::Texture_Render()
 {
+
+	TextManager::GetInstance()->Render(-1.0f, -0.9f, "Speed Gage");
+
+
 
 	if (fake_flash->GetCollsionState() == true)
 	{
