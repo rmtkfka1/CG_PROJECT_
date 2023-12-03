@@ -506,11 +506,11 @@ void Stage1::Object_Render()
 	}
 
 
-	{
-		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
-		shader->SetUniform1i("u_texture", mask_texture->GetSlot());
-		mask->Render(*shader);
-	}
+	//	{
+	//		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+	//		shader->SetUniform1i("u_texture", mask_texture->GetSlot());
+	//		mask->Render(*shader);
+	//	}
 
 	{
 		shader->SetUniform1i("u_texture", exitdoor_texture->GetSlot());
