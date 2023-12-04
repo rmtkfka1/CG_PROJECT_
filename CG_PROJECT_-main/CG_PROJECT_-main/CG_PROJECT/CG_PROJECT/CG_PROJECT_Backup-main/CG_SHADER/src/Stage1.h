@@ -45,6 +45,10 @@ private:
 
 	void MakeRoom();
 
+	void MakeEndRoom();
+	void MakeLastRoom();
+	void MakeLastCorridor();
+
 	void MakeRoom6();
 	void MakeRoom5();
 	void MakeRoom4();
@@ -114,6 +118,12 @@ private:
 	vector<Object*> room5;
 	
 	vector<Object*> room6;
+	
+	vector<Object*> last_corridor;
+	
+	vector<Object*> last_room;
+	
+	vector<Object*> end_room;
 
 
 
