@@ -65,7 +65,10 @@ void Stage1::Init()
 
 		ghost = new Ghost(*ghost_body, *ghost_left_arm, *ghost_right_arm);
 		ghost->Init();
-		ghost->SetPosition(0.0f, -800.0f);
+		ghost->SetPosition(0.0f, -480.0f);
+		BoxCollider* ptr = new BoxCollider;
+		ghost->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 
 		ghost_body->PrintInfo();
 	

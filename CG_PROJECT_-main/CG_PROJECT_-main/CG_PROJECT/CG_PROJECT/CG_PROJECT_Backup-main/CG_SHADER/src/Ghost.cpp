@@ -6,7 +6,9 @@ Ghost::Ghost(Model& model_body, Model& model_left_arm, Model& model_right_arm) :
 {
 
 	_center = model_body.GetCenter();
-	_size = model_body.GetSize();
+	_size.x = model_body.GetSize().x + 10.0f;
+	_size.y = model_body.GetSize().y;
+	_size.z = model_body.GetSize().z + 10.0f;
 
 	_first_center = _center;
 	_model = &model_body;
@@ -28,7 +30,10 @@ void Ghost::Init()
 {
 	Super::Init();
 
-	//	1
+	_patrol_locations.clear();
+	_patrol_locations.shrink_to_fit();
+
+	//	1 - 3번방 주위를 돔
 	{
 		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-470.0f));
 		_patrol_locations.push_back(glm::vec3(-40.0f,	0.0f,	-470.0f));
@@ -45,8 +50,10 @@ void Ghost::Init()
 	
 		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-485.0f));
 		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-522.5f));
+		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-560.0f));	// ROOM3 왼쪽문
+		room3_left_door = _patrol_locations.size() - 1;
 		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-597.5f));
-		_patrol_locations.push_back(glm::vec3(-415.5f,	0.0f,	-635.0f));
+		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-635.0f));
 		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-660.0f));
 	
 		_patrol_locations.push_back(glm::vec3(-377.5f,	0.0f,	-660.0f));
@@ -59,7 +66,8 @@ void Ghost::Init()
 	
 		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-635.0f));
 		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-597.5f));
-		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-560.0f));
+		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-560.0f));	// ROOM3 오른쪽문
+		room3_right_door = _patrol_locations.size() - 1;
 		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-522.5f));
 		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-470.0f));
 	
@@ -70,12 +78,13 @@ void Ghost::Init()
 	
 	}
 	
-	//	2
+	// 2 - 2번방 주위를 돔
 	{
 		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-470.0f));
 		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-455.0f));
 		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-417.5f));
-		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-380.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-380.0f));	// ROOM2 왼쪽문
+		room2_left_door = _patrol_locations.size() - 1;
 		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-342.5f));
 		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-305.0f));
 		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-290.0f));
@@ -92,7 +101,8 @@ void Ghost::Init()
 	
 		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-305.0f));
 		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-342.5f));
-		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-380.0f));
+		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-380.0f));	// ROOM2 오른쪽문
+		room2_right_door = _patrol_locations.size() - 1;
 		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-417.5f));
 		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-455.0f));
 		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-470.0f));
@@ -108,13 +118,14 @@ void Ghost::Init()
 		_patrol_locations.push_back(glm::vec3(0.0f, 	0.0f,	-470.0f));
 	}
 	
-	// 3
+	// 3 - 1번방 주위를 돔
 	{
 		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-470.0f));
 		_patrol_locations.push_back(glm::vec3(-40.0f,	0.0f,	-470.0f));
 		_patrol_locations.push_back(glm::vec3(-77.5f,	0.0f,	-470.0f));
 		_patrol_locations.push_back(glm::vec3(-115.0f,	0.0f,	-470.0f));
-		_patrol_locations.push_back(glm::vec3(-152.5f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(-152.5f,	0.0f,	-470.0f));	// ROOM1 위쪽문
+		room1_upper_door = _patrol_locations.size() - 1;
 		_patrol_locations.push_back(glm::vec3(-190.0f,	0.0f,	-470.0f));
 		_patrol_locations.push_back(glm::vec3(-227.5f,	0.0f,	-470.0f));
 		_patrol_locations.push_back(glm::vec3(-265.0f,	0.0f,	-470.0f));
@@ -130,7 +141,8 @@ void Ghost::Init()
 		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-305.0f));
 		_patrol_locations.push_back(glm::vec3(-415.0f,	0.0f,	-290.0f));
 	
-		_patrol_locations.push_back(glm::vec3(-367.5f,	0.0f,	-290.0f));
+		_patrol_locations.push_back(glm::vec3(-367.5f,	0.0f,	-290.0f));	// ROOM1 아래쪽문
+		room1_lower_door = _patrol_locations.size() - 1;
 		_patrol_locations.push_back(glm::vec3(-320.0f,	0.0f,	-290.0f));
 		_patrol_locations.push_back(glm::vec3(-272.5f,	0.0f,	-290.0f));
 		_patrol_locations.push_back(glm::vec3(-225.0f,	0.0f,	-290.0f));
@@ -148,7 +160,7 @@ void Ghost::Init()
 		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-470.0f));
 	}
 
-	// 4
+	// 4 - 4번방 주위를 돔
 	{
 		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-470.0f));
 		_patrol_locations.push_back(glm::vec3(-40.0f,	0.0f,	-470.0f));
@@ -164,7 +176,8 @@ void Ghost::Init()
 
 		_patrol_locations.push_back(glm::vec3(-77.5f,	0.0f,	-660.0f));
 		_patrol_locations.push_back(glm::vec3(-40.0f, 	0.0f,	-660.0f));
-		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-660.0f));
+		_patrol_locations.push_back(glm::vec3(0.0f,		0.0f,	-660.0f));	// ROOM4 윗문
+		room4_upper_door = _patrol_locations.size() - 1;
 		_patrol_locations.push_back(glm::vec3(+35.0f,	0.0f,	-660.0f));
 		_patrol_locations.push_back(glm::vec3(+82.5f,	0.0f,	-660.0f));
 		_patrol_locations.push_back(glm::vec3(+130.0f,	0.0f,	-660.0f));
@@ -183,7 +196,8 @@ void Ghost::Init()
 		_patrol_locations.push_back(glm::vec3(+415.0f,	0.0f,	-470.0f));
 
 		_patrol_locations.push_back(glm::vec3(+367.5f,	0.0f,	-470.0f));
-		_patrol_locations.push_back(glm::vec3(+320.0f,	0.0f,	-470.0f));
+		_patrol_locations.push_back(glm::vec3(+320.0f,	0.0f,	-470.0f));	// ROOM4 아랫문
+		room4_lower_door = _patrol_locations.size() - 1;
 		_patrol_locations.push_back(glm::vec3(+272.5f,	0.0f,	-470.0f));
 		_patrol_locations.push_back(glm::vec3(+225.0f,	0.0f,	-470.0f));
 		_patrol_locations.push_back(glm::vec3(+177.5f,	0.0f,	-470.0f));
@@ -364,6 +378,18 @@ void Ghost::Update()
 
 	MatrixUpdate();
 
+	// _center도 같이 이동
+	_center.x = _pos.x;
+	_center.y = 15.0f;
+	_center.z = _pos.z;
+
+
+	_location = GetLocation(_pos.x, _pos.z);
+	_player_location = GetLocation(_player_pos.x, _player_pos.z);
+
+
+
+
 	RunBT();
 }
 
@@ -409,18 +435,28 @@ void Ghost::MatrixUpdate()
 }
 
 
-
 void Ghost::SetPosition(float x, float z)
 {
 	_pos = glm::vec3(x, _center.y-20.0f, z);
+	_center = _pos;
 }
 
 void Ghost::OnComponentBeginOverlap(Collider* collider, Collider* other)
 {
+	if (other->GetOwner()->GetObjectType() == ObjectType::PLAYER)
+	{
+		cout << "PLAYER_COLLISION" << endl;
+		_collusion = true;
+		// 여기에 change scene
+
+	}
+	
 }
 
 void Ghost::OnComponentEndOverlap(Collider* collider, Collider* other)
 {
+	_collusion = true;
+
 }
 
 
@@ -429,6 +465,11 @@ void Ghost::OnComponentEndOverlap(Collider* collider, Collider* other)
 // BehaviorNode
 // - 행동과 관련된 함수들과 노드들을 생성합니다.
 ////////////////
+
+void Ghost::SetGhostSpeed(float speed)
+{
+	_speed = speed;
+}
 
 void Ghost::SetTargetLocation(float to_x, float to_z)
 {
@@ -466,6 +507,115 @@ void Ghost::MoveSlightlyTo(float to_x, float to_z)
 	//cout << "Move Slightly To : " << _dir.x * _speed * GET_SINGLE(TimeManager)->GetDeltaTime() << ", " << _dir.z * _speed * GET_SINGLE(TimeManager)->GetDeltaTime() << endl;
 }
 
+Location Ghost::GetLocation(float x, float z)
+{
+	// 1번방은 x-400 ~ x-50, z-305 ~ z-455 
+
+	if((x >= -430.0f && x <= 430.0f) && (z <= -275.0f && z >= -685.0f))
+	{
+		if ((x >= -400.0f && x <= -50.0f) && (z <= -305.0f && z >= -455.0f))
+		{
+			return Location::ROOM1;
+		}
+		else if ((x >= 50.0f && x <= 400.0f) && (z <= -305.0f && z >= -455.0f))
+		{
+			return Location::ROOM2;
+		}
+		else if ((x <= -130.0f && x >= -400.0f) && (z <= -485.0f && z >= -635.0f))
+		{
+			return Location::ROOM3;
+		}
+		else if ((x >= -100.0f && x <= 400.0f) && (z <= -485.0f && z >= -635.0f))
+		{
+			return Location::ROOM4;
+		}
+		else
+		{
+			return Location::CORRIDOR;
+		}
+	}
+	else
+	{
+		return Location::NONE;
+	}
+
+
+}
+
+BehaviorStatus Ghost::GetNearestPatrolLocAtPlayer()
+{
+	float x = _player_pos.x;
+	float z = _player_pos.z;
+	int minLoc = 0;
+	float minDist = 9999.9f;
+	for (int i = 0; i < _patrol_locations.size(); i++)
+	{
+		float distance2 = glm::pow((x - _patrol_locations[i].x), 2) + glm::pow((z - _patrol_locations[i].z), 2);
+		float compare = minDist;	// minDist는 기본적으로 갱신하면서 제곱이 되므로 따로 제곱할 필요가 없다.
+		if (distance2 < compare)
+		{
+			minLoc = i;
+			minDist = distance2;
+		}
+	}
+
+	_patrol_location_no = minLoc;
+	_to.x = _patrol_locations[minLoc].x;
+	_to.z = _patrol_locations[minLoc].z;
+	_patrol_location_no = (_patrol_location_no + 1) % _patrol_locations.size();
+	_state = GhostState::CHASE;
+	return BehaviorStatus::BT_SUCCESS;
+}
+
+BehaviorStatus Ghost::GetNearestPatrolLocAtGhost()
+{
+	float x = _pos.x;
+	float z = _pos.z;
+	int minLoc = 0;
+	float minDist = 9999.9f;
+	for (int i = 0; i < _patrol_locations.size(); i++)
+	{
+		float distance2 = glm::pow((x - _patrol_locations[i].x), 2) + glm::pow((z - _patrol_locations[i].z), 2);
+		float compare = minDist;	// minDist는 기본적으로 갱신하면서 제곱이 되므로 따로 제곱할 필요가 없다.
+		if (distance2 < compare)
+		{
+			minLoc = i;
+			minDist = distance2;
+		}
+	}
+
+	_patrol_location_no = minLoc;
+	_to.x = _patrol_locations[minLoc].x;
+	_to.z = _patrol_locations[minLoc].z;
+	_patrol_location_no = (_patrol_location_no + 1) % _patrol_locations.size();
+	_state = GhostState::PATROL;
+	return BehaviorStatus::BT_SUCCESS;
+}
+
+BehaviorStatus Ghost::IsGhostInChase()
+{
+	if (_state == GhostState::CHASE)
+	{
+		return BT_SUCCESS;
+	}
+	else
+	{
+		return BT_FAIL;
+	}
+}
+
+BehaviorStatus Ghost::IsGhostInCorridorPatrol()
+{
+	if (_state == GhostState::PATROL)
+	{
+		return BT_SUCCESS;
+	}
+	else
+	{
+		return BT_FAIL;
+	}
+}
+
 BehaviorStatus Ghost::MoveTo()
 {
 	MoveSlightlyTo(_to.x, _to.z);
@@ -483,7 +633,7 @@ BehaviorStatus Ghost::MoveTo()
 
 BehaviorStatus Ghost::IsPlayerNearBy()
 {
-	if (DistanceLessThan(_pos.x, _pos.z, _player_pos.x, _player_pos.z, 100.0f))
+	if (DistanceLessThan(_pos.x, _pos.z, _player_pos.x, _player_pos.z, _detection_distance))
 	{
 		//cout << "Player Nearby!!" << endl;
 		return BT_SUCCESS;
@@ -495,12 +645,75 @@ BehaviorStatus Ghost::IsPlayerNearBy()
 	}
 }
 
+BehaviorStatus Ghost::IsPlayerVeryNearBy()
+{
+	if (DistanceLessThan(_pos.x, _pos.z, _player_pos.x, _player_pos.z, _detection_distance / 3))
+	{
+		//cout << "Player Nearby!!" << endl;
+		return BT_SUCCESS;
+	}
+	else
+	{
+		//cout << "Player NOT Nearby" << endl;
+		return BT_FAIL;
+	}
+}
+
+BehaviorStatus Ghost::IsPlayerOnSight()
+{
+	// 귀신의 방향벡터와 (플레이어 위치 - 귀신 위치)벡터를 정규화하여 내적해서 구함
+	glm::vec3 v1 = glm::normalize(_dir);
+	glm::vec3 v2 = glm::normalize(_player_pos - _pos);
+	float temp = glm::dot(v1, v2);
+
+	if (temp >= glm::cos(glm::radians(_detection_degree / 2)))	// cos(탐지각도 / 2)보다 크다면 탐지각도보다 안에있음 -> v1, v2가 모두 정규화 되어있기 때문
+	{
+		cout << "player on sight" << endl;
+		return BehaviorStatus::BT_SUCCESS;
+	}
+	else
+	{
+		return BehaviorStatus::BT_FAIL;
+	}
+
+
+}
+
+BehaviorStatus Ghost::IsPlayerInRoom()
+{
+	if ((_player_location == Location::ROOM1) || 
+		(_player_location == Location::ROOM2) ||
+		(_player_location == Location::ROOM3) || 
+		(_player_location == Location::ROOM4))
+	{
+		return BehaviorStatus::BT_SUCCESS;
+	}
+	else
+	{
+		return BehaviorStatus::BT_FAIL;
+	}
+}
+
+BehaviorStatus Ghost::IsPlayerInCorridor()
+{
+	if (_player_location == Location::CORRIDOR)
+	{
+		return BehaviorStatus::BT_SUCCESS;
+	}
+	else
+	{
+		return BehaviorStatus::BT_FAIL;
+	}
+}
+
 BehaviorStatus Ghost::ChasePlayer()
 {
+	_state = GhostState::CHASE;
 	MoveSlightlyTo(_player_pos.x, _player_pos.z);
 	if (DistanceLessThan(_pos.x, _pos.z, _player_pos.x, _player_pos.z, 0.5f))
 	{
-		//cout << "Chase Complete Game Over" << endl;
+		// cout << "Chase Complete Game Over" << endl;
+		// 귀신이 플레이어를 잡으면 여기서 이벤트가 발생함
 		return BT_SUCCESS;
 	}
 	else
@@ -521,48 +734,136 @@ BehaviorStatus Ghost::GetPatrolLoc()
 
 void Ghost::MakeBehaviorTree()
 {
+	// 노드는 맨 밑 단말노드부터 만들어 나가는 것이 좋음
+
 	///// 순찰 시퀀스 /////////////////////////////////////////////////////////////////
 	{
-		act_GetPatrol._name = "Get Patrol Location";
-		act_GetPatrol._type = ACTION;
-		act_GetPatrol._func = get_patrol_loc;
 
-		act_MoveTo._name = "Move To";
-		act_MoveTo._type = ACTION;
-		act_MoveTo._func = moveto;
+		///////// 복도 순찰 시작 SEQ //////////////////////////////////////////////////////////////////////////////
 
-		seq_Patrol._name = "Patrol";
-		seq_Patrol._type = SEQUENCE;
-		seq_Patrol._children.push_back(act_GetPatrol);
-		seq_Patrol._children.push_back(act_MoveTo);
-		seq_Patrol._childrenCount = seq_Patrol._children.size();
+		act_get_near_loc_from_ghost._name = "get nearest loc from ghost";
+		act_get_near_loc_from_ghost._type = ACTION;
+		act_get_near_loc_from_ghost._func = &Ghost::GetNearestPatrolLocAtGhost;
+
+		act_move_to._name = "move to loc";
+		act_move_to._type = ACTION;
+		act_move_to._func = &Ghost::MoveTo;
+
+		seq_corridor_patrol_start._name = "start corridor patrol";
+		seq_corridor_patrol_start._type = SEQUENCE;
+		seq_corridor_patrol_start._children.push_back(act_get_near_loc_from_ghost);
+		seq_corridor_patrol_start._children.push_back(act_move_to);
+
+		///////// 순찰 시작 SEQ //////////////////////////////////////////////////////////////////////////////
+
+		cond_was_chasing._name = "was chasing";
+		cond_was_chasing._type = CONDITION;
+		cond_was_chasing._func = &Ghost::IsGhostInChase;
+
+		seq_start_patrol._name = "start patrol";
+		seq_start_patrol._type = SEQUENCE;
+		seq_start_patrol._children.push_back(cond_was_chasing);
+		seq_start_patrol._children.push_back(seq_corridor_patrol_start);
+
+		///////// 순찰 중 SEQ //////////////////////////////////////////////////////////////////////////////
+
+		act_get_next_patrol_loc._name = "get next patrol loc";
+		act_get_next_patrol_loc._type = ACTION;
+		act_get_next_patrol_loc._func = &Ghost::GetPatrolLoc;
+
+		seq_in_patrol._name = "in patrol";
+		seq_in_patrol._type = SEQUENCE;
+		seq_in_patrol._children.push_back(act_get_next_patrol_loc);
+		seq_in_patrol._children.push_back(act_move_to);
+
+		///////// 최상위 순찰 SEQ //////////////////////////////////////////////////////////////////////////////
+		sel_patrol._name = "in patrol";
+		sel_patrol._type = SELECTOR;
+		sel_patrol._children.push_back(seq_start_patrol);
+		sel_patrol._children.push_back(seq_in_patrol);
+
+
 		//BT._root = &seq_Patrol;
 	}
 
 	///// 추격 시퀀스 /////////////////////////////////////////////////////////////////
 	{
-		cond_PlayerNearby._name = "Is Player Nearby?";
-		cond_PlayerNearby._type = CONDITION;
-		cond_PlayerNearby._func = player_nearby;
 
-		act_Chase._name = "Chase Player";
-		act_Chase._type = ACTION;
-		act_Chase._func = chase_player;
+		///////// 복도 추격 SEQ //////////////////////////////////////////////////////////////////////////////
 
-		seq_Chase._name = "Chase";
-		seq_Chase._type = SEQUENCE;
-		seq_Chase._children.push_back(cond_PlayerNearby);
-		seq_Chase._children.push_back(act_Chase);
-		seq_Chase._childrenCount = seq_Chase._children.size();
-		//BT._root = &seq_Chase;
+		act_get_near_loc_from_player._name = "get nearest loc from player";
+		act_get_near_loc_from_player._type = ACTION;
+		act_get_near_loc_from_player._func = &Ghost::GetNearestPatrolLocAtPlayer;
+		
+		act_move_to_loc._name = "move to loc";
+		act_move_to_loc._type = ACTION;
+		act_move_to_loc._func = &Ghost::MoveTo;
+
+		seq_corridor_chase._name = "corridor chase";
+		seq_corridor_chase._type = SEQUENCE;
+		seq_corridor_chase._children.push_back(act_get_near_loc_from_player);
+		seq_corridor_chase._children.push_back(act_move_to_loc);
+
+		///////// 먼 추격 SEQ //////////////////////////////////////////////////////////////////////////////
+
+		cond_is_player_near._name = "is player nearby";
+		cond_is_player_near._type = CONDITION;
+		cond_is_player_near._func = &Ghost::IsPlayerNearBy;
+
+		seq_far_chase._name = "far chase";
+		seq_far_chase._type = SEQUENCE;
+		seq_far_chase._children.push_back(cond_is_player_near);
+		seq_far_chase._children.push_back(seq_corridor_chase);
+
+		///////// 가까운 추격 SEQ //////////////////////////////////////////////////////////////////////////////
+
+		cond_is_player_very_near._name = "is player very nearby";
+		cond_is_player_very_near._type = CONDITION;
+		cond_is_player_very_near._func = &Ghost::IsPlayerVeryNearBy;
+
+		act_move_direct_to_player._name = "move direct to player";
+		act_move_direct_to_player._type = ACTION;
+		act_move_direct_to_player._func = &Ghost::ChasePlayer;
+
+		seq_near_chase._name = "near chase";
+		seq_near_chase._type = SEQUENCE;
+		seq_near_chase._children.push_back(cond_is_player_near);
+		seq_near_chase._children.push_back(act_move_direct_to_player);
+
+		///////// 추격 시작 SEL //////////////////////////////////////////////////////////////////////////////
+
+		sel_chase_start._name = "chase start";
+		sel_chase_start._type = SELECTOR;
+		sel_chase_start._children.push_back(seq_near_chase);
+		sel_chase_start._children.push_back(seq_far_chase);
+
+		///////// 최상위 추격 SEQ //////////////////////////////////////////////////////////////////////////////
+		
+		cond_is_player_in_corridor._name = "is player in corridor";
+		cond_is_player_in_corridor._type = CONDITION;
+		cond_is_player_in_corridor._func = &Ghost::IsPlayerOnSight;
+
+		cond_is_player_on_sight._name = "is player on sight";
+		cond_is_player_on_sight._type = CONDITION;
+		cond_is_player_on_sight._func = &Ghost::IsPlayerOnSight;
+
+		seq_chase._name = "chase";
+		seq_chase._type = SEQUENCE;
+		seq_chase._children.push_back(cond_is_player_in_corridor);
+		seq_chase._children.push_back(cond_is_player_on_sight);
+		seq_chase._children.push_back(sel_chase_start);
+
+
+		BT._root = &seq_chase;
+		TagCondition(BT._root);
 	}
 
 	///// 순찰 혹은 추격 셀렉터 /////////////////////////////////////////////////////////////////
 	{
 		sel_Patrol_or_Chase._name = "Patrol or Chase";
 		sel_Patrol_or_Chase._type = SELECTOR;
-		sel_Patrol_or_Chase._children.push_back(seq_Chase);
-		sel_Patrol_or_Chase._children.push_back(seq_Patrol);
+		sel_Patrol_or_Chase._children.push_back(seq_chase);
+		sel_Patrol_or_Chase._children.push_back(sel_patrol);
 		sel_Patrol_or_Chase._childrenCount = sel_Patrol_or_Chase._children.size();
 
 		BT._root = &sel_Patrol_or_Chase;
@@ -588,7 +889,7 @@ void Ghost::Reset(BehaviorNode* node)
 	if (node->_type == SEQUENCE)
 	{
 		node->_value = BT_UNDEF;
-		for (int i = 0; i < node->_childrenCount; i++)
+		for (int i = 0; i < node->_children.size(); i++)
 		{
 			Reset(&node->_children[i]);
 		}
@@ -596,7 +897,7 @@ void Ghost::Reset(BehaviorNode* node)
 	else if (node->_type == SELECTOR)
 	{
 		node->_value = BT_UNDEF;
-		for (int i = 0; i < node->_childrenCount; i++)
+		for (int i = 0; i < node->_children.size(); i++)
 		{
 			Reset(&node->_children[i]);
 		}
@@ -611,7 +912,7 @@ void Ghost::TagCondition(BehaviorNode* node)
 {
 	if (node->_type == SEQUENCE || node->_type == SELECTOR)
 	{
-		for (int i = 0; i < node->_childrenCount; i++)
+		for (int i = 0; i < node->_children.size(); i++)
 		{
 			TagCondition(&node->_children[i]);
 			if (node->_children[i]._has_condition == true)
@@ -635,33 +936,37 @@ BehaviorStatus Ghost::RunNode(BehaviorNode* node)
 {
 	if (node->_type == SEQUENCE)
 	{
-		for (int i = 0; i < node->_childrenCount; i++)
+		for (int i = 0; i < node->_children.size(); i++)
 		{
 			if (node->_children[i]._value == BT_UNDEF || node->_children[i]._value == BT_RUNNING || node->_children[i]._has_condition == true)
 			{
 				node->_value = RunNode(&node->_children[i]);
 				if (node->_value == BT_RUNNING || node->_value == BT_FAIL)
 				{
+					//cout << node->_name << " -> Value : " << node->_value << endl;
 					return node->_value;
 				}
 			}
 		}
 		node->_value = BT_SUCCESS;
+		//cout << node->_name << " -> Value : " << node->_value << endl;
 		return node->_value;
 	}
 	else if (node->_type == SELECTOR)
 	{
-		for (int i = 0; i < node->_childrenCount; i++)
+		for (int i = 0; i < node->_children.size(); i++)
 		{
 			if (node->_children[i]._value == BT_UNDEF || node->_children[i]._value == BT_RUNNING || node->_children[i]._has_condition == true)
 			{
 				node->_value = RunNode(&node->_children[i]);
 				if (node->_value == BT_RUNNING || node->_value == BT_SUCCESS)
 				{
+					//cout << node->_name << " -> Value : " << node->_value << endl;
 					return node->_value;
 				}
 			}
 		}
+		//cout << node->_name << " -> Value : " << node->_value << endl;
 		node->_value = BT_FAIL;
 		return node->_value;
 	}
@@ -671,6 +976,7 @@ BehaviorStatus Ghost::RunNode(BehaviorNode* node)
 		{
 			// 일단 작동함
 			node->_value = (this->*(node->_func))();
+			//cout << node->_name << " -> Value : " << node->_value << endl;
 			return node->_value;
 		}
 		else
