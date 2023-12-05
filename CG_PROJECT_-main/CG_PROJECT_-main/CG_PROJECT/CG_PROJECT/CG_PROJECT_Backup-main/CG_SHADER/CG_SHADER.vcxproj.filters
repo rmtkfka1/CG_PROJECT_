@@ -94,6 +94,12 @@
     <Filter Include="02.Object\01.Player">
       <UniqueIdentifier>{a7901eb3-6f8a-4285-bba0-d67c1a315606}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Object\10.Cat">
+      <UniqueIdentifier>{281c88f8-56c7-474b-86b4-6e7125cb00c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Object\11.Spherequiz">
+      <UniqueIdentifier>{e08eac3e-e5b1-44c6-a5b5-c3a3d6c3ffc2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -217,6 +223,12 @@
     </ClCompile>
     <ClCompile Include="src\stage2.cpp">
       <Filter>05.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Spherequiz.cpp">
+      <Filter>02.Object\11.Spherequiz</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cat.cpp">
+      <Filter>02.Object\10.Cat</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -348,6 +360,12 @@
     </ClInclude>
     <ClInclude Include="src\stage2.h">
       <Filter>05.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spherequiz.h">
+      <Filter>02.Object\11.Spherequiz</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cat.h">
+      <Filter>02.Object\10.Cat</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

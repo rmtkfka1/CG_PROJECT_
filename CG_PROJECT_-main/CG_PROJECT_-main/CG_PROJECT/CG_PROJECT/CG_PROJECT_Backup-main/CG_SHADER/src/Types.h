@@ -139,7 +139,9 @@ enum class ObjectType
 	MASK,
 	MASKEVENT,
 	EXITDOOR,
-	LOCKED
+	LOCKED,
+	CAT,
+	SPHEREQUIZ
 };
 
 enum class SceneType

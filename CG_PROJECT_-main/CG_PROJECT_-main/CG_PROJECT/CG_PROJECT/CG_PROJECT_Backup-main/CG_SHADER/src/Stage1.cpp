@@ -19,6 +19,8 @@
 #include "ExitDoor.h"
 #include "Locked.h"
 #include "SceneManager.h"
+#include "Cat.h"
+#include "Spherequiz.h"
 
 Stage1::Stage1()
 {
@@ -270,6 +272,27 @@ void Stage1::Init()
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 	}
 
+	{
+		Model* computer_model = new Model("res/models/computer.obj");
+		computer = new Event(*computer_model);
+		BoxCollider* ptr = new BoxCollider;
+		computer->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	// 엔딩 고양이
+	{
+		Model* cat_model = new Model("res/models/cat.obj");
+		cat = new Cat(*cat_model);
+		BoxCollider* ptr = new BoxCollider;
+		cat->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+		cat_model->PrintInfo();
+
+	}
+
+
+
 
 
 
@@ -340,6 +363,7 @@ void Stage1::Update()
 		Lockedtable3->Update();
 		Lockedkey3->Update();
 		answerbox3->Update();
+		sphere_quiz->SpecialUpdate(Lockedkey3);
 
 		Lockedbox4->Update();
 		Lockedtable4->Update();
@@ -347,6 +371,7 @@ void Stage1::Update()
 		answerbox4->Update();
 		room4_event->Update();
 		prof->Update();
+
 
 	}
 
@@ -420,8 +445,9 @@ void Stage1::Update()
 	mask->MatrixUpdate(mask_event);
 	mask->Update();
 	deadbody->Update();
-
 	exitdoor->Update();
+	cat->Update();
+	computer->Update();
 
 	//cout << CameraManager::GetInstance()->m_cameraPos.x << "  " << CameraManager::GetInstance()->m_cameraPos.y << "  " << CameraManager::GetInstance()->m_cameraPos.z << endl;
 
@@ -560,6 +586,12 @@ void Stage1::Object_Render()
 		exitdoor2->RenderModel(*shader);
 	}
 
+	{
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		shader->SetUniform1i("u_texture", cat_texture->GetSlot());
+		cat->Render(*shader);
+	}
+
 
 	//퀴즈
 	{
@@ -599,11 +631,24 @@ void Stage1::Object_Render()
 		answerbox2->Render(*shader);
 	}
 
+	{	
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		shader->SetUniform1i("u_texture", starfish_texture->GetSlot());
+		sphere_quiz->Render(*shader);
+	}
+
+
 	{
 		shader->SetUniform1i("u_texture", answer1_texture->GetSlot());
 		answerbox3->Render(*shader);
 		answerbox4->Render(*shader);
 
+	}
+
+	{
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		shader->SetUniform1i("u_texture", computer_texture->GetSlot());
+		computer->Render(*shader);
 	}
 
 
@@ -729,16 +774,12 @@ void Stage1::Texture_Render()
 
 	if (Lockedkey3->_collusion == true)
 	{
+		TextManager::GetInstance()->Render(0.0f, 0.0f, "solve the quiz!!");
+	}
 
-		TextManager::GetInstance()->Render(-0.1f, 0.1f, "Press 1,2,3,4");
-
-
-		string strValue = std::to_string(Lockedkey3->_first_set[0]);
-		strValue += std::to_string(Lockedkey3->_first_set[1]);
-		strValue += std::to_string(Lockedkey3->_first_set[2]);
-		strValue += std::to_string(Lockedkey3->_first_set[3]);
-
-		TextManager::GetInstance()->Render(0.0f, 0.0f, strValue.c_str());
+	if (sphere_quiz->_collusion == true)
+	{
+		TextManager::GetInstance()->Render(0.0f, 0.0f, "solve the quiz!!");
 	}
 
 
@@ -801,6 +842,8 @@ void Stage1::MakeRoom2_QUIZ()
 		Lockedkey2->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 	}
+
+
 
 	{
 		Model* answerbox = new Model("res/models/room1_event/answer_box.obj");
@@ -914,6 +957,28 @@ void Stage1::MakeRoom3_QUIZ()
 		answerbox3->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 
+	}
+
+	{
+		Model* upper = new Model("res/models/sphere_quiz/q_upper.obj");
+		Model* middle = new Model("res/models/sphere_quiz/q_middle.obj");
+		Model* lower = new Model("res/models/sphere_quiz/q_lower.obj");
+
+		sphere_quiz = new Spherequiz(*upper, *middle, *lower);
+		BoxCollider* ptr = new BoxCollider;
+		sphere_quiz->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		Model* upper = new Model("res/models/sphere_quiz/q_upper.obj");
+		Model* middle = new Model("res/models/sphere_quiz/q_middle.obj");
+		Model* lower = new Model("res/models/sphere_quiz/q_lower.obj");
+
+		sphere_quiz = new Spherequiz(*upper, *middle, *lower);
+		BoxCollider* ptr = new BoxCollider;
+		sphere_quiz->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 	}
 }
 
@@ -1057,6 +1122,8 @@ void Stage1::MakeTexture()
 	zz_texture = new Texture("res/textures/zz.jpg");
 	room4_puzzle = new Texture("res/textures/puzzle4.png");
 	snape_texture = new Texture("res/textures/snape.png");
+	computer_texture = new Texture("res/textures/computer.jpeg");
+	cat_texture = new Texture("res/textures/cat.png");
 
 
 	texture->Bind(0);
@@ -1078,6 +1145,9 @@ void Stage1::MakeTexture()
 	zz_texture->Bind(16);
 	room4_puzzle->Bind(17);
 	snape_texture->Bind(18);
+	computer_texture->Bind(19);
+	cat_texture->Bind(20);
+
 }
 
 
@@ -1325,6 +1395,7 @@ void Stage1::MakeRoom5()
 	Model* model_right1 = new Model("res/models/room3/right1.obj");
 	Model* model_right2 = new Model("res/models/room3/right2.obj");
 	Model* model_right3 = new Model("res/models/room3/right3.obj");
+	Model* model_quizpillar = new Model("res/models/sphere_quiz/pillar.obj");
 
 	{
 		Wall* front = new Wall(*model_front);
@@ -1349,7 +1420,7 @@ void Stage1::MakeRoom5()
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 		room5.push_back(left);
 	}
-	
+
 	{
 		Wall* left = new Wall(*model_left2);
 		BoxCollider* ptr = new BoxCollider;
@@ -1357,7 +1428,7 @@ void Stage1::MakeRoom5()
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 		room5.push_back(left);
 	}
-	
+
 	{
 		Wall* left = new Wall(*model_left3);
 		BoxCollider* ptr = new BoxCollider;
@@ -1373,7 +1444,7 @@ void Stage1::MakeRoom5()
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 		room5.push_back(right);
 	}
-	
+
 	{
 		Wall* right = new Wall(*model_right2);
 		BoxCollider* ptr = new BoxCollider;
@@ -1381,13 +1452,21 @@ void Stage1::MakeRoom5()
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 		room5.push_back(right);
 	}
-	
+
 	{
 		Wall* right = new Wall(*model_right3);
 		BoxCollider* ptr = new BoxCollider;
 		right->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 		room5.push_back(right);
+	}
+
+	{
+		Wall* pillar = new Wall(*model_quizpillar);
+		BoxCollider* ptr = new BoxCollider;
+		pillar->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+		room5.push_back(pillar);
 	}
 
 }

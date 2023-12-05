@@ -22,6 +22,8 @@ class Event;
 class Mask;
 class ExitDoor;
 class Locked;
+class Cat;
+class Spherequiz;
 
 class Stage1 : public Scene
 {
@@ -88,6 +90,8 @@ private:
 	Mask* mask;
 	ExitDoor* exitdoor;
 	Model* exitdoor2;
+	Cat* cat;
+	Event* computer;
 
 	//방1퀴즈 배치
 	Wall* quizbox;
@@ -97,6 +101,7 @@ private:
 	Wall* Lockedtable;
 	Locked* Lockedkey;
 	Model* answerbox;
+
 	////////////////////
 
 	//방2퀴즈 배치
@@ -124,6 +129,7 @@ private:
 	Wall* Lockedtable3;
 	Locked* Lockedkey3;
 	Wall* answerbox3;
+	Spherequiz* sphere_quiz;
 
 	//방4퀴즈 배치
 	Wall* Lockedbox4;
@@ -181,6 +187,10 @@ private:
 	Texture* zz_texture;
 	Texture* room4_puzzle;
 	Texture* snape_texture;
+	Texture* cat_texture;
+	Texture* computer_texture;
+	Texture* sphere_texture;
+
 	//조명 객체 만들기
 	Light2* light;
 

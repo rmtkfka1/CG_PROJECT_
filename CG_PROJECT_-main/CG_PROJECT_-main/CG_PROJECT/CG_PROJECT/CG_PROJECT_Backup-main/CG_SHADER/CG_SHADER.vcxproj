@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Cat.cpp" />
     <ClCompile Include="src\Locked.cpp" />
     <ClCompile Include="src\ExitDoor.cpp" />
     <ClCompile Include="src\Mask.cpp" />
@@ -172,6 +173,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\Spherequiz.cpp" />
     <ClCompile Include="src\Utility.cpp" />
     <ClCompile Include="src\VAO.cpp" />
     <ClCompile Include="src\VBO.cpp" />
@@ -189,6 +191,7 @@
     <ClCompile Include="src\stage2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Cat.h" />
     <ClInclude Include="src\Locked.h" />
     <ClInclude Include="src\ExitDoor.h" />
     <ClInclude Include="src\Mask.h" />
@@ -221,6 +224,7 @@
     <ClInclude Include="src\IBO.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\Spherequiz.h" />
     <ClInclude Include="src\Types.h" />
     <ClInclude Include="src\Utility.h" />
     <ClInclude Include="src\VAO.h" />
