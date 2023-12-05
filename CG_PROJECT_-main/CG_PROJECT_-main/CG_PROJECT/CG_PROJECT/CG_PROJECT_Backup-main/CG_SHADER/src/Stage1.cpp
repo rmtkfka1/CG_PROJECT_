@@ -143,6 +143,7 @@ void Stage1::Init()
 	shader = new Shader("res/shader/mvp_spotlight.vs", "res/shader/mvp_spotlight.fs");
 	shader->Bind();
 
+	shader2 = new Shader("res/shader/mvp.vs", "res/shader/mvp.fs");
 
 
 
@@ -452,69 +453,55 @@ void Stage1::Object_Render()
 	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
 
 
-
-
-	vector<Object*> room1_copy = room1;
-
-	for (int i = 0; i < room1_copy.size(); i++)
+	for (int i = 0; i < room1.size(); i++)
 	{
-		room1_copy[i]->Render(*shader);
+		room1[i]->Render(*shader);
 	}
 
-	vector<Object*> corridor1_copy = corridor1;
-	for (int i = 0; i < corridor1_copy.size(); i++)
+	for (int i = 0; i < corridor1.size(); i++)
 	{
-		corridor1_copy[i]->Render(*shader);
+		corridor1[i]->Render(*shader);
 	}
 
-	vector<Object*> room2_copy = room2;
-	for (int i = 0; i < room2_copy.size(); i++)
+	for (int i = 0; i < room2.size(); i++)
 	{
-		room2_copy[i]->Render(*shader);
+		room2[i]->Render(*shader);
 	}
 
-	vector<Object*> room3_copy = room3;
-	for (int i = 0; i < room3_copy.size(); i++)
+	for (int i = 0; i < room3.size(); i++)
 	{
-		room3_copy[i]->Render(*shader);
+		room3[i]->Render(*shader);
 	}
 
-	vector<Object*> room4_copy = room4;
-	for (int i = 0; i < room4_copy.size(); i++)
+	for (int i = 0; i < room4.size(); i++)
 	{
-		room4_copy[i]->Render(*shader);
+		room4[i]->Render(*shader);
 	}
 
-	vector<Object*> room5_copy = room5;
-	for (int i = 0; i < room5_copy.size(); i++)
+	for (int i = 0; i < room5.size(); i++)
 	{
-		room5_copy[i]->Render(*shader);
+		room5[i]->Render(*shader);
 	}
 
-	vector<Object*> room6_copy = room6;
-	for (int i = 0; i < room6_copy.size(); i++)
+	for (int i = 0; i < room6.size(); i++)
 	{
-		room6_copy[i]->Render(*shader);
-	}
-	
-	vector<Object*> last_corridor_copy = last_corridor;
-	for (int i = 0; i < last_corridor_copy.size(); i++)
-	{
-		last_corridor_copy[i]->Render(*shader);
-	}
-	
-	vector<Object*> last_room_copy = last_room_copy;
-	for (int i = 0; i < last_room_copy.size(); i++)
-	{
-		last_room_copy[i]->Render(*shader);
-	}
-	
-	vector<Object*> end_room_copy = end_room;
-	for (int i = 0; i < end_room_copy.size(); i++)
-	{
-		end_room_copy[i]->Render(*shader);
+		room6[i]->Render(*shader);
 	}
 
+	for (int i = 0; i < last_corridor.size(); i++)
+	{
+		last_corridor[i]->Render(*shader);
+	}
+
+	for (int i = 0; i < last_room.size(); i++)
+	{
+		last_room[i]->Render(*shader);
+	}
+
+	for (int i = 0; i < end_room.size(); i++)
+	{
+		end_room[i]->Render(*shader);
+	}
 
 	{
 		shader->SetUniform1i("u_texture", flash_fake_texture->GetSlot());
@@ -606,11 +593,22 @@ void Stage1::Object_Render()
 		shader->SetUniform1i("u_texture", answer1_texture->GetSlot());
 		answerbox3->Render(*shader);
 		answerbox4->Render(*shader);
+
 	}
 
+	shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
 
+	fish->RenderModel(*shader);
 
-	
+	shader->SetUniformMat4f("u_model", matrix::GetInstance()->GetTranslation(30,0,-70));
+	fish->RenderModel(*shader);
+
+	auto trans = matrix::GetInstance()->GetTranslation(-fish->GetCenter().x, -fish->GetCenter().y, -fish->GetCenter().z);
+	auto rotate = matrix::GetInstance()->GetRotate(90, 0, 1, 0);
+	auto trans2 = matrix::GetInstance()->GetTranslation(fish->GetCenter().x+70, fish->GetCenter().y+0, fish->GetCenter().z-50);
+	auto result = trans2 * rotate * trans;
+	shader->SetUniformMat4f("u_model", result);
+	fish->RenderModel(*shader);
 
 
 }
@@ -660,24 +658,27 @@ void Stage1::Texture_Render()
 
 	if (Lockedkey2->_collusion == true)
 	{
-		shader->Bind();
-
-		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
-		shader->SetUniformMat4f("u_view", matrix::GetInstance()->GetCamera(glm::vec3(0,0,-2.0f),glm::vec3(0,0,0),glm::vec3(0,1.0f,0)));
-
-		test->RenderModel(*shader);
+		shader2->Bind();
+		shader2->SetUniform1i("u_texture", room2_puzzle->GetSlot());
+		shader2->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		shader2->SetUniformMat4f("u_view", matrix::GetInstance()->GetCamera(glm::vec3(0,0,-2.0f),glm::vec3(0,0,0),glm::vec3(0,1.0f,0)));
+		shader2->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
+		render_box->RenderModel(*shader);
 
 
 		shader->Unbind();
-		TextManager::GetInstance()->Render(-0.1f, 0.1f, "Press 1,2,3,4");
+
 
 
 		string strValue = std::to_string(Lockedkey2->_first_set[0]);
+		strValue += "      ";
 		strValue += std::to_string(Lockedkey2->_first_set[1]);
+		strValue += "      ";
 		strValue += std::to_string(Lockedkey2->_first_set[2]);
+		strValue += "      ";
 		strValue += std::to_string(Lockedkey2->_first_set[3]);
 
-		TextManager::GetInstance()->Render(0.0f, 0.0f, strValue.c_str());
+		TextManager::GetInstance()->Render(-0.2f, -0.2f, strValue.c_str());
 	}
 
 	if (Lockedkey3->_collusion == true)
@@ -754,7 +755,8 @@ void Stage1::MakeRoom2_QUIZ()
 	}
 	{
 
-		test = new Model("res/models/test.obj");
+		render_box = new Model("res/models/test.obj");
+		fish = new Model("res/models/room2_event/fish.obj");
 	}
 }
 
@@ -914,7 +916,7 @@ void Stage1::MakeTexture()
 	quizbox_texture = new Texture("res/textures/1.jpg");
 	lockedbox_texture = new Texture("res/textures/lockedbox.jpeg");
 	answer1_texture = new Texture("res/textures/answer1.png");
-
+	room2_puzzle = new Texture("res/textures/puzzle.png");
 
 	texture->Bind(0);
 	flash_fake_texture->Bind(1);
@@ -928,6 +930,7 @@ void Stage1::MakeTexture()
 	quizbox_texture->Bind(9);
 	lockedbox_texture->Bind(10);
 	answer1_texture->Bind(11);
+	room2_puzzle->Bind(12);
 }
 
 

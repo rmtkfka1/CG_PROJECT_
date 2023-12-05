@@ -71,6 +71,7 @@ private:
 
 	//쉐이더
 	Shader* shader;
+	Shader* shader2; //노조명
 	
 	
 	//각기 다른 텍스쳐를 적용해줘야 되는 애들//
@@ -103,7 +104,8 @@ private:
 	Wall*   Lockedtable2;
 	Locked* Lockedkey2;
 	Wall*  answerbox2;
-	Model* test;
+	Model* render_box;
+	Model* fish;
 
 	////////////////
 	//방3퀴즈 배치
@@ -159,6 +161,7 @@ private:
 	Texture* quizbox_texture;
 	Texture* lockedbox_texture;
 	Texture* answer1_texture;
+	Texture* room2_puzzle;
 	//조명 객체 만들기
 	Light2* light;
 
