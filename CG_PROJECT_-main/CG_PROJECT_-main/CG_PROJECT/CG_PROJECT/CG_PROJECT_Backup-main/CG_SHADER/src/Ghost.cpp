@@ -666,9 +666,28 @@ BehaviorStatus Ghost::IsPlayerOnSight()
 	glm::vec3 v2 = glm::normalize(_player_pos - _pos);
 	float temp = glm::dot(v1, v2);
 
-	if (temp >= glm::cos(glm::radians(_detection_degree / 2)))	// cos(탐지각도 / 2)보다 크다면 탐지각도보다 안에있음 -> v1, v2가 모두 정규화 되어있기 때문
+	if (temp >= glm::cos(glm::radians(_detection_degree)))	// cos(탐지각도)보다 크다면 탐지각도보다 안에있음 -> v1, v2가 모두 정규화 되어있기 때문
 	{
 		cout << "player on sight" << endl;
+		return BehaviorStatus::BT_SUCCESS;
+	}
+	else
+	{
+		return BehaviorStatus::BT_FAIL;
+	}
+
+
+}
+
+BehaviorStatus Ghost::IsPlayerOnMoreSight()
+{	// 귀신의 방향벡터와 (플레이어 위치 - 귀신 위치)벡터를 정규화하여 내적해서 구함
+	glm::vec3 v1 = glm::normalize(_dir);
+	glm::vec3 v2 = glm::normalize(_player_pos - _pos);
+	float temp = glm::dot(v1, v2);
+
+	if (temp >= glm::cos(glm::radians(_detection_degree*2)))	// cos(탐지각도 / 2)보다 크다면 탐지각도보다 안에있음 -> v1, v2가 모두 정규화 되어있기 때문
+	{
+		cout << "player on near sight" << endl;
 		return BehaviorStatus::BT_SUCCESS;
 	}
 	else
@@ -713,7 +732,6 @@ BehaviorStatus Ghost::ChasePlayer()
 	if (DistanceLessThan(_pos.x, _pos.z, _player_pos.x, _player_pos.z, 0.5f))
 	{
 		// cout << "Chase Complete Game Over" << endl;
-		// 귀신이 플레이어를 잡으면 여기서 이벤트가 발생함
 		return BT_SUCCESS;
 	}
 	else
@@ -804,6 +822,22 @@ void Ghost::MakeBehaviorTree()
 		seq_corridor_chase._children.push_back(act_get_near_loc_from_player);
 		seq_corridor_chase._children.push_back(act_move_to_loc);
 
+		///////// 먼 추격 조건 SEL //////////////////////////////////////////////////////////////////////////////
+
+		cond_is_player_on_sight._name = "is player on sight";
+		cond_is_player_on_sight._type = CONDITION;
+		cond_is_player_on_sight._func = &Ghost::IsPlayerOnSight;
+
+		cond_is_already_chase._name = "is already chase";
+		cond_is_already_chase._type = CONDITION;
+		cond_is_already_chase._func = &Ghost::IsGhostInChase;
+
+		sel_far_chase_condition._name = "far chase condition";
+		sel_far_chase_condition._type = SELECTOR;
+		sel_far_chase_condition._children.push_back(cond_is_player_on_sight);
+		sel_far_chase_condition._children.push_back(cond_is_already_chase);
+
+
 		///////// 먼 추격 SEQ //////////////////////////////////////////////////////////////////////////////
 
 		cond_is_player_near._name = "is player nearby";
@@ -813,13 +847,26 @@ void Ghost::MakeBehaviorTree()
 		seq_far_chase._name = "far chase";
 		seq_far_chase._type = SEQUENCE;
 		seq_far_chase._children.push_back(cond_is_player_near);
+		seq_far_chase._children.push_back(sel_far_chase_condition);
 		seq_far_chase._children.push_back(seq_corridor_chase);
+
+		///////// 가까운 추격  조건 SEL //////////////////////////////////////////////////////////////////////////////
+
+		cond_is_player_on_more_sight._name = "is player on more sight";
+		cond_is_player_on_more_sight._type = CONDITION;
+		cond_is_player_on_more_sight._func = &Ghost::IsPlayerOnMoreSight;
+
+		sel_near_chase_condition._name = "near chase condition";
+		sel_near_chase_condition._type = SELECTOR;
+		sel_near_chase_condition._children.push_back(cond_is_player_on_more_sight);
+		sel_near_chase_condition._children.push_back(cond_is_already_chase);
 
 		///////// 가까운 추격 SEQ //////////////////////////////////////////////////////////////////////////////
 
 		cond_is_player_very_near._name = "is player very nearby";
 		cond_is_player_very_near._type = CONDITION;
 		cond_is_player_very_near._func = &Ghost::IsPlayerVeryNearBy;
+		
 
 		act_move_direct_to_player._name = "move direct to player";
 		act_move_direct_to_player._type = ACTION;
@@ -827,7 +874,8 @@ void Ghost::MakeBehaviorTree()
 
 		seq_near_chase._name = "near chase";
 		seq_near_chase._type = SEQUENCE;
-		seq_near_chase._children.push_back(cond_is_player_near);
+		seq_near_chase._children.push_back(cond_is_player_very_near);
+		seq_near_chase._children.push_back(sel_near_chase_condition);
 		seq_near_chase._children.push_back(act_move_direct_to_player);
 
 		///////// 추격 시작 SEL //////////////////////////////////////////////////////////////////////////////
@@ -841,16 +889,11 @@ void Ghost::MakeBehaviorTree()
 		
 		cond_is_player_in_corridor._name = "is player in corridor";
 		cond_is_player_in_corridor._type = CONDITION;
-		cond_is_player_in_corridor._func = &Ghost::IsPlayerOnSight;
-
-		cond_is_player_on_sight._name = "is player on sight";
-		cond_is_player_on_sight._type = CONDITION;
-		cond_is_player_on_sight._func = &Ghost::IsPlayerOnSight;
+		cond_is_player_in_corridor._func = &Ghost::IsPlayerInCorridor;
 
 		seq_chase._name = "chase";
 		seq_chase._type = SEQUENCE;
 		seq_chase._children.push_back(cond_is_player_in_corridor);
-		seq_chase._children.push_back(cond_is_player_on_sight);
 		seq_chase._children.push_back(sel_chase_start);
 
 

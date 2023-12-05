@@ -75,7 +75,7 @@ public:
 	Location _player_location = Location::NONE;
 
 	GhostState _state;
-	float _detection_distance = 80.0f;
+	float _detection_distance = 120.0f;
 	float _detection_degree = 90.0f;	// Å½Áö °¢µµ(±Í½Å ±âÁØ »ï°¢ÇüÀÇ ½Ã¾ß)
 
 	vector<glm::vec3> _patrol_locations;
@@ -126,6 +126,7 @@ public:
 	BehaviorStatus IsPlayerNearBy();
 	BehaviorStatus IsPlayerVeryNearBy();
 	BehaviorStatus IsPlayerOnSight();
+	BehaviorStatus IsPlayerOnMoreSight();
 
 	BehaviorStatus IsPlayerInRoom();
 	BehaviorStatus IsPlayerInCorridor();
@@ -171,6 +172,10 @@ public:
 	BehaviorNode act_move_direct_to_player;
 	BehaviorNode cond_is_player_near;
 	BehaviorNode cond_is_player_on_sight;
+	BehaviorNode cond_is_player_on_more_sight;
+	BehaviorNode cond_is_already_chase;
+	BehaviorNode sel_near_chase_condition;
+	BehaviorNode sel_far_chase_condition;
 	BehaviorNode act_get_near_loc_from_player;
 	BehaviorNode act_move_to_loc;
 	BehaviorNode seq_corridor_chase;
