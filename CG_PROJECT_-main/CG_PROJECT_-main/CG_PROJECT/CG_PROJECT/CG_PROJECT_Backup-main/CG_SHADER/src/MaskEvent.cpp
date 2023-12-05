@@ -14,7 +14,11 @@ Event::Event(Model& model) :Object(ObjectType::MASKEVENT)
 Event::~Event()
 {
 
-
+	if (_model != nullptr)
+	{
+		delete _model;
+		_model = nullptr;
+	}
 }
 
 void Event::Init()

@@ -19,6 +19,11 @@ RightDoor::RightDoor(Model& model) :Object(ObjectType::RIGHTDOOR)
 
 RightDoor::~RightDoor()
 {
+	if (_model != nullptr)
+	{
+		delete _model;
+		_model = nullptr;
+	}
 
 
 }

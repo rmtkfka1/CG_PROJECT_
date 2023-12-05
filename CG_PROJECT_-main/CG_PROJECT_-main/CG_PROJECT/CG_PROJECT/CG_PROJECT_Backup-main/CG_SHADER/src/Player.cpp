@@ -6,7 +6,7 @@
 #include "Model.h"
 #include "Light2.h"
 #include "ExitDoor.h"
-
+#include "SceneManager.h"
 Player::Player(Model& model) :Object(ObjectType::PLAYER)
 {
 	_center = model.GetCenter();
@@ -18,6 +18,11 @@ Player::Player(Model& model) :Object(ObjectType::PLAYER)
 
 Player::~Player()
 {
+	if (_model != nullptr)
+	{
+		delete _model;
+		_model = nullptr;
+	}
 
 }
 
@@ -36,7 +41,7 @@ void Player::Update()
 
 	MatrixUpdate();
 
-
+	
 
 
 
@@ -65,6 +70,9 @@ void Player::MatrixUpdate()
 
 void Player::KeyUpdate()
 {
+
+
+
 	if (KeyManager::GetInstance()->Getbutton(KeyType::W))
 	{
 		_center.x = CameraManager::GetInstance()->m_cameraPos.x;
@@ -97,12 +105,12 @@ void Player::KeyUpdate()
 
 		if (speed_gage < -1.0f)
 		{
-			CameraManager::GetInstance()->m_cameraSpeed = 40.0f;
+			CameraManager::GetInstance()->m_cameraSpeed = 200.0f; //40.0f
 			return;
 		}
 
 		
-		CameraManager::GetInstance()->m_cameraSpeed = 80.0f;
+		CameraManager::GetInstance()->m_cameraSpeed = 200.0f; //80.0f
 		_run = true;
 		cout << speed_gage << endl;
 		speed_gage += -0.05f * TimeManager::GetInstance()->GetDeltaTime();
@@ -112,7 +120,7 @@ void Player::KeyUpdate()
 	if (KeyManager::GetInstance()->GetbuttonUp(KeyType::SHIFT))
 	{
 
-		CameraManager::GetInstance()->m_cameraSpeed = 40.0f;
+		CameraManager::GetInstance()->m_cameraSpeed = 200.0f; //40.0f
 		_run = false;
 
 		if (speed_gage < -0.67f)

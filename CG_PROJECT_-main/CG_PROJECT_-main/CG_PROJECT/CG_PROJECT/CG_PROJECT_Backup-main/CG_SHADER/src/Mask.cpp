@@ -12,7 +12,11 @@ Mask::Mask(Model& model):Object(ObjectType::MASK)
 
 Mask::~Mask()
 {
-
+	if (_model != nullptr)
+	{
+		delete _model;
+		_model = nullptr;
+	}
 }
 
 void Mask::Init()

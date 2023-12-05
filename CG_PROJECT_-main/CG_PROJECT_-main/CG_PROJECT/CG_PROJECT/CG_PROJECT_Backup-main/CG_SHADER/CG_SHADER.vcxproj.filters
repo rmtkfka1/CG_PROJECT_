@@ -215,6 +215,9 @@
     <ClCompile Include="src\Locked.cpp">
       <Filter>02.Object\09.Locked</Filter>
     </ClCompile>
+    <ClCompile Include="src\stage2.cpp">
+      <Filter>05.Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core.h">
@@ -342,6 +345,9 @@
     </ClInclude>
     <ClInclude Include="src\Locked.h">
       <Filter>02.Object\09.Locked</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stage2.h">
+      <Filter>05.Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

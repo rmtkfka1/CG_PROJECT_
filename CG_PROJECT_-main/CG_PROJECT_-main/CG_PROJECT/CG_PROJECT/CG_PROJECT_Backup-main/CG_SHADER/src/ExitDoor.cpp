@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ExitDoor.h"
 #include "BoxCollider.h"
+#include "SceneManager.h"
 ExitDoor::ExitDoor(Model& model):Object(ObjectType::EXITDOOR)
 {
 
@@ -17,6 +18,11 @@ ExitDoor::ExitDoor(Model& model):Object(ObjectType::EXITDOOR)
 
 ExitDoor::~ExitDoor()
 {
+	if (_model != nullptr)
+	{
+		delete _model;
+		_model = nullptr;
+	}
 }
 
 void ExitDoor::Init()
@@ -65,7 +71,6 @@ void ExitDoor::OnComponentBeginOverlap(Collider* collider, Collider* other)
 	if (other->GetOwner()->GetObjectType() == ObjectType::PLAYER)
 	{
 		_collusion = true;
-
 	}
 }
 

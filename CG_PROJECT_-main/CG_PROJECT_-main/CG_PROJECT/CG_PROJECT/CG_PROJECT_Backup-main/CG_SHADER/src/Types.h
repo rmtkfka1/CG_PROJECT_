@@ -145,5 +145,6 @@ enum class ObjectType
 enum class SceneType
 {
 	NONE,
-	Stage1
+	Stage1,
+	Stage2,
 };

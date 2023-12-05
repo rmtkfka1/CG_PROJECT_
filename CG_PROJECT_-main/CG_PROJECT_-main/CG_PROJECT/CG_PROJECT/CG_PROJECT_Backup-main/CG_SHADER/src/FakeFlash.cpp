@@ -16,6 +16,11 @@ FakeFlash::FakeFlash(Model& model):Object(ObjectType::FAKE_FLASH)
 
 FakeFlash::~FakeFlash()
 {
+	if (_model != nullptr)
+	{
+		delete _model;
+		_model = nullptr;
+	}
 }
 
 void FakeFlash::Init()

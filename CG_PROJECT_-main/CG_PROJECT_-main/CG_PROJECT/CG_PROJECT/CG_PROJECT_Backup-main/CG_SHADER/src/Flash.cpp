@@ -12,6 +12,11 @@ Flash::Flash(Model& model):Object(ObjectType::FLASH)
 
 Flash::~Flash()
 {
+	if (_model != nullptr)
+	{
+		delete _model;
+		_model = nullptr;
+	}
 }
 
 void Flash::Init()

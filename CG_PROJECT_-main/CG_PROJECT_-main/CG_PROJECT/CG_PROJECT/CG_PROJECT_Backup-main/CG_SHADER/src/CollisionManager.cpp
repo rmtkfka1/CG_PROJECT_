@@ -12,7 +12,7 @@ void CollisionManager::Init()
 void CollisionManager::Update()
 {
 	
-	vector<Collider*>& colliders = _colliders;
+	vector<Collider*> colliders = _colliders;
 
 	for (int32 i = 0; i < colliders.size(); i++)
 	{
@@ -20,6 +20,11 @@ void CollisionManager::Update()
 		{
 			Collider* src = colliders[i];
 			Collider* dest = colliders[j];
+
+			if (src == nullptr || dest ==nullptr)
+			{
+				return;
+			}
 
 			if (src->CheckCollision(dest))
 			{

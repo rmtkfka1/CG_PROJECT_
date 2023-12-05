@@ -17,7 +17,11 @@ LeftDoor::LeftDoor(Model& model):Object(ObjectType::LEFTDOOR)
 
 LeftDoor::~LeftDoor()
 {
-
+	if (_model != nullptr)
+	{
+		delete _model;
+		_model = nullptr;
+	}
 
 }
 

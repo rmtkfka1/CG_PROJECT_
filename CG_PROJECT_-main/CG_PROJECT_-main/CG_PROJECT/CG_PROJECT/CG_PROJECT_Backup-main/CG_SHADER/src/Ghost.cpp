@@ -24,6 +24,24 @@ Ghost::Ghost(Model& model_body, Model& model_left_arm, Model& model_right_arm) :
 Ghost::~Ghost()
 {
 	cout << "~Ghost" << endl;
+
+	if (_left_arm != nullptr)
+	{
+		delete _left_arm;
+		_left_arm = nullptr;
+	}
+
+	if (_right_arm != nullptr)
+	{
+		delete _right_arm;
+		_right_arm = nullptr;
+	}
+
+	if (_model != nullptr)
+	{
+		delete _model;
+		_model = nullptr;
+	}
 }
 
 void Ghost::Init()

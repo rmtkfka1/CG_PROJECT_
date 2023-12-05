@@ -14,6 +14,12 @@ Wall::Wall(Model& model) :Object(ObjectType::WALL)
 Wall::~Wall()
 {
 
+	if (_model != nullptr)
+	{
+		delete _model;
+		_model = nullptr;
+	}
+
 }
 
 void Wall::Init()

@@ -26,7 +26,11 @@ Locked::Locked(Model& model, int answer[4]) :Object(ObjectType::LOCKED)
 
 Locked::~Locked()
 {
-
+	if (_model != nullptr)
+	{
+		delete _model;
+		_model = nullptr;
+	}
 
 }
 

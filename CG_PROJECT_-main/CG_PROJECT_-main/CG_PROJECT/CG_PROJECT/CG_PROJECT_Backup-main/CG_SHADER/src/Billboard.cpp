@@ -11,6 +11,11 @@ Billboard::Billboard(Model& model) :Object(ObjectType::BILLBOARD)
 
 Billboard::~Billboard()
 {
+	if (_model != nullptr)
+	{
+		delete _model;
+		_model = nullptr;
+	}
 }
 
 void Billboard::Init()

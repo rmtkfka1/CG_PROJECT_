@@ -30,9 +30,6 @@ public:
 	virtual ~Stage1();
 
 	virtual void Init() override;
-	void MakeRoom2_QUIZ();
-	void MakeRoom1_QUIZ();
-	void MakeTexture();
 	virtual void Update() override;
 	virtual void Render() override;
 
@@ -42,6 +39,12 @@ public:
 	void Texture_Render();
 
 private:
+	void MakeRoom1_QUIZ();
+	void MakeRoom2_QUIZ();
+	void MakeRoom3_QUIZ();
+	void MakeRoom4_QUIZ();
+	void MakeTexture();
+
 
 	void MakeRoom();
 
@@ -87,22 +90,34 @@ private:
 
 	//방1퀴즈 배치
 	Wall* quizbox;
+	Event* quizbox_event;
+
 	Wall* Lockedbox;
 	Wall* Lockedtable;
 	Locked* Lockedkey;
-	Event* quizbox_event;
 	Model* answerbox;
 	////////////////////
 
 	//방2퀴즈 배치
-	Wall*   quizbox2;
 	Wall*   Lockedbox2;
 	Wall*   Lockedtable2;
 	Locked* Lockedkey2;
 	Wall*  answerbox2;
 
-
 	////////////////
+	//방3퀴즈 배치
+	Wall* Lockedbox3;
+	Wall* Lockedtable3;
+	Locked* Lockedkey3;
+	Wall* answerbox3;
+
+	//방4퀴즈 배치
+	Wall* Lockedbox4;
+	Wall* Lockedtable4;
+	Locked* Lockedkey4;
+	Wall* answerbox4;
+
+
 
 
 	vector<Object*> room1;
@@ -146,6 +161,6 @@ private:
 
 
 
-	float xx;
+
 };
 

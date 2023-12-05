@@ -8,6 +8,7 @@ Collider::Collider(ColliderType colliderType)
 
 Collider::~Collider()
 {
+	
 }
 
 void Collider::Init()

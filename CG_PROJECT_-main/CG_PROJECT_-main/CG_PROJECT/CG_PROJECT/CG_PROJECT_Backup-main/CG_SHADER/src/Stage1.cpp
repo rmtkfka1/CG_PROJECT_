@@ -18,6 +18,7 @@
 #include "Mask.h"
 #include "ExitDoor.h"
 #include "Locked.h"
+#include "SceneManager.h"
 
 Stage1::Stage1()
 {
@@ -27,6 +28,111 @@ Stage1::Stage1()
 
 Stage1::~Stage1()
 {
+
+	//// Delete shader
+	//delete shader;
+
+	//// Delete objects with different textures
+	//delete player;
+	//delete flash;
+	//delete fake_flash;
+	//delete billboard;
+	//delete table;
+	//delete ghost;
+	//delete Corridor_left_door;
+	//delete Corridor_right_door;
+	//delete deadbody;
+	//delete mask_event;
+	//delete mask;
+	//delete exitdoor;
+	//delete exitdoor2;
+
+	//// Delete objects related to room 1 quiz
+	//delete quizbox;
+	//delete Lockedbox;
+	//delete Lockedtable;
+	//delete Lockedkey;
+	//delete quizbox_event;
+	//delete answerbox;
+
+	//// Delete objects related to room 2 quiz
+	//delete quizbox2;
+	//delete Lockedbox2;
+	//delete Lockedtable2;
+	//delete Lockedkey2;
+	//delete answerbox2;
+
+
+	//delete texture;
+	//delete billboard_texture;
+	//delete light_texture;
+	//delete table_texture;
+	//delete flash_fake_texture;
+	//delete ghost_texture;
+	//delete door_texture;
+	//delete deadbody_texture;
+	//delete mask_texture;
+	//delete exitdoor_texture;
+	//delete quizbox_texture;
+	//delete lockedbox_texture;
+	//delete answer1_texture;
+
+	//// Deleting light object
+	//delete light;
+
+	//for (Object* obj : room1) {
+	//	delete obj;
+	//}
+	//room1.clear();
+
+	//for (Object* obj : corridor1) {
+	//	delete obj;
+	//}
+	//corridor1.clear();
+
+	//for (Object* obj : room2) {
+	//	delete obj;
+	//}
+	//room2.clear();
+
+	//for (Object* obj : room3) {
+	//	delete obj;
+	//}
+	//room3.clear();
+
+	//for (Object* obj : room4) {
+	//	delete obj;
+	//}
+	//room4.clear();
+
+	//for (Object* obj : room5) {
+	//	delete obj;
+	//}
+	//room5.clear();
+
+	//for (Object* obj : room6) {
+	//	delete obj;
+	//}
+	//room6.clear();
+
+	//for (Object* obj : last_corridor) {
+	//	delete obj;
+	//}
+	//last_corridor.clear();
+
+	//for (Object* obj : last_room) {
+	//	delete obj;
+	//}
+	//last_room.clear();
+
+	//for (Object* obj : end_room) {
+	//	delete obj;
+	//}
+	//end_room.clear();
+
+
+
+
 
 
 }
@@ -169,6 +275,8 @@ void Stage1::Init()
 	//방1 퀴즈 생성
 	MakeRoom1_QUIZ();
 	MakeRoom2_QUIZ();
+	MakeRoom3_QUIZ();
+	MakeRoom4_QUIZ();
 /////////////	
 	MakeRoom();
 	/////////텍스처 만들기/////////////////////////////////////////////////////////////
@@ -221,6 +329,91 @@ void Stage1::MakeRoom2_QUIZ()
 		answerbox2->SetTransPose(455, 0, 20);
 		BoxCollider* ptr = new BoxCollider;
 		answerbox2->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+
+	}
+}
+
+void Stage1::MakeRoom3_QUIZ()
+{
+	//방3 퀴즈 생성
+	{
+		Model* box = new Model("res/models/lockedbox.obj");
+		Lockedbox3 = new Wall(*box);
+		Lockedbox3->SetTransPose(0, 0, -250);
+		BoxCollider* ptr = new BoxCollider;
+		Lockedbox3->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		Model* table_model = new Model("res/models/lockedtable.obj");
+		Lockedtable3 = new Wall(*table_model);
+		Lockedtable3->SetTransPose(0, 0, -250);
+		BoxCollider* ptr = new BoxCollider;
+		Lockedtable3->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		Model* locked_key = new Model("res/models/lockedkey.obj");
+		int num[4] = { 1,2,3,4 };// 너가 정답을 설정해줘야됨
+		Lockedkey3 = new Locked(*locked_key, num);
+		Lockedkey3->SetTransPose(0, 0, -250);
+		BoxCollider* ptr = new BoxCollider;
+		Lockedkey3->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		Model* answerbox = new Model("res/models/room1_event/answer_box.obj");
+		answerbox3 = new Wall(*answerbox);
+		answerbox3->SetTransPose(0, 0, -250);
+		BoxCollider* ptr = new BoxCollider;
+		answerbox3->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+
+	}
+}
+
+void Stage1::MakeRoom4_QUIZ()
+{
+
+	//방3 퀴즈 생성
+	{
+		Model* box = new Model("res/models/lockedbox.obj");
+		Lockedbox4 = new Wall(*box);
+		Lockedbox4->SetTransPose(300, 0, -250);
+		BoxCollider* ptr = new BoxCollider;
+		Lockedbox4->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		Model* table_model = new Model("res/models/lockedtable.obj");
+		Lockedtable4 = new Wall(*table_model);
+		Lockedtable4->SetTransPose(300, 0, -250);
+		BoxCollider* ptr = new BoxCollider;
+		Lockedtable4->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		Model* locked_key = new Model("res/models/lockedkey.obj");
+		int num[4] = { 1,1,1,1 };// 너가 정답을 설정해줘야됨
+		Lockedkey4 = new Locked(*locked_key, num);
+		Lockedkey4->SetTransPose(300, 0, -250);
+		BoxCollider* ptr = new BoxCollider;
+		Lockedkey4->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		Model* answerbox = new Model("res/models/room1_event/answer_box.obj");
+		answerbox4 = new Wall(*answerbox);
+		answerbox4->SetTransPose(300, 0, -250);
+		BoxCollider* ptr = new BoxCollider;
+		answerbox4->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 
 	}
@@ -328,20 +521,37 @@ void Stage1::Update()
 
 	fake_flash->Update();
 	fake_flash->UpdateFlash(light, flash);
-	quizbox_event->Update();
+
 
 	Corridor_left_door->Update();
 	Corridor_right_door->Update();
 
-	table->Update();
-	Lockedtable->Update();
-	Lockedkey->Update();
+	{
+
+		quizbox->Update();
+		table->Update();
+		Lockedbox->Update();
+		Lockedtable->Update();
+		Lockedkey->Update();
+		quizbox_event->Update();
 
 
-	Lockedbox2->Update();
-	Lockedtable2->Update();
-	Lockedkey2->Update();
-	answerbox2->Update();
+		Lockedbox2->Update();
+		Lockedtable2->Update();
+		Lockedkey2->Update();
+		answerbox2->Update();
+
+		Lockedbox3->Update();
+		Lockedtable3->Update();
+		Lockedkey3->Update();
+		answerbox3->Update();
+
+		Lockedbox4->Update();
+		Lockedtable4->Update();
+		Lockedkey4->Update();
+		answerbox4->Update();
+
+	}
 
 
 
@@ -396,8 +606,8 @@ void Stage1::Update()
 		end_room[i]->Update();
 	}
 
-	exitdoor->Update();
-	quizbox->Update();
+
+	
 
 	flash->MatrixUpdate(player);
 
@@ -413,10 +623,11 @@ void Stage1::Update()
 	mask->MatrixUpdate(mask_event);
 	mask->Update();
 	deadbody->Update();
-	
+	exitdoor->Update();
 
 	//cout << CameraManager::GetInstance()->m_cameraPos.x << "  " << CameraManager::GetInstance()->m_cameraPos.y << "  " << CameraManager::GetInstance()->m_cameraPos.z << endl;
-	
+
+
 }
 
 void Stage1::Render()
@@ -451,54 +662,65 @@ void Stage1::Object_Render()
 	player->Render(*shader);
 
 
-	for (int i = 0; i < room1.size(); i++)
+	vector<Object*> room1_copy = room1;
+
+	for (int i = 0; i < room1_copy.size(); i++)
 	{
-		room1[i]->Render(*shader);
+		room1_copy[i]->Render(*shader);
 	}
 
-	for (int i = 0; i < corridor1.size(); i++)
+	vector<Object*> corridor1_copy = corridor1;
+	for (int i = 0; i < corridor1_copy.size(); i++)
 	{
-		corridor1[i]->Render(*shader);
+		corridor1_copy[i]->Render(*shader);
 	}
 
-	for (int i = 0; i < room2.size(); i++)
+	vector<Object*> room2_copy = room2;
+	for (int i = 0; i < room2_copy.size(); i++)
 	{
-		room2[i]->Render(*shader);
+		room2_copy[i]->Render(*shader);
 	}
 
-	for (int i = 0; i < room3.size(); i++)
+	vector<Object*> room3_copy = room3;
+	for (int i = 0; i < room3_copy.size(); i++)
 	{
-		room3[i]->Render(*shader);
+		room3_copy[i]->Render(*shader);
 	}
 
-	for (int i = 0; i < room4.size(); i++)
+	vector<Object*> room4_copy = room4;
+	for (int i = 0; i < room4_copy.size(); i++)
 	{
-		room4[i]->Render(*shader);
+		room4_copy[i]->Render(*shader);
 	}
 
-	for (int i = 0; i < room5.size(); i++)
+	vector<Object*> room5_copy = room5;
+	for (int i = 0; i < room5_copy.size(); i++)
 	{
-		room5[i]->Render(*shader);
+		room5_copy[i]->Render(*shader);
 	}
 
-	for (int i = 0; i < room6.size(); i++)
+	vector<Object*> room6_copy = room6;
+	for (int i = 0; i < room6_copy.size(); i++)
 	{
-		room6[i]->Render(*shader);
+		room6_copy[i]->Render(*shader);
 	}
 	
-	for (int i = 0; i < last_corridor.size(); i++)
+	vector<Object*> last_corridor_copy = last_corridor;
+	for (int i = 0; i < last_corridor_copy.size(); i++)
 	{
-		last_corridor[i]->Render(*shader);
+		last_corridor_copy[i]->Render(*shader);
 	}
 	
-	for (int i = 0; i < last_room.size(); i++)
+	vector<Object*> last_room_copy = last_room_copy;
+	for (int i = 0; i < last_room_copy.size(); i++)
 	{
-		last_room[i]->Render(*shader);
+		last_room_copy[i]->Render(*shader);
 	}
 	
-	for (int i = 0; i < end_room.size(); i++)
+	vector<Object*> end_room_copy = end_room;
+	for (int i = 0; i < end_room_copy.size(); i++)
 	{
-		end_room[i]->Render(*shader);
+		end_room_copy[i]->Render(*shader);
 	}
 
 
@@ -512,12 +734,6 @@ void Stage1::Object_Render()
 		billboard->Render(*shader);
 	}
 
-	{
-		shader->SetUniform1i("u_texture", table_texture->GetSlot());
-		table->Render(*shader);
-		Lockedtable->Render(*shader);
-		Lockedtable2->Render(*shader);
-	}
 
 	{
 		shader->SetUniform1i("u_texture", ghost_texture->GetSlot());
@@ -542,11 +758,11 @@ void Stage1::Object_Render()
 	}
 
 
-	//	{
-	//		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
-	//		shader->SetUniform1i("u_texture", mask_texture->GetSlot());
-	//		mask->Render(*shader);
-	//	}
+	{
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		shader->SetUniform1i("u_texture", mask_texture->GetSlot());
+		mask->Render(*shader);
+	}
 
 	{
 		shader->SetUniform1i("u_texture", exitdoor_texture->GetSlot());
@@ -554,6 +770,19 @@ void Stage1::Object_Render()
 		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
 		exitdoor2->RenderModel(*shader);
 	}
+
+
+	//퀴즈
+	{
+		shader->SetUniform1i("u_texture", table_texture->GetSlot());
+		table->Render(*shader);
+		Lockedtable->Render(*shader);
+		Lockedtable2->Render(*shader);
+		Lockedtable3->Render(*shader);
+		Lockedtable4->Render(*shader);
+	}
+
+
 
 	{
 		shader->SetUniform1i("u_texture", quizbox_texture->GetSlot());
@@ -567,6 +796,10 @@ void Stage1::Object_Render()
 		Lockedkey->Render(*shader);
 		Lockedbox2->Render(*shader);
 		Lockedkey2->Render(*shader);
+		Lockedbox3->Render(*shader);
+		Lockedkey3->Render(*shader);
+		Lockedbox4->Render(*shader);
+		Lockedkey4->Render(*shader);
 
 	}
 
@@ -574,11 +807,13 @@ void Stage1::Object_Render()
 		shader->SetUniform1i("u_texture", answer1_texture->GetSlot());
 		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
 		answerbox->RenderModel(*shader);
+		answerbox2->Render(*shader);
 	}
 
 	{
 		shader->SetUniform1i("u_texture", answer1_texture->GetSlot());
-		answerbox2->Render(*shader);
+		answerbox3->Render(*shader);
+		answerbox4->Render(*shader);
 	}
 
 
@@ -646,6 +881,34 @@ void Stage1::Texture_Render()
 		TextManager::GetInstance()->Render(0.0f, 0.0f, strValue.c_str());
 	}
 
+	if (Lockedkey3->_collusion == true)
+	{
+
+		TextManager::GetInstance()->Render(-0.1f, 0.1f, "Press 1,2,3,4");
+
+
+		string strValue = std::to_string(Lockedkey3->_first_set[0]);
+		strValue += std::to_string(Lockedkey3->_first_set[1]);
+		strValue += std::to_string(Lockedkey3->_first_set[2]);
+		strValue += std::to_string(Lockedkey3->_first_set[3]);
+
+		TextManager::GetInstance()->Render(0.0f, 0.0f, strValue.c_str());
+	}
+
+
+	if (Lockedkey4->_collusion == true)
+	{
+
+		TextManager::GetInstance()->Render(-0.1f, 0.1f, "Press 1,2,3,4");
+
+
+		string strValue = std::to_string(Lockedkey4->_first_set[0]);
+		strValue += std::to_string(Lockedkey4->_first_set[1]);
+		strValue += std::to_string(Lockedkey4->_first_set[2]);
+		strValue += std::to_string(Lockedkey4->_first_set[3]);
+
+		TextManager::GetInstance()->Render(0.0f, 0.0f, strValue.c_str());
+	}
 
 }
 

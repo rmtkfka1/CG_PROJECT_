@@ -14,6 +14,11 @@ DeadBody::DeadBody(Model& model):Object(ObjectType::DEADBODY)
 
 DeadBody::~DeadBody()
 {
+	if (_model != nullptr)
+	{
+		delete _model;
+		_model = nullptr;
+	}
 }
 
 void DeadBody::Init()
