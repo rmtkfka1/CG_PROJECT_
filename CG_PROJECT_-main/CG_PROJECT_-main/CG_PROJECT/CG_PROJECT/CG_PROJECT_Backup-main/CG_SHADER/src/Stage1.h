@@ -89,7 +89,7 @@ private:
 	Event* mask_event;
 	Mask* mask;
 	ExitDoor* exitdoor;
-	Model* exitdoor2;
+
 	Cat* cat;
 	Event* computer;
 
@@ -140,7 +140,8 @@ private:
 	Event* room4_event;
 
 
-
+	//¸¶Áö¸··ë
+	Wall* computer_table;
 
 
 

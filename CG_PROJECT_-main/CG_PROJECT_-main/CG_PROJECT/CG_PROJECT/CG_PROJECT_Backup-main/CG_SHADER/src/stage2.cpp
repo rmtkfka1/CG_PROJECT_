@@ -19,5 +19,5 @@ void stage2::Update()
 
 void stage2::Render()
 {
-	cout << "hello world" << endl;
+
 }

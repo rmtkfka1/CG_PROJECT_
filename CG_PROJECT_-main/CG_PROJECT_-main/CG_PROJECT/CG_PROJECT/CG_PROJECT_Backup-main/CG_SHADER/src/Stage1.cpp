@@ -161,8 +161,6 @@ void Stage1::Init()
 		exitdoor->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 
-		exitdoor2 = new Model("res/models/exitdoor2.obj");
-
 	}
 
 
@@ -275,6 +273,7 @@ void Stage1::Init()
 	{
 		Model* computer_model = new Model("res/models/computer.obj");
 		computer = new Event(*computer_model);
+		computer->SetSize(glm::vec3(computer->GetSize().x+20, computer->GetSize().y, computer->GetSize().z));
 		BoxCollider* ptr = new BoxCollider;
 		computer->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
@@ -448,8 +447,9 @@ void Stage1::Update()
 	exitdoor->Update();
 	cat->Update();
 	computer->Update();
+	computer_table->Update();
 
-	//cout << CameraManager::GetInstance()->m_cameraPos.x << "  " << CameraManager::GetInstance()->m_cameraPos.y << "  " << CameraManager::GetInstance()->m_cameraPos.z << endl;
+	cout << CameraManager::GetInstance()->m_cameraPos.x << "  " << CameraManager::GetInstance()->m_cameraPos.y << "  " << CameraManager::GetInstance()->m_cameraPos.z << endl;
 
 
 }
@@ -582,8 +582,7 @@ void Stage1::Object_Render()
 	{
 		shader->SetUniform1i("u_texture", exitdoor_texture->GetSlot());
 		exitdoor->Render(*shader);
-		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
-		exitdoor2->RenderModel(*shader);
+
 	}
 
 	{
@@ -601,6 +600,7 @@ void Stage1::Object_Render()
 		Lockedtable2->Render(*shader);
 		Lockedtable3->Render(*shader);
 		Lockedtable4->Render(*shader);
+		computer_table->Render(*shader);
 	}
 
 
@@ -1217,6 +1217,16 @@ void Stage1::MakeEndRoom()
 	celing->AddComponent(ptr7);
 	GET_SINGLE(CollisionManager)->AddCollider(ptr7);
 	end_room.push_back(celing);
+
+
+	{
+
+		Model* table_model = new Model("res/models/computer_table.obj");
+		computer_table = new Wall(*table_model);
+		BoxCollider* ptr = new BoxCollider;
+		computer_table->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
 
 }
 

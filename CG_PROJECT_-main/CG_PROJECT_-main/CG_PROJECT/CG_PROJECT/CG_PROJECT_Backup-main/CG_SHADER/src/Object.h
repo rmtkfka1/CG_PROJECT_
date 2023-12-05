@@ -40,6 +40,7 @@ public:
 	//юс╫ц©К
 	glm::vec3 GetCenter() { return _center; }
 	glm::vec3 GetSize() { return _size; }
+	void SetSize(glm::vec3 size) { _size = size; }
 
 	void SetCenter(glm::vec3 temp) { _center = temp; }
 	void SetCenter_x(float x) { _center.x = x; }
