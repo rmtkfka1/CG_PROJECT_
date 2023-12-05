@@ -709,7 +709,7 @@ void Stage1::Object_Render()
 void Stage1::Texture_Render()
 {
 
-	TextManager::GetInstance()->Render(-1.0f, -0.9f, "Speed Gage");
+	TextManager::GetInstance()->Render(-1.0f, -0.95f, "GAGE");
 
 
 
@@ -804,9 +804,9 @@ void Stage1::Texture_Render()
 		shader2->Bind();
 		shader2->SetUniform1i("u_texture", room4_puzzle->GetSlot());
 		shader2->SetUniformMat4f("u_model", glm::mat4(1.0f));
-		shader2->SetUniformMat4f("u_view", matrix::GetInstance()->GetCamera(glm::vec3(0, 0, -1.0f), glm::vec3(0, 0, 0), glm::vec3(0, 1.0f, 0)));
+		shader2->SetUniformMat4f("u_view", matrix::GetInstance()->GetCamera(glm::vec3(0, 0, 2.5f), glm::vec3(0, 0, 0), glm::vec3(0, 1.0f, 0)));
 		shader2->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
-		render_box->RenderModel(*shader);
+		render_box2->RenderModel(*shader);
 
 	}
 
@@ -858,6 +858,7 @@ void Stage1::MakeRoom2_QUIZ()
 	{
 
 		render_box = new Model("res/models/test.obj");
+		render_box2 = new Model("res/models/render_box2.obj");
 		fish = new Model("res/models/room2_event/fish.obj");
 	}
 

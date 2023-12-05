@@ -109,6 +109,7 @@ private:
 	Locked* Lockedkey2;
 	Wall*  answerbox2;
 	Model* render_box;
+	Model* render_box2;
 	Model* fish;
 	Model* starfish;
 	Model* balls;
