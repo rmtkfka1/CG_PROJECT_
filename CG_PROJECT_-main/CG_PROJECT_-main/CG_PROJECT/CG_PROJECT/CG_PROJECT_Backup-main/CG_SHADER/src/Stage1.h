@@ -130,6 +130,8 @@ private:
 	Wall* Lockedtable4;
 	Locked* Lockedkey4;
 	Wall* answerbox4;
+	Wall* prof;
+	Event* room4_event;
 
 
 
@@ -177,6 +179,8 @@ private:
 	Texture* box_texture;
 	Texture* starfish_texture;
 	Texture* zz_texture;
+	Texture* room4_puzzle;
+	Texture* snape_texture;
 	//조명 객체 만들기
 	Light2* light;
 

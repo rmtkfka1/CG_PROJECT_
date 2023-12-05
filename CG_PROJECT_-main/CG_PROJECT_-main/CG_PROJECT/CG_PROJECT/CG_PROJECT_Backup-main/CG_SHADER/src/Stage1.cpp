@@ -345,6 +345,8 @@ void Stage1::Update()
 		Lockedtable4->Update();
 		Lockedkey4->Update();
 		answerbox4->Update();
+		room4_event->Update();
+		prof->Update();
 
 	}
 
@@ -418,6 +420,7 @@ void Stage1::Update()
 	mask->MatrixUpdate(mask_event);
 	mask->Update();
 	deadbody->Update();
+
 	exitdoor->Update();
 
 	//cout << CameraManager::GetInstance()->m_cameraPos.x << "  " << CameraManager::GetInstance()->m_cameraPos.y << "  " << CameraManager::GetInstance()->m_cameraPos.z << endl;
@@ -621,7 +624,7 @@ void Stage1::Object_Render()
 		fish->RenderModel(*shader);
 	}
 
-
+	//룸2 이벤트 박스그리기
 	{
 		shader->SetUniform1i("u_texture", box_texture->GetSlot());
 		box1->Render(*shader);
@@ -631,16 +634,23 @@ void Stage1::Object_Render()
 		wall1->Render(*shader);
 		wall2->Render(*shader);
 	}
-
+	//불가사리 그리기
 	{
 		shader->SetUniform1i("u_texture", starfish_texture->GetSlot());
 		starfish->RenderModel(*shader);
 	}
-
+	//볼그리기
 	{
 		shader->SetUniform1i("u_texture", zz_texture->GetSlot());
 		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
 		balls->RenderModel(*shader);
+	}
+
+	//////////룸4이벤트
+	{
+		shader->SetUniform1i("u_texture",snape_texture->GetSlot());
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		prof->Render(*shader);
 	}
 
 
@@ -669,7 +679,7 @@ void Stage1::Texture_Render()
 		TextManager::GetInstance()->Render(-0.4f, -0.1f, "TO OPEN THE DOOR NEDD A PASSWORD");
 	}
 
-	if (quizbox_event->room2_box_collison == true)
+	if (quizbox_event->box_collusion == true)
 	{
 		TextManager::GetInstance()->Render(0.0f, 0.0f, " RGBA !?");
 	}
@@ -707,11 +717,11 @@ void Stage1::Texture_Render()
 
 
 		string strValue = std::to_string(Lockedkey2->_first_set[0]);
-		strValue += "      ";
+		strValue += "    ";
 		strValue += std::to_string(Lockedkey2->_first_set[1]);
-		strValue += "      ";
+		strValue += "    ";
 		strValue += std::to_string(Lockedkey2->_first_set[2]);
-		strValue += "      ";
+		strValue += "    ";
 		strValue += std::to_string(Lockedkey2->_first_set[3]);
 
 		TextManager::GetInstance()->Render(-0.2f, -0.2f, strValue.c_str());
@@ -744,6 +754,18 @@ void Stage1::Texture_Render()
 		strValue += std::to_string(Lockedkey4->_first_set[3]);
 
 		TextManager::GetInstance()->Render(0.0f, 0.0f, strValue.c_str());
+	}
+
+	if (room4_event->box_collusion==true)
+	{
+
+		shader2->Bind();
+		shader2->SetUniform1i("u_texture", room4_puzzle->GetSlot());
+		shader2->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		shader2->SetUniformMat4f("u_view", matrix::GetInstance()->GetCamera(glm::vec3(0, 0, -1.0f), glm::vec3(0, 0, 0), glm::vec3(0, 1.0f, 0)));
+		shader2->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
+		render_box->RenderModel(*shader);
+
 	}
 
 }
@@ -919,7 +941,7 @@ void Stage1::MakeRoom4_QUIZ()
 
 	{
 		Model* locked_key = new Model("res/models/lockedkey.obj");
-		int num[4] = { 1,1,1,1 };// 너가 정답을 설정해줘야됨
+		int num[4] = { 0,2,0,3 };// 너가 정답을 설정해줘야됨
 		Lockedkey4 = new Locked(*locked_key, num);
 		Lockedkey4->SetTransPose(300, 0, -250);
 		BoxCollider* ptr = new BoxCollider;
@@ -933,6 +955,25 @@ void Stage1::MakeRoom4_QUIZ()
 		answerbox4->SetTransPose(300, 0, -250);
 		BoxCollider* ptr = new BoxCollider;
 		answerbox4->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+
+	}
+
+	{
+		Model* pt = new Model("res/models/room4_event/snape.obj");
+		prof = new Wall(*pt);
+		BoxCollider* ptr = new BoxCollider;
+		prof->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+
+	}
+
+	{
+
+		Model* pt = new Model("res/models/room4_event/snape_event.obj");
+		room4_event = new Event(*pt);
+		BoxCollider* ptr = new BoxCollider;
+		room4_event->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 
 	}
@@ -1014,6 +1055,8 @@ void Stage1::MakeTexture()
 	fish_texture = new Texture("res/textures/fish.jpeg");
 	starfish_texture = new Texture("res/textures/color.jpeg");
 	zz_texture = new Texture("res/textures/zz.jpg");
+	room4_puzzle = new Texture("res/textures/puzzle4.png");
+	snape_texture = new Texture("res/textures/snape.png");
 
 
 	texture->Bind(0);
@@ -1033,6 +1076,8 @@ void Stage1::MakeTexture()
 	fish_texture->Bind(14);
 	starfish_texture->Bind(15);
 	zz_texture->Bind(16);
+	room4_puzzle->Bind(17);
+	snape_texture->Bind(18);
 }
 
 

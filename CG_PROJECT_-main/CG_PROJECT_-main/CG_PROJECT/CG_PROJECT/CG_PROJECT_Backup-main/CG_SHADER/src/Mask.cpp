@@ -57,6 +57,8 @@ void Mask::MatrixUpdate(Event* ptr)
 		
 		_center =_first_center + glm::vec3(0, 0, delta);
 	}
+
+
 }
 
 

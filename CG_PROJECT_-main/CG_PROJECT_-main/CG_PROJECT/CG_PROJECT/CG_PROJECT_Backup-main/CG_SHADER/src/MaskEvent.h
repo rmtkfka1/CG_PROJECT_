@@ -22,6 +22,6 @@ private:
 
 public:
 	bool mask_collison = false;
-	bool room2_box_collison= false;
+	bool box_collusion= false;
 };
 

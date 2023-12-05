@@ -19,7 +19,7 @@ void Core::Init(int argc, char** argv) //
 	int screenWidth = glutGet(GLUT_SCREEN_WIDTH); // 모니터의 가로 해상도 가져오기
 	int screenHeight = glutGet(GLUT_SCREEN_HEIGHT); // 모니터의 세로 해상도 가져오기
 
-	::glutInitWindowSize(screenWidth, screenHeight);  // 윈도우 크기 조정 
+	::glutInitWindowSize(1920, 1080);  // 윈도우 크기 조정 
 	::glutCreateWindow("my window");
 
 	//--- GLEW 초기화하기

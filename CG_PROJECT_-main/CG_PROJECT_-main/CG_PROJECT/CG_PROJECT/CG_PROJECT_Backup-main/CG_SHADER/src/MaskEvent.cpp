@@ -51,7 +51,7 @@ void Event::OnComponentBeginOverlap(Collider* collider, Collider* other)
 	if (other->GetOwner()->GetObjectType() == ObjectType::PLAYER)
 	{
 		mask_collison = true;
-		room2_box_collison = true;
+		box_collusion = true;
 	}
 }
 
@@ -60,7 +60,7 @@ void Event::OnComponentEndOverlap(Collider* collider, Collider* other)
 
 	if (other->GetOwner()->GetObjectType() == ObjectType::PLAYER)
 	{
-		room2_box_collison = false;
+		box_collusion = false;
 	}
 }
 
