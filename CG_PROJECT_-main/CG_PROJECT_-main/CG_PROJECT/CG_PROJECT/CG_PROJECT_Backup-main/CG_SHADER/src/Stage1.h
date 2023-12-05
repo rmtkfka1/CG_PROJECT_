@@ -103,6 +103,7 @@ private:
 	Wall*   Lockedtable2;
 	Locked* Lockedkey2;
 	Wall*  answerbox2;
+	Model* test;
 
 	////////////////
 	//방3퀴즈 배치
@@ -116,6 +117,8 @@ private:
 	Wall* Lockedtable4;
 	Locked* Lockedkey4;
 	Wall* answerbox4;
+
+
 
 
 

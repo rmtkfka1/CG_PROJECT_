@@ -105,12 +105,12 @@ void Player::KeyUpdate()
 
 		if (speed_gage < -1.0f)
 		{
-			CameraManager::GetInstance()->m_cameraSpeed = 200.0f; //40.0f
+			CameraManager::GetInstance()->m_cameraSpeed = 40.0f; //40.0f
 			return;
 		}
 
 		
-		CameraManager::GetInstance()->m_cameraSpeed = 200.0f; //80.0f
+		CameraManager::GetInstance()->m_cameraSpeed = 80.0f; //80.0f
 		_run = true;
 		cout << speed_gage << endl;
 		speed_gage += -0.05f * TimeManager::GetInstance()->GetDeltaTime();
@@ -120,7 +120,7 @@ void Player::KeyUpdate()
 	if (KeyManager::GetInstance()->GetbuttonUp(KeyType::SHIFT))
 	{
 
-		CameraManager::GetInstance()->m_cameraSpeed = 200.0f; //40.0f
+		CameraManager::GetInstance()->m_cameraSpeed = 40.0f; //40.0f
 		_run = false;
 
 		if (speed_gage < -0.67f)

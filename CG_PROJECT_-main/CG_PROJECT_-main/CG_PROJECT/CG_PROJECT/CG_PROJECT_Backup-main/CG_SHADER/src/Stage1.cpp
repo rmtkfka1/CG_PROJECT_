@@ -292,6 +292,426 @@ void Stage1::Init()
 
 }
 
+
+
+void Stage1::Update()
+{
+
+
+	
+
+	CameraManager::GetInstance()->KeyUpdate();
+	CameraManager::GetInstance()->MouseUpdate(MouseManager::GetInstance()->GetMousePos().x, MouseManager::GetInstance()->GetMousePos().y);
+
+	player->Update();
+	GET_SINGLE(CollisionManager)->Update();
+
+	fake_flash->Update();
+	fake_flash->UpdateFlash(light, flash);
+
+
+	Corridor_left_door->Update();
+	Corridor_right_door->Update();
+
+	{
+
+		quizbox->Update();
+		table->Update();
+		Lockedbox->Update();
+		Lockedtable->Update();
+		Lockedkey->Update();
+		quizbox_event->Update();
+
+
+		Lockedbox2->Update();
+		Lockedtable2->Update();
+		Lockedkey2->Update();
+		answerbox2->Update();
+
+		Lockedbox3->Update();
+		Lockedtable3->Update();
+		Lockedkey3->Update();
+		answerbox3->Update();
+
+		Lockedbox4->Update();
+		Lockedtable4->Update();
+		Lockedkey4->Update();
+		answerbox4->Update();
+
+	}
+
+
+
+	for (int i = 0; i < room1.size(); i++)
+	{
+
+		room1[i]->Update();
+	}
+
+	for (int i = 0; i < corridor1.size(); i++)
+	{
+		corridor1[i]->Update();
+	}
+
+	for (int i = 0; i < room2.size(); i++)
+	{
+		room2[i]->Update();
+	}
+
+	for (int i = 0; i < room3.size(); i++)
+	{
+		room3[i]->Update();
+	}
+
+	for (int i = 0; i < room4.size(); i++)
+	{
+		room4[i]->Update();
+	}
+
+	for (int i = 0; i < room5.size(); i++)
+	{
+		room5[i]->Update();
+	}
+
+	for (int i = 0; i < room6.size(); i++)
+	{
+		room6[i]->Update();
+	}
+	
+	for (int i = 0; i < last_corridor.size(); i++)
+	{
+		last_corridor[i]->Update();
+	}
+	
+	for (int i = 0; i < last_room.size(); i++)
+	{
+		last_room[i]->Update();
+	}
+	
+	for (int i = 0; i < end_room.size(); i++)
+	{
+		end_room[i]->Update();
+	}
+
+
+	
+
+	flash->MatrixUpdate(player);
+
+	light->Spot_light.position = CameraManager::GetInstance()->m_cameraPos;
+	light->Spot_light.direction = CameraManager::GetInstance()->m_cameraFront;
+	light->UseSpotLight(*shader,*ghost);
+
+
+	ghost->UpdatePlayerLocation(player->GetCenter());
+	ghost->Update();
+	billboard->Update();
+	mask_event->Update();
+	mask->MatrixUpdate(mask_event);
+	mask->Update();
+	deadbody->Update();
+	exitdoor->Update();
+
+	//cout << CameraManager::GetInstance()->m_cameraPos.x << "  " << CameraManager::GetInstance()->m_cameraPos.y << "  " << CameraManager::GetInstance()->m_cameraPos.z << endl;
+
+
+}
+
+void Stage1::Render()
+{
+
+
+
+	shader->Bind();
+	Object_Render();
+
+
+	shader->Unbind();
+	Texture_Render();
+	player->DrawGage();
+
+
+
+
+
+
+	
+
+}
+
+void Stage1::Object_Render()
+{
+
+	light->UseSpotLight(*shader, *ghost);
+
+	shader->SetUniform1i("u_texture", 0);
+	player->Render(*shader);
+
+	shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
+	shader->SetUniform3f("u_viewpos", CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
+	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
+
+
+
+
+	vector<Object*> room1_copy = room1;
+
+	for (int i = 0; i < room1_copy.size(); i++)
+	{
+		room1_copy[i]->Render(*shader);
+	}
+
+	vector<Object*> corridor1_copy = corridor1;
+	for (int i = 0; i < corridor1_copy.size(); i++)
+	{
+		corridor1_copy[i]->Render(*shader);
+	}
+
+	vector<Object*> room2_copy = room2;
+	for (int i = 0; i < room2_copy.size(); i++)
+	{
+		room2_copy[i]->Render(*shader);
+	}
+
+	vector<Object*> room3_copy = room3;
+	for (int i = 0; i < room3_copy.size(); i++)
+	{
+		room3_copy[i]->Render(*shader);
+	}
+
+	vector<Object*> room4_copy = room4;
+	for (int i = 0; i < room4_copy.size(); i++)
+	{
+		room4_copy[i]->Render(*shader);
+	}
+
+	vector<Object*> room5_copy = room5;
+	for (int i = 0; i < room5_copy.size(); i++)
+	{
+		room5_copy[i]->Render(*shader);
+	}
+
+	vector<Object*> room6_copy = room6;
+	for (int i = 0; i < room6_copy.size(); i++)
+	{
+		room6_copy[i]->Render(*shader);
+	}
+	
+	vector<Object*> last_corridor_copy = last_corridor;
+	for (int i = 0; i < last_corridor_copy.size(); i++)
+	{
+		last_corridor_copy[i]->Render(*shader);
+	}
+	
+	vector<Object*> last_room_copy = last_room_copy;
+	for (int i = 0; i < last_room_copy.size(); i++)
+	{
+		last_room_copy[i]->Render(*shader);
+	}
+	
+	vector<Object*> end_room_copy = end_room;
+	for (int i = 0; i < end_room_copy.size(); i++)
+	{
+		end_room_copy[i]->Render(*shader);
+	}
+
+
+	{
+		shader->SetUniform1i("u_texture", flash_fake_texture->GetSlot());
+		fake_flash->Render(*shader);
+	}
+
+	{
+		shader->SetUniform1i("u_texture", 2);
+		billboard->Render(*shader);
+	}
+
+
+	{
+		shader->SetUniform1i("u_texture", ghost_texture->GetSlot());
+		ghost->Render(*shader);
+	}
+
+	//{
+	//	shader->SetUniform1i("u_texture", flash_fake_texture->GetSlot());
+	//	flash->Render(*shader);
+	//}
+
+	{
+		shader->SetUniform1i("u_texture", flash_fake_texture->GetSlot());
+		Corridor_left_door->Render(*shader);
+		Corridor_right_door->Render(*shader);
+	}
+
+	{
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		shader->SetUniform1i("u_texture", deadbody_texture->GetSlot());
+		deadbody->SpecialRender(*shader, fake_flash);
+	}
+
+
+	{
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		shader->SetUniform1i("u_texture", mask_texture->GetSlot());
+		mask->Render(*shader);
+	}
+
+	{
+		shader->SetUniform1i("u_texture", exitdoor_texture->GetSlot());
+		exitdoor->Render(*shader);
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		exitdoor2->RenderModel(*shader);
+	}
+
+
+	//ÄûÁî
+	{
+		shader->SetUniform1i("u_texture", table_texture->GetSlot());
+		table->Render(*shader);
+		Lockedtable->Render(*shader);
+		Lockedtable2->Render(*shader);
+		Lockedtable3->Render(*shader);
+		Lockedtable4->Render(*shader);
+	}
+
+
+
+	{
+		shader->SetUniform1i("u_texture", quizbox_texture->GetSlot());
+		quizbox->Render(*shader);
+	}
+
+	{
+
+		shader->SetUniform1i("u_texture", lockedbox_texture->GetSlot());
+		Lockedbox->Render(*shader);
+		Lockedkey->Render(*shader);
+		Lockedbox2->Render(*shader);
+		Lockedkey2->Render(*shader);
+		Lockedbox3->Render(*shader);
+		Lockedkey3->Render(*shader);
+		Lockedbox4->Render(*shader);
+		Lockedkey4->Render(*shader);
+
+	}
+
+	{
+		shader->SetUniform1i("u_texture", answer1_texture->GetSlot());
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		answerbox->RenderModel(*shader);
+		answerbox2->Render(*shader);
+	}
+
+	{
+		shader->SetUniform1i("u_texture", answer1_texture->GetSlot());
+		answerbox3->Render(*shader);
+		answerbox4->Render(*shader);
+	}
+
+
+
+	
+
+
+}
+
+
+void Stage1::Texture_Render()
+{
+
+	TextManager::GetInstance()->Render(-1.0f, -0.9f, "Speed Gage");
+
+
+
+	if (fake_flash->GetCollsionState() == true)
+	{
+		TextManager::GetInstance()->Render(-0.2f, -0.5f, "Press F to Equid");
+		TextManager::GetInstance()->Render(-0.2f, -0.6f, "Press R to Turnon / Turnoff");
+	}
+
+	if (exitdoor->LockedAndCollusion() == true)
+	{
+		TextManager::GetInstance()->Render(-0.4f, 0.0f, "THIS DOOR IS LOCKED");
+		TextManager::GetInstance()->Render(-0.4f, -0.1f, "TO OPEN THE DOOR NEDD A PASSWORD");
+	}
+
+	if (quizbox_event->room2_box_collison == true)
+	{
+		TextManager::GetInstance()->Render(0.0f, 0.0f, " RGBA !?");
+	}
+
+
+	if (Lockedkey->_collusion == true)
+	{
+
+
+		TextManager::GetInstance()->Render(-0.1f, 0.1f,"Press 1,2,3,4");
+
+
+		string strValue = std::to_string(Lockedkey->_first_set[0]);
+		strValue += std::to_string(Lockedkey->_first_set[1]);
+		strValue += std::to_string(Lockedkey->_first_set[2]);
+		strValue += std::to_string(Lockedkey->_first_set[3]);
+
+		TextManager::GetInstance()->Render(0.0f,0.0f, strValue.c_str());
+	}
+
+
+
+	if (Lockedkey2->_collusion == true)
+	{
+		shader->Bind();
+
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		shader->SetUniformMat4f("u_view", matrix::GetInstance()->GetCamera(glm::vec3(0,0,-2.0f),glm::vec3(0,0,0),glm::vec3(0,1.0f,0)));
+
+		test->RenderModel(*shader);
+
+
+		shader->Unbind();
+		TextManager::GetInstance()->Render(-0.1f, 0.1f, "Press 1,2,3,4");
+
+
+		string strValue = std::to_string(Lockedkey2->_first_set[0]);
+		strValue += std::to_string(Lockedkey2->_first_set[1]);
+		strValue += std::to_string(Lockedkey2->_first_set[2]);
+		strValue += std::to_string(Lockedkey2->_first_set[3]);
+
+		TextManager::GetInstance()->Render(0.0f, 0.0f, strValue.c_str());
+	}
+
+	if (Lockedkey3->_collusion == true)
+	{
+
+		TextManager::GetInstance()->Render(-0.1f, 0.1f, "Press 1,2,3,4");
+
+
+		string strValue = std::to_string(Lockedkey3->_first_set[0]);
+		strValue += std::to_string(Lockedkey3->_first_set[1]);
+		strValue += std::to_string(Lockedkey3->_first_set[2]);
+		strValue += std::to_string(Lockedkey3->_first_set[3]);
+
+		TextManager::GetInstance()->Render(0.0f, 0.0f, strValue.c_str());
+	}
+
+
+	if (Lockedkey4->_collusion == true)
+	{
+
+		TextManager::GetInstance()->Render(-0.1f, 0.1f, "Press 1,2,3,4");
+
+
+		string strValue = std::to_string(Lockedkey4->_first_set[0]);
+		strValue += std::to_string(Lockedkey4->_first_set[1]);
+		strValue += std::to_string(Lockedkey4->_first_set[2]);
+		strValue += std::to_string(Lockedkey4->_first_set[3]);
+
+		TextManager::GetInstance()->Render(0.0f, 0.0f, strValue.c_str());
+	}
+
+}
+
+
 void Stage1::MakeRoom2_QUIZ()
 {
 	//¹æ2 ÄûÁî »ý¼º
@@ -331,6 +751,10 @@ void Stage1::MakeRoom2_QUIZ()
 		answerbox2->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 
+	}
+	{
+
+		test = new Model("res/models/test.obj");
 	}
 }
 
@@ -506,411 +930,6 @@ void Stage1::MakeTexture()
 	answer1_texture->Bind(11);
 }
 
-
-void Stage1::Update()
-{
-
-
-	
-
-	CameraManager::GetInstance()->KeyUpdate();
-	CameraManager::GetInstance()->MouseUpdate(MouseManager::GetInstance()->GetMousePos().x, MouseManager::GetInstance()->GetMousePos().y);
-
-	player->Update();
-	GET_SINGLE(CollisionManager)->Update();
-
-	fake_flash->Update();
-	fake_flash->UpdateFlash(light, flash);
-
-
-	Corridor_left_door->Update();
-	Corridor_right_door->Update();
-
-	{
-
-		quizbox->Update();
-		table->Update();
-		Lockedbox->Update();
-		Lockedtable->Update();
-		Lockedkey->Update();
-		quizbox_event->Update();
-
-
-		Lockedbox2->Update();
-		Lockedtable2->Update();
-		Lockedkey2->Update();
-		answerbox2->Update();
-
-		Lockedbox3->Update();
-		Lockedtable3->Update();
-		Lockedkey3->Update();
-		answerbox3->Update();
-
-		Lockedbox4->Update();
-		Lockedtable4->Update();
-		Lockedkey4->Update();
-		answerbox4->Update();
-
-	}
-
-
-
-	for (int i = 0; i < room1.size(); i++)
-	{
-
-		room1[i]->Update();
-	}
-
-	for (int i = 0; i < corridor1.size(); i++)
-	{
-		corridor1[i]->Update();
-	}
-
-	for (int i = 0; i < room2.size(); i++)
-	{
-		room2[i]->Update();
-	}
-
-	for (int i = 0; i < room3.size(); i++)
-	{
-		room3[i]->Update();
-	}
-
-	for (int i = 0; i < room4.size(); i++)
-	{
-		room4[i]->Update();
-	}
-
-	for (int i = 0; i < room5.size(); i++)
-	{
-		room5[i]->Update();
-	}
-
-	for (int i = 0; i < room6.size(); i++)
-	{
-		room6[i]->Update();
-	}
-	
-	for (int i = 0; i < last_corridor.size(); i++)
-	{
-		last_corridor[i]->Update();
-	}
-	
-	for (int i = 0; i < last_room.size(); i++)
-	{
-		last_room[i]->Update();
-	}
-	
-	for (int i = 0; i < end_room.size(); i++)
-	{
-		end_room[i]->Update();
-	}
-
-
-	
-
-	flash->MatrixUpdate(player);
-
-	light->Spot_light.position = CameraManager::GetInstance()->m_cameraPos;
-	light->Spot_light.direction = CameraManager::GetInstance()->m_cameraFront;
-	light->UseSpotLight(*shader,*ghost);
-
-
-	ghost->UpdatePlayerLocation(player->GetCenter());
-	ghost->Update();
-	billboard->Update();
-	mask_event->Update();
-	mask->MatrixUpdate(mask_event);
-	mask->Update();
-	deadbody->Update();
-	exitdoor->Update();
-
-	//cout << CameraManager::GetInstance()->m_cameraPos.x << "  " << CameraManager::GetInstance()->m_cameraPos.y << "  " << CameraManager::GetInstance()->m_cameraPos.z << endl;
-
-
-}
-
-void Stage1::Render()
-{
-
-
-
-	shader->Bind();
-	Object_Render();
-
-
-	shader->Unbind();
-	Texture_Render();
-	player->DrawGage();
-
-
-
-
-
-
-	
-
-}
-
-void Stage1::Object_Render()
-{
-
-	light->UseSpotLight(*shader, *ghost);
-
-
-	shader->SetUniform1i("u_texture", 0);
-	player->Render(*shader);
-
-
-	vector<Object*> room1_copy = room1;
-
-	for (int i = 0; i < room1_copy.size(); i++)
-	{
-		room1_copy[i]->Render(*shader);
-	}
-
-	vector<Object*> corridor1_copy = corridor1;
-	for (int i = 0; i < corridor1_copy.size(); i++)
-	{
-		corridor1_copy[i]->Render(*shader);
-	}
-
-	vector<Object*> room2_copy = room2;
-	for (int i = 0; i < room2_copy.size(); i++)
-	{
-		room2_copy[i]->Render(*shader);
-	}
-
-	vector<Object*> room3_copy = room3;
-	for (int i = 0; i < room3_copy.size(); i++)
-	{
-		room3_copy[i]->Render(*shader);
-	}
-
-	vector<Object*> room4_copy = room4;
-	for (int i = 0; i < room4_copy.size(); i++)
-	{
-		room4_copy[i]->Render(*shader);
-	}
-
-	vector<Object*> room5_copy = room5;
-	for (int i = 0; i < room5_copy.size(); i++)
-	{
-		room5_copy[i]->Render(*shader);
-	}
-
-	vector<Object*> room6_copy = room6;
-	for (int i = 0; i < room6_copy.size(); i++)
-	{
-		room6_copy[i]->Render(*shader);
-	}
-	
-	vector<Object*> last_corridor_copy = last_corridor;
-	for (int i = 0; i < last_corridor_copy.size(); i++)
-	{
-		last_corridor_copy[i]->Render(*shader);
-	}
-	
-	vector<Object*> last_room_copy = last_room_copy;
-	for (int i = 0; i < last_room_copy.size(); i++)
-	{
-		last_room_copy[i]->Render(*shader);
-	}
-	
-	vector<Object*> end_room_copy = end_room;
-	for (int i = 0; i < end_room_copy.size(); i++)
-	{
-		end_room_copy[i]->Render(*shader);
-	}
-
-
-	{
-		shader->SetUniform1i("u_texture", flash_fake_texture->GetSlot());
-		fake_flash->Render(*shader);
-	}
-
-	{
-		shader->SetUniform1i("u_texture", 2);
-		billboard->Render(*shader);
-	}
-
-
-	{
-		shader->SetUniform1i("u_texture", ghost_texture->GetSlot());
-		ghost->Render(*shader);
-	}
-
-	//{
-	//	shader->SetUniform1i("u_texture", flash_fake_texture->GetSlot());
-	//	flash->Render(*shader);
-	//}
-
-	{
-		shader->SetUniform1i("u_texture", flash_fake_texture->GetSlot());
-		Corridor_left_door->Render(*shader);
-		Corridor_right_door->Render(*shader);
-	}
-
-	{
-		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
-		shader->SetUniform1i("u_texture", deadbody_texture->GetSlot());
-		deadbody->SpecialRender(*shader, fake_flash);
-	}
-
-
-	{
-		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
-		shader->SetUniform1i("u_texture", mask_texture->GetSlot());
-		mask->Render(*shader);
-	}
-
-	{
-		shader->SetUniform1i("u_texture", exitdoor_texture->GetSlot());
-		exitdoor->Render(*shader);
-		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
-		exitdoor2->RenderModel(*shader);
-	}
-
-
-	//ÄûÁî
-	{
-		shader->SetUniform1i("u_texture", table_texture->GetSlot());
-		table->Render(*shader);
-		Lockedtable->Render(*shader);
-		Lockedtable2->Render(*shader);
-		Lockedtable3->Render(*shader);
-		Lockedtable4->Render(*shader);
-	}
-
-
-
-	{
-		shader->SetUniform1i("u_texture", quizbox_texture->GetSlot());
-		quizbox->Render(*shader);
-	}
-
-	{
-
-		shader->SetUniform1i("u_texture", lockedbox_texture->GetSlot());
-		Lockedbox->Render(*shader);
-		Lockedkey->Render(*shader);
-		Lockedbox2->Render(*shader);
-		Lockedkey2->Render(*shader);
-		Lockedbox3->Render(*shader);
-		Lockedkey3->Render(*shader);
-		Lockedbox4->Render(*shader);
-		Lockedkey4->Render(*shader);
-
-	}
-
-	{
-		shader->SetUniform1i("u_texture", answer1_texture->GetSlot());
-		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
-		answerbox->RenderModel(*shader);
-		answerbox2->Render(*shader);
-	}
-
-	{
-		shader->SetUniform1i("u_texture", answer1_texture->GetSlot());
-		answerbox3->Render(*shader);
-		answerbox4->Render(*shader);
-	}
-
-
-
-	shader->SetUniformMat4f("u_proj", matrix::GetInstance()->GetProjection());
-	shader->SetUniform3f("u_viewpos", CameraManager::GetInstance()->m_cameraPos.x, CameraManager::GetInstance()->m_cameraPos.y, CameraManager::GetInstance()->m_cameraPos.z);
-	shader->SetUniformMat4f("u_view", CameraManager::GetInstance()->GetMatrix());
-
-
-}
-
-
-void Stage1::Texture_Render()
-{
-
-	TextManager::GetInstance()->Render(-1.0f, -0.9f, "Speed Gage");
-
-
-
-	if (fake_flash->GetCollsionState() == true)
-	{
-		TextManager::GetInstance()->Render(-0.2f, -0.5f, "Press F to Equid");
-		TextManager::GetInstance()->Render(-0.2f, -0.6f, "Press R to Turnon / Turnoff");
-	}
-
-	if (exitdoor->LockedAndCollusion() == true)
-	{
-		TextManager::GetInstance()->Render(-0.4f, 0.0f, "THIS DOOR IS LOCKED");
-		TextManager::GetInstance()->Render(-0.4f, -0.1f, "TO OPEN THE DOOR NEDD A PASSWORD");
-	}
-
-	if (quizbox_event->room2_box_collison == true)
-	{
-		TextManager::GetInstance()->Render(0.0f, 0.0f, " RGBA !?");
-	}
-
-
-	if (Lockedkey->_collusion == true)
-	{
-
-
-		TextManager::GetInstance()->Render(-0.1f, 0.1f,"Press 1,2,3,4");
-
-
-		string strValue = std::to_string(Lockedkey->_first_set[0]);
-		strValue += std::to_string(Lockedkey->_first_set[1]);
-		strValue += std::to_string(Lockedkey->_first_set[2]);
-		strValue += std::to_string(Lockedkey->_first_set[3]);
-
-		TextManager::GetInstance()->Render(0.0f,0.0f, strValue.c_str());
-	}
-
-
-	if (Lockedkey2->_collusion == true)
-	{
-
-		TextManager::GetInstance()->Render(-0.1f, 0.1f, "Press 1,2,3,4");
-
-
-		string strValue = std::to_string(Lockedkey2->_first_set[0]);
-		strValue += std::to_string(Lockedkey2->_first_set[1]);
-		strValue += std::to_string(Lockedkey2->_first_set[2]);
-		strValue += std::to_string(Lockedkey2->_first_set[3]);
-
-		TextManager::GetInstance()->Render(0.0f, 0.0f, strValue.c_str());
-	}
-
-	if (Lockedkey3->_collusion == true)
-	{
-
-		TextManager::GetInstance()->Render(-0.1f, 0.1f, "Press 1,2,3,4");
-
-
-		string strValue = std::to_string(Lockedkey3->_first_set[0]);
-		strValue += std::to_string(Lockedkey3->_first_set[1]);
-		strValue += std::to_string(Lockedkey3->_first_set[2]);
-		strValue += std::to_string(Lockedkey3->_first_set[3]);
-
-		TextManager::GetInstance()->Render(0.0f, 0.0f, strValue.c_str());
-	}
-
-
-	if (Lockedkey4->_collusion == true)
-	{
-
-		TextManager::GetInstance()->Render(-0.1f, 0.1f, "Press 1,2,3,4");
-
-
-		string strValue = std::to_string(Lockedkey4->_first_set[0]);
-		strValue += std::to_string(Lockedkey4->_first_set[1]);
-		strValue += std::to_string(Lockedkey4->_first_set[2]);
-		strValue += std::to_string(Lockedkey4->_first_set[3]);
-
-		TextManager::GetInstance()->Render(0.0f, 0.0f, strValue.c_str());
-	}
-
-}
 
 void Stage1::MakeRoom()
 {
