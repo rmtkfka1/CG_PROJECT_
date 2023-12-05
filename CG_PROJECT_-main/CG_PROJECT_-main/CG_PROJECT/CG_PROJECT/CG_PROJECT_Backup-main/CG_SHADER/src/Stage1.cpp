@@ -322,12 +322,19 @@ void Stage1::Update()
 		Lockedtable->Update();
 		Lockedkey->Update();
 		quizbox_event->Update();
+		
 
 
 		Lockedbox2->Update();
 		Lockedtable2->Update();
 		Lockedkey2->Update();
 		answerbox2->Update();
+		box1->Update();
+		box2->Update();
+		box3->Update();
+		box4->Update();
+		wall1->Update();
+		wall2->Update();
 
 		Lockedbox3->Update();
 		Lockedtable3->Update();
@@ -596,19 +603,48 @@ void Stage1::Object_Render()
 
 	}
 
-	shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
 
-	fish->RenderModel(*shader);
+	//물고기그리기
+	{
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		shader->SetUniform1i("u_texture",fish_texture->GetSlot());
 
-	shader->SetUniformMat4f("u_model", matrix::GetInstance()->GetTranslation(30,0,-70));
-	fish->RenderModel(*shader);
+		fish->RenderModel(*shader);
+		shader->SetUniformMat4f("u_model", matrix::GetInstance()->GetTranslation(30, 0, -70));
+		fish->RenderModel(*shader);
 
-	auto trans = matrix::GetInstance()->GetTranslation(-fish->GetCenter().x, -fish->GetCenter().y, -fish->GetCenter().z);
-	auto rotate = matrix::GetInstance()->GetRotate(90, 0, 1, 0);
-	auto trans2 = matrix::GetInstance()->GetTranslation(fish->GetCenter().x+70, fish->GetCenter().y+0, fish->GetCenter().z-50);
-	auto result = trans2 * rotate * trans;
-	shader->SetUniformMat4f("u_model", result);
-	fish->RenderModel(*shader);
+		auto trans = matrix::GetInstance()->GetTranslation(-fish->GetCenter().x, -fish->GetCenter().y, -fish->GetCenter().z);
+		auto rotate = matrix::GetInstance()->GetRotate(90, 0, 1, 0);
+		auto trans2 = matrix::GetInstance()->GetTranslation(fish->GetCenter().x + 70, fish->GetCenter().y + 0, fish->GetCenter().z - 50);
+		auto result = trans2 * rotate * trans;
+		shader->SetUniformMat4f("u_model", result);
+		fish->RenderModel(*shader);
+	}
+
+
+	{
+		shader->SetUniform1i("u_texture", box_texture->GetSlot());
+		box1->Render(*shader);
+		box2->Render(*shader);
+		box3->Render(*shader);
+		box4->Render(*shader);
+		wall1->Render(*shader);
+		wall2->Render(*shader);
+	}
+
+	{
+		shader->SetUniform1i("u_texture", starfish_texture->GetSlot());
+		starfish->RenderModel(*shader);
+	}
+
+	{
+		shader->SetUniform1i("u_texture", zz_texture->GetSlot());
+		shader->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		balls->RenderModel(*shader);
+	}
+
+
+
 
 
 }
@@ -736,7 +772,7 @@ void Stage1::MakeRoom2_QUIZ()
 
 	{
 		Model* locked_key = new Model("res/models/lockedkey.obj");
-		int num[4] = { 1,1,1,1 };// 너가 정답을 설정해줘야됨
+		int num[4] = { 3,1,4,4 };// 너가 정답을 설정해줘야됨
 		Lockedkey2 = new Locked(*locked_key, num);
 		Lockedkey2->SetTransPose(455, 0, 20);
 		BoxCollider* ptr = new BoxCollider;
@@ -757,6 +793,63 @@ void Stage1::MakeRoom2_QUIZ()
 
 		render_box = new Model("res/models/test.obj");
 		fish = new Model("res/models/room2_event/fish.obj");
+	}
+
+	{
+		Model* box1_model = new Model("res/models/room2_event/box1.obj");
+		box1 = new Wall(*box1_model);
+		BoxCollider* ptr = new BoxCollider;
+		box1->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		Model* box2_model = new Model("res/models/room2_event/box2.obj");
+		box2 = new Wall(*box2_model);
+		BoxCollider* ptr = new BoxCollider;
+		box2->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		Model* box3_model = new Model("res/models/room2_event/box3.obj");
+		box3 = new Wall(*box3_model);
+		BoxCollider* ptr = new BoxCollider;
+		box3->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+		Model* box4_model = new Model("res/models/room2_event/box4.obj");
+		box4 = new Wall(*box4_model);
+		BoxCollider* ptr = new BoxCollider;
+		box4->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+	{
+
+
+		balls = new Model("res/models/room2_event/balls.obj");
+		starfish = new Model("res/models/room2_event/starfish.obj");
+
+	}
+
+	{
+		Model* wall1_m = new Model("res/models/room2_event/wall1.obj");
+		wall1 = new Wall(*wall1_m);
+		BoxCollider* ptr = new BoxCollider;
+		wall1->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
+
+
+	{
+		Model* wall2_m = new Model("res/models/room2_event/wall2.obj");
+		wall2 = new Wall(*wall2_m);
+		BoxCollider* ptr = new BoxCollider;
+		wall2->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
 	}
 }
 
@@ -917,6 +1010,11 @@ void Stage1::MakeTexture()
 	lockedbox_texture = new Texture("res/textures/lockedbox.jpeg");
 	answer1_texture = new Texture("res/textures/answer1.png");
 	room2_puzzle = new Texture("res/textures/puzzle.png");
+	box_texture = new Texture("res/textures/box.jpg");
+	fish_texture = new Texture("res/textures/fish.jpeg");
+	starfish_texture = new Texture("res/textures/color.jpeg");
+	zz_texture = new Texture("res/textures/zz.jpg");
+
 
 	texture->Bind(0);
 	flash_fake_texture->Bind(1);
@@ -931,6 +1029,10 @@ void Stage1::MakeTexture()
 	lockedbox_texture->Bind(10);
 	answer1_texture->Bind(11);
 	room2_puzzle->Bind(12);
+	box_texture->Bind(13);
+	fish_texture->Bind(14);
+	starfish_texture->Bind(15);
+	zz_texture->Bind(16);
 }
 
 

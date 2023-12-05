@@ -106,6 +106,17 @@ private:
 	Wall*  answerbox2;
 	Model* render_box;
 	Model* fish;
+	Model* starfish;
+	Model* balls;
+
+	Wall* box1;
+	Wall* box2;
+	Wall* box3;
+	Wall* box4;
+
+	Wall* wall1;
+	Wall* wall2;
+	
 
 	////////////////
 	//방3퀴즈 배치
@@ -162,6 +173,10 @@ private:
 	Texture* lockedbox_texture;
 	Texture* answer1_texture;
 	Texture* room2_puzzle;
+	Texture* fish_texture;
+	Texture* box_texture;
+	Texture* starfish_texture;
+	Texture* zz_texture;
 	//조명 객체 만들기
 	Light2* light;
 
