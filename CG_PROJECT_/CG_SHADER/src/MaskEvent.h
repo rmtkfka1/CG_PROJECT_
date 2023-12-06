@@ -23,5 +23,7 @@ private:
 public:
 	bool mask_collison = false;
 	bool box_collusion= false;
+
+	bool scare_sound1 = false;
 };
 

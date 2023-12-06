@@ -302,7 +302,7 @@ void Stage1::Init()
 
 
 
-	/*SoundManager::GetInstance()->Play(TEST);*/
+
 
 
 
@@ -330,6 +330,8 @@ void Stage1::Init()
 
 void Stage1::Update()
 {
+
+	
 
 	SoundManager::GetInstance()->Update();
 

@@ -80,9 +80,8 @@ void Player::KeyUpdate()
 		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
 		
-			SoundManager::GetInstance()->Play(HEARTBEAT);
+		SoundManager::GetInstance()->Play(WALK);
 	
-
 		
 	}
 
@@ -91,12 +90,16 @@ void Player::KeyUpdate()
 		_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
+		SoundManager::GetInstance()->Play(WALK);
+
 	}
 
 	if (KeyManager::GetInstance()->Getbutton(KeyType::A))
 	{
 		_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
+
+		SoundManager::GetInstance()->Play(WALK);
 	}
 
 	if (KeyManager::GetInstance()->Getbutton(KeyType::D))
@@ -104,7 +107,18 @@ void Player::KeyUpdate()
 		_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
+		SoundManager::GetInstance()->Play(WALK);
+
 	}
+
+	if (KeyManager::GetInstance()->GetbuttonUp(KeyType::W) && KeyManager::GetInstance()->GetbuttonUp(KeyType::D) && KeyManager::GetInstance()->GetbuttonUp(KeyType::A)
+		&& KeyManager::GetInstance()->GetbuttonUp(KeyType::S))
+	{
+		SoundManager::GetInstance()->Stop(WALK);
+	}
+
+
+
 
 	if (KeyManager::GetInstance()->Getbutton(KeyType::SHIFT))
 	{

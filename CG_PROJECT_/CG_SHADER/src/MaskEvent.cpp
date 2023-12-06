@@ -52,6 +52,12 @@ void Event::OnComponentBeginOverlap(Collider* collider, Collider* other)
 	{
 		mask_collison = true;
 		box_collusion = true;
+
+		if (scare_sound1 == false)
+		{
+			SoundManager::GetInstance()->Play(SCARE);
+			scare_sound1 = true;
+		}
 	}
 }
 

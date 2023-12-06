@@ -5,7 +5,10 @@
 enum sound
 {
 	TEST,
+	BACKGROUND,
 	HEARTBEAT,
+	WALK,
+	SCARE,
 	END
 };
 
@@ -26,7 +29,7 @@ public:
 	void Init();
 	void Update();
 	void Play(sound song);
-
+	void Stop(sound song);
 
 private:
 

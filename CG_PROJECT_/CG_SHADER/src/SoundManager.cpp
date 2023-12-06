@@ -57,12 +57,33 @@ void SoundManager::Play(sound song)
 
     }
 
+}
 
+void SoundManager::Stop(sound song)
+{
+
+    if (soundPlayingStatus[song] == false)
+    {
+        cout << "실행중인 노래가 없잔허" << endl;
+        return;
+    }
+
+    FMOD::Channel* channel = playingChannels[song]; 
+
+    channel->stop();
+
+    soundPlayingStatus[song] = false;
+    playingChannels[song] = nullptr;
 
 }
+
+
 
 void SoundManager::load()
 {
     ssystem->createSound("res/sound/sound.mp3", FMOD_LOOP_NORMAL, 0, &fsound[TEST]);
-    ssystem->createSound("res/sound/heartbeat.mp3", FMOD_DEFAULT, 0, &fsound[HEARTBEAT]);
+    ssystem->createSound("res/sound/heartbeat.mp3", FMOD_LOOP_NORMAL, 0, &fsound[HEARTBEAT]);
+    ssystem->createSound("res/sound/walk.mp3", FMOD_LOOP_NORMAL, 0, &fsound[WALK]);
+    ssystem->createSound("res/sound/background.mp3", FMOD_LOOP_NORMAL, 0, &fsound[BACKGROUND]);
+    ssystem->createSound("res/sound/scare.mp3", FMOD_LOOP_OFF, 0, &fsound[SCARE]);
 }

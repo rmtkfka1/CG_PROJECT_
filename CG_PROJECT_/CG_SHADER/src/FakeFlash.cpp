@@ -3,7 +3,7 @@
 #include "BoxCollider.h"
 #include "Light2.h"
 #include "Flash.h"
-
+#include "SoundManager.h"
 FakeFlash::FakeFlash(Model& model):Object(ObjectType::FAKE_FLASH)
 {
 	_center = model.GetCenter();
@@ -50,6 +50,7 @@ void FakeFlash::UpdateFlash(Light2* light, Flash* flash)
 		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::F))
 		{
 
+			SoundManager::GetInstance()->Play(BACKGROUND);
 			draw = false;
 		}	
 
@@ -57,6 +58,10 @@ void FakeFlash::UpdateFlash(Light2* light, Flash* flash)
 
 	if (draw == false)
 	{
+
+		
+
+
 		flash->SetLighton();
 		light->point_light.diffuse = glm::vec3(1.0f, 0, 0);
 		if (spotoff == false)

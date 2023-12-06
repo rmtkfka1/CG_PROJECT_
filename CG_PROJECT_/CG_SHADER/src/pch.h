@@ -32,7 +32,6 @@ using namespace std;
 #include <set>
 #include <unordered_set>
 
-
 ///////////////////////////
 #include "Types.h"
 #include "Core.h"
@@ -52,5 +51,6 @@ using namespace std;
 #include "Model.h"
 #include "CameraManager.h"
 #include "BoxCollider.h"
+#include "SoundManager.h"
 
 
