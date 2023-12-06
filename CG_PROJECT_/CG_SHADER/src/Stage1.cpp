@@ -21,7 +21,8 @@
 #include "SceneManager.h"
 #include "Cat.h"
 #include "Spherequiz.h"
-
+#include "fmod.hpp"
+#include "SoundManager.h"
 Stage1::Stage1()
 {
 	
@@ -146,6 +147,7 @@ void Stage1::Init()
 	shader->Bind();
 
 	shader2 = new Shader("res/shader/mvp.vs", "res/shader/mvp.fs");
+
 
 
 
@@ -300,6 +302,7 @@ void Stage1::Init()
 
 
 
+	/*SoundManager::GetInstance()->Play(TEST);*/
 
 
 
@@ -328,9 +331,7 @@ void Stage1::Init()
 void Stage1::Update()
 {
 
-
-
-
+	SoundManager::GetInstance()->Update();
 
 	CameraManager::GetInstance()->KeyUpdate();
 	CameraManager::GetInstance()->MouseUpdate(MouseManager::GetInstance()->GetMousePos().x, MouseManager::GetInstance()->GetMousePos().y);

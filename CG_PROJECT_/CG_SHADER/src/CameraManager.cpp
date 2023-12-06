@@ -42,14 +42,7 @@ void CameraManager::KeyUpdate()
 	auto cameraUp = glm::normalize(glm::cross(-m_cameraFront, cameraRight));
 
 
-	if (KeyManager::GetInstance()->Getbutton(KeyType::Q))
-	{
-		m_cameraPos += m_cameraSpeed * cameraUp * dt;
-	}
-	if (KeyManager::GetInstance()->Getbutton(KeyType::E))
-	{
-		m_cameraPos -= m_cameraSpeed * cameraUp * dt;
-	}
+
 
 }
 

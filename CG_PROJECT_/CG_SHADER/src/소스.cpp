@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "SceneManager.h"
 #include "TextManager.h"
-#include "fmod.hpp"
+#include "SoundManager.h"
+
 
 
 void draw()
@@ -23,11 +24,13 @@ int main(int argc, char** argv)
 	Core::GetInstance()->Init(argc, argv);
 	Core::GetInstance()->Render(draw);
 
-
 	KeyManager::GetInstance()->Init();
 	TimeManager::GetInstance()->Init();
 	MouseManager::GetInstance()->Init();
 	TextManager::GetInstance()->Init();
+	SoundManager::GetInstance()->Init();
+
+
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
@@ -38,6 +41,7 @@ int main(int argc, char** argv)
 
 	while (1)
 	{
+	
 		KeyManager::GetInstance()->Update();
 		TimeManager::GetInstance()->Update();
 		SceneManager::GetInstance()->Update();

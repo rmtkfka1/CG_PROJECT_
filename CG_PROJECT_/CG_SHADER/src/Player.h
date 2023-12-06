@@ -32,4 +32,6 @@ public:
 	bool _run = false;
 	bool _collusion = false;
 
+	bool sound_playing = false;
+
 };

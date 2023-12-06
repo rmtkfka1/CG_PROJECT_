@@ -7,6 +7,7 @@
 #include "Light2.h"
 #include "ExitDoor.h"
 #include "SceneManager.h"
+#include "SoundManager.h"
 Player::Player(Model& model) :Object(ObjectType::PLAYER)
 {
 	_center = model.GetCenter();
@@ -78,6 +79,11 @@ void Player::KeyUpdate()
 		_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
+		
+			SoundManager::GetInstance()->Play(HEARTBEAT);
+	
+
+		
 	}
 
 	if (KeyManager::GetInstance()->Getbutton(KeyType::S))

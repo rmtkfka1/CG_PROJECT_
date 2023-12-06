@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\SoundManager.cpp" />
     <ClCompile Include="src\Cat.cpp" />
     <ClCompile Include="src\Locked.cpp" />
     <ClCompile Include="src\ExitDoor.cpp" />
@@ -194,6 +195,7 @@
     <ClCompile Include="src\stage2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\SoundManager.h" />
     <ClInclude Include="src\Cat.h" />
     <ClInclude Include="src\Locked.h" />
     <ClInclude Include="src\ExitDoor.h" />

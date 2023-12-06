@@ -230,6 +230,9 @@
     <ClCompile Include="src\Cat.cpp">
       <Filter>02.Object\10.Cat</Filter>
     </ClCompile>
+    <ClCompile Include="src\SoundManager.cpp">
+      <Filter>03,Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core.h">
@@ -366,6 +369,9 @@
     </ClInclude>
     <ClInclude Include="src\Cat.h">
       <Filter>02.Object\10.Cat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SoundManager.h">
+      <Filter>03,Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
