@@ -162,6 +162,8 @@ void RightDoor::OnComponentBeginOverlap(Collider* collider, Collider* other)
 			_test = true;
 		}
 
+		SoundManager::GetInstance()->Play(DOOR);
+
 	}
 
 

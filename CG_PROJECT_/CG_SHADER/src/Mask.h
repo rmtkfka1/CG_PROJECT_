@@ -22,6 +22,8 @@ public:
 	void OnComponentEndOverlap(Collider* collider, Collider* other) override;
 
 public:
+
+	bool play_sound = false;
 	float speed = 200.0f;
 	float delta = 0;
 };

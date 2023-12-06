@@ -41,6 +41,7 @@ void FakeFlash::UpdateFlash(Light2* light, Flash* flash)
 {
 	if (KeyManager::GetInstance()->GetbuttonDown(KeyType::R))
 	{
+		SoundManager::GetInstance()->Play(FLASH);
 		spotoff = !spotoff;
 	}
 
@@ -60,13 +61,12 @@ void FakeFlash::UpdateFlash(Light2* light, Flash* flash)
 	{
 
 		
-
-
 		flash->SetLighton();
 		light->point_light.diffuse = glm::vec3(1.0f, 0, 0);
+
 		if (spotoff == false)
 		{
-			light->Spot_light.distance = 1000.0f;			
+			light->Spot_light.distance = 500.0f;			
 		}
 
 		else 

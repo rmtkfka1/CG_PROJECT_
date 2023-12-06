@@ -149,6 +149,7 @@ void LeftDoor::OnComponentBeginOverlap(Collider* collider, Collider* other)
 
 
 
+
 		if (_center.z < other->GetOwner()->GetCenter_z())
 		{
 			_test = false;
@@ -157,6 +158,9 @@ void LeftDoor::OnComponentBeginOverlap(Collider* collider, Collider* other)
 		{
 			_test=true;
 		}
+
+
+		SoundManager::GetInstance()->Play(DOOR);
 
 	}
 

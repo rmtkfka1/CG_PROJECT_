@@ -21,6 +21,8 @@ private:
 	void OnComponentEndOverlap(Collider* collider, Collider* other) override;
 
 public:
+
+
 	bool mask_collison = false;
 	bool box_collusion= false;
 

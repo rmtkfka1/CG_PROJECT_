@@ -51,21 +51,21 @@ void Locked::Update()
 
 		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::ONE))
 		{
-
+			SoundManager::GetInstance()->Play(SWAP);
 			_first_set[0] = (_first_set[0] + 1) % 10;
 
 		}
 
 		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::TWO))
 		{
-
+			SoundManager::GetInstance()->Play(SWAP);
 			_first_set[1] = (_first_set[1] + 1) % 10;
 
 		}
 
 		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::THREE))
 		{
-
+			SoundManager::GetInstance()->Play(SWAP);
 			_first_set[2] = (_first_set[2] + 1) % 10;
 
 		}
@@ -73,6 +73,7 @@ void Locked::Update()
 		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::FOUR))
 		{
 
+			SoundManager::GetInstance()->Play(SWAP);
 			_first_set[3] = (_first_set[3] + 1) % 10;
 
 		}
@@ -104,6 +105,12 @@ void Locked::Update()
 			_matrix = result ;
 		}
 
+		if (sound_event == false)
+		{
+			SoundManager::GetInstance()->Play(LOCKOPEN);
+			sound_event = true;
+		}
+
 
 	}
 
@@ -124,12 +131,16 @@ void Locked::SpecialUpdate(ExitDoor* ptr)
 
 			_first_set[0] = (_first_set[0] + 1) % 10;
 
+			SoundManager::GetInstance()->Play(SWAP);
+
 		}
 
 		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::TWO))
 		{
 
 			_first_set[1] = (_first_set[1] + 1) % 10;
+
+			SoundManager::GetInstance()->Play(SWAP);
 
 		}
 
@@ -138,6 +149,8 @@ void Locked::SpecialUpdate(ExitDoor* ptr)
 
 			_first_set[2] = (_first_set[2] + 1) % 10;
 
+			SoundManager::GetInstance()->Play(SWAP);
+
 		}
 
 		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::FOUR))
@@ -145,11 +158,19 @@ void Locked::SpecialUpdate(ExitDoor* ptr)
 
 			_first_set[3] = (_first_set[3] + 1) % 10;
 
+			SoundManager::GetInstance()->Play(SWAP);
+
 		}
 
 		if (_first_set[0] == _answer[0] && _first_set[1] == _answer[1] && _first_set[2] == _answer[2] && _first_set[3] == _answer[3])
 		{
 			_locked = false;
+
+			if (sound_event == false)
+			{
+				SoundManager::GetInstance()->Play(LOCKOPEN);
+				sound_event = true;
+			}
 		}
 
 
@@ -159,6 +180,7 @@ void Locked::SpecialUpdate(ExitDoor* ptr)
 
 	if (_locked == false)
 	{
+
 		ptr->locked = false;
 	}
 

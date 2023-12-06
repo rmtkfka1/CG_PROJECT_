@@ -32,7 +32,7 @@ public:
 
 	bool _collusion = false; //자물쇠충돌
 	bool _locked = true;  //1번방자물쇠락
-
+	bool sound_event = false;  
 	
 public:
 

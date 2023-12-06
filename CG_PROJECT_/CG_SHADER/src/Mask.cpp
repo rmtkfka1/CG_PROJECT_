@@ -66,7 +66,20 @@ void Mask::MatrixUpdate(Event* ptr)
 void Mask::OnComponentBeginOverlap(Collider* collider, Collider* other)
 {
 
+	
 
+
+		if (other->GetOwner()->GetObjectType() == ObjectType::PLAYER)
+		{
+			if (play_sound == false)
+			{
+				SoundManager::GetInstance()->Play(HEARTBEAT);
+				play_sound = true;
+			}
+
+		
+		}
+	
 
 }
 

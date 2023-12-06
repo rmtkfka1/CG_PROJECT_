@@ -745,6 +745,9 @@ BehaviorStatus Ghost::IsPlayerInCorridor()
 
 BehaviorStatus Ghost::ChasePlayer()
 {
+	SoundManager::GetInstance()->Stop(BACKGROUND);
+	SoundManager::GetInstance()->Play(CHASE);
+
 	_state = GhostState::CHASE;
 	MoveSlightlyTo(_player_pos.x, _player_pos.z);
 	if (DistanceLessThan(_pos.x, _pos.z, _player_pos.x, _player_pos.z, 0.5f))
@@ -754,6 +757,7 @@ BehaviorStatus Ghost::ChasePlayer()
 	}
 	else
 	{
+
 		//cout << "Chasing Player" << endl;
 		return BT_RUNNING;
 	}
@@ -761,6 +765,9 @@ BehaviorStatus Ghost::ChasePlayer()
 
 BehaviorStatus Ghost::GetPatrolLoc()
 {
+	SoundManager::GetInstance()->Play(BACKGROUND);
+	SoundManager::GetInstance()->Stop(CHASE);
+
 	_to.x = _patrol_locations[_patrol_location_no].x;
 	_to.z = _patrol_locations[_patrol_location_no].z;
 	_patrol_location_no = (_patrol_location_no + 1) % _patrol_locations.size();

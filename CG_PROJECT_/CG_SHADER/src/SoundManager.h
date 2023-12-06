@@ -9,6 +9,12 @@ enum sound
 	HEARTBEAT,
 	WALK,
 	SCARE,
+	CHASE,
+	LOCKOPEN,
+	SWAP,
+	DOOR,
+	TELEPORT,
+	FLASH,
 	END
 };
 
