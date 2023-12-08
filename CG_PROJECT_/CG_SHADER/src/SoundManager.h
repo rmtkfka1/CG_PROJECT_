@@ -16,6 +16,7 @@ enum sound
 	FLASH,
 	RUN,
 	START,
+	FINDBODY,
 	END
 };
 
