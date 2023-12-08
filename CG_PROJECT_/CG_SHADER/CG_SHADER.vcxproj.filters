@@ -100,6 +100,9 @@
     <Filter Include="04.Matrix\03,Manager">
       <UniqueIdentifier>{85a7d254-0cbc-4d21-ae3e-a8673cebff75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Object\12.end">
+      <UniqueIdentifier>{489ed151-182c-41f7-937d-801e192ff7f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -232,6 +235,9 @@
     </ClCompile>
     <ClCompile Include="src\SoundManager.cpp">
       <Filter>04.Matrix\03,Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\end.cpp">
+      <Filter>02.Object\12.end</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -372,6 +378,9 @@
     </ClInclude>
     <ClInclude Include="src\SoundManager.h">
       <Filter>04.Matrix\03,Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\end.h">
+      <Filter>02.Object\12.end</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

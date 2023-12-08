@@ -23,6 +23,7 @@
 #include "Spherequiz.h"
 #include "fmod.hpp"
 #include "SoundManager.h"
+#include "end.h"
 Stage1::Stage1()
 {
 	
@@ -149,7 +150,7 @@ void Stage1::Init()
 	shader2 = new Shader("res/shader/mvp.vs", "res/shader/mvp.fs");
 
 
-
+	
 
 	///////////////////////////////////////////////////모델 불러오기 
 
@@ -302,8 +303,12 @@ void Stage1::Init()
 
 
 
-	render_box3 = new Model("res/models/render_box3.obj");
-	ending_box = new Model("res/models/ending_box.obj");
+	render_box3 = new Model("res/models/render_box3.obj"); //고스트충돌
+
+	{
+		ending_box = new Model("res/models/ending_box.obj");
+		end = new ENDING(*ending_box);
+	}
 
 
 	//방1 퀴즈 생성
@@ -463,6 +468,7 @@ void Stage1::Update()
 
 	cat->Update();
 	computer->Update();
+	end->Update(computer);
 	computer_table->Update();
 
 	//cout << CameraManager::GetInstance()->m_cameraPos.x << "  " << CameraManager::GetInstance()->m_cameraPos.y << "  " << CameraManager::GetInstance()->m_cameraPos.z << endl;
@@ -750,28 +756,13 @@ void Stage1::Object_Render2()
 		shader2->SetUniformMat4f("u_proj", matrix::GetInstance()->Getortho());
 		shader2->SetUniform1i("u_texture", die_texture->GetSlot());
 		render_box3->RenderModel(*shader2);
+
 	}
 
-	if (computer->_collison_onetime)
-	{
+	shader2->SetUniform1i("u_texture", end_texture->GetSlot());
+	end->Render(shader2);
 
-		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::F))
-		{
-			coding = true;
-		}
-	}
-
-	if (coding)
-	{
-		dt += 1.0f * TimeManager::GetInstance()->GetDeltaTime();
-		shader2->SetUniformMat4f("u_model", glm::mat4(1.0f));
-		shader2->SetUniformMat4f("u_view", matrix::GetInstance()->GetCamera(glm::vec3(0, 6.0f - dt, -2.0f), glm::vec3(0, 6.0f - dt, 0), glm::vec3(0, 1, 0)));
-		glm::mat4 projection = glm::mat4(1.0f);
-		projection = glm::ortho(-1.0f, 1.0f, -2.0f, 2.0f, -0.1f, 10.0f);
-		shader2->SetUniformMat4f("u_proj", projection);
-		shader2->SetUniform1i("u_texture", end_texture->GetSlot());
-		ending_box->RenderModel(*shader2);
-	}
+	
 }
 
 
@@ -781,9 +772,8 @@ void Stage1::Texture_Render()
 	TextManager::GetInstance()->Render(-1.0f, -0.95f, "RUN");
 
 
-	if (computer->_collison_onetime && coding==false)
+	if (computer->_collison_onetime && end->_coding==false)
 	{
-
 		TextManager::GetInstance()->Render(-0.2f, 0.0f, "Press F to Coding");
 	}
 

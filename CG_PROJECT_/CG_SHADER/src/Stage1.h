@@ -23,6 +23,7 @@ class ExitDoor;
 class Locked;
 class Cat;
 class Spherequiz;
+class ENDING;
 
 class Stage1 : public Scene
 {
@@ -145,7 +146,7 @@ private:
 
 	//¸¶Áö¸··ë
 	Wall* computer_table;
-	
+	ENDING* end;
 
 
 
@@ -208,7 +209,6 @@ private:
 	/// <summary>
 	/// ////
 	/// </summary>
-	bool coding = false;
-	float dt = 0.0f;
+
 };
 
