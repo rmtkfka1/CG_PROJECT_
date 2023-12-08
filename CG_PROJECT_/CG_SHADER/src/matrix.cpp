@@ -93,7 +93,7 @@ glm::mat4 matrix::GetProjection(float _fovy, float _aspect, float _near, float _
 glm::mat4 matrix::Getortho()
 {
 	glm::mat4 projection = glm::mat4(1.0f);
-	projection = glm::ortho(-1.0f,1.0f, 0.0f, 2.0f, -0.1f, 5.0f);
+	projection = glm::ortho(-1.0f,1.0f, 0.0f, 2.0f, -0.1f, 20.0f);
 
 	return projection;
 }

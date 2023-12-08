@@ -81,7 +81,6 @@ void SoundManager::Stop(sound song)
 
 void SoundManager::load()
 {
-    ssystem->createSound("res/sound/sound.mp3", FMOD_LOOP_NORMAL, 0, &fsound[TEST]);
     ssystem->createSound("res/sound/heartbeat.mp3", FMOD_LOOP_OFF, 0, &fsound[HEARTBEAT]);
     ssystem->createSound("res/sound/walk.mp3", FMOD_LOOP_NORMAL, 0, &fsound[WALK]);
     ssystem->createSound("res/sound/background.mp3", FMOD_LOOP_NORMAL, 0, &fsound[BACKGROUND]);
@@ -93,4 +92,5 @@ void SoundManager::load()
     ssystem->createSound("res/sound/teleport.wav", FMOD_LOOP_OFF, 0, &fsound[TELEPORT]);
     ssystem->createSound("res/sound/flash.wav", FMOD_LOOP_OFF, 0, &fsound[FLASH]);
     ssystem->createSound("res/sound/run.wav", FMOD_LOOP_NORMAL, 0, &fsound[RUN]);
+    ssystem->createSound("res/sound/start.mp3", FMOD_LOOP_NORMAL, 0, &fsound[START]);
 }

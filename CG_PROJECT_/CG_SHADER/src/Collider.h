@@ -31,7 +31,7 @@ public:
 protected:
 
 	ColliderType _colliderType;
-	bool _showDebug = true;
+	bool _showDebug = false;
 	
 public:
 

@@ -7,13 +7,12 @@
 
 void draw()
 {
-		glClearColor(0, 0, 0, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0, 0, 0, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	
-		
-		SceneManager::GetInstance()->Render();
-		glutSwapBuffers();
+
+	SceneManager::GetInstance()->Render();
+	glutSwapBuffers();
 
 };
 
@@ -32,12 +31,12 @@ int main(int argc, char** argv)
 
 
 
-	glEnable(GL_DEPTH_TEST);
+
 	glEnable(GL_CULL_FACE);
 	glutSetCursor(GLUT_CURSOR_NONE); // 마우스 커서 숨기기
 
 
-	SceneManager::GetInstance()->ChangeScene(SceneType::Stage1);
+	SceneManager::GetInstance()->ChangeScene(SceneType::Stage2);
 
 	while (1)
 	{

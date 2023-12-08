@@ -148,10 +148,8 @@ void Stage1::Init()
 	shader->Bind();
 
 	shader2 = new Shader("res/shader/mvp.vs", "res/shader/mvp.fs");
-
-
 	
-
+	glEnable(GL_DEPTH_TEST);
 	///////////////////////////////////////////////////모델 불러오기 
 
 
@@ -328,7 +326,7 @@ void Stage1::Init()
 
 
 
-
+	SoundManager::GetInstance()->Stop(START);
 }
 
 
@@ -777,7 +775,7 @@ void Stage1::Texture_Render()
 		TextManager::GetInstance()->Render(-0.2f, 0.0f, "Press F to Coding");
 	}
 
-	if (fake_flash->GetCollsionState() == true)
+	if (fake_flash->GetCollsionState() == true && fake_flash->draw==true)
 	{
 		TextManager::GetInstance()->Render(-0.2f, -0.5f, "Press F to Equid");
 		TextManager::GetInstance()->Render(-0.2f, -0.6f, "Press R to Turnon / Turnoff");
@@ -808,7 +806,7 @@ void Stage1::Texture_Render()
 	}
 
 
-	if (Lockedkey->_collusion == true)
+	if (Lockedkey->_collusion == true && Lockedkey->_locked==true)
 	{
 
 
@@ -825,7 +823,7 @@ void Stage1::Texture_Render()
 
 
 
-	if (Lockedkey2->_collusion == true)
+	if (Lockedkey2->_collusion == true && Lockedkey2->_locked == true)
 	{
 		shader2->Bind();
 		shader2->SetUniform1i("u_texture", room2_puzzle->GetSlot());
@@ -850,7 +848,7 @@ void Stage1::Texture_Render()
 		TextManager::GetInstance()->Render(-0.2f, -0.2f, strValue.c_str());
 	}
 
-	if (Lockedkey3->_collusion == true)
+	if (Lockedkey3->_collusion == true && Lockedkey3->_locked == true)
 	{
 		TextManager::GetInstance()->Render(0.0f, 0.0f, "solve the quiz!!");
 	}
@@ -861,7 +859,7 @@ void Stage1::Texture_Render()
 	}
 
 
-	if (Lockedkey4->_collusion == true)
+	if (Lockedkey4->_collusion == true && Lockedkey4->_locked == true)
 	{
 
 		TextManager::GetInstance()->Render(-0.1f, 0.1f, "Press 1,2,3,4");

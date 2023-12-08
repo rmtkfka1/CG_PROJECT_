@@ -4,7 +4,6 @@
 
 enum sound
 {
-	TEST,
 	BACKGROUND,
 	HEARTBEAT,
 	WALK,
@@ -16,6 +15,7 @@ enum sound
 	TELEPORT,
 	FLASH,
 	RUN,
+	START,
 	END
 };
 
