@@ -37,7 +37,7 @@ public:
 	void Update();
 	void Play(sound song);
 	void Stop(sound song);
-
+	bool endsong = false;
 private:
 
 	void load();

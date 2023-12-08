@@ -98,7 +98,7 @@ public:
 	int room4_lower_door;
 
 	int _patrol_location_no = 0;
-	float _speed = 55.0f;
+	float _speed = 10.0f;
 
 	float _anim_switch = true;
 

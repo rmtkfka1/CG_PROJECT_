@@ -49,6 +49,10 @@ void Cat::OnComponentBeginOverlap(Collider* collider, Collider* other)
 	{
 
 		SoundManager::GetInstance()->Play(TELEPORT);
+
+		SoundManager::GetInstance()->endsong = true;
+		SoundManager::GetInstance()->Stop(BACKGROUND);
+
 		GET_SINGLE(CameraManager)->m_cameraFront = { -1,0,0};
 		GET_SINGLE(CameraManager)->m_cameraPos.x = 0.0f;
 		GET_SINGLE(CameraManager)->m_cameraPos.z = -900.0f;

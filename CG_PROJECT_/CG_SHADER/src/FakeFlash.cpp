@@ -50,8 +50,6 @@ void FakeFlash::UpdateFlash(Light2* light, Flash* flash)
 	{
 		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::F))
 		{
-
-			SoundManager::GetInstance()->Play(BACKGROUND);
 			draw = false;
 		}	
 

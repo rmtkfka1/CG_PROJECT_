@@ -2,12 +2,15 @@
 #include "MaskEvent.h"
 #include "BoxCollider.h"
 #include "DeadBody.h"
-Event::Event(Model& model) :Object(ObjectType::MASKEVENT)
+
+
+Event::Event(Model& model,string type) :Object(ObjectType::MASKEVENT)
 {
 	_center = model.GetCenter();
 	_size = model.GetSize();
 	_first_center = _center;
 	_model = &model;
+	_type = type;
 
 }
 
@@ -50,14 +53,20 @@ void Event::OnComponentBeginOverlap(Collider* collider, Collider* other)
 {
 	if (other->GetOwner()->GetObjectType() == ObjectType::PLAYER)
 	{
-		mask_collison = true;
-		box_collusion = true;
+	
+		_collison_onetime = true;
+		_collison_everytime = true;
 
-		if (scare_sound1 == false)
+		if (_type == "mask")
 		{
-			SoundManager::GetInstance()->Play(SCARE);
-			scare_sound1 = true;
+			if (scare_sound1 == false)
+			{
+				SoundManager::GetInstance()->Play(SCARE);
+				scare_sound1 = true;
+			}
 		}
+
+		
 	}
 }
 
@@ -66,7 +75,7 @@ void Event::OnComponentEndOverlap(Collider* collider, Collider* other)
 
 	if (other->GetOwner()->GetObjectType() == ObjectType::PLAYER)
 	{
-		box_collusion = false;
+		_collison_everytime = false;
 	}
 }
 

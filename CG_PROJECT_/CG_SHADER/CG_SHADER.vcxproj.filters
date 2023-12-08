@@ -34,9 +34,6 @@
     <Filter Include="02.Object">
       <UniqueIdentifier>{2bf560c8-d426-4a7c-8bbe-47d741c06895}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03,Manager">
-      <UniqueIdentifier>{85a7d254-0cbc-4d21-ae3e-a8673cebff75}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Object\00.Object">
       <UniqueIdentifier>{3c8f9fe8-8dad-4e39-bbef-a0e51e9b21f9}</UniqueIdentifier>
     </Filter>
@@ -100,6 +97,9 @@
     <Filter Include="02.Object\11.Spherequiz">
       <UniqueIdentifier>{e08eac3e-e5b1-44c6-a5b5-c3a3d6c3ffc2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Matrix\03,Manager">
+      <UniqueIdentifier>{85a7d254-0cbc-4d21-ae3e-a8673cebff75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -124,16 +124,16 @@
       <Filter>01.OPENGL\05.Shader</Filter>
     </ClCompile>
     <ClCompile Include="src\KeyManager.cpp">
-      <Filter>03,Manager</Filter>
+      <Filter>04.Matrix\03,Manager</Filter>
     </ClCompile>
     <ClCompile Include="src\MouseManager.cpp">
-      <Filter>03,Manager</Filter>
+      <Filter>04.Matrix\03,Manager</Filter>
     </ClCompile>
     <ClCompile Include="src\ObjectManager.cpp">
-      <Filter>03,Manager</Filter>
+      <Filter>04.Matrix\03,Manager</Filter>
     </ClCompile>
     <ClCompile Include="src\TimeManager.cpp">
-      <Filter>03,Manager</Filter>
+      <Filter>04.Matrix\03,Manager</Filter>
     </ClCompile>
     <ClCompile Include="src\matrix.cpp">
       <Filter>04.Matrix</Filter>
@@ -157,7 +157,7 @@
       <Filter>06.Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="src\CollisionManager.cpp">
-      <Filter>03,Manager</Filter>
+      <Filter>04.Matrix\03,Manager</Filter>
     </ClCompile>
     <ClCompile Include="src\Object.cpp">
       <Filter>02.Object\00.Object</Filter>
@@ -169,7 +169,7 @@
       <Filter>02.Object\02.Wall</Filter>
     </ClCompile>
     <ClCompile Include="src\CameraManager.cpp">
-      <Filter>03,Manager</Filter>
+      <Filter>04.Matrix\03,Manager</Filter>
     </ClCompile>
     <ClCompile Include="src\SceneManager.cpp">
       <Filter>05.Scene</Filter>
@@ -204,7 +204,7 @@
     </ClCompile>
     <ClCompile Include="src\연습장.cpp" />
     <ClCompile Include="src\TextManager.cpp">
-      <Filter>03,Manager</Filter>
+      <Filter>04.Matrix\03,Manager</Filter>
     </ClCompile>
     <ClCompile Include="src\DeadBody.cpp">
       <Filter>02.Object\07.Deadbody</Filter>
@@ -231,7 +231,7 @@
       <Filter>02.Object\10.Cat</Filter>
     </ClCompile>
     <ClCompile Include="src\SoundManager.cpp">
-      <Filter>03,Manager</Filter>
+      <Filter>04.Matrix\03,Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,22 +260,22 @@
       <Filter>99.defines</Filter>
     </ClInclude>
     <ClInclude Include="src\KeyManager.h">
-      <Filter>03,Manager</Filter>
+      <Filter>04.Matrix\03,Manager</Filter>
     </ClInclude>
     <ClInclude Include="src\enum.h">
       <Filter>99.defines</Filter>
     </ClInclude>
     <ClInclude Include="src\MouseManager.h">
-      <Filter>03,Manager</Filter>
+      <Filter>04.Matrix\03,Manager</Filter>
     </ClInclude>
     <ClInclude Include="src\VertexBufferLayout.h">
       <Filter>01.OPENGL\02.VAO</Filter>
     </ClInclude>
     <ClInclude Include="src\ObjectManager.h">
-      <Filter>03,Manager</Filter>
+      <Filter>04.Matrix\03,Manager</Filter>
     </ClInclude>
     <ClInclude Include="src\TimeManager.h">
-      <Filter>03,Manager</Filter>
+      <Filter>04.Matrix\03,Manager</Filter>
     </ClInclude>
     <ClInclude Include="src\matrix.h">
       <Filter>04.Matrix</Filter>
@@ -299,7 +299,7 @@
       <Filter>06.Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="src\CollisionManager.h">
-      <Filter>03,Manager</Filter>
+      <Filter>04.Matrix\03,Manager</Filter>
     </ClInclude>
     <ClInclude Include="src\Object.h">
       <Filter>02.Object\00.Object</Filter>
@@ -311,7 +311,7 @@
       <Filter>02.Object\02.Wall</Filter>
     </ClInclude>
     <ClInclude Include="src\CameraManager.h">
-      <Filter>03,Manager</Filter>
+      <Filter>04.Matrix\03,Manager</Filter>
     </ClInclude>
     <ClInclude Include="src\SceneManager.h">
       <Filter>05.Scene</Filter>
@@ -344,7 +344,7 @@
       <Filter>02.Object\06.Door</Filter>
     </ClInclude>
     <ClInclude Include="src\TextManager.h">
-      <Filter>03,Manager</Filter>
+      <Filter>04.Matrix\03,Manager</Filter>
     </ClInclude>
     <ClInclude Include="src\DeadBody.h">
       <Filter>02.Object\07.Deadbody</Filter>
@@ -371,7 +371,7 @@
       <Filter>02.Object\10.Cat</Filter>
     </ClInclude>
     <ClInclude Include="src\SoundManager.h">
-      <Filter>03,Manager</Filter>
+      <Filter>04.Matrix\03,Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

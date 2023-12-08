@@ -274,7 +274,7 @@ void Stage1::Init()
 	//마스크이벤트발생
 	{
 		Model* mask__event = new Model("res/models/deadbody_event.obj");
-		mask_event = new Event(*mask__event);
+		mask_event = new Event(*mask__event,"mask");
 		BoxCollider* ptr = new BoxCollider;
 		mask_event->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
@@ -282,7 +282,7 @@ void Stage1::Init()
 
 	{
 		Model* computer_model = new Model("res/models/computer.obj");
-		computer = new Event(*computer_model);
+		computer = new Event(*computer_model,"computer");
 		computer->SetSize(glm::vec3(computer->GetSize().x + 20, computer->GetSize().y, computer->GetSize().z));
 		BoxCollider* ptr = new BoxCollider;
 		computer->AddComponent(ptr);
@@ -303,7 +303,7 @@ void Stage1::Init()
 
 
 	render_box3 = new Model("res/models/render_box3.obj");
-
+	ending_box = new Model("res/models/ending_box.obj");
 
 
 	//방1 퀴즈 생성
@@ -473,15 +473,8 @@ void Stage1::Update()
 void Stage1::Render()
 {
 	
-	if (ghost->_collusion == true)
-	{
-		shader2->Bind();
-		shader2->SetUniformMat4f("u_model", glm::mat4(1.0f));
-		shader2->SetUniformMat4f("u_view", matrix::GetInstance()->GetCamera(glm::vec3(0, 0, -2.0f), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0)));
-		shader2->SetUniformMat4f("u_proj", matrix::GetInstance()->Getortho());
-		shader2->SetUniform1i("u_texture", die_texture->GetSlot());
-		render_box3->RenderModel(*shader2);
-	}
+	shader2->Bind();
+	Object_Render2();
 
 
 	shader->Bind();
@@ -746,6 +739,41 @@ void Stage1::Object_Render()
 
 }
 
+void Stage1::Object_Render2()
+{
+
+	if (ghost->_collusion == true)
+	{
+
+		shader2->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		shader2->SetUniformMat4f("u_view", matrix::GetInstance()->GetCamera(glm::vec3(0, 0, -2.0f), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0)));
+		shader2->SetUniformMat4f("u_proj", matrix::GetInstance()->Getortho());
+		shader2->SetUniform1i("u_texture", die_texture->GetSlot());
+		render_box3->RenderModel(*shader2);
+	}
+
+	if (computer->_collison_onetime)
+	{
+
+		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::F))
+		{
+			coding = true;
+		}
+	}
+
+	if (coding)
+	{
+		dt += 1.0f * TimeManager::GetInstance()->GetDeltaTime();
+		shader2->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		shader2->SetUniformMat4f("u_view", matrix::GetInstance()->GetCamera(glm::vec3(0, 6.0f - dt, -2.0f), glm::vec3(0, 6.0f - dt, 0), glm::vec3(0, 1, 0)));
+		glm::mat4 projection = glm::mat4(1.0f);
+		projection = glm::ortho(-1.0f, 1.0f, -2.0f, 2.0f, -0.1f, 10.0f);
+		shader2->SetUniformMat4f("u_proj", projection);
+		shader2->SetUniform1i("u_texture", end_texture->GetSlot());
+		ending_box->RenderModel(*shader2);
+	}
+}
+
 
 void Stage1::Texture_Render()
 {
@@ -753,6 +781,11 @@ void Stage1::Texture_Render()
 	TextManager::GetInstance()->Render(-1.0f, -0.95f, "RUN");
 
 
+	if (computer->_collison_onetime && coding==false)
+	{
+
+		TextManager::GetInstance()->Render(-0.2f, 0.0f, "Press F to Coding");
+	}
 
 	if (fake_flash->GetCollsionState() == true)
 	{
@@ -779,7 +812,7 @@ void Stage1::Texture_Render()
 
 	}
 
-	if (quizbox_event->box_collusion == true)
+	if (quizbox_event->_collison_everytime == true)
 	{
 		TextManager::GetInstance()->Render(0.0f, 0.0f, " RGBA !?");
 	}
@@ -852,7 +885,7 @@ void Stage1::Texture_Render()
 		TextManager::GetInstance()->Render(0.0f, 0.0f, strValue.c_str());
 	}
 
-	if (room4_event->box_collusion==true)
+	if (room4_event->_collison_everytime==true)
 	{
 
 		shader2->Bind();
@@ -1092,7 +1125,7 @@ void Stage1::MakeRoom4_QUIZ()
 	{
 
 		Model* pt = new Model("res/models/room4_event/snape_event.obj");
-		room4_event = new Event(*pt);
+		room4_event = new Event(*pt,"quiz");
 		BoxCollider* ptr = new BoxCollider;
 		room4_event->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
@@ -1142,7 +1175,7 @@ void Stage1::MakeRoom1_QUIZ()
 	}
 	{
 		Model* temp = new Model("res/models/room1_event/fake_box.obj");
-		quizbox_event = new Event(*temp);
+		quizbox_event = new Event(*temp,"quiz");
 		BoxCollider* ptr = new BoxCollider;
 		quizbox_event->AddComponent(ptr);
 		GET_SINGLE(CollisionManager)->AddCollider(ptr);
@@ -1159,10 +1192,8 @@ void Stage1::MakeRoom1_QUIZ()
 
 void Stage1::MakeTexture()
 {
-	//texture = new Texture("res/textures/block.jpg");
 
 	texture = new Texture("res/textures/23.jpg");
-	/*texture = new Texture("res/textures/metal.jpg");*/
 
 	billboard_texture = new Texture("res/textures/billboard_test.png");
 	light_texture = new Texture("res/textures/light.jpg");
@@ -1188,6 +1219,7 @@ void Stage1::MakeTexture()
 	answer3_texture= new Texture("res/textures/answer3.png");
 	answer4_texture = new Texture("res/textures/answer4.png");
 	die_texture = new Texture("res/textures/re.jpg");
+	end_texture = new Texture("res/textures/answer1.png");
 
 	texture->Bind(0);
 	flash_fake_texture->Bind(1);
@@ -1214,7 +1246,7 @@ void Stage1::MakeTexture()
 	answer3_texture->Bind(22);
 	answer4_texture->Bind(23);
 	die_texture->Bind(24);
-
+	end_texture->Bind(25);
 }
 
 

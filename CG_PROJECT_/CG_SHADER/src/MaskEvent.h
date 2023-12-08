@@ -7,14 +7,14 @@ class Event :public Object
 	using Super = Object;
 
 public:
-	Event(Model& model);
+	Event(Model& model,string type);
 	~Event();
 
 	void Init() override;
 	void Update() override;
 	void Render(Shader& shader) override;
 
-	bool GetCollison(){ return mask_collison; }
+	bool GetCollison(){ return _collison_onetime; }
 private:
 
 	void OnComponentBeginOverlap(Collider* collider, Collider* other) override;
@@ -23,9 +23,9 @@ private:
 public:
 
 
-	bool mask_collison = false;
-	bool box_collusion= false;
-
-	bool scare_sound1 = false;
+	bool _collison_onetime = false;
+	bool _collison_everytime= false;
+	string _type;
+	bool scare_sound1;
 };
 

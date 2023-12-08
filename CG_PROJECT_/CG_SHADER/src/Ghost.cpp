@@ -405,7 +405,7 @@ void Ghost::Update()
 	_location = GetLocation(_pos.x, _pos.z);
 	_player_location = GetLocation(_player_pos.x, _player_pos.z);
 
-
+	
 	if (_collusion == true)
 	{
 		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::ENTER))
@@ -754,8 +754,11 @@ BehaviorStatus Ghost::IsPlayerInCorridor()
 
 BehaviorStatus Ghost::ChasePlayer()
 {
-	SoundManager::GetInstance()->Stop(BACKGROUND);
-	SoundManager::GetInstance()->Play(CHASE);
+	if(SoundManager::GetInstance()->endsong==false)
+	{
+		SoundManager::GetInstance()->Stop(BACKGROUND);
+		SoundManager::GetInstance()->Play(CHASE);
+	}
 
 	_state = GhostState::CHASE;
 	MoveSlightlyTo(_player_pos.x, _player_pos.z);
@@ -774,8 +777,11 @@ BehaviorStatus Ghost::ChasePlayer()
 
 BehaviorStatus Ghost::GetPatrolLoc()
 {
-	SoundManager::GetInstance()->Play(BACKGROUND);
-	SoundManager::GetInstance()->Stop(CHASE);
+	if (SoundManager::GetInstance()->endsong == false)
+	{
+		SoundManager::GetInstance()->Stop(CHASE);
+		SoundManager::GetInstance()->Play(BACKGROUND);
+	}
 
 	_to.x = _patrol_locations[_patrol_location_no].x;
 	_to.z = _patrol_locations[_patrol_location_no].z;

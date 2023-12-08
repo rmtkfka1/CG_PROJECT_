@@ -2,7 +2,6 @@
 
 #include "Scene.h"
 
-
 class Player;
 class Model;
 class Billboard;
@@ -38,6 +37,7 @@ public:
 
 	
 	void Object_Render();
+	void Object_Render2();
 	void Texture_Render();
 
 private:
@@ -112,6 +112,7 @@ private:
 	Model* render_box;
 	Model* render_box2;
 	Model* render_box3;
+	Model* ending_box;
 	Model* fish;
 	Model* starfish;
 	Model* balls;
@@ -144,6 +145,7 @@ private:
 
 	//마지막룸
 	Wall* computer_table;
+	
 
 
 
@@ -198,11 +200,15 @@ private:
 	Texture* computer_texture;
 	Texture* sphere_texture;
 	Texture* die_texture;
+	Texture* end_texture;
 	//조명 객체 만들기
 	Light2* light;
 
 
-
-
+	/// <summary>
+	/// ////
+	/// </summary>
+	bool coding = false;
+	float dt = 0.0f;
 };
 
