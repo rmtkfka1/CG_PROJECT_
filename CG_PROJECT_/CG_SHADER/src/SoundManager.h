@@ -15,6 +15,7 @@ enum sound
 	DOOR,
 	TELEPORT,
 	FLASH,
+	RUN,
 	END
 };
 

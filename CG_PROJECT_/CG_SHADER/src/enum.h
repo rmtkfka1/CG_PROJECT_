@@ -34,6 +34,7 @@ enum class KeyType
 	SpaceBar = VK_SPACE,
 	ESC = VK_ESCAPE,
 	SHIFT = VK_SHIFT,
+	ENTER= VK_RETURN,
 	A = 'A',
 	B = 'B',
 	C = 'C',

@@ -9,22 +9,7 @@ Model::Model(const std::string& fileName)
 
 Model::~Model()
 {
-	//for (int i = 0; i < VAOs.size(); i++)
-	//{
-	//	delete VAOs[i];
-	//}
-	//for (int i = 0; i < VBOs.size(); i++)
-	//{
-	//	delete VBOs[i];
-	//}
-	//for (int i = 0; i < IBOs.size(); i++)
-	//{
-	//	delete IBOs[i];
-	//}
-	//for (int i = 0; i < m_TextureList.size(); i++)
-	//{
-	//	delete m_TextureList[i];
-	//}
+	ClearModel();
 
 }
 
@@ -42,6 +27,8 @@ void Model::LoadModel(const std::string& fileName)
 
 	aiVector3D min(FLT_MAX, FLT_MAX, FLT_MAX);
 	aiVector3D max(-FLT_MAX, -FLT_MAX, -FLT_MAX);
+	aiVector3D center(0.0f, 0.0f, 0.0f);
+	unsigned int vertexCount = 0;
 
 	for (unsigned int i = 0; i < scene->mNumMeshes; ++i) {
 		aiMesh* mesh = scene->mMeshes[i];
@@ -54,6 +41,10 @@ void Model::LoadModel(const std::string& fileName)
 			max.x = std::max(max.x, vertex.x);
 			max.y = std::max(max.y, vertex.y);
 			max.z = std::max(max.z, vertex.z);
+
+			center += vertex;
+			vertexCount++;
+
 		}
 	}
 
@@ -62,19 +53,6 @@ void Model::LoadModel(const std::string& fileName)
 	_size.x = size.x;
 	_size.y = size.y;
 	_size.z = size.z;
-
-
-	aiVector3D center(0.0f, 0.0f, 0.0f);
-	unsigned int vertexCount = 0;
-
-	for (unsigned int i = 0; i < scene->mNumMeshes; ++i) {
-		aiMesh* mesh = scene->mMeshes[i];
-		for (unsigned int j = 0; j < mesh->mNumVertices; ++j) {
-			aiVector3D vertex = mesh->mVertices[j];
-			center += vertex;
-			vertexCount++;
-		}
-	}
 
 	if (vertexCount > 0) {
 		center /= static_cast<float>(vertexCount);
@@ -93,7 +71,25 @@ void Model::LoadModel(const std::string& fileName)
 
 void Model::ClearModel()
 {
+	// Release memory for VAOs
+	for (auto vao : VAOs)
+		delete vao;
+	VAOs.clear();
 
+	// Release memory for VBOs
+	for (auto vbo : VBOs)
+		delete vbo;
+	VBOs.clear();
+
+	// Release memory for IBOs
+	for (auto ibo : IBOs)
+		delete ibo;
+	IBOs.clear();
+
+	// Release memory for textures
+	for (auto texture : m_TextureList)
+		delete texture;
+	m_TextureList.clear();
 }
 
 void Model::RenderModel(Shader& shader)

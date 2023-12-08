@@ -64,7 +64,6 @@ void SoundManager::Stop(sound song)
 
     if (soundPlayingStatus[song] == false)
     {
-        cout << "실행중인 노래가 없잔허" << endl;
         return;
     }
 
@@ -76,6 +75,7 @@ void SoundManager::Stop(sound song)
     playingChannels[song] = nullptr;
 
 }
+
 
 
 
@@ -92,4 +92,5 @@ void SoundManager::load()
     ssystem->createSound("res/sound/door.wav", FMOD_LOOP_OFF, 0, &fsound[DOOR]);
     ssystem->createSound("res/sound/teleport.wav", FMOD_LOOP_OFF, 0, &fsound[TELEPORT]);
     ssystem->createSound("res/sound/flash.wav", FMOD_LOOP_OFF, 0, &fsound[FLASH]);
+    ssystem->createSound("res/sound/run.wav", FMOD_LOOP_NORMAL, 0, &fsound[RUN]);
 }

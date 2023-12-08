@@ -43,6 +43,7 @@ void Mask::MatrixUpdate(Event* ptr)
 
 	if (delta > 600)
 	{
+	
 		return;
 	}
 
@@ -66,7 +67,6 @@ void Mask::MatrixUpdate(Event* ptr)
 void Mask::OnComponentBeginOverlap(Collider* collider, Collider* other)
 {
 
-	
 
 
 		if (other->GetOwner()->GetObjectType() == ObjectType::PLAYER)

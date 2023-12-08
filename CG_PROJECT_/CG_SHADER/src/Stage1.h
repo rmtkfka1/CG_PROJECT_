@@ -111,6 +111,7 @@ private:
 	Wall*  answerbox2;
 	Model* render_box;
 	Model* render_box2;
+	Model* render_box3;
 	Model* fish;
 	Model* starfish;
 	Model* balls;
@@ -196,7 +197,7 @@ private:
 	Texture* cat_texture;
 	Texture* computer_texture;
 	Texture* sphere_texture;
-
+	Texture* die_texture;
 	//조명 객체 만들기
 	Light2* light;
 

@@ -79,9 +79,16 @@ void Player::KeyUpdate()
 		_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
-		
-		SoundManager::GetInstance()->Play(WALK);
-	
+		if (_run == false)
+		{
+			SoundManager::GetInstance()->Play(WALK);
+			SoundManager::GetInstance()->Stop(RUN);
+		}
+		else
+		{
+			SoundManager::GetInstance()->Play(RUN);
+			SoundManager::GetInstance()->Stop(WALK);
+		}
 		
 	}
 
@@ -90,7 +97,16 @@ void Player::KeyUpdate()
 		_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
-		SoundManager::GetInstance()->Play(WALK);
+		if (_run == false)
+		{
+			SoundManager::GetInstance()->Play(WALK);
+			SoundManager::GetInstance()->Stop(RUN);
+		}
+		else
+		{
+			SoundManager::GetInstance()->Play(RUN);
+			SoundManager::GetInstance()->Stop(WALK);
+		}
 
 	}
 
@@ -98,8 +114,16 @@ void Player::KeyUpdate()
 	{
 		_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
-
-		SoundManager::GetInstance()->Play(WALK);
+		if (_run == false)
+		{
+			SoundManager::GetInstance()->Play(WALK);
+			SoundManager::GetInstance()->Stop(RUN);
+		}
+		else
+		{
+			SoundManager::GetInstance()->Play(RUN);
+			SoundManager::GetInstance()->Stop(WALK);
+		}
 	}
 
 	if (KeyManager::GetInstance()->Getbutton(KeyType::D))
@@ -107,7 +131,16 @@ void Player::KeyUpdate()
 		_center.x = CameraManager::GetInstance()->m_cameraPos.x;
 		_center.z = CameraManager::GetInstance()->m_cameraPos.z;
 
-		SoundManager::GetInstance()->Play(WALK);
+		if (_run == false)
+		{
+			SoundManager::GetInstance()->Play(WALK);
+			SoundManager::GetInstance()->Stop(RUN);
+		}
+		else
+		{
+			SoundManager::GetInstance()->Play(RUN);
+			SoundManager::GetInstance()->Stop(WALK);
+		}
 
 	}
 
@@ -115,9 +148,10 @@ void Player::KeyUpdate()
 		&& KeyManager::GetInstance()->GetbuttonUp(KeyType::S))
 	{
 		SoundManager::GetInstance()->Stop(WALK);
+		SoundManager::GetInstance()->Stop(RUN);
 	}
 
-
+	
 
 
 	if (KeyManager::GetInstance()->Getbutton(KeyType::SHIFT))
@@ -126,10 +160,10 @@ void Player::KeyUpdate()
 		if (speed_gage < -1.0f)
 		{
 			CameraManager::GetInstance()->m_cameraSpeed = 30.0f; //40.0f
+			_run = false;
 			return;
 		}
 
-		
 		CameraManager::GetInstance()->m_cameraSpeed = 60.0f; //80.0f
 		_run = true;
 		cout << speed_gage << endl;
@@ -151,6 +185,8 @@ void Player::KeyUpdate()
 	
 		
 	}
+
+
 }
 
 void Player::DrawGage()

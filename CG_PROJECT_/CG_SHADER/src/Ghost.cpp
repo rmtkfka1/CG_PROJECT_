@@ -406,7 +406,14 @@ void Ghost::Update()
 	_player_location = GetLocation(_player_pos.x, _player_pos.z);
 
 
+	if (_collusion == true)
+	{
+		if (KeyManager::GetInstance()->GetbuttonDown(KeyType::ENTER))
+		{
 
+			_collusion = false;
+		}
+	}
 
 	RunBT();
 }
@@ -465,7 +472,9 @@ void Ghost::OnComponentBeginOverlap(Collider* collider, Collider* other)
 	{
 		cout << "PLAYER_COLLISION" << endl;
 		_collusion = true;
-		// ¿©±â¿¡ change scene
+
+		CameraManager::GetInstance()->m_cameraPos = glm::vec3(0, 15.0f, 200.0f);
+	
 
 	}
 	
@@ -473,7 +482,7 @@ void Ghost::OnComponentBeginOverlap(Collider* collider, Collider* other)
 
 void Ghost::OnComponentEndOverlap(Collider* collider, Collider* other)
 {
-	_collusion = true;
+
 
 }
 

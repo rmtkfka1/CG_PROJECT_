@@ -302,7 +302,7 @@ void Stage1::Init()
 
 
 
-
+	render_box3 = new Model("res/models/render_box3.obj");
 
 
 
@@ -453,6 +453,8 @@ void Stage1::Update()
 	ghost->Update();
 	billboard->Update();
 	mask_event->Update();
+
+
 	mask->MatrixUpdate(mask_event);
 	mask->Update();
 	deadbody->Update();
@@ -470,7 +472,16 @@ void Stage1::Update()
 
 void Stage1::Render()
 {
-
+	
+	if (ghost->_collusion == true)
+	{
+		shader2->Bind();
+		shader2->SetUniformMat4f("u_model", glm::mat4(1.0f));
+		shader2->SetUniformMat4f("u_view", matrix::GetInstance()->GetCamera(glm::vec3(0, 0, -2.0f), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0)));
+		shader2->SetUniformMat4f("u_proj", matrix::GetInstance()->Getortho());
+		shader2->SetUniform1i("u_texture", die_texture->GetSlot());
+		render_box3->RenderModel(*shader2);
+	}
 
 
 	shader->Bind();
@@ -900,7 +911,7 @@ void Stage1::MakeRoom2_QUIZ()
 	}
 	{
 
-		render_box = new Model("res/models/test.obj");
+		render_box = new Model("res/models/render_box.obj");
 		render_box2 = new Model("res/models/render_box2.obj");
 		fish = new Model("res/models/room2_event/fish.obj");
 	}
@@ -1176,7 +1187,7 @@ void Stage1::MakeTexture()
 	answer2_texture= new Texture("res/textures/answer2.png");
 	answer3_texture= new Texture("res/textures/answer3.png");
 	answer4_texture = new Texture("res/textures/answer4.png");
-
+	die_texture = new Texture("res/textures/re.jpg");
 
 	texture->Bind(0);
 	flash_fake_texture->Bind(1);
@@ -1202,6 +1213,7 @@ void Stage1::MakeTexture()
 	answer2_texture->Bind(21);
 	answer3_texture->Bind(22);
 	answer4_texture->Bind(23);
+	die_texture->Bind(24);
 
 }
 

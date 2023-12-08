@@ -27,7 +27,7 @@ public:
 	float m_cameraYaw{ 0.0f };
 	float m_cameraSpeed = 50.0f;
 
-	glm::vec3 m_cameraPos{ glm::vec3(0.0f,15.0f,188.37f) };
+	glm::vec3 m_cameraPos{ glm::vec3(0.0f,15.0f,200.0f) };
 	glm::vec3 m_cameraFront{ glm::vec3(0.0f,0.0f,-1.0f) };
 	glm::vec3 m_cameraUp{ glm::vec3(0.0f,1.0f,0.0f) };
 
