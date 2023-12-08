@@ -770,6 +770,7 @@ void Stage1::Texture_Render()
 	TextManager::GetInstance()->Render(-1.0f, -0.95f, "RUN");
 
 
+
 	if (computer->_collison_onetime && end->_coding==false)
 	{
 		TextManager::GetInstance()->Render(-0.2f, 0.0f, "Press F to Coding");
@@ -1206,7 +1207,7 @@ void Stage1::MakeTexture()
 	answer2_texture= new Texture("res/textures/answer2.png");
 	answer3_texture= new Texture("res/textures/answer3.png");
 	answer4_texture = new Texture("res/textures/answer4.png");
-	die_texture = new Texture("res/textures/re.jpg");
+	die_texture = new Texture("res/textures/re.png");
 	end_texture = new Texture("res/textures/answer1.png");
 
 	texture->Bind(0);
