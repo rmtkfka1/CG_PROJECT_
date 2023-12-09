@@ -94,4 +94,5 @@ void SoundManager::load()
     ssystem->createSound("res/sound/run.wav", FMOD_LOOP_NORMAL, 0, &fsound[RUN]);
     ssystem->createSound("res/sound/start.mp3", FMOD_LOOP_NORMAL, 0, &fsound[START]);
     ssystem->createSound("res/sound/findbody.mp3", FMOD_LOOP_OFF, 0, &fsound[FINDBODY]);
+    ssystem->createSound("res/sound/endsong.mp3", FMOD_LOOP_NORMAL, 0, &fsound[ENDINGSONG]);
 }

@@ -66,13 +66,15 @@ void Spherequiz::SpecialUpdate(Locked* ptr)
 			{
 				_quiz_degrees[static_cast<int>(_selected)] += _rot_speed * GET_SINGLE(TimeManager)->GetDeltaTime();
 				MatrixUpdate();
+
+				SoundManager::GetInstance()->Play(SWAP);
 			}
 
 		}
 
 
-		if (((_upper_correction >= 360.0 - 5.0f) || (_upper_correction <= 5.0f)) &&
-			((_lower_correction >= 360.0 - 5.0f) || (_lower_correction <= 5.0f)))
+		if (((_upper_correction >= 360.0 - 1.0f) || (_upper_correction <= 1.0f)) &&
+			((_lower_correction >= 360.0 - 1.0f) || (_lower_correction <= 1.0f)))
 		{
 			_solved = true;
 		}

@@ -17,6 +17,7 @@ enum sound
 	RUN,
 	START,
 	FINDBODY,
+	ENDINGSONG,
 	END
 };
 
