@@ -117,6 +117,7 @@ private:
 	Model* fish;
 	Model* starfish;
 	Model* balls;
+	Model* mapping_quiz;
 
 	Wall* box1;
 	Wall* box2;
@@ -202,6 +203,7 @@ private:
 	Texture* sphere_texture;
 	Texture* die_texture;
 	Texture* end_texture;
+	Texture* mapping_texture;
 	//조명 객체 만들기
 	Light2* light;
 

@@ -308,6 +308,7 @@ void Stage1::Init()
 		end = new ENDING(*ending_box);
 	}
 
+	mapping_quiz =new Model("res/models/maping_quiz.obj");
 
 	//방1 퀴즈 생성
 	MakeRoom1_QUIZ();
@@ -461,7 +462,7 @@ void Stage1::Update()
 	mask->MatrixUpdate(mask_event);
 	mask->Update();
 	deadbody->Update();
-	exitdoor_rocked->SpecialUpdate(exitdoor);
+	exitdoor_rocked->SpecialUpdate(exitdoor,Lockedkey2,Lockedkey3,Lockedkey,Lockedkey4);
 	exitdoor->Update();
 
 	cat->Update();
@@ -739,6 +740,11 @@ void Stage1::Object_Render()
 
 
 
+	shader->SetUniform1i("u_texture", mapping_texture->GetSlot());
+	mapping_quiz->RenderModel(*shader);
+
+
+
 
 
 }
@@ -769,7 +775,10 @@ void Stage1::Texture_Render()
 
 	TextManager::GetInstance()->Render(-1.0f, -0.95f, "RUN");
 
-
+	if (exitdoor_rocked->_collusion && exitdoor_rocked->dontcheat == true)
+	{
+		TextManager::GetInstance()->Render(-0.2f, -0.4f, "Dont Cheat Solve All quiz");
+	}
 
 	if (computer->_collison_onetime && end->_coding==false)
 	{
@@ -1084,7 +1093,7 @@ void Stage1::MakeRoom4_QUIZ()
 
 	{
 		Model* locked_key = new Model("res/models/lockedkey.obj");
-		int num[4] = { 0,2,0,3 };// 너가 정답을 설정해줘야됨
+		int num[4] = { 1,2,2,5 };// 너가 정답을 설정해줘야됨
 		Lockedkey4 = new Locked(*locked_key, num);
 		Lockedkey4->SetTransPose(300, 0, -250);
 		BoxCollider* ptr = new BoxCollider;
@@ -1209,6 +1218,7 @@ void Stage1::MakeTexture()
 	answer4_texture = new Texture("res/textures/answer4.png");
 	die_texture = new Texture("res/textures/re.png");
 	end_texture = new Texture("res/textures/answer1.png");
+	mapping_texture = new Texture("res/textures/testing_pow.png");
 
 	texture->Bind(0);
 	flash_fake_texture->Bind(1);
@@ -1236,6 +1246,7 @@ void Stage1::MakeTexture()
 	answer4_texture->Bind(23);
 	die_texture->Bind(24);
 	end_texture->Bind(25);
+	mapping_texture->Bind(26);
 }
 
 

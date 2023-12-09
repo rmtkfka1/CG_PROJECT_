@@ -38,6 +38,9 @@ void ExitDoor::Update()
 	if (locked==false)
 	{
 
+
+
+
 		if (_degree < 90.0f)
 		{
 			_degree += _speed * TimeManager::GetInstance()->GetDeltaTime();

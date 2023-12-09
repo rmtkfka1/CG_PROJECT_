@@ -14,7 +14,7 @@ public:
 
 	void Init() override;
 	void Update() override;
-	void SpecialUpdate(ExitDoor* ptr);
+	void SpecialUpdate(ExitDoor* ptr,Locked* ptr2, Locked* ptr3 , Locked* ptr4, Locked* ptr5);
 	void Render(Shader& shader) override;
 	bool LockedAndCollusion() { return _collusion && _locked; }
 
@@ -33,6 +33,8 @@ public:
 	bool _collusion = false; //자물쇠충돌
 	bool _locked = true;  //1번방자물쇠락
 	bool sound_event = false;  
+
+	bool dontcheat = false;
 	
 public:
 

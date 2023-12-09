@@ -117,7 +117,7 @@ void Locked::Update()
 
 }
 
-void Locked::SpecialUpdate(ExitDoor* ptr)
+void Locked::SpecialUpdate(ExitDoor* ptr, Locked* ptr2, Locked* ptr3 , Locked* ptr4, Locked* ptr5)
 {
 
 	Super::Update();
@@ -164,12 +164,20 @@ void Locked::SpecialUpdate(ExitDoor* ptr)
 
 		if (_first_set[0] == _answer[0] && _first_set[1] == _answer[1] && _first_set[2] == _answer[2] && _first_set[3] == _answer[3])
 		{
-			_locked = false;
-
-			if (sound_event == false)
+			if (ptr2->_locked == true || ptr3->_locked == true || ptr4->_locked == true || ptr5->_locked == true)
 			{
-				SoundManager::GetInstance()->Play(LOCKOPEN);
-				sound_event = true;
+				dontcheat = true;
+			}
+
+			else
+			{
+				_locked = false;
+
+				if (sound_event == false)
+				{
+					SoundManager::GetInstance()->Play(LOCKOPEN);
+					sound_event = true;
+				}
 			}
 		}
 
@@ -217,7 +225,7 @@ void Locked::OnComponentEndOverlap(Collider* collider, Collider* other)
 	{
 
 		_collusion = false;
-
+		dontcheat = false;
 	
 	}
 }
