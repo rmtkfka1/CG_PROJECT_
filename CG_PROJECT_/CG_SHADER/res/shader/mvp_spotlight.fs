@@ -29,6 +29,7 @@ uniform Spot_Light spot_light;
 // 공용 변수
 uniform Material material;
 uniform sampler2D u_texture;
+uniform sampler2D u_texture_spec;
 
 uniform vec3 control_color;
 uniform vec3 u_viewpos;
@@ -54,7 +55,7 @@ vec3 Calculate_spot_light()
         float diff = max(dot(pixelnorm, lightdir), 0.0);
         vec3 diffuse = diff * textcolor * spot_light.diffuse;
 
-        vec3 specColor = texture(u_texture, v_texcoord).xyz;
+        vec3 specColor = texture(u_texture_spec, v_texcoord).xyz;
         vec3 viewdir = normalize(u_viewpos - v_position);
         vec3 reflectdir = reflect(-lightdir, pixelnorm);
         float spec = pow(max(dot(viewdir, reflectdir), 0.0), material.shininess);

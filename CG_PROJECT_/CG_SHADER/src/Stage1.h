@@ -204,6 +204,8 @@ private:
 	Texture* die_texture;
 	Texture* end_texture;
 	Texture* mapping_texture;
+	Texture* spec_texture;
+	Texture* black_texture;
 	//조명 객체 만들기
 	Light2* light;
 

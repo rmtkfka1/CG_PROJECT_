@@ -739,11 +739,11 @@ void Stage1::Object_Render()
 	}
 
 
-
-	shader->SetUniform1i("u_texture", mapping_texture->GetSlot());
+	shader->SetUniform1i("u_texture_spec", spec_texture->GetSlot());
+	shader->SetUniform1i("u_texture", texture->GetSlot());
 	mapping_quiz->RenderModel(*shader);
 
-
+	shader->SetUniform1i("u_texture_spec", black_texture->GetSlot());
 
 
 
@@ -1219,6 +1219,8 @@ void Stage1::MakeTexture()
 	die_texture = new Texture("res/textures/re.png");
 	end_texture = new Texture("res/textures/answer1.png");
 	mapping_texture = new Texture("res/textures/testing_pow.png");
+	spec_texture =new Texture("res/textures/spec.png");
+	black_texture= new Texture("res/textures/black.png");
 
 	texture->Bind(0);
 	flash_fake_texture->Bind(1);
@@ -1247,6 +1249,8 @@ void Stage1::MakeTexture()
 	die_texture->Bind(24);
 	end_texture->Bind(25);
 	mapping_texture->Bind(26);
+	spec_texture->Bind(27);
+	black_texture->Bind(28);
 }
 
 

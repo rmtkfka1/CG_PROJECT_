@@ -15,7 +15,7 @@ Light2::Light2()
 
 	Spot_light.ambient = glm::vec3(0.01f, 0.01f, 0.01f);
 	Spot_light.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
-	Spot_light.specular = glm::vec3(0.1, 0.1, 0.1);
+	Spot_light.specular = glm::vec3(0, 0, 10.0f);
 
 	material.shininess = 1.0f;
 	material.specular = glm::vec3(1.0f, 1.0f, 1.0f);
