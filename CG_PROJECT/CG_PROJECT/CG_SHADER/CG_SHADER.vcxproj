@@ -23,7 +23,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{65a51623-373e-4d3b-b336-8ebe1f331238}</ProjectGuid>
     <RootNamespace>CGSHADER</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <ProjectName>CG_PROJECT</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -118,7 +118,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalOptions>glew32.lib freeglut.lib %(AdditionalOptions)</AdditionalOptions>
       <AdditionalLibraryDirectories>.\dependency\fmod\core\lib\x64;C:\Users\pakhe\Desktop\Git\CG_PROJECT_\CG_PROJECT\CG_PROJECT\CG_SHADER\dependency\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>fmod_vc.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>fmod_vc.lib;assimp-vc143-mt.lib;glew32.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -141,7 +141,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalOptions>glew32.lib freeglut.lib %(AdditionalOptions)</AdditionalOptions>
       <AdditionalLibraryDirectories>.\dependency\fmod\core\lib\x64;C:\Users\pakhe\Desktop\Git\CG_PROJECT_\CG_PROJECT\CG_PROJECT\CG_SHADER\dependency\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>fmod_vc.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>fmod_vc.lib;assimp-vc143-mt.lib;glew32.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
