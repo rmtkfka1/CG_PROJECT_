@@ -180,11 +180,11 @@ private:
 	//ÅØ½ºÃÄ
 	Texture* texture;
 	Texture* billboard_texture;
-	Texture* light_texture;
+	Texture* flash_texture;
+	Texture* flash_spec_texture;
 	Texture* table_texture;
-	Texture* flash_fake_texture;
-	Texture* ghost_texture;
 	Texture* door_texture;
+	Texture* ghost_texture;
 	Texture* deadbody_texture;
 	Texture* mask_texture;
 	Texture* exitdoor_texture;

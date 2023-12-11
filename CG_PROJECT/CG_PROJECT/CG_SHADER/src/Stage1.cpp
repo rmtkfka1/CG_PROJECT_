@@ -582,10 +582,7 @@ void Stage1::Object_Render()
 		end_room[i]->Render(*shader);
 	}
 
-	{
-		shader->SetUniform1i("u_texture", flash_fake_texture->GetSlot());
-		fake_flash->Render(*shader);
-	}
+
 
 	{
 		shader->SetUniform1i("u_texture", 2);
@@ -604,7 +601,7 @@ void Stage1::Object_Render()
 	//}
 
 	{
-		shader->SetUniform1i("u_texture", flash_fake_texture->GetSlot());
+		shader->SetUniform1i("u_texture", door_texture->GetSlot());
 		Corridor_left_door->Render(*shader);
 		Corridor_right_door->Render(*shader);
 	}
@@ -768,13 +765,28 @@ void Stage1::Object_Render()
 		shader->SetUniform1i("u_texture_spec", spec_texture->GetSlot());
 		shader->SetUniform1i("u_texture", texture->GetSlot());
 		mapping_quiz->RenderModel(*shader);
-		shader->SetUniform1i("u_texture_spec", black_texture->GetSlot());
+	
 	}
 
-	// 천장 조명
-	shader->SetUniform1i("u_texture", ceiling_light_texture->GetSlot());
-	ceiling_light->Render(*shader);
+	{
+		// 천장 조명
 
+		shader->SetUniform1i("u_texture", ceiling_light_texture->GetSlot());
+		ceiling_light->Render(*shader);
+	}
+
+	{
+		shader->SetUniform1i("u_texture_spec", spec_texture->GetSlot());
+		shader->SetUniform1i("u_texture", texture->GetSlot());
+		mapping_quiz->RenderModel(*shader);
+		
+		shader->SetUniform1i("u_texture", flash_texture->GetSlot());
+		shader->SetUniform1i("u_texture_spec", flash_spec_texture->GetSlot());
+		fake_flash->Render(*shader);
+	}
+
+
+	shader->SetUniform1i("u_texture_spec", black_texture->GetSlot());
 
 }
 
@@ -1223,9 +1235,11 @@ void Stage1::MakeTexture()
 	texture = new Texture("res/textures/23.jpg");
 
 	billboard_texture = new Texture("res/textures/billboard_test.png");
-	light_texture = new Texture("res/textures/light.jpg");
+
+	flash_texture = new Texture("res/textures/flash.jpg");
+	flash_spec_texture=new Texture("res/textures/flash_spec.jpg");
 	table_texture = new Texture("res/textures/table.png");
-	flash_fake_texture = new Texture("res/textures/door.jpg");
+	door_texture = new Texture("res/textures/door.jpg");
 	ghost_texture = new Texture("res/textures/SM_text.png");
 	deadbody_texture = new Texture("res/textures/deadbody.jpg");
 	mask_texture = new Texture("res/textures/mask.jpg");
@@ -1255,9 +1269,9 @@ void Stage1::MakeTexture()
 	ceiling_light_texture =new Texture("res/textures/light_texture.png");
 
 	texture->Bind(0);
-	flash_fake_texture->Bind(1);
+	door_texture->Bind(1);
 	billboard_texture->Bind(2);
-	light_texture->Bind(3);
+	flash_texture->Bind(3);
 	table_texture->Bind(4);
 	ghost_texture->Bind(5);
 	deadbody_texture->Bind(6);
@@ -1287,6 +1301,8 @@ void Stage1::MakeTexture()
 	ending_board_texture->Bind(30);
 	ending_board_texture->Bind(30);
 	ceiling_light_texture->Bind(31);
+	flash_spec_texture->Bind(32);
+
 
 }
 
