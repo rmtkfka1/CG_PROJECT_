@@ -111,7 +111,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\pakhe\Desktop\Git\CG_PROJECT_\CG_PROJECT\CG_PROJECT\CG_SHADER\dependency\include;.\dependency\fmod\core\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\dependency\include;.\dependency\fmod\core\inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,7 +132,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\pakhe\Desktop\Git\CG_PROJECT_\CG_PROJECT\CG_PROJECT\CG_SHADER\dependency\include;.\dependency\fmod\core\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\dependency\include;.\dependency\fmod\core\inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
