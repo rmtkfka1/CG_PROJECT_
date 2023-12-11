@@ -71,6 +71,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnabled>false</VcpkgEnabled>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -108,14 +111,14 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>.\dependency\fmod\core\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\pakhe\Desktop\Git\CG_PROJECT_\CG_PROJECT\CG_PROJECT\CG_SHADER\dependency\include;.\dependency\fmod\core\inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalOptions>glew32.lib freeglut.lib %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalLibraryDirectories>.\dependency\fmod\core\lib\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>.\dependency\fmod\core\lib\x64;C:\Users\pakhe\Desktop\Git\CG_PROJECT_\CG_PROJECT\CG_PROJECT\CG_SHADER\dependency\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmod_vc.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -129,7 +132,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>.\dependency\fmod\core\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\pakhe\Desktop\Git\CG_PROJECT_\CG_PROJECT\CG_PROJECT\CG_SHADER\dependency\include;.\dependency\fmod\core\inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,8 +140,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalOptions>glew32.lib freeglut.lib %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalLibraryDirectories>.\dependency\fmod\core\lib\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>.\dependency\fmod\core\lib\x64;C:\Users\pakhe\Desktop\Git\CG_PROJECT_\CG_PROJECT\CG_PROJECT\CG_SHADER\dependency\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmod_vc.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
