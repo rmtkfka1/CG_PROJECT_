@@ -1247,7 +1247,7 @@ void Stage1::MakeTexture()
 	answer4_texture = new Texture("res/textures/answer4.png");
 	die_texture = new Texture("res/textures/re.png");
 	end_texture = new Texture("res/textures/answer1.png");
-	mapping_texture = new Texture("res/textures/testing_pow.png");
+	mapping_texture = new Texture("res/textures/23.jpg");
 	spec_texture =new Texture("res/textures/spec.png");
 	black_texture= new Texture("res/textures/black.png");
 	cross_texture=new Texture("res/textures/cross_texture.png");
