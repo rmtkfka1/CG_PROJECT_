@@ -299,6 +299,14 @@ void Stage1::Init()
 
 	}
 
+	// 방 천장 조명
+	{
+		Model* light_model = new Model("res/models/lights.obj");
+		ceiling_light = new Wall(*light_model);
+		BoxCollider* ptr = new BoxCollider;
+		ceiling_light->AddComponent(ptr);
+		GET_SINGLE(CollisionManager)->AddCollider(ptr);
+	}
 
 
 	render_box3 = new Model("res/models/render_box3.obj"); //고스트충돌
@@ -763,6 +771,9 @@ void Stage1::Object_Render()
 		shader->SetUniform1i("u_texture_spec", black_texture->GetSlot());
 	}
 
+	// 천장 조명
+	shader->SetUniform1i("u_texture", ceiling_light_texture->GetSlot());
+	ceiling_light->Render(*shader);
 
 
 }
@@ -1241,6 +1252,7 @@ void Stage1::MakeTexture()
 	black_texture= new Texture("res/textures/black.png");
 	cross_texture=new Texture("res/textures/cross_texture.png");
 	ending_board_texture =new Texture("res/textures/ending_board_texture.png");
+	ceiling_light_texture =new Texture("res/textures/light_texture.png");
 
 	texture->Bind(0);
 	flash_fake_texture->Bind(1);
@@ -1273,6 +1285,8 @@ void Stage1::MakeTexture()
 	black_texture->Bind(28);
 	cross_texture->Bind(29);
 	ending_board_texture->Bind(30);
+	ending_board_texture->Bind(30);
+	ceiling_light_texture->Bind(31);
 
 }
 

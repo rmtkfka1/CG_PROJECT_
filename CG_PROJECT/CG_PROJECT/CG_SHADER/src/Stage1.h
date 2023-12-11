@@ -93,6 +93,8 @@ private:
 	Locked* exitdoor_rocked;
 	Cat* cat;
 	Event* computer;
+	Wall* ceiling_light;
+
 
 	//방1퀴즈 배치
 	Wall* quizbox;
@@ -209,6 +211,10 @@ private:
 	Texture* black_texture;
 	Texture* cross_texture;
 	Texture* ending_board_texture;
+	Texture* ceiling_light_texture;
+
+
+
 	//조명 객체 만들기
 	Light2* light;
 
