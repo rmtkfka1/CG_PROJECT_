@@ -117,7 +117,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalOptions>glew32.lib freeglut.lib %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalLibraryDirectories>.\dependency\fmod\core\lib\x64;C:\Users\pakhe\Desktop\Git\CG_PROJECT_\CG_PROJECT\CG_PROJECT\CG_SHADER\dependency\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\dependency\fmod\core\lib\x64;.\dependency\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>fmod_vc.lib;assimp-vc143-mt.lib;glew32.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -140,7 +140,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalOptions>glew32.lib freeglut.lib %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalLibraryDirectories>.\dependency\fmod\core\lib\x64;C:\Users\pakhe\Desktop\Git\CG_PROJECT_\CG_PROJECT\CG_PROJECT\CG_SHADER\dependency\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\dependency\fmod\core\lib\x64;.\dependency\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>fmod_vc.lib;assimp-vc143-mt.lib;glew32.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
