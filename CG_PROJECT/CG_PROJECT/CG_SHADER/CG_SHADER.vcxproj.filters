@@ -443,9 +443,4 @@
       <Filter>00.res\textures</Filter>
     </Image>
   </ItemGroup>
-  <ItemGroup>
-    <Object Include="res\models\teapot.obj">
-      <Filter>00.res\models</Filter>
-    </Object>
-  </ItemGroup>
 </Project>
