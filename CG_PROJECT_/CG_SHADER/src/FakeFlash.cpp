@@ -57,21 +57,23 @@ void FakeFlash::UpdateFlash(Light2* light, Flash* flash)
 
 	}
 
-	if (draw == false)
+	if (SoundManager::GetInstance()->endsong == false)
 	{
-
-		
-		flash->SetLighton();
-		light->point_light.diffuse = glm::vec3(1.0f, 0, 0);
-
-		if (spotoff == false)
+		if (draw == false)
 		{
-			light->Spot_light.distance = 500.0f;			
-		}
 
-		else 
-		{
-			light->Spot_light.distance = 0.1f;
+			flash->SetLighton();
+			light->point_light.diffuse = glm::vec3(1.0f, 0, 0);
+
+			if (spotoff == false)
+			{
+				light->Spot_light.distance = 500.0f;
+			}
+
+			else
+			{
+				light->Spot_light.distance = 0.1f;
+			}
 		}
 	}
 	

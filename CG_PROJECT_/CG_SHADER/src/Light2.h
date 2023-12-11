@@ -15,7 +15,7 @@ struct SpotLight
 
 struct PointLight
 {
-	glm::vec3 position[8];
+	glm::vec3 position[9];
 	float distance;
 	glm::vec3 ambient;
 	glm::vec3 diffuse;

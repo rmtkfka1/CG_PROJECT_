@@ -166,7 +166,6 @@ void Player::KeyUpdate()
 
 		CameraManager::GetInstance()->m_cameraSpeed = 60.0f; //80.0f
 		_run = true;
-		cout << speed_gage << endl;
 		speed_gage += -0.05f * TimeManager::GetInstance()->GetDeltaTime();
 
 	}

@@ -148,7 +148,8 @@ private:
 	//마지막룸
 	Wall* computer_table;
 	ENDING* end;
-
+	Model* cross;
+	Model* ending_baord;
 
 
 
@@ -206,6 +207,8 @@ private:
 	Texture* mapping_texture;
 	Texture* spec_texture;
 	Texture* black_texture;
+	Texture* cross_texture;
+	Texture* ending_board_texture;
 	//조명 객체 만들기
 	Light2* light;
 

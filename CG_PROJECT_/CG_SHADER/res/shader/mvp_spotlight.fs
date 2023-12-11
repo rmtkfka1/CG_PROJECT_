@@ -72,7 +72,7 @@ vec3 Calculate_spot_light()
 // 포인트 라이트 구현하기 위한 변수들
 struct Point_Light 
 {
-    vec3 position[8]; 
+    vec3 position[9]; 
     vec3 attenuation;
     vec3 ambient;  
     vec3 diffuse;
@@ -112,7 +112,7 @@ void main()
     vec3 spot_result = Calculate_spot_light();
 
     vec3 point_result = vec3(0.0);
-    for (int i = 0; i < 8; ++i)
+    for (int i = 0; i < 9; ++i)
     {
         point_result += Calculate_point_light(i);
     }

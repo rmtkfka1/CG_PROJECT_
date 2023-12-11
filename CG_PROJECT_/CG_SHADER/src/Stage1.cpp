@@ -310,6 +310,10 @@ void Stage1::Init()
 
 	mapping_quiz =new Model("res/models/maping_quiz.obj");
 
+
+	cross = new Model("res/models/cross.obj");
+	ending_baord= new Model("res/models/ending_board.obj");
+
 	//¹æ1 ÄûÁî »ý¼º
 	MakeRoom1_QUIZ();
 	MakeRoom2_QUIZ();
@@ -462,16 +466,24 @@ void Stage1::Update()
 	mask->MatrixUpdate(mask_event);
 	mask->Update();
 	deadbody->Update();
-	exitdoor_rocked->SpecialUpdate(exitdoor,Lockedkey2,Lockedkey3,Lockedkey,Lockedkey4);
-	exitdoor->Update();
+	//exitdoor_rocked->SpecialUpdate(exitdoor,Lockedkey2,Lockedkey3,Lockedkey,Lockedkey4);
+	//exitdoor->Update();
 
 	cat->Update();
 	computer->Update();
 	end->Update(computer);
 	computer_table->Update();
 
-	//cout << CameraManager::GetInstance()->m_cameraPos.x << "  " << CameraManager::GetInstance()->m_cameraPos.y << "  " << CameraManager::GetInstance()->m_cameraPos.z << endl;
+	cout << CameraManager::GetInstance()->m_cameraPos.x << "  " << CameraManager::GetInstance()->m_cameraPos.y << "  " << CameraManager::GetInstance()->m_cameraPos.z << endl;
 
+	if (SoundManager::GetInstance()->endsong)
+	{
+
+		light->point_light.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+		light->point_light.distance = 400.0f;
+		light->Spot_light.distance = 0.1f;
+		light->point_light.position[8] = glm::vec3(-5.6f, 22.0f, -900.0f); 
+	}
 
 }
 
@@ -738,12 +750,18 @@ void Stage1::Object_Render()
 		prof->Render(*shader);
 	}
 
+	shader->SetUniform1i("u_texture", cross_texture->GetSlot());
+	cross->RenderModel(*shader);
 
-	shader->SetUniform1i("u_texture_spec", spec_texture->GetSlot());
-	shader->SetUniform1i("u_texture", texture->GetSlot());
-	mapping_quiz->RenderModel(*shader);
+	shader->SetUniform1i("u_texture", ending_board_texture->GetSlot());
+	ending_baord->RenderModel(*shader);
 
-	shader->SetUniform1i("u_texture_spec", black_texture->GetSlot());
+	{
+		shader->SetUniform1i("u_texture_spec", spec_texture->GetSlot());
+		shader->SetUniform1i("u_texture", texture->GetSlot());
+		mapping_quiz->RenderModel(*shader);
+		shader->SetUniform1i("u_texture_spec", black_texture->GetSlot());
+	}
 
 
 
@@ -780,7 +798,7 @@ void Stage1::Texture_Render()
 		TextManager::GetInstance()->Render(-0.2f, -0.4f, "Dont Cheat Solve All quiz");
 	}
 
-	if (computer->_collison_onetime && end->_coding==false)
+	if (computer->_collison_everytime && end->_coding==false)
 	{
 		TextManager::GetInstance()->Render(-0.2f, 0.0f, "Press F to Coding");
 	}
@@ -1221,6 +1239,8 @@ void Stage1::MakeTexture()
 	mapping_texture = new Texture("res/textures/testing_pow.png");
 	spec_texture =new Texture("res/textures/spec.png");
 	black_texture= new Texture("res/textures/black.png");
+	cross_texture=new Texture("res/textures/cross_texture.png");
+	ending_board_texture =new Texture("res/textures/ending_board_texture.png");
 
 	texture->Bind(0);
 	flash_fake_texture->Bind(1);
@@ -1251,6 +1271,9 @@ void Stage1::MakeTexture()
 	mapping_texture->Bind(26);
 	spec_texture->Bind(27);
 	black_texture->Bind(28);
+	cross_texture->Bind(29);
+	ending_board_texture->Bind(30);
+
 }
 
 

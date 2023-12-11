@@ -23,6 +23,7 @@ Light2::Light2()
 
 	//포인트 라이트 작업
 	//200 -215 250
+	point_light.position[8] = glm::vec3(0, 300, 0); //첫번쨰방조명
 	point_light.position[7] = glm::vec3(0, 22.0f, 200.0f); //첫번쨰방조명
 	point_light.position[0] = glm::vec3(0, 22.0f, 140.0f);
 	point_light.position[1] = glm::vec3(0, 22.0f, -250.0f);
@@ -69,7 +70,7 @@ void Light2::UseSpotLight(Shader& shader,Ghost& ghost)
 
 
 
-	//테스트해보자
+
 	shader.SetUniform3f("point_light.attenuation", GetAttenuationCoeff(point_light.distance).x, GetAttenuationCoeff(point_light.distance).y, GetAttenuationCoeff(point_light.distance).z);
 	shader.SetUniform3f("point_light.position[0]", point_light.position[0].x, point_light.position[0].y, point_light.position[0].z);
 	shader.SetUniform3f("point_light.position[1]", point_light.position[1].x, point_light.position[1].y, point_light.position[1].z);
@@ -79,6 +80,7 @@ void Light2::UseSpotLight(Shader& shader,Ghost& ghost)
 	shader.SetUniform3f("point_light.position[5]", point_light.position[5].x, point_light.position[5].y, point_light.position[5].z);
 	shader.SetUniform3f("point_light.position[6]", point_light.position[6].x, point_light.position[6].y, point_light.position[6].z);
 	shader.SetUniform3f("point_light.position[7]", point_light.position[7].x, point_light.position[7].y, point_light.position[7].z);
+	shader.SetUniform3f("point_light.position[8]", point_light.position[8].x, point_light.position[8].y, point_light.position[8].z);
 
 	shader.SetUniform3f("point_light.ambient", point_light.ambient.r, point_light.ambient.g, point_light.ambient.b);
 	shader.SetUniform3f("point_light.diffuse", point_light.diffuse.r, point_light.diffuse.g, point_light.diffuse.b);
