@@ -1,0 +1,42 @@
+
+==조명(lighting)==
+
+과거 : phong model -> 현재 :PBR (physically based rendering)
+
+광원 (Light Source)-> 특성에 따라 다르게 계산해줘야함.
+
+phong model: 많이사용되는 광원들 
+1.Directional Light(태양) -> 물체가 어디에있건 빛은 동일한방향 동일한크기로 들어옴 
+2.Point Light(전구) 
+3.Spot Light (손전등)
+4.Area Light (면적안에서 일정하게 빛이나옴)
+
+	1.diffuse -> view direction independent percieved of reflection
+
+	max(n dot l ,0)*Sd (Light Source )*Md(Material Source) [Md 는 Texture 에서 얻어옴]
+
+	2.specular-> view direction dependent  
+	(r dot v)^sh
+	r dot v == cos(쎄타) sh 가 커지면 하이라이트의 크기가 작아짐								
+	max(r dot v ,0)*Sd (Light Source )*Md(Material Source) [ Md 는 Gray Scale Value ( rgb값이동일 )을 사용함 ex )(1,1,1), (0.5,0.5,0.5)]
+
+	3.ambient->
+	대낮에 방에 있다 방문도 닫고 , 창문도닫았을때  ,  그래도 흐릿하게보인다
+	물리적으로 어딘가에 있는 태양빛이 들어와서 산란해서 빛추기떄문이다.
+	indirect lighting 
+	= > Sa * Ma 
+
+	4.emissive->
+	Me s도필요없음 표면자체가 빛을발산.
+	light Source 에 영향을 받는게아님
+
+	즉 퐁모델 !
+
+	max(n dot l ,0)*Sd (Light Source )*Md(Material Source) [Md 는 Texture 에서 얻어옴] +
+	max(r dot v ,0)*Sd (Light Source )*Md(Material Source) [ Md 는 Gray Scale Value ( rgb값이동일 )을 사용함 ex )(1,1,1), (0.5,0.5,0.5)]+
+	+ Sa * Ma +Me
+
+	======================================================================================
+	l(Light Source) =>  모두 동일하다 그래서 uniform 으로 조작 ㅣ , N 이 둘다 같은 세계에 있어야한다 .
+	즉 둘다 월드스페이스 공간에서 변환한다. 
+	Perframent Data => n(법선벡터),r(반사벡터),v(시선벡터) 는 => 프래그먼트 마다 각각 값이 다르다 
