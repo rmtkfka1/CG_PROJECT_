@@ -96,4 +96,5 @@ void SoundManager::load()
     ssystem->createSound("res/sound/findbody.mp3", FMOD_LOOP_OFF, 0, &fsound[FINDBODY]);
     ssystem->createSound("res/sound/endsong.mp3", FMOD_LOOP_OFF, 0, &fsound[ENDINGSONG]);
     ssystem->createSound("res/sound/ghost_scream.mp3", FMOD_LOOP_OFF, 0, &fsound[GHOST_SCREAM]);
+    ssystem->createSound("res/sound/die.mp3", FMOD_LOOP_OFF, 0, &fsound[DIE]);
 }

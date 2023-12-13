@@ -470,18 +470,18 @@ void Ghost::OnComponentBeginOverlap(Collider* collider, Collider* other)
 {
 	if (other->GetOwner()->GetObjectType() == ObjectType::PLAYER)
 	{
-		cout << "PLAYER_COLLISION" << endl;
+
 		_collusion = true;
 
 		CameraManager::GetInstance()->m_cameraPos = glm::vec3(0, 15.0f, 200.0f);
-	
-
+		SoundManager::GetInstance()->Play(DIE);
 	}
 	
 }
 
 void Ghost::OnComponentEndOverlap(Collider* collider, Collider* other)
 {
+
 
 
 }
@@ -695,7 +695,7 @@ BehaviorStatus Ghost::IsPlayerOnSight()
 
 	if (temp >= glm::cos(glm::radians(_detection_degree)))	// cos(탐지각도)보다 크다면 탐지각도보다 안에있음 -> v1, v2가 모두 정규화 되어있기 때문
 	{
-		cout << "player on sight" << endl;
+	
 		return BehaviorStatus::BT_SUCCESS;
 	}
 	else
@@ -714,7 +714,7 @@ BehaviorStatus Ghost::IsPlayerOnMoreSight()
 
 	if (temp >= glm::cos(glm::radians(_detection_degree*2)))	// cos(탐지각도 / 2)보다 크다면 탐지각도보다 안에있음 -> v1, v2가 모두 정규화 되어있기 때문
 	{
-		cout << "player on near sight" << endl;
+	
 		return BehaviorStatus::BT_SUCCESS;
 	}
 	else

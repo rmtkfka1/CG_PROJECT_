@@ -159,12 +159,12 @@ void Player::KeyUpdate()
 
 		if (speed_gage < -1.0f)
 		{
-			CameraManager::GetInstance()->m_cameraSpeed = 30.0f; //40.0f
+			CameraManager::GetInstance()->m_cameraSpeed = 40.0f; //40.0f
 			_run = false;
 			return;
 		}
 
-		CameraManager::GetInstance()->m_cameraSpeed = 60.0f; //80.0f
+		CameraManager::GetInstance()->m_cameraSpeed = 70.0f; //80.0f
 		_run = true;
 		speed_gage += -0.05f * TimeManager::GetInstance()->GetDeltaTime();
 
@@ -173,7 +173,7 @@ void Player::KeyUpdate()
 	if (KeyManager::GetInstance()->GetbuttonUp(KeyType::SHIFT))
 	{
 
-		CameraManager::GetInstance()->m_cameraSpeed = 60.0f; //40.0f
+		CameraManager::GetInstance()->m_cameraSpeed = 40.0f; //40.0f
 		_run = false;
 
 		if (speed_gage < -0.67f)
@@ -343,13 +343,13 @@ void Player::OnComponentEndOverlap(Collider* collider, Collider* other)
 
 	if (_run)
 	{
-		CameraManager::GetInstance()->m_cameraSpeed = 60.0f;
+		CameraManager::GetInstance()->m_cameraSpeed = 70.0f;
 		
 	}
 
 	else
 	{
-		CameraManager::GetInstance()->m_cameraSpeed = 60.0f;
+		CameraManager::GetInstance()->m_cameraSpeed = 40.0f;
 
 	}
 	

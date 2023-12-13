@@ -13,7 +13,7 @@ Core::~Core()
 void Core::Init(int argc, char** argv) //
 {
 	::glutInit(&argc, argv); // glut 초기화   GLUT와 openGL 환경 초기화
-	::glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH); // 컬러모델, 윈도우 버퍼 등 초기의 출력 모드를 결정한다.
+	::glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_BORDERLESS); // 컬러모델, 윈도우 버퍼 등 초기의 출력 모드를 결정한다.
 	::glutInitWindowPosition(0, 0); // 윈도우 시작 지점 (x,y)
 
 	int screenWidth = glutGet(GLUT_SCREEN_WIDTH); // 모니터의 가로 해상도 가져오기

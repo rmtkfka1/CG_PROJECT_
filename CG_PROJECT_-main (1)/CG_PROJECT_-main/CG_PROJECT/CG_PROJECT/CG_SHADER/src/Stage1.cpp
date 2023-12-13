@@ -496,7 +496,7 @@ void Stage1::Update()
 		{
 
 			light->point_light.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
-			light->point_light.distance = 400.0f;
+			light->point_light.distance = 800.0f;
 			light->Spot_light.distance = 0.1f;
 			light->point_light.position[8] = glm::vec3(-5.6f, 22.0f, -900.0f);
 		}
@@ -782,7 +782,7 @@ void Stage1::Object_Render()
 			_second_monitor->RenderModel(*shader);
 		}
 
-		if (end->dt > 10.0f)
+		if (end->dt > 8.5f)
 		{
 			
 
@@ -1300,7 +1300,7 @@ void Stage1::MakeTexture()
 	answer3_texture= new Texture("res/textures/answer3.png");
 	answer4_texture = new Texture("res/textures/answer4.png");
 	die_texture = new Texture("res/textures/re.png");
-	end_texture = new Texture("res/textures/answer1.png");
+	end_texture = new Texture("res/textures/11.png");
 	mapping_texture = new Texture("res/textures/23.jpg");
 	spec_texture =new Texture("res/textures/spec.png");
 	black_texture= new Texture("res/textures/black.png");

@@ -31,20 +31,19 @@ void ENDING::Update(Event* computer,Light2* light)
 
 	if (_coding)
 	{
-		dt += 1.0f * TimeManager::GetInstance()->GetDeltaTime();
+		dt += 0.3f * TimeManager::GetInstance()->GetDeltaTime();
 	}
 
-	if (dt > 6.0f)
+	if (dt > 5.5f)
 	{
 		SoundManager::GetInstance()->real_end = true;
-		if (dt < 10.0f)
+		if (dt < 6.5f)
 		{
 			SoundManager::GetInstance()->Stop(ENDINGSONG);
 		}
 		
 		if (SoundManager::GetInstance()->realrealreal_end == false)
 		{
-			SoundManager::GetInstance()->Play(HEARTBEAT);
 			SoundManager::GetInstance()->Play(GHOST_SCREAM);
 		}
 		light->point_light.diffuse = glm::vec3(1.0f, 0, 0);
@@ -56,7 +55,7 @@ void ENDING::Update(Event* computer,Light2* light)
 
 	if (dt > 10.0f)
 	{
-		ft += 10.0f * TimeManager::GetInstance()->GetDeltaTime();
+		ft += 8.0f * TimeManager::GetInstance()->GetDeltaTime();
 	}
 
 
@@ -74,6 +73,7 @@ void ENDING::Render(Shader* shader)
 		glm::mat4 projection = glm::mat4(1.0f);
 		projection = glm::ortho(-1.0f, 1.0f, -2.0f, 2.0f, -0.1f, 10.0f);
 		shader->SetUniformMat4f("u_proj", projection);
+
 		_model->RenderModel(*shader);
 	}
 

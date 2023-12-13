@@ -75,7 +75,7 @@ public:
 	Location _player_location = Location::NONE;
 
 	GhostState _state;
-	float _detection_distance = 140.0f;
+	float _detection_distance = 130.0f;
 	float _detection_degree = 90.0f;	// 탐지 각도(귀신 기준 삼각형의 시야)
 
 	vector<glm::vec3> _patrol_locations;
@@ -98,7 +98,7 @@ public:
 	int room4_lower_door;
 
 	int _patrol_location_no = 0;
-	float _speed = 10.0f;
+	float _speed = 75.0f;
 
 	float _anim_switch = true;
 

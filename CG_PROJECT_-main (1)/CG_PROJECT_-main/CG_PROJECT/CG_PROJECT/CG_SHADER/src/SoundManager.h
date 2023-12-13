@@ -19,6 +19,7 @@ enum sound
 	FINDBODY,
 	ENDINGSONG,
 	GHOST_SCREAM,
+	DIE,
 	END
 };
 
