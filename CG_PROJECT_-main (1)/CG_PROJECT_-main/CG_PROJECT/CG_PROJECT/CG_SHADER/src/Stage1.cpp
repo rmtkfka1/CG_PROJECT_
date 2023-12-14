@@ -328,6 +328,7 @@ void Stage1::Init()
 
 	cross = new Model("res/models/cross.obj");
 	ending_baord= new Model("res/models/ending_board.obj");
+	santa= new Model("res/models/santa.obj");
 
 	//¹æ1 ÄûÁî »ý¼º
 	MakeRoom1_QUIZ();
@@ -532,6 +533,9 @@ void Stage1::Object_Render()
 {
 
 	light->UseSpotLight(*shader, *ghost);
+
+	shader->SetUniform1i("u_texture", santa_texture->GetSlot());
+	santa->RenderModel(*shader);
 
 	shader->SetUniform1i("u_texture", 0);
 	player->Render(*shader);
@@ -1310,6 +1314,7 @@ void Stage1::MakeTexture()
 	start_texture = new Texture("res/textures/start_scene.png");
 	real_end_texture = new Texture("res/textures/real_end.png");
 	merry_texture = new Texture("res/textures/merry.jpg");
+	santa_texture= new Texture("res/textures/santa.jpg");
 
 	texture->Bind(0);
 	door_texture->Bind(1);
@@ -1348,7 +1353,7 @@ void Stage1::MakeTexture()
 	start_texture->Bind(33);
 	real_end_texture->Bind(34);
 	merry_texture->Bind(35);
-
+	santa_texture->Bind(36);
 
 }
 
