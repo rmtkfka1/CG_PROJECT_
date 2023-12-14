@@ -154,7 +154,7 @@ private:
 	Model* cross;
 	Model* ending_baord;
 	Model* _second_monitor;
-	Model* santa;
+
 
 
 	vector<Object*> room1;
@@ -217,7 +217,6 @@ private:
 	Texture* start_texture;
 	Texture* real_end_texture;
 	Texture* merry_texture;
-	Texture* santa_texture;
 	//조명 객체 만들기
 	Light2* light;
 
