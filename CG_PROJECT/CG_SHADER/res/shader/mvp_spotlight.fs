@@ -112,6 +112,7 @@ void main()
     vec3 spot_result = Calculate_spot_light();
 
     vec3 point_result = vec3(0.0);
+
     for (int i = 0; i < 9; ++i)
     {
         point_result += Calculate_point_light(i);

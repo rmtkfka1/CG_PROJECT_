@@ -54,7 +54,7 @@ void Light2::UseSpotLight(Shader& shader,Ghost& ghost)
 {
 
 	point_light.position[6].x = ghost._pos.x;
-	point_light.position[6].y = ghost._pos.y+10;
+	point_light.position[6].y = ghost._pos.y+60;
 	point_light.position[6].z = ghost._pos.z + 10;
 
 	shader.Bind();

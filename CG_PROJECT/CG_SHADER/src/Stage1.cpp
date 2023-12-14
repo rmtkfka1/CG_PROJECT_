@@ -481,8 +481,8 @@ void Stage1::Update()
 	mask->MatrixUpdate(mask_event);
 	mask->Update();
 	deadbody->Update();
-	//exitdoor_rocked->SpecialUpdate(exitdoor,Lockedkey2,Lockedkey3,Lockedkey,Lockedkey4);
-	//exitdoor->Update();
+	exitdoor_rocked->SpecialUpdate(exitdoor,Lockedkey2,Lockedkey3,Lockedkey,Lockedkey4);
+	exitdoor->Update();
 
 	cat->Update();
 	computer->Update();
@@ -868,7 +868,7 @@ void Stage1::Texture_Render()
 
 	if (fake_flash->GetCollsionState() == true && fake_flash->draw==true)
 	{
-		TextManager::GetInstance()->Render(-0.2f, -0.5f, "Press F to Equid");
+		TextManager::GetInstance()->Render(-0.2f, -0.5f, "Press F to Equip");
 		TextManager::GetInstance()->Render(-0.2f, -0.6f, "Press R to Turnon / Turnoff");
 	}
 

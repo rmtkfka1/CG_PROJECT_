@@ -75,7 +75,7 @@ public:
 	Location _player_location = Location::NONE;
 
 	GhostState _state;
-	float _detection_distance = 130.0f;
+	float _detection_distance = 120.0f;
 	float _detection_degree = 90.0f;	// 탐지 각도(귀신 기준 삼각형의 시야)
 
 	vector<glm::vec3> _patrol_locations;

@@ -23,7 +23,7 @@ enum sound
 	END
 };
 
-
+ 
 class SoundManager
 {
 
@@ -56,7 +56,7 @@ private:
 
 	std::unordered_map<sound, bool> soundPlayingStatus;  
 	std::unordered_map<sound, FMOD::Channel*> playingChannels; 
-
+	float vol = 1.0f;
 
 };
 

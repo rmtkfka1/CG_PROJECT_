@@ -32,7 +32,6 @@ public:
 	void RemoveComponent(Component* component);
 	ObjectType GetObjectType() { return _type; }
 
-	// OnCollisionEnter2D / OnCollisionExit2D
 	virtual void OnComponentBeginOverlap(Collider* collider, Collider* other);
 	virtual void OnComponentEndOverlap(Collider* collider, Collider* other);
 

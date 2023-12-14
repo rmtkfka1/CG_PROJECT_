@@ -58,6 +58,7 @@ void stage2::Render()
 	model->RenderModel(*shader);
 
 	shader->Unbind();
+
 	TextManager::GetInstance()->Render(-0.3f, -0.5f, "Press Enter To Start");
 
 
